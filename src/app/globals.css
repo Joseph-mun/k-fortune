@@ -1,49 +1,49 @@
 @import "tailwindcss";
-@import url("https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Inter:wght@300;400;500;600;700&family=Nanum+Myeongjo:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+KR:wght@400;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
 @theme inline {
   --color-background: var(--bg-dark);
   --color-foreground: var(--text-primary);
-  --font-heading: "Cinzel Decorative", serif;
-  --font-body: "Inter", sans-serif;
-  --font-korean: "Nanum Myeongjo", serif;
-  --font-mono: "Space Mono", monospace;
+  --font-heading: "Space Grotesk", sans-serif;
+  --font-body: "Inter", system-ui, sans-serif;
+  --font-korean: "Noto Serif KR", serif;
+  --font-mono: ui-monospace, "SF Mono", monospace;
 
-  /* Primary - BTS Purple */
+  /* Primary - Refined Purple */
   --color-purple-300: #C4B5FD;
   --color-purple-400: #A78BFA;
-  --color-purple-500: #7C3AED;
-  --color-purple-600: #6D28D9;
-  --color-purple-700: #5B21B6;
-  --color-purple-800: #4C1D95;
+  --color-purple-500: #8B5CF6;
+  --color-purple-600: #7C3AED;
+  --color-purple-700: #6D28D9;
+  --color-purple-800: #5B21B6;
 
-  /* Accent - Gold */
-  --color-gold-300: #F5DEB3;
-  --color-gold-400: #E8C9A0;
-  --color-gold-500: #D4A574;
-  --color-gold-600: #B8860B;
+  /* Accent - Warm Amber */
+  --color-gold-300: #FDE68A;
+  --color-gold-400: #FBBF24;
+  --color-gold-500: #F59E0B;
+  --color-gold-600: #D97706;
 
-  /* Background */
-  --color-bg-dark: #0A0A1A;
-  --color-bg-card: #1A1A2E;
-  --color-bg-surface: #16213E;
+  /* Background - True Dark */
+  --color-bg-dark: #09090B;
+  --color-bg-card: #18181B;
+  --color-bg-surface: #27272A;
 
   /* Five Elements */
   --color-element-wood: #22C55E;
-  --color-element-fire: #EF4444;
-  --color-element-earth: #EAB308;
-  --color-element-metal: #F8FAFC;
-  --color-element-water: #3B82F6;
+  --color-element-fire: #F43F5E;
+  --color-element-earth: #F59E0B;
+  --color-element-metal: #E4E4E7;
+  --color-element-water: #6366F1;
 
   /* Text */
-  --color-text-primary: #F8FAFC;
-  --color-text-secondary: #94A3B8;
-  --color-text-muted: #64748B;
+  --color-text-primary: #FAFAFA;
+  --color-text-secondary: #A1A1AA;
+  --color-text-muted: #71717A;
 }
 
 :root {
-  --bg-dark: #0A0A1A;
-  --text-primary: #F8FAFC;
+  --bg-dark: #09090B;
+  --text-primary: #FAFAFA;
 }
 
 body {
@@ -51,34 +51,42 @@ body {
   color: var(--text-primary);
   font-family: var(--font-body);
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.korean-pattern {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237C3AED' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-}
-
+/* --- Glow Effects (subtle) --- */
 .glow-purple {
-  box-shadow: 0 0 20px rgba(124, 58, 237, 0.3), 0 0 60px rgba(124, 58, 237, 0.1);
+  box-shadow: 0 0 24px rgba(139, 92, 246, 0.15), 0 0 48px rgba(139, 92, 246, 0.05);
 }
 
 .glow-gold {
-  box-shadow: 0 0 20px rgba(212, 165, 116, 0.3), 0 0 60px rgba(212, 165, 116, 0.1);
+  box-shadow: 0 0 24px rgba(245, 158, 11, 0.15), 0 0 48px rgba(245, 158, 11, 0.05);
 }
 
+/* --- Gradient Text --- */
 .text-gradient-purple {
-  background: linear-gradient(135deg, #A78BFA, #7C3AED, #D4A574);
+  background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 50%, #C084FC 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, #D4A574, #E8C9A0, #D4A574);
+  background: linear-gradient(135deg, #FBBF24 0%, #F59E0B 50%, #FDE68A 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
+.text-gradient-hero {
+  background: linear-gradient(135deg, #FAFAFA 0%, #A78BFA 40%, #C084FC 60%, #FAFAFA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* --- Card Shine (refined) --- */
 @keyframes shine {
   0% { transform: translateX(-100%) rotate(25deg); }
   100% { transform: translateX(100%) rotate(25deg); }
@@ -96,19 +104,61 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: linear-gradient(transparent, rgba(255, 255, 255, 0.05), transparent);
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.03), transparent);
   transform: translateX(-100%) rotate(25deg);
 }
 
 .card-shine:hover::after {
-  animation: shine 0.6s ease-in-out;
+  animation: shine 0.8s ease-out;
 }
 
+/* --- Animations --- */
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-8px); }
 }
 
 .animate-float {
-  animation: float 3s ease-in-out infinite;
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+/* --- Korean Pattern (subtle) --- */
+.korean-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%238B5CF6' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* --- Scrollbar (minimal) --- */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #27272A;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #3F3F46;
 }

@@ -11,6 +11,8 @@
   "nav": {
     "home": "Home",
     "pricing": "Pricing",
+    "compatibility": "Compatibility",
+    "gallery": "Gallery",
     "dashboard": "My Readings",
     "signIn": "Sign In",
     "signOut": "Sign Out"

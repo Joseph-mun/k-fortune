@@ -11,6 +11,8 @@
   "nav": {
     "home": "Inicio",
     "pricing": "Precios",
+    "compatibility": "Compatibilidad",
+    "gallery": "Galería",
     "dashboard": "Mis Lecturas",
     "signIn": "Iniciar Sesión",
     "signOut": "Cerrar Sesión"

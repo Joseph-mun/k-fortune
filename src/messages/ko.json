@@ -11,6 +11,8 @@
   "nav": {
     "home": "홈",
     "pricing": "요금제",
+    "compatibility": "궁합",
+    "gallery": "갤러리",
     "dashboard": "내 감정",
     "signIn": "로그인",
     "signOut": "로그아웃"

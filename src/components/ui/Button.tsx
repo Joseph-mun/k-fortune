@@ -22,18 +22,19 @@ export function Button({
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all duration-200 cursor-pointer",
-        "disabled:opacity-50 disabled:cursor-not-allowed",
+        "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 cursor-pointer",
+        "disabled:opacity-40 disabled:cursor-not-allowed",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-dark",
         {
-          "bg-purple-500 text-white hover:bg-purple-600 glow-purple": variant === "primary",
-          "bg-bg-card text-text-primary border border-purple-500/30 hover:border-purple-500/60": variant === "secondary",
-          "bg-transparent text-text-secondary hover:text-text-primary": variant === "ghost",
-          "bg-gradient-to-r from-gold-500 to-gold-600 text-bg-dark hover:from-gold-600 hover:to-gold-500 glow-gold": variant === "gold",
+          "bg-purple-500 text-white hover:bg-purple-400 active:bg-purple-600": variant === "primary",
+          "bg-transparent text-text-primary border border-white/10 hover:border-white/20 hover:bg-white/5": variant === "secondary",
+          "bg-transparent text-text-secondary hover:text-text-primary hover:bg-white/5": variant === "ghost",
+          "bg-gold-500 text-bg-dark hover:bg-gold-400 active:bg-gold-600 font-semibold": variant === "gold",
         },
         {
-          "px-3 py-1.5 text-sm": size === "sm",
-          "px-5 py-2.5 text-base": size === "md",
-          "px-8 py-4 text-lg": size === "lg",
+          "px-3 py-1.5 text-xs": size === "sm",
+          "px-4 py-2 text-sm": size === "md",
+          "px-6 py-3 text-base": size === "lg",
         },
         className,
       )}

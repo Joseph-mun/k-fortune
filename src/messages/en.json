@@ -83,7 +83,9 @@
     "share": "Share My Reading",
     "shareText": "I'm {metaphor} in K-Destiny! Discover your Korean cosmic identity.",
     "storyBridge": "Your birth chart reveals a unique cosmic blueprint. Here's how the stars aligned at the moment you were born.",
-    "createCard": "Create My Destiny Card"
+    "createCard": "Create My Destiny Card",
+    "strengths": "Strengths",
+    "weaknesses": "Challenges"
   },
   "elements": {
     "wood": "Wood",
@@ -309,9 +311,16 @@
     "title": "Unlock Your Full Reading",
     "description": "Discover your complete destiny with career insights, relationship guidance, and personalized life advice.",
     "unlockButton": "Unlock Full Reading",
+    "price": "$2.99",
     "feature1": "Complete career path and purpose analysis",
     "feature2": "Relationship compatibility and guidance",
-    "feature3": "Personalized life advice and fortune timeline"
+    "feature3": "Personalized life advice and fortune timeline",
+    "previewCareer": "Career Path",
+    "previewCareerDesc": "Your natural talents align with leadership roles where you can...",
+    "previewRelationship": "Relationships",
+    "previewRelationshipDesc": "In relationships, you tend to be supportive and understanding...",
+    "previewAdvice": "Life Advice",
+    "previewAdviceDesc": "Focus on building strong foundations in your early years..."
   },
   "interpretation": {
     "personality": {

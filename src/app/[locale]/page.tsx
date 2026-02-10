@@ -8,7 +8,6 @@ import { Sparkles, Layers, Sun, ArrowRight, Star, Users } from "lucide-react";
 export default function LandingPage() {
   const t = useTranslations("landing");
   const tCommon = useTranslations("common");
-  const tNav = useTranslations("nav");
 
   return (
     <main className="flex flex-col items-center min-h-screen">

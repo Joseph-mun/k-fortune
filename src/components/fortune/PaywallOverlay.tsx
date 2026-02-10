@@ -33,24 +33,18 @@ export function PaywallOverlay({ onUnlock, readingId, productId }: PaywallOverla
   return (
     <div className="relative">
       {/* Blurred content preview */}
-      <div className="blur-sm select-none pointer-events-none">
+      <div className="blur-sm select-none pointer-events-none" aria-hidden="true">
         <div className="p-5 rounded-lg bg-bg-card border border-white/[0.06] mb-3">
-          <h3 className="text-sm font-semibold text-text-primary mb-2">Career Path</h3>
-          <p className="text-xs text-text-secondary">
-            Your natural talents align with leadership roles where you can...
-          </p>
+          <h3 className="text-sm font-semibold text-text-primary mb-2">{t("previewCareer")}</h3>
+          <p className="text-xs text-text-secondary">{t("previewCareerDesc")}</p>
         </div>
         <div className="p-5 rounded-lg bg-bg-card border border-white/[0.06] mb-3">
-          <h3 className="text-sm font-semibold text-text-primary mb-2">Relationships</h3>
-          <p className="text-xs text-text-secondary">
-            In relationships, you tend to be supportive and understanding...
-          </p>
+          <h3 className="text-sm font-semibold text-text-primary mb-2">{t("previewRelationship")}</h3>
+          <p className="text-xs text-text-secondary">{t("previewRelationshipDesc")}</p>
         </div>
         <div className="p-5 rounded-lg bg-bg-card border border-white/[0.06]">
-          <h3 className="text-sm font-semibold text-text-primary mb-2">Life Advice</h3>
-          <p className="text-xs text-text-secondary">
-            Focus on building strong foundations in your early years...
-          </p>
+          <h3 className="text-sm font-semibold text-text-primary mb-2">{t("previewAdvice")}</h3>
+          <p className="text-xs text-text-secondary">{t("previewAdviceDesc")}</p>
         </div>
       </div>
 
@@ -72,7 +66,7 @@ export function PaywallOverlay({ onUnlock, readingId, productId }: PaywallOverla
           <div className="flex flex-col gap-3">
             <Button variant="primary" size="lg" onClick={handleUnlock} disabled={loading}>
               <Sparkles className="w-4 h-4" />
-              {t("unlockButton")} - $2.99
+              {t("unlockButton")} - {t("price")}
             </Button>
 
             <ul className="text-xs text-text-muted text-left space-y-1.5 mt-3">

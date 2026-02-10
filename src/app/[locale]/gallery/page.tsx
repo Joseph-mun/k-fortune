@@ -102,8 +102,10 @@ export default function GalleryPage() {
             </h1>
             <p className="text-sm text-text-muted mt-1">{t("subtitle")}</p>
           </div>
-          <div className="flex gap-1 bg-white/[0.03] rounded-lg p-0.5 border border-white/[0.06]">
+          <div className="flex gap-1 bg-white/[0.03] rounded-lg p-0.5 border border-white/[0.06]" role="tablist" aria-label="Sort order">
             <button
+              role="tab"
+              aria-selected={sort === "latest"}
               onClick={() => setSort("latest")}
               className={`px-3 py-1.5 text-xs rounded-md transition-colors ${
                 sort === "latest"
@@ -114,6 +116,8 @@ export default function GalleryPage() {
               {t("sortLatest")}
             </button>
             <button
+              role="tab"
+              aria-selected={sort === "popular"}
               onClick={() => setSort("popular")}
               className={`px-3 py-1.5 text-xs rounded-md transition-colors ${
                 sort === "popular"

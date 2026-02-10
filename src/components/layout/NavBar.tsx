@@ -3,7 +3,6 @@ import { Link } from "@/i18n/navigation";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 
 export function NavBar() {
-  const tCommon = useTranslations("common");
   const tNav = useTranslations("nav");
 
   return (
@@ -17,19 +16,19 @@ export function NavBar() {
         <div className="hidden md:flex items-center gap-1">
           <Link
             href="/pricing"
-            className="px-3 py-1.5 text-sm text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/5"
+            className="px-3 py-1.5 text-sm text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/[0.05]"
           >
             {tNav("pricing")}
           </Link>
           <Link
             href="/compatibility"
-            className="px-3 py-1.5 text-sm text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/5"
+            className="px-3 py-1.5 text-sm text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/[0.05]"
           >
             {tNav("compatibility")}
           </Link>
           <Link
             href="/gallery"
-            className="px-3 py-1.5 text-sm text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/5"
+            className="px-3 py-1.5 text-sm text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/[0.05]"
           >
             {tNav("gallery")}
           </Link>

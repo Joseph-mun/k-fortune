@@ -83,7 +83,9 @@
     "share": "Compartir Mi Lectura",
     "shareText": "Soy {metaphor} en K-Destiny. Descubre tu identidad cósmica coreana.",
     "storyBridge": "Tu carta natal revela un mapa cósmico único. Así se alinearon las estrellas en el momento de tu nacimiento.",
-    "createCard": "Crear Mi Carta del Destino"
+    "createCard": "Crear Mi Carta del Destino",
+    "strengths": "Fortalezas",
+    "weaknesses": "Debilidades"
   },
   "elements": {
     "wood": "Madera",
@@ -309,9 +311,16 @@
     "title": "Desbloquea Tu Lectura Completa",
     "description": "Descubre tu destino completo con análisis de carrera, guía de relaciones y consejos de vida personalizados.",
     "unlockButton": "Desbloquear Lectura Completa",
+    "price": "$2.99",
     "feature1": "Análisis completo de carrera y propósito",
     "feature2": "Compatibilidad y guía de relaciones",
-    "feature3": "Consejos de vida personalizados y línea de tiempo de fortuna"
+    "feature3": "Consejos de vida personalizados y línea de tiempo de fortuna",
+    "previewCareer": "Carrera Profesional",
+    "previewCareerDesc": "Tus talentos naturales se alinean con roles de liderazgo donde puedes...",
+    "previewRelationship": "Relaciones",
+    "previewRelationshipDesc": "En las relaciones, tiendes a ser comprensivo y solidario...",
+    "previewAdvice": "Consejos de Vida",
+    "previewAdviceDesc": "Enfócate en construir bases sólidas en tus primeros años..."
   },
   "interpretation": {
     "personality": {

@@ -7,7 +7,7 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Card } from "@/components/ui/Card";
-import { KPOP_STARS, getGroups, getStarsByGroup } from "@/lib/saju/celebrities";
+import { getGroups, getStarsByGroup } from "@/lib/saju/celebrities";
 import { Heart, Sparkles, Share2 } from "lucide-react";
 
 interface StarMatchResult {
@@ -133,7 +133,7 @@ export default function StarMatchPage() {
                     type="checkbox"
                     checked={unknownTime}
                     onChange={(e) => setUnknownTime(e.target.checked)}
-                    className="rounded border-white/10 bg-bg-surface accent-purple-500"
+                    className="rounded border-white/[0.08] bg-bg-surface accent-purple-500"
                   />
                   {tForm("birthTimeUnknown")}
                 </label>

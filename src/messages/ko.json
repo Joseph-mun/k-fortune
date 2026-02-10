@@ -83,7 +83,9 @@
     "share": "내 감정 공유하기",
     "shareText": "나는 K-Destiny에서 {metaphor}! 당신의 사주도 확인해보세요.",
     "storyBridge": "당신의 사주팔자는 고유한 우주적 청사진을 담고 있습니다. 태어난 순간 별들이 어떻게 정렬되었는지 확인해보세요.",
-    "createCard": "데스티니 카드 만들기"
+    "createCard": "데스티니 카드 만들기",
+    "strengths": "강점",
+    "weaknesses": "약점"
   },
   "elements": {
     "wood": "목(木)",
@@ -309,9 +311,16 @@
     "title": "전체 감정 열기",
     "description": "직업 통찰, 인간관계 안내, 맞춤형 인생 조언으로 완전한 운명을 발견하세요.",
     "unlockButton": "전체 감정 열기",
+    "price": "$2.99",
     "feature1": "직업 진로 및 사명 분석",
     "feature2": "인간관계 궁합 및 안내",
-    "feature3": "맞춤형 인생 조언 및 운세 타임라인"
+    "feature3": "맞춤형 인생 조언 및 운세 타임라인",
+    "previewCareer": "직업 진로",
+    "previewCareerDesc": "당신의 천부적 재능은 리더십 역할에 잘 맞으며...",
+    "previewRelationship": "인간관계",
+    "previewRelationshipDesc": "인간관계에서 당신은 따뜻하고 이해심 깊은...",
+    "previewAdvice": "인생 조언",
+    "previewAdviceDesc": "초기에 탄탄한 기반을 쌓는 데 집중하세요..."
   },
   "interpretation": {
     "personality": {

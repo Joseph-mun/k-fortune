@@ -27,8 +27,8 @@ export function Button({
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-dark",
         {
           "bg-purple-500 text-white hover:bg-purple-400 active:bg-purple-600": variant === "primary",
-          "bg-transparent text-text-primary border border-white/10 hover:border-white/20 hover:bg-white/5": variant === "secondary",
-          "bg-transparent text-text-secondary hover:text-text-primary hover:bg-white/5": variant === "ghost",
+          "bg-transparent text-text-primary border border-white/[0.08] hover:border-white/[0.15] hover:bg-white/[0.05]": variant === "secondary",
+          "bg-transparent text-text-secondary hover:text-text-primary hover:bg-white/[0.05]": variant === "ghost",
           "bg-gold-500 text-bg-dark hover:bg-gold-400 active:bg-gold-600 font-semibold": variant === "gold",
         },
         {

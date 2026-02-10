@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://k-fortune.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const locales = ["en", "es"];
+  const locales = ["ko", "en", "es"];
   const routes = [
     "",
     "/pricing",

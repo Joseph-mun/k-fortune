@@ -24,7 +24,7 @@ const PersonSchema = z.object({
 const CompatibilityInputSchema = z.object({
   person1: PersonSchema,
   person2: PersonSchema,
-  locale: z.enum(["en", "es"]).optional().default("en"),
+  locale: z.enum(["ko", "en", "es"]).optional().default("ko"),
 });
 
 export async function POST(request: Request) {

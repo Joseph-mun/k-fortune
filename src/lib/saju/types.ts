@@ -136,7 +136,7 @@ export interface BirthInput {
   birthTime: string | null;
   timezone: string;
   gender: 'male' | 'female' | 'other';
-  locale: 'en' | 'es';
+  locale: 'ko' | 'en' | 'es';
 }
 
 /** Ten God Relations (십신) */

@@ -22,7 +22,7 @@ const DetailedInputSchema = z.object({
   birthTime: z.string().regex(/^\d{2}:\d{2}$/, "Invalid birth time format").nullable().optional(),
   timezone: z.string().optional().default("UTC"),
   gender: z.enum(["male", "female", "other"]),
-  locale: z.enum(["en", "es"]).optional().default("en"),
+  locale: z.enum(["ko", "en", "es"]).optional().default("ko"),
   readingId: z.string().optional(),
 });
 

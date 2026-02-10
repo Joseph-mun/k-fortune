@@ -62,7 +62,7 @@ export function BirthInputForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-5 w-full max-w-md">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
       <Input
         id="birthDate"
         type="date"
@@ -85,42 +85,42 @@ export function BirthInputForm() {
         />
       )}
 
-      <label className="flex items-center gap-2 text-sm text-text-secondary cursor-pointer">
+      <label className="flex items-center gap-2 text-xs text-text-muted cursor-pointer">
         <input
           type="checkbox"
           checked={unknownTime}
           onChange={(e) => setUnknownTime(e.target.checked)}
-          className="rounded border-purple-500/30 bg-bg-surface"
+          className="rounded border-white/10 bg-bg-surface accent-purple-500"
         />
         {t("birthTimeUnknown")}
       </label>
 
       <div className="flex flex-col gap-1.5">
         <span className="text-sm font-medium text-text-secondary">{t("gender")}</span>
-        <div className="flex gap-3">
+        <div className="flex gap-2">
           {(["male", "female", "other"] as const).map((g) => (
             <button
               key={g}
               type="button"
               onClick={() => setGender(g)}
-              className={`flex-1 py-2.5 rounded-xl border text-sm font-medium transition-all cursor-pointer ${
+              className={`flex-1 py-2 rounded-lg border text-xs font-medium transition-all cursor-pointer ${
                 gender === g
-                  ? "bg-purple-500/20 border-purple-500/60 text-purple-300"
-                  : "bg-bg-surface border-purple-500/10 text-text-secondary hover:border-purple-500/30"
+                  ? "bg-purple-500/15 border-purple-500/40 text-purple-300"
+                  : "bg-transparent border-white/[0.08] text-text-muted hover:border-white/[0.15]"
               }`}
             >
               {t(g)}
             </button>
           ))}
         </div>
-        {errors.gender && <p className="text-sm text-red-400">{errors.gender}</p>}
+        {errors.gender && <p className="text-xs text-red-400">{errors.gender}</p>}
       </div>
 
       {errors.form && (
-        <p className="text-sm text-red-400 text-center">{errors.form}</p>
+        <p className="text-xs text-red-400 text-center">{errors.form}</p>
       )}
 
-      <Button type="submit" size="lg" loading={loading} className="mt-2">
+      <Button type="submit" size="lg" loading={loading} className="mt-1">
         {t("submit")}
       </Button>
     </form>

@@ -88,35 +88,37 @@ export default function GalleryPage() {
   }, [hasMore, loadingMore, offset, fetchCards]);
 
   return (
-    <main className="flex flex-col items-center min-h-screen px-4">
-      <NavBar />
+    <main className="flex flex-col items-center min-h-screen">
+      <div className="w-full px-4">
+        <NavBar />
+      </div>
 
-      <div className="w-full max-w-4xl flex flex-col gap-6 py-8">
+      <div className="w-full max-w-5xl flex flex-col gap-8 py-12 px-4">
         {/* Header */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="flex flex-col sm:flex-row items-start sm:items-end justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-bold font-[family-name:var(--font-heading)] text-text-primary">
+            <h1 className="text-2xl md:text-3xl font-bold font-[family-name:var(--font-heading)] text-text-primary">
               {t("title")}
             </h1>
-            <p className="text-sm text-text-secondary mt-1">{t("subtitle")}</p>
+            <p className="text-sm text-text-muted mt-1">{t("subtitle")}</p>
           </div>
-          <div className="flex gap-2">
+          <div className="flex gap-1 bg-white/[0.03] rounded-lg p-0.5 border border-white/[0.06]">
             <button
               onClick={() => setSort("latest")}
-              className={`px-3 py-1.5 text-xs rounded-lg transition-colors ${
+              className={`px-3 py-1.5 text-xs rounded-md transition-colors ${
                 sort === "latest"
-                  ? "bg-purple-500/20 text-purple-300 border border-purple-500"
-                  : "bg-surface text-text-muted border border-border hover:border-purple-500/50"
+                  ? "bg-white/[0.08] text-text-primary"
+                  : "text-text-muted hover:text-text-secondary"
               }`}
             >
               {t("sortLatest")}
             </button>
             <button
               onClick={() => setSort("popular")}
-              className={`px-3 py-1.5 text-xs rounded-lg transition-colors ${
+              className={`px-3 py-1.5 text-xs rounded-md transition-colors ${
                 sort === "popular"
-                  ? "bg-purple-500/20 text-purple-300 border border-purple-500"
-                  : "bg-surface text-text-muted border border-border hover:border-purple-500/50"
+                  ? "bg-white/[0.08] text-text-primary"
+                  : "text-text-muted hover:text-text-secondary"
               }`}
             >
               {t("sortPopular")}
@@ -126,16 +128,18 @@ export default function GalleryPage() {
 
         {/* Grid */}
         {loading ? (
-          <div className="text-center py-12 text-text-muted">Loading...</div>
+          <div className="flex items-center justify-center py-20">
+            <div className="w-6 h-6 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+          </div>
         ) : cards.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-text-secondary mb-4">{t("empty")}</p>
-            <Button onClick={() => router.push("/cards/create")}>
+          <div className="text-center py-20">
+            <p className="text-text-muted mb-4">{t("empty")}</p>
+            <Button onClick={() => router.push("/cards/create")} variant="secondary">
               {t("createCard")}
             </Button>
           </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
             {cards.map((card) => {
               let reading;
               try {
@@ -147,9 +151,9 @@ export default function GalleryPage() {
                 <button
                   key={card.id}
                   onClick={() => router.push(`/cards/${card.id}`)}
-                  className="hover:scale-[1.02] transition-transform"
+                  className="group hover:scale-[1.02] transition-transform duration-200"
                 >
-                  <div className="transform scale-50 origin-top-left w-[180px]">
+                  <div className="transform scale-[0.5] origin-top-left w-[160px] h-[240px] pointer-events-none">
                     <DestinyCard reading={reading} style={card.style} />
                   </div>
                 </button>
@@ -160,13 +164,17 @@ export default function GalleryPage() {
 
         {/* Infinite scroll trigger */}
         {hasMore && (
-          <div ref={observerRef} className="text-center py-4 text-text-muted text-sm">
-            {loadingMore && t("loadMore")}
+          <div ref={observerRef} className="flex items-center justify-center py-4">
+            {loadingMore && (
+              <div className="w-5 h-5 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+            )}
           </div>
         )}
       </div>
 
-      <Footer />
+      <div className="w-full px-4 flex justify-center">
+        <Footer />
+      </div>
     </main>
   );
 }

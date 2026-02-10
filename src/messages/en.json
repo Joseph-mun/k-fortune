@@ -13,6 +13,7 @@
     "pricing": "Pricing",
     "compatibility": "Compatibility",
     "gallery": "Gallery",
+    "starMatch": "Star Match",
     "dashboard": "My Readings",
     "signIn": "Sign In",
     "signOut": "Sign Out"
@@ -23,6 +24,13 @@
     "heroDescription": "Unlock the ancient secrets of Korean Four Pillars of Destiny (Saju). Discover your cosmic blueprint based on your birth date and time.",
     "cta": "Reveal My Destiny",
     "trustBadge": "Trusted by {count}+ seekers worldwide",
+    "whatIsTitle": "What is K-Fortune?",
+    "whatIsDescription": "K-Fortune (Saju) is Korea's ancient destiny reading system, now trending globally alongside K-Pop and K-Drama. Your birth date holds the key to your cosmic blueprint.",
+    "cardSectionTitle": "Your Destiny, One Card",
+    "cardSectionDesc": "Get a beautiful, shareable Destiny Card that captures your cosmic identity. Collect and share with friends.",
+    "viewGallery": "Browse Destiny Cards",
+    "ctaTitle": "Ready to Discover Your Destiny?",
+    "ctaDescription": "Join thousands of seekers worldwide. It only takes 30 seconds to uncover your cosmic blueprint.",
     "features": {
       "fourPillars": "Four Pillars Analysis",
       "fourPillarsDesc": "Your cosmic blueprint based on year, month, day, and hour of birth",
@@ -436,5 +444,23 @@
         "difficult": "Invest in deep understanding of each other's needs. Professional guidance can help navigate the complex dynamics. Focus on shared values as your anchor."
       }
     }
+  },
+  "starMatch": {
+    "badge": "K-Pop Star Match",
+    "title": "Star Compatibility",
+    "subtitle": "Check your cosmic compatibility with your favorite K-Pop stars based on the Four Pillars of Destiny.",
+    "yourInfo": "Your Birth Info",
+    "chooseStar": "Choose Your Star",
+    "checkMatch": "Check Compatibility",
+    "fillAll": "Please fill in all fields and select a star.",
+    "error": "Something went wrong. Please try again.",
+    "you": "You",
+    "compatibilityScore": "Cosmic Compatibility",
+    "breakdown": "Compatibility Breakdown",
+    "analysis": "Analysis",
+    "advice": "Advice",
+    "tryAnother": "Try Another Star",
+    "share": "Share",
+    "shareText": "My K-Fortune compatibility with {star} is {score}%! Check yours at K-Destiny."
   }
 }

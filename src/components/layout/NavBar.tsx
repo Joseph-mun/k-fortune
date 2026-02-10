@@ -33,6 +33,12 @@ export function NavBar() {
           >
             {tNav("gallery")}
           </Link>
+          <Link
+            href="/star-match"
+            className="px-3 py-1.5 text-sm text-pink-400/80 hover:text-pink-300 transition-colors rounded-md hover:bg-pink-500/5"
+          >
+            {tNav("starMatch")}
+          </Link>
         </div>
       </div>
       <div className="flex items-center gap-3">

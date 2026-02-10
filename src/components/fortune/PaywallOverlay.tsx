@@ -34,21 +34,21 @@ export function PaywallOverlay({ onUnlock, readingId, productId }: PaywallOverla
     <div className="relative">
       {/* Blurred content preview */}
       <div className="blur-sm select-none pointer-events-none">
-        <div className="p-6 rounded-2xl bg-bg-card border border-purple-500/10 mb-4">
-          <h3 className="text-lg font-semibold text-text-primary mb-3">Career Path</h3>
-          <p className="text-text-secondary">
+        <div className="p-5 rounded-lg bg-bg-card border border-white/[0.06] mb-3">
+          <h3 className="text-sm font-semibold text-text-primary mb-2">Career Path</h3>
+          <p className="text-xs text-text-secondary">
             Your natural talents align with leadership roles where you can...
           </p>
         </div>
-        <div className="p-6 rounded-2xl bg-bg-card border border-purple-500/10 mb-4">
-          <h3 className="text-lg font-semibold text-text-primary mb-3">Relationships</h3>
-          <p className="text-text-secondary">
+        <div className="p-5 rounded-lg bg-bg-card border border-white/[0.06] mb-3">
+          <h3 className="text-sm font-semibold text-text-primary mb-2">Relationships</h3>
+          <p className="text-xs text-text-secondary">
             In relationships, you tend to be supportive and understanding...
           </p>
         </div>
-        <div className="p-6 rounded-2xl bg-bg-card border border-purple-500/10">
-          <h3 className="text-lg font-semibold text-text-primary mb-3">Life Advice</h3>
-          <p className="text-text-secondary">
+        <div className="p-5 rounded-lg bg-bg-card border border-white/[0.06]">
+          <h3 className="text-sm font-semibold text-text-primary mb-2">Life Advice</h3>
+          <p className="text-xs text-text-secondary">
             Focus on building strong foundations in your early years...
           </p>
         </div>
@@ -56,26 +56,26 @@ export function PaywallOverlay({ onUnlock, readingId, productId }: PaywallOverla
 
       {/* CTA Overlay */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-center bg-bg-primary/95 backdrop-blur-xl p-8 rounded-3xl border border-purple-500/20 max-w-md mx-4 shadow-2xl">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-purple-500 to-gold-500 flex items-center justify-center mx-auto mb-4">
-            <Lock className="w-8 h-8 text-white" />
+        <div className="text-center bg-bg-dark/95 backdrop-blur-xl p-6 rounded-xl border border-white/[0.08] max-w-sm mx-4 shadow-2xl">
+          <div className="w-12 h-12 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mx-auto mb-4">
+            <Lock className="w-5 h-5 text-purple-400" />
           </div>
 
-          <h2 className="text-2xl font-bold text-text-primary mb-2 font-[family-name:var(--font-heading)]">
+          <h2 className="text-lg font-bold text-text-primary mb-1.5 font-[family-name:var(--font-heading)]">
             {t("title")}
           </h2>
 
-          <p className="text-text-secondary mb-6">
+          <p className="text-text-secondary text-sm mb-5">
             {t("description")}
           </p>
 
           <div className="flex flex-col gap-3">
-            <Button variant="gold" size="lg" onClick={handleUnlock} disabled={loading}>
-              <Sparkles className="w-5 h-5" />
+            <Button variant="primary" size="lg" onClick={handleUnlock} disabled={loading}>
+              <Sparkles className="w-4 h-4" />
               {t("unlockButton")} - $2.99
             </Button>
 
-            <ul className="text-sm text-text-muted text-left space-y-2 mt-4">
+            <ul className="text-xs text-text-muted text-left space-y-1.5 mt-3">
               <li className="flex items-start gap-2">
                 <span className="text-purple-400 mt-0.5">✓</span>
                 <span>{t("feature1")}</span>

@@ -13,6 +13,7 @@
     "pricing": "요금제",
     "compatibility": "궁합",
     "gallery": "갤러리",
+    "starMatch": "스타 궁합",
     "dashboard": "내 감정",
     "signIn": "로그인",
     "signOut": "로그아웃"
@@ -23,6 +24,13 @@
     "heroDescription": "한국 전통 사주팔자(四柱八字)의 고대 비밀을 풀어보세요. 생년월일과 시간을 바탕으로 당신의 운명 청사진을 발견하세요.",
     "cta": "내 운명 알아보기",
     "trustBadge": "전 세계 {count}명 이상이 신뢰합니다",
+    "whatIsTitle": "K-Fortune이란?",
+    "whatIsDescription": "K-Fortune(사주)은 한국의 전통 운명 풀이 시스템으로, K-Pop, K-Drama와 함께 전 세계적으로 주목받고 있습니다. 당신의 생년월일이 운명의 열쇠를 쥐고 있습니다.",
+    "cardSectionTitle": "당신의 운명, 한 장의 카드",
+    "cardSectionDesc": "당신의 우주적 정체성을 담은 아름다운 운명 카드를 받으세요. 친구들과 공유하고 수집하세요.",
+    "viewGallery": "운명 카드 둘러보기",
+    "ctaTitle": "운명을 알아볼 준비가 되셨나요?",
+    "ctaDescription": "전 세계 수천 명과 함께하세요. 30초만에 당신의 운명 청사진을 확인할 수 있습니다.",
     "features": {
       "fourPillars": "사주팔자 분석",
       "fourPillarsDesc": "연주, 월주, 일주, 시주를 기반으로 한 당신의 운명 청사진",
@@ -436,5 +444,23 @@
         "difficult": "서로의 필요에 대한 깊은 이해에 투자하세요. 전문적인 안내가 복잡한 관계 역학을 탐색하는 데 도움될 수 있습니다. 공유하는 가치관을 닻으로 삼으세요."
       }
     }
+  },
+  "starMatch": {
+    "badge": "K-Pop 스타 궁합",
+    "title": "스타 궁합 보기",
+    "subtitle": "사주팔자로 좋아하는 K-Pop 스타와의 우주적 궁합을 확인하세요.",
+    "yourInfo": "내 생년월일 정보",
+    "chooseStar": "스타 선택",
+    "checkMatch": "궁합 확인하기",
+    "fillAll": "모든 항목을 입력하고 스타를 선택해 주세요.",
+    "error": "문제가 발생했습니다. 다시 시도해 주세요.",
+    "you": "나",
+    "compatibilityScore": "우주적 궁합",
+    "breakdown": "궁합 상세",
+    "analysis": "분석",
+    "advice": "조언",
+    "tryAnother": "다른 스타 해보기",
+    "share": "공유",
+    "shareText": "나와 {star}의 K-Fortune 궁합은 {score}%! K-Destiny에서 확인해보세요."
   }
 }

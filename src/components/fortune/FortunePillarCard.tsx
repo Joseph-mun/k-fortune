@@ -19,24 +19,24 @@ export function FortunePillarCard({ pillar, label, isHighlighted = false }: Fort
   return (
     <div
       className={cn(
-        "flex flex-col items-center gap-1 rounded-xl p-3 bg-bg-surface border transition-all duration-300",
+        "flex flex-col items-center gap-1 rounded-lg p-3 bg-bg-surface border transition-all duration-200",
         isHighlighted
-          ? "border-purple-500/60 glow-purple"
-          : "border-purple-500/10 hover:border-purple-500/30",
+          ? "border-purple-500/40 bg-purple-500/[0.04]"
+          : "border-white/[0.06] hover:border-white/[0.1]",
       )}
     >
-      <span className="text-xs font-medium text-text-muted uppercase tracking-wider">
+      <span className="text-[10px] font-medium text-text-muted uppercase tracking-wider">
         {label}
       </span>
 
       {/* Stem Metaphor (top) */}
-      <div className="flex flex-col items-center gap-0.5 py-2">
-        <span className="text-3xl">{metaphor.icon}</span>
-        <span className="text-sm font-semibold text-text-primary">
+      <div className="flex flex-col items-center gap-0.5 py-1.5">
+        <span className="text-2xl">{metaphor.icon}</span>
+        <span className="text-xs font-semibold text-text-primary">
           {metaphor.displayName.replace("The ", "")}
         </span>
         <span
-          className="text-xs"
+          className="text-[10px]"
           style={{ color: elementColor }}
         >
           {pillar.yinYang === "yang" ? "Yang" : "Yin"} {pillar.stemElement.charAt(0).toUpperCase() + pillar.stemElement.slice(1)}
@@ -44,12 +44,12 @@ export function FortunePillarCard({ pillar, label, isHighlighted = false }: Fort
       </div>
 
       {/* Divider */}
-      <div className="w-8 h-px bg-purple-500/20" />
+      <div className="w-6 h-px bg-white/[0.08]" />
 
       {/* Branch Animal (bottom) */}
-      <div className="flex flex-col items-center gap-0.5 py-2">
-        <span className="text-2xl">{animal.icon}</span>
-        <span className="text-sm text-text-secondary">
+      <div className="flex flex-col items-center gap-0.5 py-1.5">
+        <span className="text-xl">{animal.icon}</span>
+        <span className="text-xs text-text-secondary">
           {animal.displayName}
         </span>
       </div>

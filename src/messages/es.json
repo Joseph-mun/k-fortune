@@ -13,6 +13,7 @@
     "pricing": "Precios",
     "compatibility": "Compatibilidad",
     "gallery": "Galería",
+    "starMatch": "Star Match",
     "dashboard": "Mis Lecturas",
     "signIn": "Iniciar Sesión",
     "signOut": "Cerrar Sesión"
@@ -22,7 +23,14 @@
     "heroHighlight": "Destino Coreano",
     "heroDescription": "Desbloquea los secretos ancestrales de los Cuatro Pilares del Destino Coreano (Saju). Descubre tu mapa cósmico basado en tu fecha y hora de nacimiento.",
     "cta": "Revelar Mi Destino",
-    "trustBadge": "Más de {count}+ buscadores confían en nosotros",
+    "trustBadge": "Mas de {count}+ buscadores confian en nosotros",
+    "whatIsTitle": "Que es K-Fortune?",
+    "whatIsDescription": "K-Fortune (Saju) es el antiguo sistema coreano de lectura del destino, ahora en tendencia global junto con K-Pop y K-Drama. Tu fecha de nacimiento tiene la clave de tu mapa cosmico.",
+    "cardSectionTitle": "Tu Destino, Una Carta",
+    "cardSectionDesc": "Obtén una hermosa Carta del Destino que captura tu identidad cosmica. Colecciona y comparte con amigos.",
+    "viewGallery": "Ver Cartas del Destino",
+    "ctaTitle": "Listo para Descubrir Tu Destino?",
+    "ctaDescription": "Unete a miles de buscadores en todo el mundo. Solo toma 30 segundos descubrir tu mapa cosmico.",
     "features": {
       "fourPillars": "Análisis de Cuatro Pilares",
       "fourPillarsDesc": "Tu mapa cósmico basado en año, mes, día y hora de nacimiento",
@@ -436,5 +444,23 @@
         "difficult": "Invierte en comprensión profunda de las necesidades del otro. La guía profesional puede ayudar a navegar las dinámicas complejas."
       }
     }
+  },
+  "starMatch": {
+    "badge": "K-Pop Star Match",
+    "title": "Compatibilidad con Estrellas",
+    "subtitle": "Verifica tu compatibilidad cosmica con tus estrellas K-Pop favoritas basada en los Cuatro Pilares del Destino.",
+    "yourInfo": "Tu Informacion de Nacimiento",
+    "chooseStar": "Elige Tu Estrella",
+    "checkMatch": "Verificar Compatibilidad",
+    "fillAll": "Por favor completa todos los campos y selecciona una estrella.",
+    "error": "Algo salio mal. Por favor intenta de nuevo.",
+    "you": "Tu",
+    "compatibilityScore": "Compatibilidad Cosmica",
+    "breakdown": "Desglose de Compatibilidad",
+    "analysis": "Analisis",
+    "advice": "Consejo",
+    "tryAnother": "Probar Otra Estrella",
+    "share": "Compartir",
+    "shareText": "Mi compatibilidad K-Fortune con {star} es {score}%! Verifica la tuya en K-Destiny."
   }
 }

@@ -1,0 +1,438 @@
+{
+  "common": {
+    "appName": "K-Destiny",
+    "tagline": "Discover Your Korean Destiny",
+    "subtitle": "Ancient Korean wisdom meets modern insight",
+    "loading": "Reading the stars...",
+    "error": "Something went wrong",
+    "retry": "Try again",
+    "disclaimer": "For entertainment purposes only. Not a substitute for professional advice."
+  },
+  "nav": {
+    "home": "Home",
+    "pricing": "Pricing",
+    "dashboard": "My Readings",
+    "signIn": "Sign In",
+    "signOut": "Sign Out"
+  },
+  "landing": {
+    "heroTitle": "Discover Your",
+    "heroHighlight": "Korean Destiny",
+    "heroDescription": "Unlock the ancient secrets of Korean Four Pillars of Destiny (Saju). Discover your cosmic blueprint based on your birth date and time.",
+    "cta": "Reveal My Destiny",
+    "trustBadge": "Trusted by {count}+ seekers worldwide",
+    "features": {
+      "fourPillars": "Four Pillars Analysis",
+      "fourPillarsDesc": "Your cosmic blueprint based on year, month, day, and hour of birth",
+      "elements": "Five Elements Balance",
+      "elementsDesc": "Understand your elemental energy: Wood, Fire, Earth, Metal, Water",
+      "dayMaster": "Day Master Identity",
+      "dayMasterDesc": "Discover your core nature through powerful nature metaphors"
+    }
+  },
+  "form": {
+    "birthDate": "Birth Date",
+    "birthTime": "Birth Time",
+    "birthTimePlaceholder": "Select your birth time",
+    "birthTimeUnknown": "I don't know my birth time",
+    "gender": "Gender",
+    "male": "Male",
+    "female": "Female",
+    "other": "Other",
+    "submit": "Reveal My Destiny",
+    "validation": {
+      "birthDateRequired": "Please enter your birth date",
+      "genderRequired": "Please select your gender"
+    }
+  },
+  "reading": {
+    "youAre": "You are",
+    "the": "The",
+    "fourPillars": "Your Four Pillars of Destiny",
+    "year": "Year",
+    "month": "Month",
+    "day": "Day",
+    "hour": "Hour",
+    "elementBalance": "Element Balance",
+    "dominant": "Dominant",
+    "lacking": "Lacking",
+    "balanced": "Balanced",
+    "keywords": "Keywords",
+    "lucky": {
+      "title": "Lucky Info",
+      "color": "Lucky Color",
+      "number": "Lucky Number",
+      "direction": "Lucky Direction"
+    },
+    "unlock": {
+      "title": "Unlock Full Reading",
+      "description": "Career, Love, Health, {year} Fortune & Life Map",
+      "price": "Only ${price}",
+      "cta": "Unlock Now"
+    },
+    "share": "Share My Reading"
+  },
+  "elements": {
+    "wood": "Wood",
+    "fire": "Fire",
+    "earth": "Earth",
+    "metal": "Metal",
+    "water": "Water"
+  },
+  "metaphors": {
+    "great-tree": {
+      "name": "The Great Tree",
+      "nature": "Like an ancient tree reaching for the sky, you stand tall with unwavering determination and natural leadership.",
+      "keywords": ["Growth", "Leadership", "Ambition", "Resilience"]
+    },
+    "flower": {
+      "name": "The Flower",
+      "nature": "Like a graceful flower bending with the wind, you adapt beautifully to any environment with charm and elegance.",
+      "keywords": ["Flexibility", "Grace", "Creativity", "Diplomacy"]
+    },
+    "sun": {
+      "name": "The Sun",
+      "nature": "Like the sun itself, you radiate warmth and light wherever you go, naturally drawing others to your brilliance.",
+      "keywords": ["Radiance", "Passion", "Charisma", "Leadership"]
+    },
+    "candle": {
+      "name": "The Candle",
+      "nature": "Like a gentle candlelight, you offer warmth and intimacy, illuminating the lives of those closest to you.",
+      "keywords": ["Warmth", "Sensitivity", "Devotion", "Insight"]
+    },
+    "mountain": {
+      "name": "The Mountain",
+      "nature": "Like an immovable mountain, you are the pillar of stability and trust that everyone depends on.",
+      "keywords": ["Stability", "Trust", "Patience", "Strength"]
+    },
+    "garden": {
+      "name": "The Garden",
+      "nature": "Like a nurturing garden, you cultivate growth in others and create abundance wherever you plant your roots.",
+      "keywords": ["Nurturing", "Abundance", "Care", "Harmony"]
+    },
+    "sword": {
+      "name": "The Sword",
+      "nature": "Like a finely forged sword, you cut through confusion with decisive action and an unwavering sense of justice.",
+      "keywords": ["Decisiveness", "Justice", "Courage", "Integrity"]
+    },
+    "jewel": {
+      "name": "The Jewel",
+      "nature": "Like a polished jewel, you shine with refined elegance and possess an eye for detail that others admire.",
+      "keywords": ["Precision", "Elegance", "Refinement", "Brilliance"]
+    },
+    "ocean": {
+      "name": "The Ocean",
+      "nature": "Like the vast ocean, you hold immeasurable depth and power, embracing all with an open and generous spirit.",
+      "keywords": ["Depth", "Power", "Wisdom", "Generosity"]
+    },
+    "rain": {
+      "name": "The Rain",
+      "nature": "Like gentle rain nourishing the earth, you bring clarity and renewal, cleansing and refreshing everything you touch.",
+      "keywords": ["Clarity", "Wisdom", "Renewal", "Gentleness"]
+    }
+  },
+  "pricing": {
+    "title": "Choose Your Reading",
+    "subtitle": "Unlock the full power of Korean Four Pillars wisdom",
+    "badge": "Most Popular",
+    "popular": "MOST POPULAR",
+    "basic": {
+      "name": "Basic Reading",
+      "price": "FREE",
+      "features": ["Four Pillars Analysis", "Element Balance", "Day Master Identity", "Lucky Info"],
+      "cta": "Get Free Reading"
+    },
+    "detailed": {
+      "name": "Full Reading",
+      "price": "$2.99",
+      "features": ["Everything in Basic", "Career & Purpose", "Love & Relationships", "Health & Wellness", "2026 Fortune", "Life Cycles Map"],
+      "cta": "Buy Now"
+    },
+    "premium": {
+      "name": "Premium",
+      "price": "$9.99",
+      "period": "/month",
+      "features": ["All Readings Unlimited", "Monthly Fortune Updates", "Compatibility Analysis", "All Destiny Card Styles", "Priority Support"],
+      "cta": "Subscribe"
+    }
+  },
+  "auth": {
+    "signIn": {
+      "title": "Welcome Back",
+      "subtitle": "Sign in to access your readings and destiny cards",
+      "googleButton": "Continue with Google",
+      "emailLabel": "Email Address",
+      "emailPlaceholder": "you@example.com",
+      "emailButton": "Send Magic Link",
+      "emailSent": "Check your email for a sign-in link!",
+      "divider": "or",
+      "noAccount": "Don't have an account?",
+      "signUpLink": "Sign up",
+      "error": {
+        "default": "Something went wrong. Please try again.",
+        "signin": "Unable to sign in. Please check your credentials.",
+        "oauthSignin": "Error connecting to Google. Please try again.",
+        "emailSignin": "Could not send magic link. Please check your email address.",
+        "callback": "Authentication error. Please try again.",
+        "oauthCallback": "Google sign-in failed. Please try again.",
+        "sessionRequired": "Please sign in to access this page."
+      }
+    },
+    "signUp": {
+      "title": "Create Your Account",
+      "subtitle": "Join K-Destiny and unlock your full cosmic blueprint",
+      "hasAccount": "Already have an account?",
+      "signInLink": "Sign in"
+    }
+  },
+  "dashboard": {
+    "title": "My Dashboard",
+    "welcome": "Welcome to your destiny dashboard",
+    "welcomeBack": "Welcome back, {name}",
+    "loading": "Loading your readings...",
+    "subscription": {
+      "title": "Subscription",
+      "free": "Free Plan - Basic readings only",
+      "detailed": "Full Reading - One-time purchase",
+      "premium": "Premium - Unlimited readings & compatibility",
+      "upgrade": "Upgrade"
+    },
+    "actions": {
+      "newReading": "New Reading",
+      "newReadingDesc": "Get a free Four Pillars reading",
+      "compatibility": "Compatibility Check",
+      "compatibilityDesc": "Compare two destinies",
+      "fullReading": "Full Reading",
+      "fullReadingDesc": "Unlock career, love & more"
+    },
+    "history": {
+      "title": "Reading History",
+      "total": "{count} readings",
+      "empty": "You haven't done any readings yet. Start your first reading to discover your destiny!",
+      "getStarted": "Get Started",
+      "reading": "Reading",
+      "metaphor": {
+        "great-tree": "The Great Tree",
+        "flower": "The Flower",
+        "sun": "The Sun",
+        "candle": "The Candle",
+        "mountain": "The Mountain",
+        "garden": "The Garden",
+        "sword": "The Sword",
+        "jewel": "The Jewel",
+        "ocean": "The Ocean",
+        "rain": "The Rain"
+      }
+    }
+  },
+  "cardGenerator": {
+    "download": "Download",
+    "share": "Share",
+    "shareText": "Discover your destiny! I am {metaphor} in K-Destiny.",
+    "linkCopied": "Link copied to clipboard!",
+    "styles": {
+      "classic": "Classic",
+      "tarot": "Tarot",
+      "neon": "Neon",
+      "ink": "Ink",
+      "photo": "Photo",
+      "seasonal": "Seasonal"
+    }
+  },
+  "compatibilityPage": {
+    "title": "Compatibility Check",
+    "subtitle": "Discover the cosmic harmony between two people",
+    "person1": "Person 1",
+    "person2": "Person 2",
+    "submit": "Check Compatibility",
+    "results": {
+      "title": "Compatibility Results",
+      "overall": "Overall Score",
+      "romance": "Romance",
+      "communication": "Communication",
+      "values": "Values",
+      "lifestyle": "Lifestyle",
+      "analysis": "Analysis",
+      "advice": "Advice"
+    }
+  },
+  "gallery": {
+    "title": "Destiny Card Gallery",
+    "subtitle": "Explore destiny cards created by our community",
+    "sortLatest": "Latest",
+    "sortPopular": "Popular",
+    "empty": "No cards yet. Create your first destiny card!",
+    "loadMore": "Loading more...",
+    "createCard": "Create Your Card"
+  },
+  "cards": {
+    "create": {
+      "title": "Create Your Card",
+      "chooseStyle": "Choose Your Card Style",
+      "preview": "Preview Your Card",
+      "makePublic": "Make this card public",
+      "back": "Back",
+      "next": "Next",
+      "creating": "Creating your card...",
+      "success": "Card Created!",
+      "createButton": "Create Card",
+      "viewGallery": "View Gallery",
+      "needReading": "You need a reading first to create a card."
+    },
+    "view": {
+      "title": "Destiny Card",
+      "download": "Download",
+      "share": "Share",
+      "delete": "Delete",
+      "confirmDelete": "Are you sure you want to delete this card?",
+      "deleted": "Card deleted successfully",
+      "back": "Back",
+      "createdAt": "Created {date}",
+      "dayMaster": "Day Master",
+      "element": "Element"
+    }
+  },
+  "paywall": {
+    "title": "Unlock Your Full Reading",
+    "description": "Discover your complete destiny with career insights, relationship guidance, and personalized life advice.",
+    "unlockButton": "Unlock Full Reading",
+    "feature1": "Complete career path and purpose analysis",
+    "feature2": "Relationship compatibility and guidance",
+    "feature3": "Personalized life advice and fortune timeline"
+  },
+  "interpretation": {
+    "personality": {
+      "great-tree": "You are The Great Tree — a natural-born leader with towering ambition and unwavering resolve. Your Yang Wood energy gives you the drive to grow beyond any obstacle.",
+      "flower": "You are The Flower — graceful, adaptable, and endlessly creative. Your Yin Wood energy lets you find beauty and opportunity in every situation, bending without breaking.",
+      "sun": "You are The Sun — radiant, passionate, and naturally charismatic. Your Yang Fire energy makes you a beacon of warmth and inspiration, lighting up every room you enter.",
+      "candle": "You are The Candle — intimate, perceptive, and deeply caring. Your Yin Fire energy creates a warm glow that nurtures close relationships and illuminates hidden truths.",
+      "mountain": "You are The Mountain — steadfast, reliable, and immovable in your convictions. Your Yang Earth energy makes you the anchor others depend on in times of change.",
+      "garden": "You are The Garden — nurturing, abundant, and harmonious. Your Yin Earth energy creates fertile ground for growth, cultivating beautiful things in everyone around you.",
+      "sword": "You are The Sword — decisive, principled, and fiercely just. Your Yang Metal energy cuts through confusion with clarity, championing fairness and taking bold action.",
+      "jewel": "You are The Jewel — refined, precise, and brilliant. Your Yin Metal energy shines with polished elegance, noticing details others miss and creating beauty in precision.",
+      "ocean": "You are The Ocean — deep, powerful, and endlessly generous. Your Yang Water energy holds vast wisdom and strength, embracing all things with an open spirit.",
+      "rain": "You are The Rain — gentle, wise, and transformative. Your Yin Water energy cleanses and renews, bringing fresh perspective and quiet clarity wherever you flow."
+    },
+    "strengths": {
+      "wood": ["Creative vision", "Natural leadership", "Growth mindset", "Compassion"],
+      "fire": ["Charisma", "Enthusiasm", "Strong intuition", "Warm-hearted"],
+      "earth": ["Reliability", "Practical wisdom", "Patience", "Groundedness"],
+      "metal": ["Discipline", "Clear judgment", "Integrity", "Determination"],
+      "water": ["Adaptability", "Deep thinking", "Emotional intelligence", "Resourcefulness"]
+    },
+    "weaknesses": {
+      "wood": ["Stubbornness", "Overcommitment"],
+      "fire": ["Impatience", "Burnout tendency"],
+      "earth": ["Overthinking", "Resistance to change"],
+      "metal": ["Perfectionism", "Emotional rigidity"],
+      "water": ["Indecisiveness", "Emotional overwhelm"]
+    },
+    "career": {
+      "great-tree": "Your Great Tree energy gives you natural leadership abilities. You thrive in roles where you can pioneer new paths and grow organizations. Consider careers in entrepreneurship, management, or environmental work where your steady growth mindset creates lasting impact.",
+      "flower": "Your Flower energy makes you exceptionally adaptable in professional settings. You excel in creative fields, diplomacy, and any role requiring social finesse. Consider careers in design, public relations, counseling, or the arts.",
+      "sun": "Your Sun energy makes you a natural in the spotlight. You excel in leadership, entertainment, and any role that lets you inspire others. Consider careers in coaching, performing arts, executive leadership, or teaching.",
+      "candle": "Your Candle energy gives you exceptional perception and warmth. You thrive in intimate, detail-oriented work. Consider careers in counseling, writing, research, or healing arts where your gentle insight creates profound impact.",
+      "mountain": "Your Mountain energy provides unshakeable reliability. You excel in positions requiring steady judgment and trust. Consider careers in finance, law, real estate, or any field where stability and patience are valued.",
+      "garden": "Your Garden energy makes you a natural nurturer and cultivator. You thrive in roles where you help others grow. Consider careers in education, healthcare, human resources, or community development.",
+      "sword": "Your Sword energy gives you decisive action and strong principles. You excel in roles requiring clear judgment. Consider careers in law enforcement, surgery, military, engineering, or any field demanding precision and courage.",
+      "jewel": "Your Jewel energy gives you an eye for detail and refined taste. You excel in precision-oriented fields. Consider careers in jewelry design, technology, accounting, editing, or luxury goods where your attention to detail shines.",
+      "ocean": "Your Ocean energy provides vast depth and embracing power. You thrive in expansive roles. Consider careers in international business, philosophy, marine sciences, or any field requiring broad vision and deep understanding.",
+      "rain": "Your Rain energy brings wisdom and transformative power. You excel in roles that create renewal. Consider careers in therapy, spiritual guidance, environmental science, or writing where your gentle influence creates lasting change."
+    },
+    "relationship": {
+      "great-tree": "In relationships, you are the strong, dependable partner who provides stability and direction. You value loyalty and growth in your connections. Your challenge is learning to be flexible and not overshadow your partner's needs.",
+      "flower": "In relationships, you are charming, adaptable, and deeply attuned to your partner's feelings. You create harmony naturally. Your challenge is maintaining your own identity and not losing yourself in pleasing others.",
+      "sun": "In relationships, you are warm, generous, and inspiring. You naturally draw people to you with your charisma. Your challenge is sharing the spotlight and being patient with those who move at a different pace.",
+      "candle": "In relationships, you create deep, intimate bonds that others envy. You intuitively understand your partner's needs. Your challenge is not burning out from giving too much and maintaining healthy boundaries.",
+      "mountain": "In relationships, you are the rock that others lean on. You provide unwavering support and loyalty. Your challenge is expressing emotions openly and adapting when your partner needs change.",
+      "garden": "In relationships, you nurture and cultivate deep connections with care. You create a warm, welcoming space for love to grow. Your challenge is not sacrificing your own needs while caring for everyone else.",
+      "sword": "In relationships, you are loyal, protective, and straightforward. You value honesty above all. Your challenge is softening your directness and learning that not everything needs to be cut-and-dried.",
+      "jewel": "In relationships, you bring refinement and thoughtful attention. You notice the small things that matter. Your challenge is accepting imperfection in yourself and others, and opening up emotionally.",
+      "ocean": "In relationships, you love deeply and unconditionally. You embrace your partner with vast understanding. Your challenge is not overwhelming others with your intensity and maintaining personal boundaries.",
+      "rain": "In relationships, you bring gentle wisdom and emotional depth. You help your partner grow through quiet understanding. Your challenge is being more assertive about your own needs and not dissolving into others."
+    },
+    "health": {
+      "wood": "Wood element dominant: Pay attention to your liver and gallbladder health. You may be prone to tension headaches and eye strain. Regular stretching, time in nature, and green foods support your wellbeing. Avoid excessive stress and anger.",
+      "fire": "Fire element dominant: Your heart and circulatory system need attention. You may experience anxiety or insomnia when unbalanced. Regular cardio exercise, adequate rest, and cooling foods help maintain balance. Watch for overexcitement.",
+      "earth": "Earth element dominant: Focus on digestive health and your spleen/stomach system. You may be prone to worry-related ailments. Regular meals, grounding exercises, and moderate sweet foods support you. Avoid overthinking and irregular eating.",
+      "metal": "Metal element dominant: Your respiratory system and skin need care. You may be prone to grief-related health issues. Deep breathing exercises, clean air, and spicy foods in moderation support your health. Keep your emotions flowing.",
+      "water": "Water element dominant: Your kidneys and urinary system need attention. You may be prone to fear-related tension. Stay well hydrated, practice calming meditation, and include salty foods in moderation. Avoid excessive cold exposure."
+    },
+    "wealth": {
+      "wood": "Your wealth flows like a growing forest — steady, expanding, and rooted in long-term vision. You build wealth through patient investment and entrepreneurial ventures. Your best financial strategy is to plant seeds now and let them grow over time.",
+      "fire": "Your wealth flows with passionate energy — quick to arrive and quick to move. You attract money through charisma and bold ventures. Your best financial strategy is to channel your fire into sustainable investments rather than impulsive spending.",
+      "earth": "Your wealth flows like fertile soil — stable, reliable, and accumulating over time. You build wealth through consistent savings and real estate. Your best financial strategy is a conservative, long-term approach with diversified assets.",
+      "metal": "Your wealth flows with precision — calculated, efficient, and well-structured. You attract money through discipline and strategic planning. Your best financial strategy is systematic investing with clear goals and defined timelines.",
+      "water": "Your wealth flows like water — finding paths of least resistance and pooling in unexpected places. You attract money through adaptability and wisdom. Your best financial strategy is staying flexible and diversifying income streams."
+    },
+    "yearly": {
+      "2026": "2026 is a year of transformation and new beginnings for you. The cosmic energies align to support bold decisions and fresh starts. Focus on planting seeds in the first half of the year, as the second half brings opportunities for harvest and recognition."
+    },
+    "advice": {
+      "great-tree": "Embrace your natural leadership but remember that even the mightiest tree needs deep roots. Take time to nurture your foundation — relationships, health, and inner peace — before reaching for new heights. Your greatest growth comes from grounding.",
+      "flower": "Your adaptability is your superpower, but don't let flexibility become a lack of direction. Choose your garden wisely and commit to blooming where you're planted. Your beauty shines brightest when you're authentically yourself.",
+      "sun": "Your radiance inspires everyone around you, but remember that even the sun sets to rest. Balance your outward generosity with inward reflection. Your greatest impact comes when you're energized and centered, not depleted.",
+      "candle": "Your warm, intimate light is a gift to those close to you. Protect your flame by setting boundaries and refueling regularly. Your greatest wisdom comes from the quiet moments of stillness between the light and shadow.",
+      "mountain": "Your steadfast nature is your greatest strength, but mountains that never shift can crack under pressure. Allow yourself to evolve and embrace change as a form of growth. Your stability is most powerful when paired with adaptability.",
+      "garden": "Your nurturing spirit enriches everyone's life, but remember to tend your own soil first. You cannot pour from an empty cup. Schedule regular self-care and say no when needed. Your abundance grows when you're well-nourished.",
+      "sword": "Your decisive nature cuts through confusion brilliantly, but not every situation requires a sharp edge. Learn when to sheathe your blade and lead with compassion. Your justice is most powerful when tempered with mercy.",
+      "jewel": "Your refined precision creates beautiful results, but perfection can become a prison. Allow yourself to be imperfect and find beauty in the rough edges of life. Your brilliance shines brightest when you embrace authenticity over polish.",
+      "ocean": "Your vast depth is both your gift and your challenge. Learn to share your wisdom in accessible ways and set boundaries for your emotional generosity. Your power is most effective when channeled with clear intention.",
+      "rain": "Your gentle wisdom transforms everything you touch, but don't let your flowing nature make you directionless. Choose where to rain your gifts and commit. Your renewal powers are strongest when focused on meaningful causes."
+    },
+    "cycles": {
+      "great-tree": "A period of steady growth and natural expansion. Plant seeds for the future.",
+      "flower": "A period of creative blossoming and social connections. Embrace new opportunities.",
+      "sun": "A period of radiance and recognition. Step into the spotlight with confidence.",
+      "candle": "A period of inner reflection and intimate connections. Deepen meaningful bonds.",
+      "mountain": "A period of stability and grounding. Build solid foundations for the future.",
+      "garden": "A period of nurturing and abundance. Cultivate your relationships and skills.",
+      "sword": "A period of decisive action and clear direction. Cut away what no longer serves you.",
+      "jewel": "A period of refinement and precision. Polish your talents and showcase your brilliance.",
+      "ocean": "A period of depth and expansion. Explore new horizons and embrace the unknown.",
+      "rain": "A period of renewal and transformation. Let go of the old to welcome the new.",
+      "early": "A formative period of discovery and foundational learning.",
+      "growth": "A period of accelerated growth and expanding potential."
+    },
+    "tenGods": {
+      "bijeon": { "name": "Parallel", "description": "Independence and self-reliance. You stand strong on your own, drawing confidence from your core identity." },
+      "geopjae": { "name": "Rob Wealth", "description": "Competition and ambition. You are driven to seize opportunities and thrive in challenging environments." },
+      "siksin": { "name": "Eating God", "description": "Creativity and nurturing. Your natural talents flow effortlessly, bringing joy and abundance to those around you." },
+      "sanggwan": { "name": "Hurting Officer", "description": "Innovation and bold expression. You challenge conventions and express yourself with fearless originality." },
+      "pyeonjae": { "name": "Indirect Wealth", "description": "Opportunistic and versatile. You have a gift for spotting hidden opportunities and creating unconventional success." },
+      "jeongjae": { "name": "Direct Wealth", "description": "Steady accumulation and diligence. You build lasting wealth through consistent effort and careful planning." },
+      "pyeongwan": { "name": "Indirect Authority", "description": "Power and transformation. You possess an intense drive that can reshape your world through sheer force of will." },
+      "jeonggwan": { "name": "Direct Authority", "description": "Discipline and order. You thrive in structured environments and naturally earn respect through integrity." },
+      "pyeonin": { "name": "Indirect Seal", "description": "Unconventional wisdom. You learn through unique experiences, gaining insights that others miss entirely." },
+      "jeongin": { "name": "Direct Seal", "description": "Knowledge and support. You are nurtured by learning and mentorship, building wisdom through traditional paths." },
+      "summary": {
+        "bijeon": "Your chart is dominated by Parallel energy — a strong sense of self and independence defines your path. You are most powerful when you trust your own abilities.",
+        "geopjae": "Your chart is dominated by Rob Wealth energy — your competitive spirit and ambition drive you toward bold achievements. Channel this energy wisely.",
+        "siksin": "Your chart is dominated by Eating God energy — creativity and natural talent flow through everything you do. You are a born creator and nurturer.",
+        "sanggwan": "Your chart is dominated by Hurting Officer energy — you express yourself boldly and challenge the status quo. Your innovation inspires change.",
+        "pyeonjae": "Your chart is dominated by Indirect Wealth energy — you have a knack for finding hidden opportunities and creating unconventional paths to success.",
+        "jeongjae": "Your chart is dominated by Direct Wealth energy — your steady, diligent approach builds lasting prosperity through patience and careful planning.",
+        "pyeongwan": "Your chart is dominated by Indirect Authority energy — you possess intense transformative power that reshapes your environment and inspires awe.",
+        "jeonggwan": "Your chart is dominated by Direct Authority energy — discipline, structure, and integrity guide your path to earned respect and lasting influence.",
+        "pyeonin": "Your chart is dominated by Indirect Seal energy — your wisdom comes from unexpected sources and unconventional experiences that others overlook.",
+        "jeongin": "Your chart is dominated by Direct Seal energy — you are deeply supported by knowledge, mentorship, and the wisdom of traditional learning."
+      }
+    },
+    "compatibility": {
+      "analysis": {
+        "excellent": "An extraordinary cosmic match! Your energies complement each other beautifully, creating a powerful harmony that amplifies both partners' strengths.",
+        "good": "A strong and promising connection. Your elements work well together, with natural areas of harmony and a few growth opportunities that keep the relationship dynamic.",
+        "moderate": "A balanced relationship with both harmony and creative tension. The differences between you create opportunities for mutual growth and learning.",
+        "challenging": "A relationship that requires conscious effort and understanding. Your differing energies create friction but also the potential for transformative growth.",
+        "difficult": "A complex dynamic that demands patience and wisdom. While challenging, this connection offers the deepest lessons in understanding and acceptance."
+      },
+      "advice": {
+        "excellent": "Nurture this beautiful connection by maintaining your individual identities while celebrating your harmony. Your combined energy can achieve remarkable things.",
+        "good": "Build on your natural strengths as a pair. Use your differences as opportunities to learn from each other rather than sources of conflict.",
+        "moderate": "Focus on clear communication and mutual respect. Your different perspectives are an asset when you learn to appreciate what each brings to the table.",
+        "challenging": "Practice patience and empathy. Schedule regular check-ins to address tension before it builds. Consider couples activities that bridge your different energies.",
+        "difficult": "Invest in deep understanding of each other's needs. Professional guidance can help navigate the complex dynamics. Focus on shared values as your anchor."
+      }
+    }
+  }
+}

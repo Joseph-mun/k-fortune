@@ -1,0 +1,105 @@
+import createIntlMiddleware from "next-intl/middleware";
+import { getToken } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
+import { routing } from "./src/i18n/routing";
+
+/**
+ * Middleware: i18n routing + Auth protection
+ *
+ * Protected page routes (require authentication):
+ *   - /[locale]/dashboard
+ *
+ * Protected API routes:
+ *   - /api/fortune/detailed
+ *   - /api/user/*
+ *
+ * Public routes (no auth required):
+ *   - /[locale] (landing)
+ *   - /[locale]/reading/[id]
+ *   - /[locale]/pricing
+ *   - /[locale]/auth/*
+ *   - /api/fortune/basic
+ *   - /api/checkout
+ *   - /api/webhook/*
+ *   - /api/auth/*
+ */
+
+const intlMiddleware = createIntlMiddleware(routing);
+
+// Page routes that require authentication (without locale prefix)
+const protectedPagePatterns = ["/dashboard"];
+
+// API routes that require authentication
+const protectedApiPatterns = [
+  "/api/fortune/detailed",
+  "/api/user/",
+];
+
+function isProtectedPage(pathname: string): boolean {
+  // Strip locale prefix (e.g., /en/dashboard -> /dashboard)
+  const withoutLocale = pathname.replace(/^\/(en|es)/, "");
+  return protectedPagePatterns.some((pattern) =>
+    withoutLocale.startsWith(pattern)
+  );
+}
+
+function isProtectedApi(pathname: string): boolean {
+  return protectedApiPatterns.some((pattern) =>
+    pathname.startsWith(pattern)
+  );
+}
+
+function isApiRoute(pathname: string): boolean {
+  return pathname.startsWith("/api/");
+}
+
+export default async function middleware(req: NextRequest) {
+  const pathname = req.nextUrl.pathname;
+
+  // API routes: check auth for protected endpoints, skip i18n
+  if (isApiRoute(pathname)) {
+    if (isProtectedApi(pathname)) {
+      const token = await getToken({
+        req,
+        secret: process.env.NEXTAUTH_SECRET,
+      });
+
+      if (!token) {
+        return NextResponse.json(
+          { error: { code: "UNAUTHORIZED", message: "Authentication required" } },
+          { status: 401 }
+        );
+      }
+    }
+    // Let API routes pass through without i18n processing
+    return NextResponse.next();
+  }
+
+  // Page routes: check auth for protected pages
+  if (isProtectedPage(pathname)) {
+    const token = await getToken({
+      req,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
+
+    if (!token) {
+      // Redirect to sign-in page with callback URL
+      const locale = pathname.match(/^\/(en|es)/)?.[1] || "en";
+      const signInUrl = new URL(`/${locale}/auth/signin`, req.url);
+      signInUrl.searchParams.set("callbackUrl", pathname);
+      return NextResponse.redirect(signInUrl);
+    }
+  }
+
+  // Apply i18n middleware for all page routes
+  return intlMiddleware(req);
+}
+
+export const config = {
+  matcher: [
+    "/",
+    "/(en|es)/:path*",
+    "/api/fortune/detailed",
+    "/api/user/:path*",
+  ],
+};

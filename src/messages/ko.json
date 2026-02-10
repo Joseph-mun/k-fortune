@@ -21,23 +21,23 @@
   "landing": {
     "heroTitle": "당신의",
     "heroHighlight": "사주팔자",
-    "heroDescription": "한국 전통 사주팔자(四柱八字)의 고대 비밀을 풀어보세요. 생년월일과 시간을 바탕으로 당신의 운명 청사진을 발견하세요.",
+    "heroDescription": "당신의 생년월일에 숨겨진 비밀, 사주팔자. 30초 만에 나의 우주적 정체성을 알아보세요.",
     "cta": "내 운명 알아보기",
     "trustBadge": "전 세계 {count}명 이상이 신뢰합니다",
     "whatIsTitle": "K-Fortune이란?",
-    "whatIsDescription": "K-Fortune(사주)은 한국의 전통 운명 풀이 시스템으로, K-Pop, K-Drama와 함께 전 세계적으로 주목받고 있습니다. 당신의 생년월일이 운명의 열쇠를 쥐고 있습니다.",
+    "whatIsDescription": "사주(四柱)는 수천 년간 한국인의 삶을 이끌어온 운명 해석 체계입니다. 연애부터 커리어까지, 동양 최고의 운세 시스템을 지금 경험하세요.",
     "cardSectionTitle": "당신의 운명, 한 장의 카드",
-    "cardSectionDesc": "당신의 우주적 정체성을 담은 아름다운 운명 카드를 받으세요. 친구들과 공유하고 수집하세요.",
+    "cardSectionDesc": "나만의 데스티니 카드를 수집하고 친구에게 공유하세요. K-Pop 포토카드처럼, 하지만 당신의 영혼을 담은.",
     "viewGallery": "운명 카드 둘러보기",
-    "ctaTitle": "운명을 알아볼 준비가 되셨나요?",
-    "ctaDescription": "전 세계 수천 명과 함께하세요. 30초만에 당신의 운명 청사진을 확인할 수 있습니다.",
+    "ctaTitle": "당신의 생년월일은 무엇을 말하고 있을까?",
+    "ctaDescription": "30초면 충분합니다. 회원가입 없이 바로 시작하세요.",
     "features": {
       "fourPillars": "사주팔자 분석",
-      "fourPillarsDesc": "연주, 월주, 일주, 시주를 기반으로 한 당신의 운명 청사진",
+      "fourPillarsDesc": "연주, 월주, 일주, 시주 — 태어난 순간의 운명 청사진",
       "elements": "오행 균형",
-      "elementsDesc": "당신의 기(氣) 에너지를 이해하세요: 목, 화, 토, 금, 수",
+      "elementsDesc": "목, 화, 토, 금, 수 — 나를 정의하는 에너지를 발견하세요",
       "dayMaster": "일간 정체성",
-      "dayMasterDesc": "강력한 자연 메타포를 통해 당신의 본질을 발견하세요"
+      "dayMasterDesc": "태양인가, 바다인가, 검인가? 나의 우주적 원형을 찾아보세요"
     }
   },
   "form": {
@@ -80,7 +80,10 @@
       "price": "${price}만",
       "cta": "지금 열기"
     },
-    "share": "내 감정 공유하기"
+    "share": "내 감정 공유하기",
+    "shareText": "나는 K-Destiny에서 {metaphor}! 당신의 사주도 확인해보세요.",
+    "storyBridge": "당신의 사주팔자는 고유한 우주적 청사진을 담고 있습니다. 태어난 순간 별들이 어떻게 정렬되었는지 확인해보세요.",
+    "createCard": "데스티니 카드 만들기"
   },
   "elements": {
     "wood": "목(木)",

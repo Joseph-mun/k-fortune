@@ -21,23 +21,23 @@
   "landing": {
     "heroTitle": "Discover Your",
     "heroHighlight": "Korean Destiny",
-    "heroDescription": "Unlock the ancient secrets of Korean Four Pillars of Destiny (Saju). Discover your cosmic blueprint based on your birth date and time.",
+    "heroDescription": "Your birth date holds a secret. In Korea, it's called Saju — the Four Pillars of Destiny. Find out who you really are in just 30 seconds.",
     "cta": "Reveal My Destiny",
     "trustBadge": "Trusted by {count}+ seekers worldwide",
     "whatIsTitle": "What is K-Fortune?",
-    "whatIsDescription": "K-Fortune (Saju) is Korea's ancient destiny reading system, now trending globally alongside K-Pop and K-Drama. Your birth date holds the key to your cosmic blueprint.",
+    "whatIsDescription": "Think of it as Korea's answer to astrology — but based on the exact moment you were born. Saju has been guiding decisions in Korea for centuries, from relationships to career moves. Now it's going global.",
     "cardSectionTitle": "Your Destiny, One Card",
-    "cardSectionDesc": "Get a beautiful, shareable Destiny Card that captures your cosmic identity. Collect and share with friends.",
+    "cardSectionDesc": "Get a collectible Destiny Card that captures your cosmic identity. Share it like a K-Pop photocard — but for your soul.",
     "viewGallery": "Browse Destiny Cards",
-    "ctaTitle": "Ready to Discover Your Destiny?",
-    "ctaDescription": "Join thousands of seekers worldwide. It only takes 30 seconds to uncover your cosmic blueprint.",
+    "ctaTitle": "What Does Your Birth Date Reveal?",
+    "ctaDescription": "It only takes 30 seconds. No sign-up required.",
     "features": {
       "fourPillars": "Four Pillars Analysis",
-      "fourPillarsDesc": "Your cosmic blueprint based on year, month, day, and hour of birth",
+      "fourPillarsDesc": "A cosmic blueprint calculated from the year, month, day, and hour you were born",
       "elements": "Five Elements Balance",
-      "elementsDesc": "Understand your elemental energy: Wood, Fire, Earth, Metal, Water",
+      "elementsDesc": "Wood, Fire, Earth, Metal, Water — discover which energies define you",
       "dayMaster": "Day Master Identity",
-      "dayMasterDesc": "Discover your core nature through powerful nature metaphors"
+      "dayMasterDesc": "Are you The Sun, The Ocean, or The Sword? Find your cosmic archetype"
     }
   },
   "form": {
@@ -80,7 +80,10 @@
       "price": "Only ${price}",
       "cta": "Unlock Now"
     },
-    "share": "Share My Reading"
+    "share": "Share My Reading",
+    "shareText": "I'm {metaphor} in K-Destiny! Discover your Korean cosmic identity.",
+    "storyBridge": "Your birth chart reveals a unique cosmic blueprint. Here's how the stars aligned at the moment you were born.",
+    "createCard": "Create My Destiny Card"
   },
   "elements": {
     "wood": "Wood",

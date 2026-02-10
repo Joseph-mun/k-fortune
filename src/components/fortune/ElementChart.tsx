@@ -16,9 +16,6 @@ export function ElementChart({ analysis }: ElementChartProps) {
 
   return (
     <div className="w-full">
-      <h2 className="text-lg font-bold text-text-primary mb-4">
-        {tReading("elementBalance")}
-      </h2>
       <div className="flex flex-col gap-3">
         {ELEMENTS.map((element) => {
           const percentage = analysis[element];
@@ -29,30 +26,30 @@ export function ElementChart({ analysis }: ElementChartProps) {
 
           return (
             <div key={element} className="flex items-center gap-3">
-              <span className="text-lg w-6">{icon}</span>
-              <span className="text-sm text-text-secondary w-14 capitalize">
+              <span className="text-base w-5">{icon}</span>
+              <span className="text-xs text-text-secondary w-12 capitalize">
                 {t(element)}
               </span>
-              <div className="flex-1 h-3 rounded-full bg-bg-surface overflow-hidden">
+              <div className="flex-1 h-2 rounded-full bg-bg-surface overflow-hidden">
                 <div
                   className="h-full rounded-full transition-all duration-1000 ease-out"
                   style={{
-                    width: `${percentage}%`,
+                    width: `${Math.max(percentage, 3)}%`,
                     backgroundColor: color,
                     opacity: element === "metal" ? 0.8 : 1,
                   }}
                 />
               </div>
-              <span className="text-sm font-mono text-text-secondary w-10 text-right">
+              <span className="text-xs font-[family-name:var(--font-mono)] text-text-muted w-9 text-right">
                 {percentage}%
               </span>
               {isDominant && (
-                <span className="text-xs px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300">
+                <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/15">
                   {tReading("dominant")}
                 </span>
               )}
               {isLacking && (
-                <span className="text-xs px-1.5 py-0.5 rounded bg-red-500/20 text-red-300">
+                <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-red-500/10 text-red-400 border border-red-500/15">
                   {tReading("lacking")}
                 </span>
               )}

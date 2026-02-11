@@ -96,7 +96,7 @@ export default function DashboardPage() {
     <main className="flex flex-col items-center min-h-screen px-4">
       <NavBar />
 
-      <div className="w-full max-w-4xl py-8 space-y-8">
+      <div className="w-full max-w-5xl py-8 space-y-8">
         {/* Header */}
         <div>
           <h1 className="text-3xl font-bold text-text-primary font-[family-name:var(--font-heading)]">

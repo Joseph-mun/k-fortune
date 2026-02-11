@@ -76,7 +76,7 @@ export default function ReadingPage() {
       </div>
 
       <ElementThemeProvider element={reading.dayMaster.element}>
-        <div className="relative w-full max-w-2xl px-4 flex flex-col items-center gap-6 py-8">
+        <div className="relative w-full max-w-3xl px-4 sm:px-8 flex flex-col items-center gap-6 py-8">
           {/* Quick Summary — instantly visible */}
           <ReadingSummary
             dayMaster={reading.dayMaster}

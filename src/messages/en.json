@@ -61,6 +61,9 @@
   },
   "form": {
     "birthDate": "Birth Date",
+    "year": "Year",
+    "month": "Month",
+    "day": "Day",
     "birthTime": "Birth Time",
     "birthTimePlaceholder": "Select your birth time",
     "birthTimeUnknown": "I don't know my birth time",

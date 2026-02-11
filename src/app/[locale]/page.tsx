@@ -68,7 +68,7 @@ export default function LandingPage() {
 
       {/* Social Proof Strip */}
       <section className="w-full border-y border-white/[0.04] py-6 px-4 animate-shimmer">
-        <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-text-muted text-sm">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-text-muted text-sm">
           <div className="flex items-center gap-2">
             <Users className="w-4 h-4" />
             <span>{t("trustBadge", { count: "10,000" })}</span>
@@ -83,7 +83,7 @@ export default function LandingPage() {
       </section>
 
       {/* What is Saju */}
-      <section className="w-full max-w-4xl px-4 py-20">
+      <section className="w-full max-w-5xl px-4 sm:px-8 py-20">
         <div className="text-center mb-12 animate-slide-up">
           <h2 className="text-2xl md:text-3xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-3">
             {t("whatIsTitle")}
@@ -118,7 +118,7 @@ export default function LandingPage() {
       </section>
 
       {/* What You'll Discover — Service Highlights */}
-      <section className="w-full max-w-4xl px-4 py-20">
+      <section className="w-full max-w-5xl px-4 sm:px-8 py-20">
         <div className="text-center mb-10 animate-slide-up">
           <h2 className="text-2xl md:text-3xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-3">
             {t("discoverTitle")}
@@ -164,7 +164,7 @@ export default function LandingPage() {
 
       {/* Card Preview Section */}
       <section className="w-full bg-white/[0.01] border-y border-white/[0.04] py-20 px-4">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="max-w-5xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-3 animate-slide-up">
             {t("cardSectionTitle")}
           </h2>
@@ -208,7 +208,7 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Bottom */}
-      <section className="relative w-full max-w-3xl px-4 py-20 text-center overflow-hidden">
+      <section className="relative w-full max-w-4xl px-4 sm:px-8 py-20 text-center overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-[400px] h-[200px] bg-purple-500/[0.05] rounded-full blur-[100px]" />
         </div>

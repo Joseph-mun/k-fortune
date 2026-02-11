@@ -61,6 +61,9 @@
   },
   "form": {
     "birthDate": "Fecha de Nacimiento",
+    "year": "Año",
+    "month": "Mes",
+    "day": "Día",
     "birthTime": "Hora de Nacimiento",
     "birthTimePlaceholder": "Selecciona tu hora de nacimiento",
     "birthTimeUnknown": "No sé mi hora de nacimiento",

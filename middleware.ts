@@ -37,7 +37,7 @@ const protectedApiPatterns = [
 
 function isProtectedPage(pathname: string): boolean {
   // Strip locale prefix (e.g., /en/dashboard -> /dashboard)
-  const withoutLocale = pathname.replace(/^\/(en|es)/, "");
+  const withoutLocale = pathname.replace(/^\/(ko|en|es)/, "");
   return protectedPagePatterns.some((pattern) =>
     withoutLocale.startsWith(pattern)
   );
@@ -84,7 +84,7 @@ export default async function middleware(req: NextRequest) {
 
     if (!token) {
       // Redirect to sign-in page with callback URL
-      const locale = pathname.match(/^\/(en|es)/)?.[1] || "en";
+      const locale = pathname.match(/^\/(ko|en|es)/)?.[1] || "ko";
       const signInUrl = new URL(`/${locale}/auth/signin`, req.url);
       signInUrl.searchParams.set("callbackUrl", pathname);
       return NextResponse.redirect(signInUrl);
@@ -98,7 +98,7 @@ export default async function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     "/",
-    "/(en|es)/:path*",
+    "/(ko|en|es)/:path*",
     "/api/fortune/detailed",
     "/api/user/:path*",
   ],

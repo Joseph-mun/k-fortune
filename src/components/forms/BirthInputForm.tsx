@@ -6,6 +6,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/Button";
+import { CalendarPopup } from "@/components/ui/CalendarPopup";
 import { StepProgress } from "./StepProgress";
 import { useReadingStore } from "@/stores/useReadingStore";
 import { calculateYearPillar } from "@/lib/saju/pillars";
@@ -13,33 +14,11 @@ import { BRANCH_ANIMALS } from "@/lib/saju/metaphors";
 import { TIME_TO_BRANCH } from "@/lib/saju/constants";
 import { AnimalIcon } from "@/components/icons/AnimalIcon";
 
-const TOTAL_STEPS = 3;
-
-const currentYear = new Date().getFullYear();
-const YEARS = Array.from({ length: currentYear - 1920 + 1 }, (_, i) => currentYear - i);
-const MONTHS = Array.from({ length: 12 }, (_, i) => i + 1);
+const TOTAL_STEPS = 2;
 
 function getDaysInMonth(year: number, month: number) {
   return new Date(year, month, 0).getDate();
 }
-
-const TIME_SLOTS = [
-  { value: "00:00", label: "23:00 – 01:00", labelKo: "자시 (子時) 23:00–01:00" },
-  { value: "02:00", label: "01:00 – 03:00", labelKo: "축시 (丑時) 01:00–03:00" },
-  { value: "04:00", label: "03:00 – 05:00", labelKo: "인시 (寅時) 03:00–05:00" },
-  { value: "06:00", label: "05:00 – 07:00", labelKo: "묘시 (卯時) 05:00–07:00" },
-  { value: "08:00", label: "07:00 – 09:00", labelKo: "진시 (辰時) 07:00–09:00" },
-  { value: "10:00", label: "09:00 – 11:00", labelKo: "사시 (巳時) 09:00–11:00" },
-  { value: "12:00", label: "11:00 – 13:00", labelKo: "오시 (午時) 11:00–13:00" },
-  { value: "14:00", label: "13:00 – 15:00", labelKo: "미시 (未時) 13:00–15:00" },
-  { value: "16:00", label: "15:00 – 17:00", labelKo: "신시 (申時) 15:00–17:00" },
-  { value: "18:00", label: "17:00 – 19:00", labelKo: "유시 (酉時) 17:00–19:00" },
-  { value: "20:00", label: "19:00 – 21:00", labelKo: "술시 (戌時) 19:00–21:00" },
-  { value: "22:00", label: "21:00 – 23:00", labelKo: "해시 (亥時) 21:00–23:00" },
-];
-
-const selectClass =
-  "w-full rounded-lg bg-bg-surface border border-white/[0.08] px-4 py-2.5 text-sm text-text-primary focus:outline-none focus:border-purple-500/40 focus:ring-1 focus:ring-purple-500/20 transition-all duration-200 appearance-none cursor-pointer";
 
 export function BirthInputForm() {
   const t = useTranslations("form");
@@ -75,8 +54,7 @@ export function BirthInputForm() {
   }, [days, day]);
 
   const stepValid = [
-    !!year && !!month && !!day,
-    unknownTime || !!birthTime,
+    !!year && !!month && !!day && (unknownTime || !!birthTime),
     !!gender,
   ];
 
@@ -165,78 +143,33 @@ export function BirthInputForm() {
           className="step-container"
           style={{ transform: `translateX(-${currentStep * 100}%)` }}
         >
-          {/* Step 0: Birth Date — select dropdowns */}
+          {/* Step 0: Birth Date + Time — Calendar Popup */}
           <div className="step-content px-1">
             <div className="flex flex-col gap-4">
               <h3 className="text-lg font-semibold text-text-primary text-center font-[family-name:var(--font-heading)]">
                 {t("step1Title")}
               </h3>
-              <div className="grid grid-cols-3 gap-2">
-                <div className="flex flex-col gap-1">
-                  <select
-                    value={year}
-                    onChange={(e) => setYear(e.target.value)}
-                    className={selectClass}
-                  >
-                    <option value="">{t("year")}</option>
-                    {YEARS.map((y) => (
-                      <option key={y} value={y}>{y}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <select
-                    value={month}
-                    onChange={(e) => setMonth(e.target.value)}
-                    className={selectClass}
-                  >
-                    <option value="">{t("month")}</option>
-                    {MONTHS.map((m) => (
-                      <option key={m} value={m}>{m}</option>
-                    ))}
-                  </select>
-                </div>
-                <div className="flex flex-col gap-1">
-                  <select
-                    value={day}
-                    onChange={(e) => setDay(e.target.value)}
-                    className={selectClass}
-                  >
-                    <option value="">{t("day")}</option>
-                    {days.map((d) => (
-                      <option key={d} value={d}>{d}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
+              <CalendarPopup
+                year={year}
+                month={month}
+                day={day}
+                birthTime={birthTime}
+                unknownTime={unknownTime}
+                onDateSelect={(y, m, d) => {
+                  setYear(y);
+                  setMonth(m);
+                  setDay(d);
+                }}
+                onTimeChange={(time) => setBirthTime(time)}
+                onUnknownTimeChange={(unknown) => setUnknownTime(unknown)}
+                placeholder={t("birthTimePlaceholder")}
+                locale={locale}
+              />
               {errors.birthDate && <p className="text-xs text-red-400 text-center">{errors.birthDate}</p>}
               {yearAnimal && (
                 <p className="text-xs text-text-muted text-center animate-fade-in">
                   {yearAnimal.icon} {t("yearInsight", { animal: yearAnimal.displayName })}
                 </p>
-              )}
-            </div>
-          </div>
-
-          {/* Step 1: Birth Time — select from 12 time slots */}
-          <div className="step-content px-1">
-            <div className="flex flex-col gap-4">
-              <h3 className="text-lg font-semibold text-text-primary text-center font-[family-name:var(--font-heading)]">
-                {t("step2Title")}
-              </h3>
-              {!unknownTime && (
-                <select
-                  value={birthTime}
-                  onChange={(e) => setBirthTime(e.target.value)}
-                  className={selectClass}
-                >
-                  <option value="">{t("birthTimePlaceholder")}</option>
-                  {TIME_SLOTS.map((slot) => (
-                    <option key={slot.value} value={slot.value}>
-                      {locale === "ko" ? slot.labelKo : slot.label}
-                    </option>
-                  ))}
-                </select>
               )}
               {timeAnimal && (
                 <div className="flex items-center justify-center gap-2 text-xs text-text-muted animate-fade-in">
@@ -244,19 +177,10 @@ export function BirthInputForm() {
                   <span>{t("timeInsight", { animal: timeAnimal.displayName, hanja: timeAnimal.hanja })}</span>
                 </div>
               )}
-              <label className="flex items-center gap-2 text-xs text-text-muted cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={unknownTime}
-                  onChange={(e) => setUnknownTime(e.target.checked)}
-                  className="rounded border-white/10 bg-bg-surface accent-purple-500"
-                />
-                {t("birthTimeUnknown")}
-              </label>
             </div>
           </div>
 
-          {/* Step 2: Gender + Submit */}
+          {/* Step 1: Gender + Submit */}
           <div className="step-content px-1">
             <div className="flex flex-col gap-4">
               <h3 className="text-lg font-semibold text-text-primary text-center font-[family-name:var(--font-heading)]">
@@ -284,7 +208,7 @@ export function BirthInputForm() {
                 <p className="text-xs text-red-400 text-center">{errors.form}</p>
               )}
 
-              <Button type="submit" size="lg" loading={loading} disabled={!stepValid[2]}>
+              <Button type="submit" size="lg" loading={loading} disabled={!stepValid[1]}>
                 {t("submit")}
               </Button>
             </div>

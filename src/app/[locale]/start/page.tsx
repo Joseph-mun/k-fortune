@@ -1,12 +1,14 @@
-import { useTranslations } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { BirthInputForm } from "@/components/forms/BirthInputForm";
 import { Link } from "@/i18n/navigation";
 import { ArrowLeft } from "lucide-react";
 
-export default function StartPage() {
-  const t = useTranslations("start");
+export default async function StartPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("start");
 
   return (
     <main className="flex flex-col items-center min-h-screen">
@@ -29,7 +31,7 @@ export default function StartPage() {
           </Link>
 
           {/* Form */}
-          <div className="w-full glass rounded-xl p-6 ring-glow-purple">
+          <div className="w-full glass rounded-lg p-6 ring-glow-purple">
             <BirthInputForm />
           </div>
         </div>

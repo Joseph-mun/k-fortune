@@ -58,7 +58,7 @@ export function LifeCycleTimeline({ cycles, currentAge }: LifeCycleTimelineProps
               key={i}
               className={`
                 flex-shrink-0 w-20 md:w-auto
-                flex flex-col items-center gap-1.5 p-3 rounded-xl border
+                flex flex-col items-center gap-1.5 p-3 rounded-lg border
                 transition-all
                 ${isCurrent ? "ring-2 ring-gold-400 bg-gold-500/5 border-gold-400/50" : RATING_BG[cycle.rating]}
               `}

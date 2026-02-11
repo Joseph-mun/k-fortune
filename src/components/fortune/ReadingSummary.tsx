@@ -32,7 +32,7 @@ export function ReadingSummary({ dayMaster, elementAnalysis }: ReadingSummaryPro
     .slice(0, 3);
 
   return (
-    <div className="w-full glass-premium rounded-xl p-6 flex flex-col items-center text-center">
+    <div className="w-full glass-premium rounded-lg p-6 flex flex-col items-center text-center">
       {/* Metaphor Icon (3D) */}
       <div className="mb-4 animate-float">
         <MetaphorIcon

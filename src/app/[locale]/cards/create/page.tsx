@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
@@ -47,7 +47,7 @@ export default function CardCreatePage() {
           <Card className="p-8 text-center max-w-sm">
             <p className="text-text-secondary mb-4">{t("needReading")}</p>
             <Button onClick={() => router.push("/")}>
-              Get a Reading First
+              {t("needReadingAction")}
             </Button>
           </Card>
         </div>
@@ -120,7 +120,7 @@ export default function CardCreatePage() {
                 <button
                   key={style}
                   onClick={() => setSelectedStyle(style)}
-                  className={`p-4 rounded-xl border text-center transition-all ${
+                  className={`p-4 rounded-lg border text-center transition-all ${
                     selectedStyle === style
                       ? "border-purple-500 bg-purple-500/20 ring-2 ring-purple-500"
                       : "border-border bg-surface hover:border-purple-500/50"

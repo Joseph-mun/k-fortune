@@ -82,6 +82,15 @@
     "validation": {
       "birthDateRequired": "생년월일을 입력해 주세요",
       "genderRequired": "성별을 선택해 주세요"
+    },
+    "calendar": {
+      "time": "시간",
+      "am": "오전",
+      "pm": "오후",
+      "timeOn": "입력",
+      "timeOff": "모름",
+      "backToCalendar": "달력으로 돌아가기",
+      "selectDate": "날짜 선택"
     }
   },
   "reading": {

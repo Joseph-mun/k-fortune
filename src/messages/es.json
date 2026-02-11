@@ -82,6 +82,15 @@
     "validation": {
       "birthDateRequired": "Por favor ingresa tu fecha de nacimiento",
       "genderRequired": "Por favor selecciona tu género"
+    },
+    "calendar": {
+      "time": "Hora",
+      "am": "AM",
+      "pm": "PM",
+      "timeOn": "Sí",
+      "timeOff": "No",
+      "backToCalendar": "Volver al calendario",
+      "selectDate": "Seleccionar fecha"
     }
   },
   "reading": {
@@ -342,7 +351,8 @@
       "success": "Carta Creada!",
       "createButton": "Crear Carta",
       "viewGallery": "Ver Galeria",
-      "needReading": "Necesitas una lectura primero para crear una carta."
+      "needReading": "Necesitas una lectura primero para crear una carta.",
+      "needReadingAction": "Obtener una Lectura Primero"
     },
     "view": {
       "title": "Carta del Destino",

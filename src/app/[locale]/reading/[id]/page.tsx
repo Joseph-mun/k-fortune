@@ -22,6 +22,7 @@ import { ElementIcon } from "@/components/icons/ElementIcon";
 import { useIntersectionReveal } from "@/hooks/useIntersectionReveal";
 import { reconstructReading } from "@/lib/saju";
 import { useReadingStore } from "@/stores/useReadingStore";
+import { POLAR_PRODUCTS } from "@/lib/polar";
 
 export default function ReadingPage() {
   const { id } = useParams<{ id: string }>();
@@ -155,7 +156,7 @@ export default function ReadingPage() {
               paywallReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >
-            <PaywallOverlay readingId={id} />
+            <PaywallOverlay readingId={id} productId={POLAR_PRODUCTS.DETAILED_READING} />
           </div>
 
           {/* Actions */}

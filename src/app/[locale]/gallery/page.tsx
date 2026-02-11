@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useCallback, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
@@ -141,7 +141,7 @@ export default function GalleryPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="animate-skeleton">
-                <div className="w-full aspect-[2/3] rounded-xl bg-bg-card border border-white/[0.06]" />
+                <div className="w-full aspect-[2/3] rounded-lg bg-bg-card border border-white/[0.06]" />
               </div>
             ))}
           </div>

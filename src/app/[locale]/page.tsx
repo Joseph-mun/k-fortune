@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { Link } from "@/i18n/navigation";
@@ -9,9 +9,11 @@ import { ElementIcon } from "@/components/icons/ElementIcon";
 import { ServiceHighlight } from "@/components/landing/ServiceHighlight";
 import { TiltCard } from "@/components/ui/TiltCard";
 
-export default function LandingPage() {
-  const t = useTranslations("landing");
-  const tCommon = useTranslations("common");
+export default async function LandingPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("landing");
+  const tCommon = await getTranslations("common");
 
   return (
     <main className="flex flex-col items-center min-h-screen">

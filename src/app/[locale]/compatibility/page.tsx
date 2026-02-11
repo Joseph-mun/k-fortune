@@ -173,10 +173,18 @@ function getInterpretationText(
 ): string {
   // key format: "interpretation.compatibility.analysis.excellent"
   const level = key.split(".").pop() || "moderate";
+  const validLevels = ["excellent", "good", "moderate", "challenging", "difficult"];
+  const safeLevel = validLevels.includes(level) ? level : "moderate";
+  const translationKey = `${category}.${safeLevel}` as Parameters<typeof t>[0];
   try {
-    return t(`${category}.${level}` as Parameters<typeof t>[0]);
+    const result = t(translationKey);
+    // next-intl returns the key path if translation is missing
+    if (result === translationKey || result.startsWith("interpretation.")) {
+      return t(`${category}.moderate` as Parameters<typeof t>[0]);
+    }
+    return result;
   } catch {
-    return key;
+    return t(`${category}.moderate` as Parameters<typeof t>[0]);
   }
 }
 

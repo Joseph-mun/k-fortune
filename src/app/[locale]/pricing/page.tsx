@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { PricingTable } from "@/components/payment/PricingTable";
@@ -8,8 +8,10 @@ import { Sparkles } from "lucide-react";
  * Pricing page (/[locale]/pricing)
  * Section 5.2 - Display pricing plans for Basic (FREE), Detail ($2.99), Premium ($9.99/mo)
  */
-export default function PricingPage() {
-  const t = useTranslations("pricing");
+export default async function PricingPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations("pricing");
 
   return (
     <main className="flex flex-col items-center min-h-screen px-4">

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import CardViewClient from "./CardViewClient";
 
 interface PageProps {
@@ -29,6 +30,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function CardViewPage() {
+export default async function CardViewPage({ params }: PageProps) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   return <CardViewClient />;
 }

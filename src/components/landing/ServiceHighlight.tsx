@@ -25,7 +25,7 @@ export function ServiceHighlight({ services }: ServiceHighlightProps) {
         <Link key={service.href} href={service.href as "/start" | "/star-match" | "/compatibility" | "/gallery"}>
           <TiltCard
             className={cn(
-              "glass-premium rounded-xl p-5 flex flex-col gap-3 group cursor-pointer",
+              "glass-premium rounded-lg p-5 flex flex-col gap-3 group cursor-pointer",
               "hover:border-white/[0.12] transition-all duration-300",
               "animate-slide-up"
             )}

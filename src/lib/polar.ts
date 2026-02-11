@@ -33,11 +33,11 @@ export function getPolarClient(): Polar {
 
 // Polar product configuration (from design spec Section 5.2)
 export const POLAR_PRODUCTS = {
-  DETAILED_READING: 'detailed_reading',
-  PREMIUM_SUBSCRIPTION: 'premium_subscription',
-  DESTINY_CARD_PREMIUM: 'destiny_card_premium',
-  DESTINY_CARD_PHOTO: 'destiny_card_photo',
-  PRINT_READY_PDF: 'print_ready_pdf',
+  DETAILED_READING: process.env.NEXT_PUBLIC_POLAR_PRODUCT_DETAILED_READING || 'detailed_reading',
+  PREMIUM_SUBSCRIPTION: process.env.NEXT_PUBLIC_POLAR_PRODUCT_PREMIUM_SUBSCRIPTION || 'premium_subscription',
+  DESTINY_CARD_PREMIUM: process.env.NEXT_PUBLIC_POLAR_PRODUCT_DESTINY_CARD_PREMIUM || 'destiny_card_premium',
+  DESTINY_CARD_PHOTO: process.env.NEXT_PUBLIC_POLAR_PRODUCT_DESTINY_CARD_PHOTO || 'destiny_card_photo',
+  PRINT_READY_PDF: process.env.NEXT_PUBLIC_POLAR_PRODUCT_PRINT_READY_PDF || 'print_ready_pdf',
 } as const;
 
 export const POLAR_PRICES = {

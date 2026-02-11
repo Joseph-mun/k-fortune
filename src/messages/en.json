@@ -82,6 +82,15 @@
     "validation": {
       "birthDateRequired": "Please enter your birth date",
       "genderRequired": "Please select your gender"
+    },
+    "calendar": {
+      "time": "Time",
+      "am": "AM",
+      "pm": "PM",
+      "timeOn": "On",
+      "timeOff": "Off",
+      "backToCalendar": "Back to calendar",
+      "selectDate": "Select date"
     }
   },
   "reading": {
@@ -342,7 +351,8 @@
       "success": "Card Created!",
       "createButton": "Create Card",
       "viewGallery": "View Gallery",
-      "needReading": "You need a reading first to create a card."
+      "needReading": "You need a reading first to create a card.",
+      "needReadingAction": "Get a Reading First"
     },
     "view": {
       "title": "Destiny Card",

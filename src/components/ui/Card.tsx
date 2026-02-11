@@ -11,7 +11,7 @@ export function Card({ children, glow = false, className, ...props }: CardProps)
   return (
     <div
       className={cn(
-        "rounded-xl bg-bg-card border border-white/[0.06] p-5",
+        "rounded-lg bg-bg-card border border-white/[0.06] p-6",
         "transition-colors duration-200",
         "hover:border-white/[0.1]",
         glow && "glow-purple border-purple-500/20",

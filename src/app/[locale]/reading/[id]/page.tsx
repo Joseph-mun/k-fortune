@@ -172,8 +172,8 @@ export default function ReadingPage() {
           </div>
 
           {/* Actions */}
-          <div className="flex flex-col items-center gap-4 w-full">
-            <div className="flex gap-3">
+          <div className="flex flex-col items-center gap-4 w-full mt-4">
+            <div className="flex flex-wrap justify-center gap-3">
               <Button variant="secondary" className="gap-2 hover:-translate-y-0.5 transition-all duration-300" onClick={handleShare}>
                 <Share2 className="w-4 h-4" />
                 {t("share")}

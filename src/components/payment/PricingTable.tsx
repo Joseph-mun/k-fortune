@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Check } from "lucide-react";
+import { POLAR_PRODUCTS } from "@/lib/polar";
 
 interface PricingPlan {
   id: string;
@@ -40,7 +41,7 @@ export function PricingTable() {
     },
     {
       id: "detailed",
-      polarProductId: "50ad1cfe-da26-41cd-80c7-862258baaa39",
+      polarProductId: POLAR_PRODUCTS.DETAILED_READING,
       name: t("detailed.name"),
       price: t("detailed.price"),
       features: [
@@ -55,7 +56,7 @@ export function PricingTable() {
     },
     {
       id: "premium",
-      polarProductId: "e6efae19-0081-4df3-8c17-2f9fd76fd89c",
+      polarProductId: POLAR_PRODUCTS.PREMIUM_SUBSCRIPTION,
       name: t("premium.name"),
       price: t("premium.price"),
       period: t("premium.period"),

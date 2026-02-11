@@ -31,7 +31,7 @@ export function PaywallOverlay({ onUnlock, readingId, productId }: PaywallOverla
   };
 
   return (
-    <div className="relative">
+    <div className="relative min-h-[360px]">
       {/* Blurred content preview */}
       <div className="blur-sm select-none pointer-events-none" aria-hidden="true">
         <div className="p-5 rounded-lg bg-bg-card border border-white/[0.06] mb-3">
@@ -42,14 +42,18 @@ export function PaywallOverlay({ onUnlock, readingId, productId }: PaywallOverla
           <h3 className="text-sm font-semibold text-text-primary mb-2">{t("previewRelationship")}</h3>
           <p className="text-xs text-text-secondary">{t("previewRelationshipDesc")}</p>
         </div>
-        <div className="p-5 rounded-lg bg-bg-card border border-white/[0.06]">
+        <div className="p-5 rounded-lg bg-bg-card border border-white/[0.06] mb-3">
           <h3 className="text-sm font-semibold text-text-primary mb-2">{t("previewAdvice")}</h3>
           <p className="text-xs text-text-secondary">{t("previewAdviceDesc")}</p>
+        </div>
+        <div className="p-5 rounded-lg bg-bg-card border border-white/[0.06]">
+          <h3 className="text-sm font-semibold text-text-primary mb-2">&nbsp;</h3>
+          <p className="text-xs text-text-secondary">&nbsp;</p>
         </div>
       </div>
 
       {/* CTA Overlay */}
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
         <div className="text-center glass p-6 rounded-lg max-w-sm mx-4 shadow-2xl" style={{ boxShadow: "0 0 40px var(--accent-glow, rgba(168,85,247,0.15))" }}>
           <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-glow" style={{ background: "var(--accent-bg-tint, rgba(168,85,247,0.1))", borderColor: "var(--accent-primary, #a855f7)", borderWidth: "1px" }}>
             <Lock className="w-5 h-5" style={{ color: "var(--accent-primary, #a855f7)" }} />

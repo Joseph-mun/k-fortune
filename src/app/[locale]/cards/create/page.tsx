@@ -74,10 +74,11 @@ export default function CardCreatePage() {
       if (response.ok) {
         const data = await response.json();
         setCardId(data.card.id);
-        setStep(3);
       }
+      // Proceed to success step regardless (card viewable locally)
+      setStep(3);
     } catch {
-      // Silently handle - card saved locally via DestinyCardGenerator
+      // Network error - still show card locally via DestinyCardGenerator
       setStep(3);
     } finally {
       setCreating(false);

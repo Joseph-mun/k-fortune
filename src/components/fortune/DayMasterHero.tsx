@@ -30,10 +30,10 @@ export function DayMasterHero({ dayMaster }: DayMasterHeroProps) {
       </div>
 
       {/* "You are" label */}
-      <p className="text-text-muted text-[10px] uppercase tracking-[0.2em] mb-2">{t("youAre")}</p>
+      <p className="typo-overline mb-2">{t("youAre")}</p>
 
       {/* Metaphor name */}
-      <h1 className="text-3xl md:text-4xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-1">
+      <h1 className="typo-h1 text-text-primary mb-1">
         {dayMaster.metaphorInfo.displayName}
       </h1>
 
@@ -43,12 +43,12 @@ export function DayMasterHero({ dayMaster }: DayMasterHeroProps) {
       </p>
 
       {/* Element tag */}
-      <span className="inline-flex px-2.5 py-0.5 rounded-full accent-badge text-[10px] tracking-wider mb-5">
+      <span className="inline-flex px-2.5 py-0.5 rounded-full accent-badge typo-overline mb-5">
         {elementLabel} · {YINYANG_HANJA[dayMaster.yinYang]}{ELEMENT_HANJA[dayMaster.element]}
       </span>
 
       {/* Personality description */}
-      <p className="text-text-secondary text-sm md:text-base max-w-lg leading-relaxed mb-5">
+      <p className="typo-body text-text-secondary max-w-lg mb-5">
         {resolveKey(dayMaster.personality)}
       </p>
 

@@ -4,10 +4,9 @@ import { Footer } from "@/components/layout/Footer";
 import { Link } from "@/i18n/navigation";
 import { Sparkles, Layers, Sun, ArrowRight, Star, Users, Heart } from "lucide-react";
 import { WebGLShader } from "@/components/ui/web-gl-shader";
-import { MetaphorIcon } from "@/components/icons/MetaphorIcon";
 import { ElementIcon } from "@/components/icons/ElementIcon";
 import { ServiceHighlight } from "@/components/landing/ServiceHighlight";
-import { TiltCard } from "@/components/ui/TiltCard";
+import { CardPreview } from "@/components/landing/CardPreview";
 
 export default async function LandingPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -39,14 +38,14 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
           </div>
 
           {/* Headline */}
-          <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight font-[family-name:var(--font-heading)] leading-[1.05] mb-6 animate-slide-up delay-100">
+          <h1 className="typo-display mb-6 animate-slide-up delay-100">
             <span className="text-white">{t("heroTitle")}</span>
             <br />
             <span className="text-gradient-hero">{t("heroHighlight")}</span>
           </h1>
 
           {/* Subheading */}
-          <p className="text-white/60 text-base md:text-lg max-w-xl leading-relaxed mb-12 animate-slide-up delay-200">
+          <p className="typo-body-lg text-white/60 max-w-xl mb-12 animate-slide-up delay-200">
             {t("heroDescription")}
           </p>
 
@@ -87,7 +86,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
       {/* What is Saju */}
       <section className="w-full max-w-5xl px-4 sm:px-8 py-20">
         <div className="text-center mb-12 animate-slide-up">
-          <h2 className="text-2xl md:text-3xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-3">
+          <h2 className="typo-h2 text-text-primary mb-3">
             {t("whatIsTitle")}
           </h2>
           <p className="text-text-secondary max-w-lg mx-auto">
@@ -122,7 +121,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
       {/* What You'll Discover — Service Highlights */}
       <section className="w-full max-w-5xl px-4 sm:px-8 py-20">
         <div className="text-center mb-10 animate-slide-up">
-          <h2 className="text-2xl md:text-3xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-3">
+          <h2 className="typo-h2 text-text-primary mb-3">
             {t("discoverTitle")}
           </h2>
           <p className="text-text-secondary max-w-lg mx-auto">
@@ -167,37 +166,14 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
       {/* Card Preview Section */}
       <section className="w-full bg-white/[0.01] border-y border-white/[0.04] py-20 px-4">
         <div className="max-w-5xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-3 animate-slide-up">
+          <h2 className="typo-h2 text-text-primary mb-3 animate-slide-up">
             {t("cardSectionTitle")}
           </h2>
           <p className="text-text-secondary max-w-lg mx-auto mb-10 animate-slide-up delay-100">
             {t("cardSectionDesc")}
           </p>
 
-          <div className="perspective-1000 mb-10">
-            <div className="flex justify-center items-end gap-4 md:gap-6">
-              <TiltCard className="w-28 md:w-36 aspect-[2/3] rounded-lg glass-premium p-3 flex flex-col items-center justify-center text-center opacity-80 hover:opacity-100 transition-all duration-500 animate-slide-up delay-100" tiltMax={8} style={{ transform: "rotate(-6deg)" }}>
-                <MetaphorIcon metaphor="great-tree" size={48} className="mb-2" />
-                <span className="text-[10px] md:text-xs text-gold-400 font-semibold font-[family-name:var(--font-heading)]">THE GREAT TREE</span>
-                <span className="text-[8px] md:text-[10px] text-text-muted mt-0.5">Yang Wood</span>
-              </TiltCard>
-              <TiltCard className="w-32 md:w-40 aspect-[2/3] rounded-lg glass-premium p-3 flex flex-col items-center justify-center text-center z-10 ring-glow-purple transition-all duration-500 animate-slide-up delay-200" tiltMax={8}>
-                <MetaphorIcon metaphor="sun" size={56} className="mb-2" />
-                <span className="text-xs md:text-sm text-gold-400 font-semibold font-[family-name:var(--font-heading)]">THE SUN</span>
-                <span className="text-[9px] md:text-xs text-text-muted mt-0.5">Yang Fire</span>
-                <div className="flex gap-0.5 mt-2">
-                  {(["wood", "fire", "earth", "metal", "water"] as const).map((el) => (
-                    <ElementIcon key={el} element={el} size={12} />
-                  ))}
-                </div>
-              </TiltCard>
-              <TiltCard className="w-28 md:w-36 aspect-[2/3] rounded-lg glass-premium p-3 flex flex-col items-center justify-center text-center opacity-80 hover:opacity-100 transition-all duration-500 animate-slide-up delay-300" tiltMax={8} style={{ transform: "rotate(6deg)" }}>
-                <MetaphorIcon metaphor="ocean" size={48} className="mb-2" />
-                <span className="text-[10px] md:text-xs text-gold-400 font-semibold font-[family-name:var(--font-heading)]">THE OCEAN</span>
-                <span className="text-[8px] md:text-[10px] text-text-muted mt-0.5">Yang Water</span>
-              </TiltCard>
-            </div>
-          </div>
+          <CardPreview />
 
           <Link
             href="/gallery"
@@ -215,7 +191,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
           <div className="w-[400px] h-[200px] bg-purple-500/[0.05] rounded-full blur-[100px]" />
         </div>
         <div className="relative z-10">
-          <h2 className="text-2xl md:text-4xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-4 animate-slide-up">
+          <h2 className="typo-h1 text-text-primary mb-4 animate-slide-up">
             {t("ctaTitle")}
           </h2>
           <p className="text-text-secondary mb-8 max-w-md mx-auto animate-slide-up delay-100">

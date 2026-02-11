@@ -7,12 +7,14 @@ import { Link } from "@/i18n/navigation";
 
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
+import { SkeletonReading } from "@/components/fortune/SkeletonReading";
 import { ReadingSummary } from "@/components/fortune/ReadingSummary";
 import { DayMasterHero } from "@/components/fortune/DayMasterHero";
 import { FourPillarsDisplay } from "@/components/fortune/FourPillarsDisplay";
 import { ElementChart } from "@/components/fortune/ElementChart";
 import { PaywallOverlay } from "@/components/fortune/PaywallOverlay";
 import { Card } from "@/components/ui/Card";
+import { GraphCard } from "@/components/ui/GraphCard";
 import { Button } from "@/components/ui/Button";
 import { Accordion } from "@/components/ui/Accordion";
 import { TiltCard } from "@/components/ui/TiltCard";
@@ -32,11 +34,11 @@ export default function ReadingPage() {
 
   if (!storedReading) {
     return (
-      <main className="flex flex-col items-center justify-center min-h-screen px-4">
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-8 h-8 border-2 border-purple-500/[0.3] border-t-purple-500 rounded-full animate-spin" />
-          <p className="text-text-muted text-sm">{tCommon("loading")}</p>
+      <main className="flex flex-col items-center min-h-screen">
+        <div className="w-full px-4">
+          <NavBar />
         </div>
+        <SkeletonReading />
       </main>
     );
   }
@@ -111,12 +113,22 @@ export default function ReadingPage() {
             title={t("sectionElements")}
             icon={<ElementIcon element={reading.dayMaster.element} size={14} />}
           >
-            <Card className="w-full glass">
+            <GraphCard
+              title={t("sectionElements")}
+              icon={<ElementIcon element={reading.dayMaster.element} size={14} />}
+              legend={[
+                { label: "Wood", color: "#22C55E" },
+                { label: "Fire", color: "#F43F5E" },
+                { label: "Earth", color: "#F59E0B" },
+                { label: "Metal", color: "#E4E4E7" },
+                { label: "Water", color: "#6366F1" },
+              ]}
+            >
               <ElementPentagonChart analysis={reading.elementAnalysis} />
               <div className="mt-6">
                 <ElementChart analysis={reading.elementAnalysis} />
               </div>
-            </Card>
+            </GraphCard>
           </Accordion>
 
           {/* Accordion: Lucky Info */}
@@ -128,19 +140,19 @@ export default function ReadingPage() {
             <div className="grid grid-cols-3 gap-3">
               <Card className="text-center py-5 glass hover:-translate-y-1 transition-all duration-300 cursor-default">
                 <Palette className="w-4 h-4 text-purple-400 mx-auto mb-2" />
-                <p className="text-text-muted text-[10px] uppercase tracking-wider mb-1">{t("lucky.color")}</p>
+                <p className="typo-overline mb-1">{t("lucky.color")}</p>
                 <p className="text-base font-semibold text-text-primary">{storedReading.luckyInfo.color}</p>
               </Card>
               <Card className="text-center py-5 glass hover:-translate-y-1 transition-all duration-300 cursor-default">
                 <Hash className="w-4 h-4 text-gold-500 mx-auto mb-2" />
-                <p className="text-text-muted text-[10px] uppercase tracking-wider mb-1">{t("lucky.number")}</p>
+                <p className="typo-overline mb-1">{t("lucky.number")}</p>
                 <p className="text-base font-semibold text-text-primary font-[family-name:var(--font-mono)]">
                   {storedReading.luckyInfo.number}
                 </p>
               </Card>
               <Card className="text-center py-5 glass hover:-translate-y-1 transition-all duration-300 cursor-default">
                 <Compass className="w-4 h-4 text-purple-400 mx-auto mb-2" />
-                <p className="text-text-muted text-[10px] uppercase tracking-wider mb-1">{t("lucky.direction")}</p>
+                <p className="typo-overline mb-1">{t("lucky.direction")}</p>
                 <p className="text-base font-semibold text-text-primary">{storedReading.luckyInfo.direction}</p>
               </Card>
             </div>

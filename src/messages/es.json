@@ -1,8 +1,8 @@
 {
   "common": {
-    "appName": "K-Destiny",
-    "tagline": "Descubre Tu Destino Coreano",
-    "subtitle": "La sabiduría antigua coreana se encuentra con la perspicacia moderna",
+    "appName": "SAJU",
+    "tagline": "Naciste para ser revelado.",
+    "subtitle": "5,000 años de sabiduría coreana en 30 segundos",
     "loading": "Leyendo las estrellas...",
     "error": "Algo salió mal",
     "retry": "Intentar de nuevo",
@@ -16,15 +16,17 @@
     "starMatch": "Star Match",
     "dashboard": "Mis Lecturas",
     "signIn": "Iniciar Sesión",
-    "signOut": "Cerrar Sesión"
+    "signOut": "Cerrar Sesión",
+    "menu": "Menú",
+    "close": "Cerrar"
   },
   "landing": {
-    "heroTitle": "Descubre Tu",
-    "heroHighlight": "Destino Coreano",
-    "heroDescription": "Tu fecha de nacimiento guarda un secreto. En Corea lo llaman Saju — los Cuatro Pilares del Destino. Descubre quién eres realmente en solo 30 segundos.",
-    "cta": "Revelar Mi Destino",
+    "heroTitle": "Naciste para",
+    "heroHighlight": "ser revelado.",
+    "heroDescription": "En Corea, tu fecha de nacimiento cuenta una historia de 5,000 años llamada Saju — los Cuatro Pilares del Destino. Descúbrela en 30 segundos.",
+    "cta": "¿Cuál es mi Saju?",
     "trustBadge": "Más de {count}+ personas confían en nosotros",
-    "whatIsTitle": "¿Qué es K-Fortune?",
+    "whatIsTitle": "¿Qué es Saju?",
     "whatIsDescription": "Es la respuesta coreana a la astrología — pero basada en el momento exacto de tu nacimiento. El Saju ha guiado decisiones en Corea durante siglos. Ahora se expande al mundo.",
     "cardSectionTitle": "Tu Destino, Una Carta",
     "cardSectionDesc": "Obtén una Carta del Destino coleccionable. Compártela como una photocard de K-Pop — pero para tu alma.",
@@ -38,6 +40,18 @@
       "elementsDesc": "Madera, Fuego, Tierra, Metal, Agua — descubre qué energías te definen",
       "dayMaster": "Identidad del Maestro del Día",
       "dayMasterDesc": "¿Eres El Sol, El Océano o La Espada? Encuentra tu arquetipo cósmico"
+    },
+    "discoverTitle": "Lo Que Descubrirás",
+    "discoverDescription": "Sabiduría coreana ancestral, reimaginada para el mundo moderno",
+    "services": {
+      "sajuTitle": "Lectura Saju",
+      "sajuDesc": "Tus Cuatro Pilares del Destino revelados en 30 segundos",
+      "starTitle": "Match de Estrellas",
+      "starDesc": "Comprueba tu compatibilidad con estrellas K-Pop",
+      "compatTitle": "Compatibilidad",
+      "compatDesc": "Descubre la armonía de tu relación",
+      "galleryTitle": "Galería de Cartas",
+      "galleryDesc": "Colecciona hermosas Cartas del Destino"
     }
   },
   "start": {
@@ -55,6 +69,13 @@
     "female": "Femenino",
     "other": "Otro",
     "submit": "Revelar Mi Destino",
+    "step1Title": "¿Cuándo naciste?",
+    "step2Title": "¿A qué hora?",
+    "step3Title": "¡Ya casi!",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "yearInsight": "¡Naciste en el Año del {animal}!",
+    "timeInsight": "Hora {hanja} — La Hora del {animal}",
     "validation": {
       "birthDateRequired": "Por favor ingresa tu fecha de nacimiento",
       "genderRequired": "Por favor selecciona tu género"
@@ -86,11 +107,18 @@
       "cta": "Desbloquear Ahora"
     },
     "share": "Compartir Mi Lectura",
-    "shareText": "Soy {metaphor} en K-Destiny. Descubre tu identidad cósmica coreana.",
+    "shareText": "Soy {metaphor} en SAJU! ¿Cuál es tu Saju?",
+    "tapToReveal": "Toca para revelar tu destino",
     "storyBridge": "Tu carta natal revela un mapa cósmico único. Así se alinearon las estrellas en el momento de tu nacimiento.",
     "createCard": "Crear Mi Carta del Destino",
     "strengths": "Fortalezas",
-    "weaknesses": "Debilidades"
+    "weaknesses": "Debilidades",
+    "scrollToExplore": "Desplázate para explorar tu destino",
+    "topElements": "Top",
+    "sectionIdentity": "Tu Identidad Cósmica",
+    "sectionPillars": "Cuatro Pilares del Destino",
+    "sectionElements": "Balance Elemental",
+    "sectionLucky": "Información de Suerte"
   },
   "elements": {
     "wood": "Madera",
@@ -99,7 +127,19 @@
     "metal": "Metal",
     "water": "Agua",
     "yang": "Yang",
-    "yin": "Yin"
+    "yin": "Yin",
+    "woodHanja": "木",
+    "fireHanja": "火",
+    "earthHanja": "土",
+    "metalHanja": "金",
+    "waterHanja": "水",
+    "yangHanja": "陽",
+    "yinHanja": "陰",
+    "woodDesc": "Crecimiento, flexibilidad y nuevos comienzos",
+    "fireDesc": "Pasión, energía y transformación",
+    "earthDesc": "Estabilidad, nutrición y arraigo",
+    "metalDesc": "Precisión, disciplina y claridad",
+    "waterDesc": "Sabiduría, adaptabilidad e intuición"
   },
   "metaphors": {
     "great-tree": {
@@ -202,7 +242,7 @@
     },
     "signUp": {
       "title": "Crea Tu Cuenta",
-      "subtitle": "Unete a K-Destiny y desbloquea tu mapa cosmico completo",
+      "subtitle": "Únete a SAJU y desbloquea tu mapa cósmico completo",
       "hasAccount": "Ya tienes cuenta?",
       "signInLink": "Iniciar sesion"
     }
@@ -250,7 +290,7 @@
   "cardGenerator": {
     "download": "Descargar",
     "share": "Compartir",
-    "shareText": "Descubre tu destino! Soy {metaphor} en K-Destiny.",
+    "shareText": "¡Descubre tu Saju! Soy {metaphor}. ¿Cuál es el tuyo?",
     "linkCopied": "Enlace copiado al portapapeles!",
     "styles": {
       "classic": "Clasico",
@@ -424,16 +464,16 @@
       "growth": "Un período de crecimiento acelerado y potencial en expansión."
     },
     "tenGods": {
-      "bijeon": { "name": "Paralelo", "description": "Independencia y autosuficiencia. Te mantienes fuerte por tu cuenta, sacando confianza de tu identidad esencial." },
-      "geopjae": { "name": "Robar Riqueza", "description": "Competencia y ambicion. Te impulsa aprovechar oportunidades y prosperar en entornos desafiantes." },
-      "siksin": { "name": "Dios de la Comida", "description": "Creatividad y crianza. Tus talentos naturales fluyen sin esfuerzo, trayendo alegria y abundancia." },
-      "sanggwan": { "name": "Oficial Herido", "description": "Innovacion y expresion audaz. Desafias convenciones y te expresas con originalidad intrépida." },
-      "pyeonjae": { "name": "Riqueza Indirecta", "description": "Oportunista y versatil. Tienes un don para detectar oportunidades ocultas y crear exito no convencional." },
-      "jeongjae": { "name": "Riqueza Directa", "description": "Acumulacion constante y diligencia. Construyes riqueza duradera a traves de esfuerzo consistente." },
-      "pyeongwan": { "name": "Autoridad Indirecta", "description": "Poder y transformacion. Posees un impulso intenso que puede remodelar tu mundo." },
-      "jeonggwan": { "name": "Autoridad Directa", "description": "Disciplina y orden. Prosperas en entornos estructurados y ganas respeto naturalmente." },
-      "pyeonin": { "name": "Sello Indirecto", "description": "Sabiduria no convencional. Aprendes a traves de experiencias unicas, obteniendo perspectivas que otros pierden." },
-      "jeongin": { "name": "Sello Directo", "description": "Conocimiento y apoyo. Te nutres del aprendizaje y la mentoria, construyendo sabiduria por caminos tradicionales." },
+      "bijeon": { "name": "Paralelo", "hanja": "比肩", "romanization": "Bi-gyeon", "description": "Independencia y autosuficiencia. Te mantienes fuerte por tu cuenta, sacando confianza de tu identidad esencial." },
+      "geopjae": { "name": "Robar Riqueza", "hanja": "劫財", "romanization": "Geop-jae", "description": "Competencia y ambicion. Te impulsa aprovechar oportunidades y prosperar en entornos desafiantes." },
+      "siksin": { "name": "Dios de la Comida", "hanja": "食神", "romanization": "Sik-sin", "description": "Creatividad y crianza. Tus talentos naturales fluyen sin esfuerzo, trayendo alegria y abundancia." },
+      "sanggwan": { "name": "Oficial Herido", "hanja": "傷官", "romanization": "Sang-gwan", "description": "Innovacion y expresion audaz. Desafias convenciones y te expresas con originalidad intrépida." },
+      "pyeonjae": { "name": "Riqueza Indirecta", "hanja": "偏財", "romanization": "Pyeon-jae", "description": "Oportunista y versatil. Tienes un don para detectar oportunidades ocultas y crear exito no convencional." },
+      "jeongjae": { "name": "Riqueza Directa", "hanja": "正財", "romanization": "Jeong-jae", "description": "Acumulacion constante y diligencia. Construyes riqueza duradera a traves de esfuerzo consistente." },
+      "pyeongwan": { "name": "Autoridad Indirecta", "hanja": "偏官", "romanization": "Pyeong-gwan", "description": "Poder y transformacion. Posees un impulso intenso que puede remodelar tu mundo." },
+      "jeonggwan": { "name": "Autoridad Directa", "hanja": "正官", "romanization": "Jeong-gwan", "description": "Disciplina y orden. Prosperas en entornos estructurados y ganas respeto naturalmente." },
+      "pyeonin": { "name": "Sello Indirecto", "hanja": "偏印", "romanization": "Pyeon-in", "description": "Sabiduria no convencional. Aprendes a traves de experiencias unicas, obteniendo perspectivas que otros pierden." },
+      "jeongin": { "name": "Sello Directo", "hanja": "正印", "romanization": "Jeong-in", "description": "Conocimiento y apoyo. Te nutres del aprendizaje y la mentoria, construyendo sabiduria por caminos tradicionales." },
       "summary": {
         "bijeon": "Tu carta esta dominada por energia Paralela — un fuerte sentido de identidad e independencia define tu camino.",
         "geopjae": "Tu carta esta dominada por energia de Robar Riqueza — tu espiritu competitivo y ambicion te impulsan hacia logros audaces.",
@@ -480,6 +520,147 @@
     "advice": "Consejo",
     "tryAnother": "Probar Otra Estrella",
     "share": "Compartir",
-    "shareText": "Mi compatibilidad K-Fortune con {star} es {score}%! Verifica la tuya en K-Destiny."
+    "shareText": "Mi compatibilidad Saju con {star} es {score}%! Verifica la tuya en SAJU."
+  },
+  "legal": {
+    "privacy": {
+      "title": "Política de Privacidad",
+      "lastUpdated": "Última actualización: 11 de febrero de 2026",
+      "intro": {
+        "heading": "1. Introducción",
+        "body": "SAJU (\"nosotros\", \"nuestro\") opera la aplicación web SAJU. Esta Política de Privacidad explica cómo recopilamos, usamos, divulgamos y protegemos sus datos personales cuando utiliza nuestro Servicio. Estamos comprometidos con la protección de su privacidad en cumplimiento del Reglamento General de Protección de Datos (RGPD), la Ley de Privacidad del Consumidor de California (CCPA/CPRA) y la Ley de Protección de Información Personal de Corea (PIPA)."
+      },
+      "dataCollected": {
+        "heading": "2. Datos que Recopilamos",
+        "body": "Recopilamos las siguientes categorías de datos personales:",
+        "items": {
+          "account": "Información de cuenta: dirección de correo electrónico, nombre visible y foto de perfil (a través de Google OAuth)",
+          "birth": "Información de nacimiento: fecha y hora de nacimiento, proporcionada voluntariamente para el análisis Saju",
+          "payment": "Información de pago: procesada de forma segura por Polar (nuestro intermediario de ventas) y Stripe; no almacenamos números de tarjetas de crédito",
+          "usage": "Datos de uso: páginas visitadas, funciones utilizadas, historial de lecturas y patrones de interacción",
+          "device": "Datos del dispositivo: dirección IP, tipo de navegador, sistema operativo e identificadores de dispositivo mediante cookies"
+        }
+      },
+      "purpose": {
+        "heading": "3. Cómo Usamos sus Datos",
+        "items": {
+          "service": "Prestación del servicio: generar sus lecturas Saju (Cuatro Pilares) y proporcionar interpretaciones personalizadas (base legal: ejecución del contrato)",
+          "payment": "Procesamiento de pagos: procesar compras y suscripciones a través de Polar/Stripe (base legal: ejecución del contrato)",
+          "improvement": "Mejora del servicio: analizar patrones de uso y mejorar la experiencia del usuario (base legal: interés legítimo)",
+          "communication": "Comunicación: enviar correos transaccionales y, con su consentimiento, actualizaciones de marketing (base legal: consentimiento)"
+        }
+      },
+      "birthData": {
+        "heading": "4. Nota Especial sobre Datos de Nacimiento",
+        "body": "Su fecha y hora de nacimiento se utilizan exclusivamente para generar lecturas Saju (Cuatro Pilares del Destino). Estos datos se procesan en base a su consentimiento explícito. Los datos de nacimiento se almacenan de forma segura en nuestra base de datos y nunca se comparten con terceros para fines de marketing o perfilado. Las lecturas básicas se calculan en el lado del cliente y se almacenan localmente en su dispositivo. Puede solicitar la eliminación de sus datos de nacimiento en cualquier momento."
+      },
+      "thirdParty": {
+        "heading": "5. Servicios de Terceros",
+        "body": "Compartimos sus datos con los siguientes proveedores de servicios, cada uno sujeto a sus propias políticas de privacidad:",
+        "items": {
+          "supabase": "Supabase (alojamiento de base de datos, Estados Unidos) — almacena información de cuenta, lecturas y registros de compras",
+          "polar": "Polar / Stripe (procesamiento de pagos, Estados Unidos / UE) — procesa pagos como intermediario de ventas",
+          "vercel": "Vercel (alojamiento web, CDN global) — procesa registros del servidor y direcciones IP",
+          "google": "Google (autenticación OAuth, Estados Unidos) — proporciona inicio de sesión a través de cuenta de Google"
+        }
+      },
+      "transfer": {
+        "heading": "6. Transferencias Internacionales de Datos",
+        "body": "Sus datos pueden ser transferidos y procesados en Estados Unidos y otros países donde operan nuestros proveedores de servicios. Para transferencias desde el EEE/Reino Unido, nos basamos en Cláusulas Contractuales Tipo (CCT) y otras salvaguardias apropiadas para garantizar la protección adecuada de sus datos."
+      },
+      "retention": {
+        "heading": "7. Retención de Datos",
+        "body": "Retenemos sus datos personales mientras su cuenta esté activa o sea necesario para proporcionar el Servicio. El historial de lecturas se mantiene hasta que lo elimine o elimine su cuenta. Tras la eliminación de la cuenta, sus datos personales se eliminan permanentemente en un plazo de 30 días, excepto cuando la ley requiera una retención más prolongada (por ejemplo, registros financieros para cumplimiento fiscal)."
+      },
+      "rights": {
+        "heading": "8. Sus Derechos",
+        "body": "Dependiendo de su ubicación, usted tiene los siguientes derechos sobre sus datos personales:",
+        "items": {
+          "access": "Derecho de acceso — solicitar una copia de los datos personales que tenemos sobre usted",
+          "rectification": "Derecho de rectificación — solicitar la corrección de datos inexactos",
+          "erasure": "Derecho de supresión — solicitar la eliminación de sus datos personales (\"derecho al olvido\")",
+          "portability": "Derecho a la portabilidad — recibir sus datos en un formato estructurado y legible por máquina",
+          "objection": "Derecho de oposición — oponerse al procesamiento basado en intereses legítimos",
+          "withdraw": "Derecho a retirar el consentimiento — retirar el consentimiento en cualquier momento sin afectar el procesamiento previo"
+        }
+      },
+      "cookies": {
+        "heading": "9. Cookies",
+        "body": "Utilizamos cookies esenciales para autenticación (sesión NextAuth), preferencias de idioma (next-intl) y seguridad. No utilizamos cookies de publicidad o seguimiento de terceros. Puede gestionar la configuración de cookies a través de las preferencias de su navegador."
+      },
+      "children": {
+        "heading": "10. Privacidad de Menores",
+        "body": "Nuestro Servicio no está destinado a personas menores de 16 años. No recopilamos deliberadamente datos personales de menores de 16 años. Si cree que hemos recopilado datos de un menor, contáctenos de inmediato y los eliminaremos rápidamente."
+      },
+      "changes": {
+        "heading": "11. Cambios en esta Política",
+        "body": "Podemos actualizar esta Política de Privacidad periódicamente. Le notificaremos cualquier cambio importante publicando la política actualizada en esta página y actualizando la fecha de \"Última actualización\". Su uso continuado del Servicio después de los cambios constituye la aceptación de la política actualizada."
+      },
+      "contact": {
+        "heading": "12. Contacto",
+        "body": "Para consultas sobre privacidad, solicitudes de acceso a datos o reclamaciones, contáctenos en: privacy@saju.app. Los residentes de la UE/EEE también tienen derecho a presentar una reclamación ante su autoridad local de protección de datos."
+      }
+    },
+    "terms": {
+      "title": "Términos de Servicio",
+      "lastUpdated": "Última actualización: 11 de febrero de 2026",
+      "acceptance": {
+        "heading": "1. Aceptación de los Términos",
+        "body": "Al acceder o utilizar la aplicación web SAJU (el \"Servicio\"), usted acepta quedar vinculado por estos Términos de Servicio. Si no está de acuerdo con estos términos, no utilice el Servicio. Estos términos constituyen un acuerdo legalmente vinculante entre usted y SAJU."
+      },
+      "service": {
+        "heading": "2. Descripción del Servicio",
+        "body": "SAJU proporciona lecturas de Saju (Cuatro Pilares del Destino) basadas en la astrología tradicional coreana. El Servicio genera interpretaciones personalizadas utilizando su fecha y hora de nacimiento. Hay disponibles lecturas básicas gratuitas y lecturas detalladas de pago."
+      },
+      "disclaimer": {
+        "heading": "3. Aviso de Entretenimiento",
+        "body": "Las lecturas de SAJU se proporcionan únicamente con fines de entretenimiento e información. No pretenden sustituir el asesoramiento profesional en áreas que incluyen, entre otras, medicina, finanzas, derecho o psicología. No garantizamos la exactitud, fiabilidad o integridad de ninguna lectura o interpretación. No debe tomar decisiones importantes de vida basándose únicamente en las lecturas de Saju."
+      },
+      "accounts": {
+        "heading": "4. Cuentas de Usuario",
+        "body": "Puede crear una cuenta usando Google OAuth u otros métodos de inicio de sesión disponibles. Usted es responsable de mantener la confidencialidad de su cuenta y de todas las actividades que ocurran bajo ella. Debe proporcionar información precisa y actualizar cualquier cambio de inmediato. Nos reservamos el derecho de suspender o terminar cuentas que violen estos términos."
+      },
+      "payments": {
+        "heading": "5. Pagos y Reembolsos",
+        "body": "Las funciones de pago se procesan a través de Polar, nuestro intermediario de ventas, que gestiona facturación, impuestos y procesamiento de pagos a través de Stripe. Todos los precios se muestran en el momento del pago e incluyen los impuestos aplicables. Los productos digitales (lecturas, informes) se entregan instantáneamente tras el pago. Debido a la naturaleza digital de nuestros productos, generalmente no se ofrecen reembolsos una vez generada una lectura. Las suscripciones se pueden cancelar en cualquier momento; el acceso continúa hasta el final del período de facturación. Para disputas de pago, contacte al soporte de Polar o comuníquese directamente con nosotros."
+      },
+      "ip": {
+        "heading": "6. Propiedad Intelectual",
+        "body": "Todo el contenido, incluyendo el motor de análisis Saju, interpretaciones de lecturas, elementos de diseño y marca, es propiedad de SAJU y está protegido por leyes de derechos de autor y propiedad intelectual. No puede reproducir, distribuir ni crear obras derivadas de nuestro contenido sin consentimiento previo por escrito. Los resultados de sus lecturas personales le pertenecen y puede compartirlos libremente."
+      },
+      "prohibited": {
+        "heading": "7. Uso Prohibido",
+        "items": {
+          "scraping": "Scraping automatizado, rastreo o extracción de datos del Servicio",
+          "reverse": "Ingeniería inversa, descompilación o intento de extraer el código fuente del motor Saju",
+          "harmful": "Usar el Servicio para acosar, engañar o dañar a otros",
+          "impersonation": "Suplantar la identidad de otra persona o tergiversar su afiliación con cualquier entidad"
+        }
+      },
+      "liability": {
+        "heading": "8. Limitación de Responsabilidad",
+        "body": "En la máxima medida permitida por la ley, SAJU no será responsable de ningún daño indirecto, incidental, especial, consecuente o punitivo que surja del uso o la imposibilidad de uso del Servicio. Nuestra responsabilidad total por cualquier reclamación no excederá el monto que usted nos haya pagado en los doce (12) meses anteriores a la reclamación."
+      },
+      "termination": {
+        "heading": "9. Terminación",
+        "body": "Puede eliminar su cuenta en cualquier momento. Podemos suspender o terminar su acceso si viola estos términos o incurre en conducta prohibida. Tras la terminación, sus datos se manejarán de acuerdo con nuestra Política de Privacidad. Las secciones que por su naturaleza deban sobrevivir a la terminación (limitación de responsabilidad, propiedad intelectual, ley aplicable) permanecerán vigentes."
+      },
+      "changes": {
+        "heading": "10. Cambios en los Términos",
+        "body": "Nos reservamos el derecho de modificar estos términos en cualquier momento. Los cambios importantes se comunicarán a través del Servicio o por correo electrónico. Su uso continuado después de que los cambios entren en vigor constituye la aceptación de los términos revisados. Si no está de acuerdo con los cambios, debe dejar de usar el servicio y eliminar su cuenta."
+      },
+      "governing": {
+        "heading": "11. Ley Aplicable",
+        "body": "Estos términos se regirán e interpretarán de acuerdo con las leyes de la República de Corea, sin tener en cuenta los principios de conflicto de leyes. La versión en inglés de estos términos es la versión legalmente vinculante. Las disputas se resolverán primero mediante negociación de buena fe y, si no tienen éxito, a través de los tribunales de Seúl, República de Corea."
+      },
+      "contact": {
+        "heading": "12. Contacto",
+        "body": "Para preguntas sobre estos Términos de Servicio, contáctenos en: support@saju.app."
+      }
+    },
+    "footer": {
+      "privacy": "Política de Privacidad",
+      "terms": "Términos de Servicio"
+    }
   }
 }

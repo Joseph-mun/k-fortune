@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import type { ElementAnalysis, Element } from "@/lib/saju/types";
-import { ELEMENT_COLORS, ELEMENT_ICONS } from "@/lib/saju/constants";
+import { ELEMENT_COLORS, ELEMENT_HANJA } from "@/lib/saju/constants";
 import { useTranslations } from "next-intl";
+import { ElementIcon } from "@/components/icons/ElementIcon";
 
 interface ElementChartProps {
   analysis: ElementAnalysis;
@@ -27,15 +28,14 @@ export function ElementChart({ analysis }: ElementChartProps) {
         {ELEMENTS.map((element, index) => {
           const percentage = analysis[element];
           const color = ELEMENT_COLORS[element];
-          const icon = ELEMENT_ICONS[element];
           const isDominant = element === analysis.dominant;
           const isLacking = element === analysis.lacking;
 
           return (
             <div key={element} className="flex items-center gap-3 animate-slide-up" style={{ animationDelay: `${index * 80}ms` }}>
-              <span className="text-base w-5">{icon}</span>
-              <span className="text-xs text-text-secondary w-12 capitalize">
-                {t(element)}
+              <ElementIcon element={element} size={18} />
+              <span className="text-xs text-text-secondary w-16 capitalize">
+                {t(element)} <span className="text-text-muted">{ELEMENT_HANJA[element]}</span>
               </span>
               <div
                 className="flex-1 h-2 rounded-full bg-bg-surface overflow-hidden"

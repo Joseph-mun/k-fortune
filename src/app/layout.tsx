@@ -1,34 +1,34 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://k-fortune.vercel.app";
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://saju.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "K-Destiny — Your Korean Fortune in 30 Seconds",
-    template: "%s | K-Destiny",
+    default: "SAJU — Born to be told.",
+    template: "%s | SAJU",
   },
   description:
-    "Discover your cosmic identity with Saju, Korea's ancient Four Pillars of Destiny. Get your free reading, collect Destiny Cards, and check your K-Pop star compatibility.",
+    "Born to be told. Discover your cosmic identity with Saju, Korea's ancient Four Pillars of Destiny. Free reading in 30 seconds, collectible Destiny Cards, and K-Pop star compatibility.",
   keywords: [
     "saju", "korean fortune", "four pillars of destiny", "korean astrology",
-    "k-fortune", "destiny card", "k-pop compatibility", "saju reading",
-    "korean zodiac", "birth chart", "cosmic blueprint",
+    "saju reading", "destiny card", "k-pop compatibility", "what is saju",
+    "korean zodiac", "birth chart", "cosmic blueprint", "born to be told",
   ],
   openGraph: {
-    title: "K-Destiny — Your Korean Fortune in 30 Seconds",
+    title: "SAJU — Born to be told.",
     description:
-      "Ancient Korean wisdom meets modern design. Free Four Pillars reading, collectible Destiny Cards, and K-Pop star compatibility.",
+      "In Korea, your birth date tells a 5,000-year-old story. Free Four Pillars reading, collectible Destiny Cards, and K-Pop star compatibility.",
     type: "website",
-    siteName: "K-Destiny",
+    siteName: "SAJU",
     url: BASE_URL,
   },
   twitter: {
     card: "summary_large_image",
-    title: "K-Destiny — Your Korean Fortune in 30 Seconds",
+    title: "SAJU — Born to be told.",
     description:
-      "Discover your cosmic identity with Saju. Free reading, Destiny Cards, and K-Pop star compatibility.",
+      "In Korea, your birth date tells a 5,000-year-old story. Free reading, Destiny Cards, and K-Pop star compatibility.",
   },
   robots: {
     index: true,

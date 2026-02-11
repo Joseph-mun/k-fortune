@@ -1,7 +1,9 @@
 "use client";
 
 import type { BasicReading } from "@/lib/saju/types";
+import { ELEMENT_HANJA, YINYANG_HANJA } from "@/lib/saju/constants";
 import { useTranslations } from "next-intl";
+import { MetaphorIcon } from "@/components/icons/MetaphorIcon";
 
 interface DayMasterHeroProps {
   dayMaster: BasicReading["dayMaster"];
@@ -10,32 +12,44 @@ interface DayMasterHeroProps {
 export function DayMasterHero({ dayMaster }: DayMasterHeroProps) {
   const t = useTranslations("reading");
   const tElements = useTranslations("elements");
+  const tInterp = useTranslations("interpretation");
 
   const elementLabel = `${tElements(dayMaster.yinYang)} ${tElements(dayMaster.element)}`;
+
+  // Resolve i18n key paths: "interpretation.personality.candle" → tInterp("personality.candle")
+  const resolveKey = (key: string) => {
+    const prefix = "interpretation.";
+    return key.startsWith(prefix) ? tInterp(key.slice(prefix.length)) : key;
+  };
 
   return (
     <div className="flex flex-col items-center text-center pt-6 pb-4">
       {/* Large metaphor icon with glow ring */}
-      <div className="w-24 h-24 rounded-full bg-purple-500/[0.06] border border-purple-500/[0.15] flex items-center justify-center mb-5 animate-float ring-glow-purple">
-        <span className="text-5xl">{dayMaster.metaphorInfo.icon}</span>
+      <div className="w-24 h-24 rounded-full flex items-center justify-center mb-5 animate-float accent-glow" style={{ background: "var(--accent-bg-tint)", border: "1px solid var(--accent-glow)" }}>
+        <MetaphorIcon metaphor={dayMaster.metaphorInfo.id} size={64} />
       </div>
 
       {/* "You are" label */}
       <p className="text-text-muted text-[10px] uppercase tracking-[0.2em] mb-2">{t("youAre")}</p>
 
       {/* Metaphor name */}
-      <h1 className="text-3xl md:text-4xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-1.5">
+      <h1 className="text-3xl md:text-4xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-1">
         {dayMaster.metaphorInfo.displayName}
       </h1>
 
+      {/* Hanja + Romanization */}
+      <p className="text-sm text-text-secondary mb-1.5">
+        {dayMaster.metaphorInfo.hanja} · {dayMaster.metaphorInfo.romanization}
+      </p>
+
       {/* Element tag */}
-      <span className="inline-flex px-2.5 py-0.5 rounded-full bg-purple-500/[0.06] border border-purple-500/[0.15] text-purple-400 text-[10px] tracking-wider mb-5">
-        {elementLabel}
+      <span className="inline-flex px-2.5 py-0.5 rounded-full accent-badge text-[10px] tracking-wider mb-5">
+        {elementLabel} · {YINYANG_HANJA[dayMaster.yinYang]}{ELEMENT_HANJA[dayMaster.element]}
       </span>
 
       {/* Personality description */}
       <p className="text-text-secondary text-sm md:text-base max-w-lg leading-relaxed mb-5">
-        {dayMaster.personality}
+        {resolveKey(dayMaster.personality)}
       </p>
 
       {/* Keywords — stagger entrance */}
@@ -46,7 +60,7 @@ export function DayMasterHero({ dayMaster }: DayMasterHeroProps) {
             className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.06] text-text-secondary text-xs animate-slide-up"
             style={{ animationDelay: `${200 + i * 100}ms` }}
           >
-            {strength}
+            {resolveKey(strength)}
           </span>
         ))}
       </div>

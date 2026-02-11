@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { MetaphorIcon } from "@/components/icons/MetaphorIcon";
 import type { MajorCycle } from "@/lib/saju/types";
 
 interface LifeCycleTimelineProps {
@@ -24,18 +25,6 @@ const RATING_BG: Record<number, string> = {
   1: "bg-red-500/10 border-red-500/30",
 };
 
-const METAPHOR_ICONS: Record<string, string> = {
-  "great-tree": "\u{1F333}",
-  flower: "\u{1F338}",
-  sun: "\u2600\uFE0F",
-  candle: "\u{1F56F}\uFE0F",
-  mountain: "\u26F0\uFE0F",
-  garden: "\u{1F33F}",
-  sword: "\u2694\uFE0F",
-  jewel: "\u{1F48E}",
-  ocean: "\u{1F30A}",
-  rain: "\u{1F327}\uFE0F",
-};
 
 function Stars({ count }: { count: number }) {
   return (
@@ -75,9 +64,7 @@ export function LifeCycleTimeline({ cycles, currentAge }: LifeCycleTimelineProps
               `}
             >
               {/* Metaphor icon */}
-              <span className="text-2xl">
-                {METAPHOR_ICONS[cycle.pillar.metaphor] || "\u2728"}
-              </span>
+              <MetaphorIcon metaphor={cycle.pillar.metaphor} size={28} />
 
               {/* Rating stars */}
               <span className={RATING_COLORS[cycle.rating]}>

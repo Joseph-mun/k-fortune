@@ -112,7 +112,7 @@ export async function POST(request: Request) {
         career: reading.dayMaster.personality.split(".")[0] + "...",
         teaser: "Unlock your full career path, relationships, and personalized advice.",
       },
-      shareUrl: `${process.env.NEXT_PUBLIC_APP_URL || 'https://k-destiny.vercel.app'}/reading/${reading.id}`,
+      shareUrl: `${process.env.NEXT_PUBLIC_APP_URL || 'https://saju.vercel.app'}/reading/${reading.id}`,
     };
 
     return NextResponse.json(response);

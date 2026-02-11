@@ -1,4 +1,4 @@
-import type { HeavenlyStem, EarthlyBranch, Element, YinYang } from './types';
+import type { HeavenlyStem, EarthlyBranch, Element, YinYang, TenGodRelation } from './types';
 
 /** Heavenly Stems in order */
 export const HEAVENLY_STEMS: HeavenlyStem[] = ['갑', '을', '병', '정', '무', '기', '경', '신', '임', '계'];
@@ -108,6 +108,59 @@ export const HIDDEN_STEMS: Record<EarthlyBranch, HeavenlyStem[]> = {
   '해': ['임', '갑'],
 };
 
+/** Stem → Hanja (Chinese character) */
+export const STEM_HANJA: Record<HeavenlyStem, string> = {
+  '갑': '甲', '을': '乙',
+  '병': '丙', '정': '丁',
+  '무': '戊', '기': '己',
+  '경': '庚', '신': '辛',
+  '임': '壬', '계': '癸',
+};
+
+/** Stem → Romanized pronunciation */
+export const STEM_ROMANIZATION: Record<HeavenlyStem, string> = {
+  '갑': 'Gap', '을': 'Eul',
+  '병': 'Byeong', '정': 'Jeong',
+  '무': 'Mu', '기': 'Gi',
+  '경': 'Gyeong', '신': 'Sin',
+  '임': 'Im', '계': 'Gye',
+};
+
+/** Branch → Hanja (Chinese character) */
+export const BRANCH_HANJA: Record<EarthlyBranch, string> = {
+  '자': '子', '축': '丑',
+  '인': '寅', '묘': '卯',
+  '진': '辰', '사': '巳',
+  '오': '午', '미': '未',
+  '신': '申', '유': '酉',
+  '술': '戌', '해': '亥',
+};
+
+/** Branch → Romanized pronunciation */
+export const BRANCH_ROMANIZATION: Record<EarthlyBranch, string> = {
+  '자': 'Ja', '축': 'Chuk',
+  '인': 'In', '묘': 'Myo',
+  '진': 'Jin', '사': 'Sa',
+  '오': 'O', '미': 'Mi',
+  '신': 'Sin', '유': 'Yu',
+  '술': 'Sul', '해': 'Hae',
+};
+
+/** Element → Hanja */
+export const ELEMENT_HANJA: Record<Element, string> = {
+  wood: '木',
+  fire: '火',
+  earth: '土',
+  metal: '金',
+  water: '水',
+};
+
+/** YinYang → Hanja */
+export const YINYANG_HANJA: Record<YinYang, string> = {
+  yang: '陽',
+  yin: '陰',
+};
+
 /** Element colors for UI */
 export const ELEMENT_COLORS: Record<Element, string> = {
   wood: '#22C55E',
@@ -157,3 +210,17 @@ export const ELEMENT_LUCKY_NUMBERS: Record<Element, number> = {
 export const REFERENCE_DATE = new Date(1900, 0, 1);
 export const REFERENCE_DAY_STEM_INDEX = 0; // 갑
 export const REFERENCE_DAY_BRANCH_INDEX = 0; // 자
+
+/** Ten God → Hanja + Korean + Romanization */
+export const TEN_GOD_HANJA: Record<TenGodRelation, { hanja: string; korean: string; romanization: string }> = {
+  bijeon:    { hanja: '比肩', korean: '비견', romanization: 'Bi-gyeon' },
+  geopjae:   { hanja: '劫財', korean: '겁재', romanization: 'Geop-jae' },
+  siksin:    { hanja: '食神', korean: '식신', romanization: 'Sik-sin' },
+  sanggwan:  { hanja: '傷官', korean: '상관', romanization: 'Sang-gwan' },
+  pyeonjae:  { hanja: '偏財', korean: '편재', romanization: 'Pyeon-jae' },
+  jeongjae:  { hanja: '正財', korean: '정재', romanization: 'Jeong-jae' },
+  pyeongwan: { hanja: '偏官', korean: '편관', romanization: 'Pyeong-gwan' },
+  jeonggwan: { hanja: '正官', korean: '정관', romanization: 'Jeong-gwan' },
+  pyeonin:   { hanja: '偏印', korean: '편인', romanization: 'Pyeon-in' },
+  jeongin:   { hanja: '正印', korean: '정인', romanization: 'Jeong-in' },
+};

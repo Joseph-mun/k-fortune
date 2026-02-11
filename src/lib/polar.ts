@@ -24,7 +24,7 @@ export function getPolarClient(): Polar {
 
     polarClient = new Polar({
       accessToken,
-      server: process.env.NODE_ENV === 'production' ? 'production' : 'sandbox',
+      server: (process.env.POLAR_ENVIRONMENT as 'production' | 'sandbox') || 'production',
     });
   }
 

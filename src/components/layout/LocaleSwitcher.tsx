@@ -9,34 +9,34 @@ export function LocaleSwitcher() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const handleLocaleChange = (newLocale: "en" | "es") => {
+  const locales = [
+    { code: "ko" as const, label: "KO" },
+    { code: "en" as const, label: "EN" },
+    { code: "es" as const, label: "ES" },
+  ];
+
+  const handleLocaleChange = (newLocale: "ko" | "en" | "es") => {
     router.replace(pathname, { locale: newLocale });
   };
 
   return (
     <div className="flex items-center gap-2">
       <Globe className="w-4 h-4 text-text-muted" />
-      <button
-        onClick={() => handleLocaleChange("en")}
-        className={`px-2 py-1 text-sm rounded transition-colors ${
-          locale === "en"
-            ? "bg-purple-500/20 text-purple-300 font-semibold"
-            : "text-text-muted hover:text-text-secondary"
-        }`}
-      >
-        EN
-      </button>
-      <span className="text-text-muted">/</span>
-      <button
-        onClick={() => handleLocaleChange("es")}
-        className={`px-2 py-1 text-sm rounded transition-colors ${
-          locale === "es"
-            ? "bg-purple-500/20 text-purple-300 font-semibold"
-            : "text-text-muted hover:text-text-secondary"
-        }`}
-      >
-        ES
-      </button>
+      {locales.map((l, i) => (
+        <span key={l.code} className="flex items-center gap-2">
+          {i > 0 && <span className="text-text-muted">/</span>}
+          <button
+            onClick={() => handleLocaleChange(l.code)}
+            className={`px-2 py-1 text-sm rounded transition-colors ${
+              locale === l.code
+                ? "bg-purple-500/20 text-purple-300 font-semibold"
+                : "text-text-muted hover:text-text-secondary"
+            }`}
+          >
+            {l.label}
+          </button>
+        </span>
+      ))}
     </div>
   );
 }

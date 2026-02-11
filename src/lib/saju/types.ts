@@ -22,6 +22,8 @@ export interface StemMetaphorInfo {
   icon: string;
   nature: string;
   keywords: string[];
+  hanja: string;
+  romanization: string;
 }
 
 /** Earthly Branches (지지) */
@@ -39,6 +41,8 @@ export interface BranchAnimalInfo {
   element: Element;
   displayName: string;
   icon: string;
+  hanja: string;
+  romanization: string;
 }
 
 /** Single pillar (stem + branch pair) */

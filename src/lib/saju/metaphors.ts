@@ -11,6 +11,8 @@ export const STEM_METAPHORS: Record<HeavenlyStem, StemMetaphorInfo> = {
     icon: '🌳',
     nature: 'metaphors.great-tree.nature',
     keywords: ['metaphors.great-tree.keywords.0', 'metaphors.great-tree.keywords.1', 'metaphors.great-tree.keywords.2', 'metaphors.great-tree.keywords.3'],
+    hanja: '甲',
+    romanization: 'Gap',
   },
   '을': {
     id: 'flower',
@@ -21,6 +23,8 @@ export const STEM_METAPHORS: Record<HeavenlyStem, StemMetaphorInfo> = {
     icon: '🌸',
     nature: 'metaphors.flower.nature',
     keywords: ['metaphors.flower.keywords.0', 'metaphors.flower.keywords.1', 'metaphors.flower.keywords.2', 'metaphors.flower.keywords.3'],
+    hanja: '乙',
+    romanization: 'Eul',
   },
   '병': {
     id: 'sun',
@@ -31,6 +35,8 @@ export const STEM_METAPHORS: Record<HeavenlyStem, StemMetaphorInfo> = {
     icon: '☀️',
     nature: 'metaphors.sun.nature',
     keywords: ['metaphors.sun.keywords.0', 'metaphors.sun.keywords.1', 'metaphors.sun.keywords.2', 'metaphors.sun.keywords.3'],
+    hanja: '丙',
+    romanization: 'Byeong',
   },
   '정': {
     id: 'candle',
@@ -41,6 +47,8 @@ export const STEM_METAPHORS: Record<HeavenlyStem, StemMetaphorInfo> = {
     icon: '🕯️',
     nature: 'metaphors.candle.nature',
     keywords: ['metaphors.candle.keywords.0', 'metaphors.candle.keywords.1', 'metaphors.candle.keywords.2', 'metaphors.candle.keywords.3'],
+    hanja: '丁',
+    romanization: 'Jeong',
   },
   '무': {
     id: 'mountain',
@@ -51,6 +59,8 @@ export const STEM_METAPHORS: Record<HeavenlyStem, StemMetaphorInfo> = {
     icon: '⛰️',
     nature: 'metaphors.mountain.nature',
     keywords: ['metaphors.mountain.keywords.0', 'metaphors.mountain.keywords.1', 'metaphors.mountain.keywords.2', 'metaphors.mountain.keywords.3'],
+    hanja: '戊',
+    romanization: 'Mu',
   },
   '기': {
     id: 'garden',
@@ -61,6 +71,8 @@ export const STEM_METAPHORS: Record<HeavenlyStem, StemMetaphorInfo> = {
     icon: '🌿',
     nature: 'metaphors.garden.nature',
     keywords: ['metaphors.garden.keywords.0', 'metaphors.garden.keywords.1', 'metaphors.garden.keywords.2', 'metaphors.garden.keywords.3'],
+    hanja: '己',
+    romanization: 'Gi',
   },
   '경': {
     id: 'sword',
@@ -71,6 +83,8 @@ export const STEM_METAPHORS: Record<HeavenlyStem, StemMetaphorInfo> = {
     icon: '⚔️',
     nature: 'metaphors.sword.nature',
     keywords: ['metaphors.sword.keywords.0', 'metaphors.sword.keywords.1', 'metaphors.sword.keywords.2', 'metaphors.sword.keywords.3'],
+    hanja: '庚',
+    romanization: 'Gyeong',
   },
   '신': {
     id: 'jewel',
@@ -81,6 +95,8 @@ export const STEM_METAPHORS: Record<HeavenlyStem, StemMetaphorInfo> = {
     icon: '💎',
     nature: 'metaphors.jewel.nature',
     keywords: ['metaphors.jewel.keywords.0', 'metaphors.jewel.keywords.1', 'metaphors.jewel.keywords.2', 'metaphors.jewel.keywords.3'],
+    hanja: '辛',
+    romanization: 'Sin',
   },
   '임': {
     id: 'ocean',
@@ -91,6 +107,8 @@ export const STEM_METAPHORS: Record<HeavenlyStem, StemMetaphorInfo> = {
     icon: '🌊',
     nature: 'metaphors.ocean.nature',
     keywords: ['metaphors.ocean.keywords.0', 'metaphors.ocean.keywords.1', 'metaphors.ocean.keywords.2', 'metaphors.ocean.keywords.3'],
+    hanja: '壬',
+    romanization: 'Im',
   },
   '계': {
     id: 'rain',
@@ -101,23 +119,25 @@ export const STEM_METAPHORS: Record<HeavenlyStem, StemMetaphorInfo> = {
     icon: '🌧️',
     nature: 'metaphors.rain.nature',
     keywords: ['metaphors.rain.keywords.0', 'metaphors.rain.keywords.1', 'metaphors.rain.keywords.2', 'metaphors.rain.keywords.3'],
+    hanja: '癸',
+    romanization: 'Gye',
   },
 };
 
 /** Branch → Animal mapping */
 export const BRANCH_ANIMALS: Record<EarthlyBranch, BranchAnimalInfo> = {
-  '자': { id: 'rat', branch: '자', element: 'water', displayName: 'Rat', icon: '🐀' },
-  '축': { id: 'ox', branch: '축', element: 'earth', displayName: 'Ox', icon: '🐂' },
-  '인': { id: 'tiger', branch: '인', element: 'wood', displayName: 'Tiger', icon: '🐅' },
-  '묘': { id: 'rabbit', branch: '묘', element: 'wood', displayName: 'Rabbit', icon: '🐇' },
-  '진': { id: 'dragon', branch: '진', element: 'earth', displayName: 'Dragon', icon: '🐉' },
-  '사': { id: 'snake', branch: '사', element: 'fire', displayName: 'Snake', icon: '🐍' },
-  '오': { id: 'horse', branch: '오', element: 'fire', displayName: 'Horse', icon: '🐎' },
-  '미': { id: 'goat', branch: '미', element: 'earth', displayName: 'Goat', icon: '🐐' },
-  '신': { id: 'monkey', branch: '신', element: 'metal', displayName: 'Monkey', icon: '🐒' },
-  '유': { id: 'rooster', branch: '유', element: 'metal', displayName: 'Rooster', icon: '🐓' },
-  '술': { id: 'dog', branch: '술', element: 'earth', displayName: 'Dog', icon: '🐕' },
-  '해': { id: 'pig', branch: '해', element: 'water', displayName: 'Pig', icon: '🐖' },
+  '자': { id: 'rat', branch: '자', element: 'water', displayName: 'Rat', icon: '🐀', hanja: '子', romanization: 'Ja' },
+  '축': { id: 'ox', branch: '축', element: 'earth', displayName: 'Ox', icon: '🐂', hanja: '丑', romanization: 'Chuk' },
+  '인': { id: 'tiger', branch: '인', element: 'wood', displayName: 'Tiger', icon: '🐅', hanja: '寅', romanization: 'In' },
+  '묘': { id: 'rabbit', branch: '묘', element: 'wood', displayName: 'Rabbit', icon: '🐇', hanja: '卯', romanization: 'Myo' },
+  '진': { id: 'dragon', branch: '진', element: 'earth', displayName: 'Dragon', icon: '🐉', hanja: '辰', romanization: 'Jin' },
+  '사': { id: 'snake', branch: '사', element: 'fire', displayName: 'Snake', icon: '🐍', hanja: '巳', romanization: 'Sa' },
+  '오': { id: 'horse', branch: '오', element: 'fire', displayName: 'Horse', icon: '🐎', hanja: '午', romanization: 'O' },
+  '미': { id: 'goat', branch: '미', element: 'earth', displayName: 'Goat', icon: '🐐', hanja: '未', romanization: 'Mi' },
+  '신': { id: 'monkey', branch: '신', element: 'metal', displayName: 'Monkey', icon: '🐒', hanja: '申', romanization: 'Sin' },
+  '유': { id: 'rooster', branch: '유', element: 'metal', displayName: 'Rooster', icon: '🐓', hanja: '酉', romanization: 'Yu' },
+  '술': { id: 'dog', branch: '술', element: 'earth', displayName: 'Dog', icon: '🐕', hanja: '戌', romanization: 'Sul' },
+  '해': { id: 'pig', branch: '해', element: 'water', displayName: 'Pig', icon: '🐖', hanja: '亥', romanization: 'Hae' },
 };
 
 /** Get metaphor by stem */

@@ -11,19 +11,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const cardUrl = `/cards/${id}`;
 
   return {
-    title: `K-Destiny Card`,
-    description: "Discover your destiny through the ancient art of Saju",
+    title: `SAJU Card`,
+    description: "Born to be told. Discover your Saju destiny.",
     openGraph: {
-      title: "K-Destiny Card",
-      description: "Discover your destiny through the ancient art of Saju",
+      title: "SAJU Card",
+      description: "Born to be told. Discover your Saju destiny.",
       url: cardUrl,
-      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: "K-Destiny Card" }],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: "SAJU Card" }],
       type: "website",
     },
     twitter: {
       card: "summary_large_image",
-      title: "K-Destiny Card",
-      description: "Discover your destiny through the ancient art of Saju",
+      title: "SAJU Card",
+      description: "Born to be told. Discover your Saju destiny.",
       images: [ogImageUrl],
     },
   };

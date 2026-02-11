@@ -65,7 +65,7 @@ export async function GET(
               marginBottom: 8,
             }}
           >
-            {(metaphorInfo?.displayName || "K-Destiny").toUpperCase()}
+            {(metaphorInfo?.displayName || "SAJU").toUpperCase()}
           </div>
 
           {/* Element */}

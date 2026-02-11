@@ -1,8 +1,8 @@
 {
   "common": {
-    "appName": "K-Destiny",
-    "tagline": "Discover Your Korean Destiny",
-    "subtitle": "Ancient Korean wisdom meets modern insight",
+    "appName": "SAJU",
+    "tagline": "Born to be told.",
+    "subtitle": "Korea's ancient Four Pillars wisdom meets modern insight",
     "loading": "Reading the stars...",
     "error": "Something went wrong",
     "retry": "Try again",
@@ -16,15 +16,17 @@
     "starMatch": "Star Match",
     "dashboard": "My Readings",
     "signIn": "Sign In",
-    "signOut": "Sign Out"
+    "signOut": "Sign Out",
+    "menu": "Menu",
+    "close": "Close"
   },
   "landing": {
-    "heroTitle": "Discover Your",
-    "heroHighlight": "Korean Destiny",
-    "heroDescription": "Your birth date holds a secret. In Korea, it's called Saju — the Four Pillars of Destiny. Find out who you really are in just 30 seconds.",
-    "cta": "Reveal My Destiny",
+    "heroTitle": "Born to be",
+    "heroHighlight": "told.",
+    "heroDescription": "In Korea, your birth date tells a 5,000-year-old story called Saju — the Four Pillars of Destiny. Discover yours in 30 seconds.",
+    "cta": "What's My Saju?",
     "trustBadge": "Trusted by {count}+ seekers worldwide",
-    "whatIsTitle": "What is K-Fortune?",
+    "whatIsTitle": "What is Saju?",
     "whatIsDescription": "Think of it as Korea's answer to astrology — but based on the exact moment you were born. Saju has been guiding decisions in Korea for centuries, from relationships to career moves. Now it's going global.",
     "cardSectionTitle": "Your Destiny, One Card",
     "cardSectionDesc": "Get a collectible Destiny Card that captures your cosmic identity. Share it like a K-Pop photocard — but for your soul.",
@@ -38,6 +40,18 @@
       "elementsDesc": "Wood, Fire, Earth, Metal, Water — discover which energies define you",
       "dayMaster": "Day Master Identity",
       "dayMasterDesc": "Are you The Sun, The Ocean, or The Sword? Find your cosmic archetype"
+    },
+    "discoverTitle": "What You'll Discover",
+    "discoverDescription": "Ancient Korean wisdom, reimagined for the modern world",
+    "services": {
+      "sajuTitle": "Saju Reading",
+      "sajuDesc": "Your Four Pillars of Destiny revealed in 30 seconds",
+      "starTitle": "Star Match",
+      "starDesc": "Check your compatibility with K-Pop stars",
+      "compatTitle": "Compatibility",
+      "compatDesc": "Discover your relationship harmony",
+      "galleryTitle": "Card Gallery",
+      "galleryDesc": "Collect beautiful Destiny Cards"
     }
   },
   "start": {
@@ -55,6 +69,13 @@
     "female": "Female",
     "other": "Other",
     "submit": "Reveal My Destiny",
+    "step1Title": "When were you born?",
+    "step2Title": "What time?",
+    "step3Title": "Almost there!",
+    "next": "Next",
+    "back": "Back",
+    "yearInsight": "You were born in the Year of the {animal}!",
+    "timeInsight": "{hanja} Hour — The Hour of the {animal}",
     "validation": {
       "birthDateRequired": "Please enter your birth date",
       "genderRequired": "Please select your gender"
@@ -86,11 +107,18 @@
       "cta": "Unlock Now"
     },
     "share": "Share My Reading",
-    "shareText": "I'm {metaphor} in K-Destiny! Discover your Korean cosmic identity.",
+    "shareText": "I'm {metaphor} in SAJU! What's your Saju?",
+    "tapToReveal": "Tap to reveal your destiny",
     "storyBridge": "Your birth chart reveals a unique cosmic blueprint. Here's how the stars aligned at the moment you were born.",
     "createCard": "Create My Destiny Card",
     "strengths": "Strengths",
-    "weaknesses": "Challenges"
+    "weaknesses": "Challenges",
+    "scrollToExplore": "Scroll to explore your destiny",
+    "topElements": "Top",
+    "sectionIdentity": "Your Cosmic Identity",
+    "sectionPillars": "Four Pillars of Destiny",
+    "sectionElements": "Element Balance",
+    "sectionLucky": "Lucky Info"
   },
   "elements": {
     "wood": "Wood",
@@ -99,7 +127,19 @@
     "metal": "Metal",
     "water": "Water",
     "yang": "Yang",
-    "yin": "Yin"
+    "yin": "Yin",
+    "woodHanja": "木",
+    "fireHanja": "火",
+    "earthHanja": "土",
+    "metalHanja": "金",
+    "waterHanja": "水",
+    "yangHanja": "陽",
+    "yinHanja": "陰",
+    "woodDesc": "Growth, flexibility, and new beginnings",
+    "fireDesc": "Passion, energy, and transformation",
+    "earthDesc": "Stability, nurturing, and grounding",
+    "metalDesc": "Precision, discipline, and clarity",
+    "waterDesc": "Wisdom, adaptability, and intuition"
   },
   "metaphors": {
     "great-tree": {
@@ -202,7 +242,7 @@
     },
     "signUp": {
       "title": "Create Your Account",
-      "subtitle": "Join K-Destiny and unlock your full cosmic blueprint",
+      "subtitle": "Join SAJU and unlock your full cosmic blueprint",
       "hasAccount": "Already have an account?",
       "signInLink": "Sign in"
     }
@@ -250,7 +290,7 @@
   "cardGenerator": {
     "download": "Download",
     "share": "Share",
-    "shareText": "Discover your destiny! I am {metaphor} in K-Destiny.",
+    "shareText": "Discover your Saju! I am {metaphor}. What's yours?",
     "linkCopied": "Link copied to clipboard!",
     "styles": {
       "classic": "Classic",
@@ -424,16 +464,16 @@
       "growth": "A period of accelerated growth and expanding potential."
     },
     "tenGods": {
-      "bijeon": { "name": "Parallel", "description": "Independence and self-reliance. You stand strong on your own, drawing confidence from your core identity." },
-      "geopjae": { "name": "Rob Wealth", "description": "Competition and ambition. You are driven to seize opportunities and thrive in challenging environments." },
-      "siksin": { "name": "Eating God", "description": "Creativity and nurturing. Your natural talents flow effortlessly, bringing joy and abundance to those around you." },
-      "sanggwan": { "name": "Hurting Officer", "description": "Innovation and bold expression. You challenge conventions and express yourself with fearless originality." },
-      "pyeonjae": { "name": "Indirect Wealth", "description": "Opportunistic and versatile. You have a gift for spotting hidden opportunities and creating unconventional success." },
-      "jeongjae": { "name": "Direct Wealth", "description": "Steady accumulation and diligence. You build lasting wealth through consistent effort and careful planning." },
-      "pyeongwan": { "name": "Indirect Authority", "description": "Power and transformation. You possess an intense drive that can reshape your world through sheer force of will." },
-      "jeonggwan": { "name": "Direct Authority", "description": "Discipline and order. You thrive in structured environments and naturally earn respect through integrity." },
-      "pyeonin": { "name": "Indirect Seal", "description": "Unconventional wisdom. You learn through unique experiences, gaining insights that others miss entirely." },
-      "jeongin": { "name": "Direct Seal", "description": "Knowledge and support. You are nurtured by learning and mentorship, building wisdom through traditional paths." },
+      "bijeon": { "name": "Parallel", "hanja": "比肩", "romanization": "Bi-gyeon", "description": "Independence and self-reliance. You stand strong on your own, drawing confidence from your core identity." },
+      "geopjae": { "name": "Rob Wealth", "hanja": "劫財", "romanization": "Geop-jae", "description": "Competition and ambition. You are driven to seize opportunities and thrive in challenging environments." },
+      "siksin": { "name": "Eating God", "hanja": "食神", "romanization": "Sik-sin", "description": "Creativity and nurturing. Your natural talents flow effortlessly, bringing joy and abundance to those around you." },
+      "sanggwan": { "name": "Hurting Officer", "hanja": "傷官", "romanization": "Sang-gwan", "description": "Innovation and bold expression. You challenge conventions and express yourself with fearless originality." },
+      "pyeonjae": { "name": "Indirect Wealth", "hanja": "偏財", "romanization": "Pyeon-jae", "description": "Opportunistic and versatile. You have a gift for spotting hidden opportunities and creating unconventional success." },
+      "jeongjae": { "name": "Direct Wealth", "hanja": "正財", "romanization": "Jeong-jae", "description": "Steady accumulation and diligence. You build lasting wealth through consistent effort and careful planning." },
+      "pyeongwan": { "name": "Indirect Authority", "hanja": "偏官", "romanization": "Pyeong-gwan", "description": "Power and transformation. You possess an intense drive that can reshape your world through sheer force of will." },
+      "jeonggwan": { "name": "Direct Authority", "hanja": "正官", "romanization": "Jeong-gwan", "description": "Discipline and order. You thrive in structured environments and naturally earn respect through integrity." },
+      "pyeonin": { "name": "Indirect Seal", "hanja": "偏印", "romanization": "Pyeon-in", "description": "Unconventional wisdom. You learn through unique experiences, gaining insights that others miss entirely." },
+      "jeongin": { "name": "Direct Seal", "hanja": "正印", "romanization": "Jeong-in", "description": "Knowledge and support. You are nurtured by learning and mentorship, building wisdom through traditional paths." },
       "summary": {
         "bijeon": "Your chart is dominated by Parallel energy — a strong sense of self and independence defines your path. You are most powerful when you trust your own abilities.",
         "geopjae": "Your chart is dominated by Rob Wealth energy — your competitive spirit and ambition drive you toward bold achievements. Channel this energy wisely.",
@@ -480,6 +520,147 @@
     "advice": "Advice",
     "tryAnother": "Try Another Star",
     "share": "Share",
-    "shareText": "My K-Fortune compatibility with {star} is {score}%! Check yours at K-Destiny."
+    "shareText": "My Saju compatibility with {star} is {score}%! Check yours at SAJU."
+  },
+  "legal": {
+    "privacy": {
+      "title": "Privacy Policy",
+      "lastUpdated": "Last updated: February 11, 2026",
+      "intro": {
+        "heading": "1. Introduction",
+        "body": "SAJU (\"we\", \"our\", \"us\") operates the SAJU web application. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal data when you use our Service. We are committed to protecting your privacy in compliance with the General Data Protection Regulation (GDPR), the California Consumer Privacy Act (CCPA/CPRA), and the Korean Personal Information Protection Act (PIPA)."
+      },
+      "dataCollected": {
+        "heading": "2. Data We Collect",
+        "body": "We collect the following categories of personal data:",
+        "items": {
+          "account": "Account information: email address, display name, and profile photo (via Google OAuth)",
+          "birth": "Birth information: date of birth and time of birth, provided voluntarily for Saju analysis",
+          "payment": "Payment information: processed securely by Polar (our Merchant of Record) and Stripe; we do not store credit card numbers",
+          "usage": "Usage data: pages visited, features used, reading history, and interaction patterns",
+          "device": "Device data: IP address, browser type, operating system, and device identifiers via cookies"
+        }
+      },
+      "purpose": {
+        "heading": "3. How We Use Your Data",
+        "items": {
+          "service": "Service delivery: to generate your Saju (Four Pillars) readings and provide personalized insights (legal basis: contract performance)",
+          "payment": "Payment processing: to process purchases and subscriptions through Polar/Stripe (legal basis: contract performance)",
+          "improvement": "Service improvement: to analyze usage patterns and improve the user experience (legal basis: legitimate interest)",
+          "communication": "Communication: to send transactional emails and, with your consent, marketing updates (legal basis: consent)"
+        }
+      },
+      "birthData": {
+        "heading": "4. Special Note on Birth Data",
+        "body": "Your date of birth and time of birth are used exclusively for generating Saju (Four Pillars of Destiny) readings. This data is processed based on your explicit consent. Birth data is stored securely in our database and is never shared with third parties for marketing or profiling purposes. Basic readings are computed client-side and stored locally on your device. You may request deletion of your birth data at any time."
+      },
+      "thirdParty": {
+        "heading": "5. Third-Party Services",
+        "body": "We share your data with the following service providers, each bound by their own privacy policies:",
+        "items": {
+          "supabase": "Supabase (database hosting, United States) — stores account info, readings, and purchase records",
+          "polar": "Polar / Stripe (payment processing, United States / EU) — processes payments as Merchant of Record",
+          "vercel": "Vercel (web hosting, global CDN) — processes server logs and IP addresses",
+          "google": "Google (OAuth authentication, United States) — provides sign-in via Google account"
+        }
+      },
+      "transfer": {
+        "heading": "6. International Data Transfers",
+        "body": "Your data may be transferred to and processed in the United States and other countries where our service providers operate. For transfers from the EEA/UK, we rely on Standard Contractual Clauses (SCCs) and other appropriate safeguards to ensure adequate protection of your data."
+      },
+      "retention": {
+        "heading": "7. Data Retention",
+        "body": "We retain your personal data for as long as your account is active or as needed to provide the Service. Reading history is retained until you delete it or your account. Upon account deletion, your personal data is permanently removed within 30 days, except where longer retention is required by law (e.g., financial records for tax compliance)."
+      },
+      "rights": {
+        "heading": "8. Your Rights",
+        "body": "Depending on your location, you have the following rights regarding your personal data:",
+        "items": {
+          "access": "Right of access — request a copy of the personal data we hold about you",
+          "rectification": "Right to rectification — request correction of inaccurate data",
+          "erasure": "Right to erasure — request deletion of your personal data (\"right to be forgotten\")",
+          "portability": "Right to data portability — receive your data in a structured, machine-readable format",
+          "objection": "Right to object — object to processing based on legitimate interests",
+          "withdraw": "Right to withdraw consent — withdraw consent at any time without affecting prior processing"
+        }
+      },
+      "cookies": {
+        "heading": "9. Cookies",
+        "body": "We use essential cookies for authentication (NextAuth session), locale preferences (next-intl), and security. We do not use third-party advertising or tracking cookies. You can manage cookie settings through your browser preferences."
+      },
+      "children": {
+        "heading": "10. Children's Privacy",
+        "body": "Our Service is not intended for individuals under the age of 16. We do not knowingly collect personal data from children under 16. If you believe we have collected data from a child, please contact us immediately and we will delete it promptly."
+      },
+      "changes": {
+        "heading": "11. Changes to This Policy",
+        "body": "We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the updated policy on this page and updating the \"Last updated\" date. Your continued use of the Service after changes constitutes acceptance of the updated policy."
+      },
+      "contact": {
+        "heading": "12. Contact Us",
+        "body": "For privacy-related inquiries, data access requests, or complaints, please contact us at: privacy@saju.app. For EU/EEA residents, you also have the right to lodge a complaint with your local data protection authority."
+      }
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "lastUpdated": "Last updated: February 11, 2026",
+      "acceptance": {
+        "heading": "1. Acceptance of Terms",
+        "body": "By accessing or using the SAJU web application (the \"Service\"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use the Service. These terms constitute a legally binding agreement between you and SAJU."
+      },
+      "service": {
+        "heading": "2. Service Description",
+        "body": "SAJU provides Saju (Four Pillars of Destiny) readings based on Korean traditional astrology. The Service generates personalized insights using your birth date and time. Both free basic readings and paid detailed readings are available."
+      },
+      "disclaimer": {
+        "heading": "3. Entertainment Disclaimer",
+        "body": "SAJU readings are provided for entertainment and informational purposes only. They are not intended to replace professional advice in areas including, but not limited to, medical, financial, legal, or psychological matters. We make no guarantees about the accuracy, reliability, or completeness of any reading or interpretation. You should not make important life decisions based solely on Saju readings."
+      },
+      "accounts": {
+        "heading": "4. User Accounts",
+        "body": "You may create an account using Google OAuth or other available sign-in methods. You are responsible for maintaining the confidentiality of your account and for all activities that occur under your account. You must provide accurate information and promptly update any changes. We reserve the right to suspend or terminate accounts that violate these terms."
+      },
+      "payments": {
+        "heading": "5. Payments & Refunds",
+        "body": "Paid features are processed through Polar, our Merchant of Record, which handles billing, taxes, and payment processing via Stripe. All prices are displayed at checkout and include applicable taxes. Digital products (readings, reports) are delivered instantly upon payment. Due to the digital nature of our products, refunds are generally not available once a reading has been generated. Subscriptions can be cancelled at any time; access continues until the end of the billing period. For payment disputes, please contact Polar support or reach out to us directly."
+      },
+      "ip": {
+        "heading": "6. Intellectual Property",
+        "body": "All content, including the Saju analysis engine, reading interpretations, design elements, and branding, is owned by SAJU and protected by copyright and intellectual property laws. You may not reproduce, distribute, or create derivative works from our content without prior written consent. Your personal reading results are yours, and you may share them freely."
+      },
+      "prohibited": {
+        "heading": "7. Prohibited Use",
+        "items": {
+          "scraping": "Automated scraping, crawling, or data extraction from the Service",
+          "reverse": "Reverse engineering, decompiling, or attempting to extract the source code of the Saju engine",
+          "harmful": "Using the Service to harass, deceive, or harm others",
+          "impersonation": "Impersonating another person or misrepresenting your affiliation with any entity"
+        }
+      },
+      "liability": {
+        "heading": "8. Limitation of Liability",
+        "body": "To the maximum extent permitted by law, SAJU shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of or inability to use the Service. Our total liability for any claim shall not exceed the amount you have paid to us in the twelve (12) months preceding the claim."
+      },
+      "termination": {
+        "heading": "9. Termination",
+        "body": "You may delete your account at any time. We may suspend or terminate your access if you violate these terms or engage in prohibited conduct. Upon termination, your data will be handled in accordance with our Privacy Policy. Sections that by their nature should survive termination (limitation of liability, intellectual property, governing law) shall remain in effect."
+      },
+      "changes": {
+        "heading": "10. Changes to Terms",
+        "body": "We reserve the right to modify these terms at any time. Material changes will be communicated via the Service or email. Your continued use after changes take effect constitutes acceptance of the revised terms. If you disagree with the changes, you should discontinue use and delete your account."
+      },
+      "governing": {
+        "heading": "11. Governing Law",
+        "body": "These terms shall be governed by and construed in accordance with the laws of the Republic of Korea, without regard to conflict of law principles. The English version of these terms is the legally binding version. Any disputes shall be resolved through good-faith negotiation first, and if unsuccessful, through the courts of Seoul, Republic of Korea."
+      },
+      "contact": {
+        "heading": "12. Contact Us",
+        "body": "For questions about these Terms of Service, please contact us at: support@saju.app."
+      }
+    },
+    "footer": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    }
   }
 }

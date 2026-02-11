@@ -2,8 +2,12 @@ import { useTranslations } from "next-intl";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { Link } from "@/i18n/navigation";
-import { Sparkles, Layers, Sun, ArrowRight, Star, Users } from "lucide-react";
+import { Sparkles, Layers, Sun, ArrowRight, Star, Users, Heart } from "lucide-react";
 import { WebGLShader } from "@/components/ui/web-gl-shader";
+import { MetaphorIcon } from "@/components/icons/MetaphorIcon";
+import { ElementIcon } from "@/components/icons/ElementIcon";
+import { ServiceHighlight } from "@/components/landing/ServiceHighlight";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 export default function LandingPage() {
   const t = useTranslations("landing");
@@ -78,7 +82,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* What is K-Fortune */}
+      {/* What is Saju */}
       <section className="w-full max-w-4xl px-4 py-20">
         <div className="text-center mb-12 animate-slide-up">
           <h2 className="text-2xl md:text-3xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-3">
@@ -113,6 +117,51 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* What You'll Discover — Service Highlights */}
+      <section className="w-full max-w-4xl px-4 py-20">
+        <div className="text-center mb-10 animate-slide-up">
+          <h2 className="text-2xl md:text-3xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-3">
+            {t("discoverTitle")}
+          </h2>
+          <p className="text-text-secondary max-w-lg mx-auto">
+            {t("discoverDescription")}
+          </p>
+        </div>
+        <ServiceHighlight
+          services={[
+            {
+              icon: <ElementIcon element="fire" size={20} />,
+              title: t("services.sajuTitle"),
+              description: t("services.sajuDesc"),
+              href: "/start",
+              color: "#8B5CF6",
+            },
+            {
+              icon: <Star className="w-5 h-5 text-pink-400" />,
+              title: t("services.starTitle"),
+              description: t("services.starDesc"),
+              href: "/star-match",
+              color: "#EC4899",
+              badge: "Popular",
+            },
+            {
+              icon: <Heart className="w-5 h-5 text-rose-400" />,
+              title: t("services.compatTitle"),
+              description: t("services.compatDesc"),
+              href: "/compatibility",
+              color: "#F43F5E",
+            },
+            {
+              icon: <Layers className="w-5 h-5 text-gold-500" />,
+              title: t("services.galleryTitle"),
+              description: t("services.galleryDesc"),
+              href: "/gallery",
+              color: "#F59E0B",
+            },
+          ]}
+        />
+      </section>
+
       {/* Card Preview Section */}
       <section className="w-full bg-white/[0.01] border-y border-white/[0.04] py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
@@ -125,26 +174,26 @@ export default function LandingPage() {
 
           <div className="perspective-1000 mb-10">
             <div className="flex justify-center items-end gap-4 md:gap-6">
-              <div className="w-28 md:w-36 aspect-[2/3] rounded-lg bg-gradient-to-b from-[#1A1A2E] to-[#0A0A1A] border border-purple-500/[0.2] p-3 flex flex-col items-center justify-center text-center opacity-80 hover:opacity-100 transition-all duration-500 hover:scale-110 hover:-translate-y-2 animate-slide-up delay-100 card-shine" style={{ transform: "rotateY(8deg) rotateX(2deg) rotate(-6deg)" }}>
-                <span className="text-3xl md:text-4xl mb-2">🌳</span>
+              <TiltCard className="w-28 md:w-36 aspect-[2/3] rounded-lg glass-premium p-3 flex flex-col items-center justify-center text-center opacity-80 hover:opacity-100 transition-all duration-500 animate-slide-up delay-100" tiltMax={8} style={{ transform: "rotate(-6deg)" }}>
+                <MetaphorIcon metaphor="great-tree" size={48} className="mb-2" />
                 <span className="text-[10px] md:text-xs text-gold-400 font-semibold font-[family-name:var(--font-heading)]">THE GREAT TREE</span>
                 <span className="text-[8px] md:text-[10px] text-text-muted mt-0.5">Yang Wood</span>
-              </div>
-              <div className="w-32 md:w-40 aspect-[2/3] rounded-lg bg-gradient-to-b from-[#1A1A2E] to-[#0A0A1A] border border-purple-500/[0.3] p-3 flex flex-col items-center justify-center text-center z-10 ring-glow-purple hover:scale-110 hover:-translate-y-3 transition-all duration-500 animate-slide-up delay-200 card-shine">
-                <span className="text-4xl md:text-5xl mb-2">☀️</span>
+              </TiltCard>
+              <TiltCard className="w-32 md:w-40 aspect-[2/3] rounded-lg glass-premium p-3 flex flex-col items-center justify-center text-center z-10 ring-glow-purple transition-all duration-500 animate-slide-up delay-200" tiltMax={8}>
+                <MetaphorIcon metaphor="sun" size={56} className="mb-2" />
                 <span className="text-xs md:text-sm text-gold-400 font-semibold font-[family-name:var(--font-heading)]">THE SUN</span>
                 <span className="text-[9px] md:text-xs text-text-muted mt-0.5">Yang Fire</span>
                 <div className="flex gap-0.5 mt-2">
-                  {["#22C55E", "#F43F5E", "#F59E0B", "#E4E4E7", "#6366F1"].map((c) => (
-                    <div key={c} className="w-1.5 h-4 rounded-full" style={{ backgroundColor: c, opacity: 0.7 }} />
+                  {(["wood", "fire", "earth", "metal", "water"] as const).map((el) => (
+                    <ElementIcon key={el} element={el} size={12} />
                   ))}
                 </div>
-              </div>
-              <div className="w-28 md:w-36 aspect-[2/3] rounded-lg bg-gradient-to-b from-[#1A1A2E] to-[#0A0A1A] border border-purple-500/[0.2] p-3 flex flex-col items-center justify-center text-center opacity-80 hover:opacity-100 transition-all duration-500 hover:scale-110 hover:-translate-y-2 animate-slide-up delay-300 card-shine" style={{ transform: "rotateY(-8deg) rotateX(2deg) rotate(6deg)" }}>
-                <span className="text-3xl md:text-4xl mb-2">🌊</span>
+              </TiltCard>
+              <TiltCard className="w-28 md:w-36 aspect-[2/3] rounded-lg glass-premium p-3 flex flex-col items-center justify-center text-center opacity-80 hover:opacity-100 transition-all duration-500 animate-slide-up delay-300" tiltMax={8} style={{ transform: "rotate(6deg)" }}>
+                <MetaphorIcon metaphor="ocean" size={48} className="mb-2" />
                 <span className="text-[10px] md:text-xs text-gold-400 font-semibold font-[family-name:var(--font-heading)]">THE OCEAN</span>
                 <span className="text-[8px] md:text-[10px] text-text-muted mt-0.5">Yang Water</span>
-              </div>
+              </TiltCard>
             </div>
           </div>
 
@@ -182,6 +231,19 @@ export default function LandingPage() {
 
       <div className="w-full px-4 flex justify-center">
         <Footer />
+      </div>
+
+      {/* Mobile fixed CTA */}
+      <div className="fixed bottom-0 left-0 right-0 z-30 md:hidden pb-safe">
+        <div className="px-4 py-3 bg-bg-dark/90 backdrop-blur-lg border-t border-white/[0.06]">
+          <Link
+            href="/start"
+            className="flex items-center justify-center gap-2 w-full py-3 bg-purple-500 text-white rounded-lg font-semibold text-sm hover:bg-purple-400 transition-colors"
+          >
+            {t("cta")}
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     </main>
   );

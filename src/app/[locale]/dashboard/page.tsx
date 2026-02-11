@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { BookOpen, Sparkles, Users, Crown, Clock, ArrowRight } from "lucide-react";
+import { MetaphorIcon } from "@/components/icons/MetaphorIcon";
 
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
@@ -202,9 +203,7 @@ export default function DashboardPage() {
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                      <div className="text-3xl">
-                        {getMetaphorIcon(reading.dayMasterMetaphor)}
-                      </div>
+                      <MetaphorIcon metaphor={reading.dayMasterMetaphor || ""} size={32} />
                       <div>
                         <p className="font-semibold text-text-primary text-sm">
                           {reading.dayMasterMetaphor
@@ -233,22 +232,6 @@ export default function DashboardPage() {
   );
 }
 
-function getMetaphorIcon(metaphor: string | null): string {
-  if (!metaphor) return "✨";
-  const icons: Record<string, string> = {
-    "great-tree": "🌳",
-    flower: "🌸",
-    sun: "☀️",
-    candle: "🕯️",
-    mountain: "⛰️",
-    garden: "🌿",
-    sword: "⚔️",
-    jewel: "💎",
-    ocean: "🌊",
-    rain: "🌧️",
-  };
-  return icons[metaphor] || "✨";
-}
 
 function formatDate(dateStr: string): string {
   try {

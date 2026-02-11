@@ -16,5 +16,5 @@ export const GET = Checkout({
     (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000") +
     "/en/reading/{CHECKOUT_ID}?paid=true",
   server:
-    process.env.NODE_ENV === "production" ? "production" : "sandbox",
+    (process.env.POLAR_ENVIRONMENT as "production" | "sandbox") || "production",
 });

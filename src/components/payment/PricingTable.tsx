@@ -5,6 +5,7 @@ import { Check } from "lucide-react";
 
 interface PricingPlan {
   id: string;
+  polarProductId: string | null;
   name: string;
   price: string;
   period?: string;
@@ -27,6 +28,7 @@ export function PricingTable() {
   const plans: PricingPlan[] = [
     {
       id: "basic",
+      polarProductId: null,
       name: t("basic.name"),
       price: t("basic.price"),
       features: [
@@ -38,6 +40,7 @@ export function PricingTable() {
     },
     {
       id: "detailed",
+      polarProductId: "50ad1cfe-da26-41cd-80c7-862258baaa39",
       name: t("detailed.name"),
       price: t("detailed.price"),
       features: [
@@ -52,6 +55,7 @@ export function PricingTable() {
     },
     {
       id: "premium",
+      polarProductId: "e6efae19-0081-4df3-8c17-2f9fd76fd89c",
       name: t("premium.name"),
       price: t("premium.price"),
       period: t("premium.period"),
@@ -108,12 +112,22 @@ export function PricingTable() {
             </ul>
 
             {/* CTA Button */}
-            <Button
-              variant={plan.highlighted ? "gold" : "secondary"}
-              className="w-full"
-            >
-              {plan.cta}
-            </Button>
+            {plan.polarProductId ? (
+              <a href={`/api/checkout?products=${plan.polarProductId}`}>
+                <Button
+                  variant={plan.highlighted ? "gold" : "secondary"}
+                  className="w-full"
+                >
+                  {plan.cta}
+                </Button>
+              </a>
+            ) : (
+              <a href="/">
+                <Button variant="secondary" className="w-full">
+                  {plan.cta}
+                </Button>
+              </a>
+            )}
           </div>
         </Card>
       ))}

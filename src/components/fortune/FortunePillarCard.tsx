@@ -3,7 +3,9 @@
 import { cn } from "@/lib/utils";
 import type { Pillar } from "@/lib/saju/types";
 import { STEM_METAPHORS, BRANCH_ANIMALS } from "@/lib/saju/metaphors";
-import { ELEMENT_COLORS } from "@/lib/saju/constants";
+import { ELEMENT_COLORS, ELEMENT_HANJA, YINYANG_HANJA } from "@/lib/saju/constants";
+import { MetaphorIcon } from "@/components/icons/MetaphorIcon";
+import { AnimalIcon } from "@/components/icons/AnimalIcon";
 
 interface FortunePillarCardProps {
   pillar: Pillar;
@@ -21,9 +23,10 @@ export function FortunePillarCard({ pillar, label, isHighlighted = false }: Fort
       className={cn(
         "flex flex-col items-center gap-1 rounded-lg p-3 bg-bg-surface border transition-all duration-200",
         isHighlighted
-          ? "border-purple-500/40 bg-purple-500/[0.04]"
+          ? "accent-glow"
           : "border-white/[0.06] hover:border-white/[0.1]",
       )}
+      style={isHighlighted ? { background: "var(--accent-bg-tint)", borderColor: "var(--accent-glow)" } : undefined}
     >
       <span className="text-[10px] font-medium text-text-muted uppercase tracking-wider">
         {label}
@@ -31,15 +34,18 @@ export function FortunePillarCard({ pillar, label, isHighlighted = false }: Fort
 
       {/* Stem Metaphor (top) */}
       <div className="flex flex-col items-center gap-0.5 py-1.5">
-        <span className="text-2xl">{metaphor.icon}</span>
+        <MetaphorIcon metaphor={metaphor.id} size={32} />
         <span className="text-xs font-semibold text-text-primary">
           {metaphor.displayName.replace("The ", "")}
+        </span>
+        <span className="text-[11px] font-medium text-text-secondary">
+          {metaphor.hanja} <span className="text-text-muted">({metaphor.romanization})</span>
         </span>
         <span
           className="text-[10px]"
           style={{ color: elementColor }}
         >
-          {pillar.yinYang === "yang" ? "Yang" : "Yin"} {pillar.stemElement.charAt(0).toUpperCase() + pillar.stemElement.slice(1)}
+          {pillar.yinYang === "yang" ? "Yang" : "Yin"} {pillar.stemElement.charAt(0).toUpperCase() + pillar.stemElement.slice(1)} · {YINYANG_HANJA[pillar.yinYang]}{ELEMENT_HANJA[pillar.stemElement]}
         </span>
       </div>
 
@@ -48,9 +54,12 @@ export function FortunePillarCard({ pillar, label, isHighlighted = false }: Fort
 
       {/* Branch Animal (bottom) */}
       <div className="flex flex-col items-center gap-0.5 py-1.5">
-        <span className="text-xl">{animal.icon}</span>
+        <AnimalIcon animal={animal.id} size={28} />
         <span className="text-xs text-text-secondary">
           {animal.displayName}
+        </span>
+        <span className="text-[10px] text-text-muted">
+          {animal.hanja} ({animal.romanization})
         </span>
       </div>
     </div>

@@ -71,7 +71,7 @@ export default function CardViewClient() {
       const html2canvas = (await import("html2canvas")).default;
       const canvas = await html2canvas(cardEl, { backgroundColor: null, scale: 2 });
       const link = document.createElement("a");
-      link.download = `k-destiny-card-${id}.png`;
+      link.download = `saju-card-${id}.png`;
       link.href = canvas.toDataURL("image/png");
       link.click();
     } catch {
@@ -82,7 +82,7 @@ export default function CardViewClient() {
   const handleShare = async () => {
     const url = `${window.location.origin}/cards/${id}`;
     if (navigator.share) {
-      await navigator.share({ title: "K-Destiny Card", url });
+      await navigator.share({ title: "SAJU Card", url });
     } else {
       await navigator.clipboard.writeText(url);
     }

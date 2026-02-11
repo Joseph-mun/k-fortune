@@ -63,7 +63,7 @@ export function DestinyCardGenerator({
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
-      link.download = `k-destiny-${reading.dayMaster.metaphor}-${reading.id}.png`;
+      link.download = `saju-${reading.dayMaster.metaphor}-${reading.id}.png`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -82,12 +82,12 @@ export function DestinyCardGenerator({
       if (blob && navigator.share && navigator.canShare) {
         const file = new File(
           [blob],
-          `k-destiny-${reading.dayMaster.metaphor}.png`,
+          `saju-${reading.dayMaster.metaphor}.png`,
           { type: "image/png" }
         );
 
         const shareData = {
-          title: `K-Destiny - ${reading.dayMaster.metaphorInfo.displayName}`,
+          title: `SAJU - ${reading.dayMaster.metaphorInfo.displayName}`,
           text: t("shareText", { metaphor: reading.dayMaster.metaphorInfo.displayName }),
           files: [file],
         };
@@ -101,7 +101,7 @@ export function DestinyCardGenerator({
       // Fallback: Share URL only
       if (navigator.share) {
         await navigator.share({
-          title: `K-Destiny - ${reading.dayMaster.metaphorInfo.displayName}`,
+          title: `SAJU - ${reading.dayMaster.metaphorInfo.displayName}`,
           text: t("shareText", { metaphor: reading.dayMaster.metaphorInfo.displayName }),
           url: `${window.location.origin}/reading/${reading.id}`,
         });

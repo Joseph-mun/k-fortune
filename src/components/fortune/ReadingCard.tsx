@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Card } from "@/components/ui/Card";
+import { MetaphorIcon } from "@/components/icons/MetaphorIcon";
 import type { BasicReading } from "@/lib/saju/types";
 
 interface ReadingCardProps {
@@ -18,7 +19,7 @@ export function ReadingCard({ reading, variant = "compact" }: ReadingCardProps) 
     return (
       <Card className="w-full">
         <div className="flex items-center gap-4">
-          <div className="text-5xl">{reading.dayMaster.metaphorInfo.icon}</div>
+          <MetaphorIcon metaphor={reading.dayMaster.metaphorInfo.id} size={48} />
           <div className="flex-1">
             <h3 className="text-lg font-bold text-text-primary mb-1">
               {reading.dayMaster.metaphorInfo.displayName}
@@ -37,7 +38,7 @@ export function ReadingCard({ reading, variant = "compact" }: ReadingCardProps) 
       <div className="flex flex-col gap-4">
         {/* Header with icon */}
         <div className="flex items-center gap-4 pb-4 border-b border-white/[0.06]">
-          <div className="text-6xl">{reading.dayMaster.metaphorInfo.icon}</div>
+          <MetaphorIcon metaphor={reading.dayMaster.metaphorInfo.id} size={56} />
           <div className="flex-1">
             <h3 className="text-2xl font-bold text-text-primary mb-2">
               {reading.dayMaster.metaphorInfo.displayName}

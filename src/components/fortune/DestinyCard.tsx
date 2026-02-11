@@ -3,6 +3,9 @@
 import { useTranslations } from "next-intl";
 import { useState, useCallback, useRef, useEffect } from "react";
 import type { BasicReading } from "@/lib/saju/types";
+import { ELEMENT_HANJA, YINYANG_HANJA } from "@/lib/saju/constants";
+import { STEM_METAPHORS } from "@/lib/saju/metaphors";
+import { MetaphorIcon } from "@/components/icons/MetaphorIcon";
 
 interface DestinyCardProps {
   reading: BasicReading;
@@ -88,20 +91,23 @@ export function DestinyCard({
         <div className="relative z-10 flex flex-col h-full p-5">
           {/* Top badge */}
           <div className={`flex items-center justify-between text-[9px] tracking-[0.15em] uppercase ${styleClasses.muted}`}>
-            <span>K-DESTINY</span>
-            <span>{tElements(dayMaster.yinYang)} {tElements(dayMaster.element)}</span>
+            <span>SAJU</span>
+            <span>{tElements(dayMaster.yinYang)} {tElements(dayMaster.element)} · {YINYANG_HANJA[dayMaster.yinYang]}{ELEMENT_HANJA[dayMaster.element]}</span>
           </div>
 
           {/* Hero: Day Master */}
           <div className="flex-1 flex flex-col items-center justify-center text-center">
             {/* SVG-based icon circle */}
             <div className={`w-20 h-20 rounded-full flex items-center justify-center mb-4 ${styleClasses.iconBg}`}>
-              <span className="text-4xl">{getMetaphorSymbol(dayMaster.metaphor)}</span>
+              <MetaphorIcon metaphor={dayMaster.metaphor} size={40} />
             </div>
 
-            <h2 className={`text-lg font-bold tracking-wide font-[family-name:var(--font-heading)] mb-1 ${styleClasses.title}`}>
+            <h2 className={`text-lg font-bold tracking-wide font-[family-name:var(--font-heading)] mb-0.5 ${styleClasses.title}`}>
               {dayMaster.metaphorInfo.displayName.toUpperCase()}
             </h2>
+            <p className={`text-[10px] mb-1 ${styleClasses.muted}`}>
+              {dayMaster.metaphorInfo.hanja} · {dayMaster.metaphorInfo.romanization}
+            </p>
             <p className={`text-[11px] leading-relaxed max-w-[240px] ${styleClasses.text}`}>
               {t(`${dayMaster.metaphor}.nature`).slice(0, 80)}...
             </p>
@@ -126,14 +132,15 @@ export function DestinyCard({
           <div className="grid grid-cols-4 gap-1.5 text-center mb-3">
             {(["year", "month", "day", "hour"] as const).map((key) => {
               const pillar = fourPillars[key];
+              const stemMeta = STEM_METAPHORS[pillar.stem];
               return (
                 <div
                   key={key}
                   className={`rounded-md py-1.5 ${styleClasses.pillarBg}`}
                 >
-                  <span className="text-sm block">{getMetaphorSymbol(pillar.metaphor)}</span>
+                  <span className="flex justify-center"><MetaphorIcon metaphor={pillar.metaphor} size={20} /></span>
                   <span className={`text-[8px] block ${styleClasses.muted}`}>
-                    {getAnimalSymbol(pillar.animal)}
+                    {stemMeta.hanja}{getAnimalSymbol(pillar.animal)}
                   </span>
                 </div>
               );
@@ -250,22 +257,6 @@ function getStyleClasses(style: string) {
   return styles[style] || styles.classic;
 }
 
-/** Stylized symbol for metaphor — using refined unicode symbols instead of emoji */
-function getMetaphorSymbol(metaphor: string): string {
-  const symbols: Record<string, string> = {
-    "great-tree": "🌲",
-    flower: "✿",
-    sun: "☀",
-    candle: "🕯",
-    mountain: "⛰",
-    garden: "🌱",
-    sword: "⚔",
-    jewel: "◆",
-    ocean: "🌊",
-    rain: "☔",
-  };
-  return symbols[metaphor] || "✦";
-}
 
 function getAnimalSymbol(animal: string): string {
   const symbols: Record<string, string> = {

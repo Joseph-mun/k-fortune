@@ -92,7 +92,9 @@
     "fire": "화(火)",
     "earth": "토(土)",
     "metal": "금(金)",
-    "water": "수(水)"
+    "water": "수(水)",
+    "yang": "양(陽)",
+    "yin": "음(陰)"
   },
   "metaphors": {
     "great-tree": {

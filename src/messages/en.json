@@ -92,7 +92,9 @@
     "fire": "Fire",
     "earth": "Earth",
     "metal": "Metal",
-    "water": "Water"
+    "water": "Water",
+    "yang": "Yang",
+    "yin": "Yin"
   },
   "metaphors": {
     "great-tree": {

@@ -50,8 +50,8 @@ export function PaywallOverlay({ onUnlock, readingId, productId }: PaywallOverla
 
       {/* CTA Overlay */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <div className="text-center bg-bg-dark/95 backdrop-blur-xl p-6 rounded-xl border border-white/[0.08] max-w-sm mx-4 shadow-2xl">
-          <div className="w-12 h-12 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mx-auto mb-4">
+        <div className="text-center glass p-6 rounded-xl max-w-sm mx-4 shadow-2xl ring-glow-purple">
+          <div className="w-12 h-12 rounded-full bg-purple-500/[0.1] border border-purple-500/[0.2] flex items-center justify-center mx-auto mb-4 animate-pulse-glow">
             <Lock className="w-5 h-5 text-purple-400" />
           </div>
 

@@ -9,13 +9,14 @@ interface DayMasterHeroProps {
 
 export function DayMasterHero({ dayMaster }: DayMasterHeroProps) {
   const t = useTranslations("reading");
+  const tElements = useTranslations("elements");
 
-  const elementLabel = `${dayMaster.yinYang === "yang" ? "Yang" : "Yin"} ${dayMaster.element.charAt(0).toUpperCase() + dayMaster.element.slice(1)}`;
+  const elementLabel = `${tElements(dayMaster.yinYang)} ${tElements(dayMaster.element)}`;
 
   return (
     <div className="flex flex-col items-center text-center pt-6 pb-4">
-      {/* Large metaphor icon */}
-      <div className="w-24 h-24 rounded-full bg-purple-500/[0.06] border border-purple-500/15 flex items-center justify-center mb-5 animate-float">
+      {/* Large metaphor icon with glow ring */}
+      <div className="w-24 h-24 rounded-full bg-purple-500/[0.06] border border-purple-500/[0.15] flex items-center justify-center mb-5 animate-float ring-glow-purple">
         <span className="text-5xl">{dayMaster.metaphorInfo.icon}</span>
       </div>
 
@@ -28,7 +29,7 @@ export function DayMasterHero({ dayMaster }: DayMasterHeroProps) {
       </h1>
 
       {/* Element tag */}
-      <span className="inline-flex px-2.5 py-0.5 rounded-full bg-purple-500/[0.06] border border-purple-500/15 text-purple-400 text-[10px] tracking-wider mb-5">
+      <span className="inline-flex px-2.5 py-0.5 rounded-full bg-purple-500/[0.06] border border-purple-500/[0.15] text-purple-400 text-[10px] tracking-wider mb-5">
         {elementLabel}
       </span>
 
@@ -37,12 +38,13 @@ export function DayMasterHero({ dayMaster }: DayMasterHeroProps) {
         {dayMaster.personality}
       </p>
 
-      {/* Keywords */}
+      {/* Keywords — stagger entrance */}
       <div className="flex flex-wrap gap-1.5 justify-center">
-        {dayMaster.strengths.map((strength) => (
+        {dayMaster.strengths.map((strength, i) => (
           <span
             key={strength}
-            className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.06] text-text-secondary text-xs"
+            className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.06] text-text-secondary text-xs animate-slide-up"
+            style={{ animationDelay: `${200 + i * 100}ms` }}
           >
             {strength}
           </span>

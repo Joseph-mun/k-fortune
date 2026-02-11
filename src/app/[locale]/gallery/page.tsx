@@ -30,6 +30,7 @@ export default function GalleryPage() {
   const [hasMore, setHasMore] = useState(true);
   const [sort, setSort] = useState<SortType>("latest");
   const [offset, setOffset] = useState(0);
+  const offsetRef = useRef(0);
   const observerRef = useRef<HTMLDivElement>(null);
 
   const LIMIT = 12;
@@ -48,7 +49,9 @@ export default function GalleryPage() {
 
         setCards((prev) => (append ? [...prev, ...data.cards] : data.cards));
         setHasMore(data.pagination.hasMore);
-        setOffset(newOffset + LIMIT);
+        const nextOffset = newOffset + LIMIT;
+        setOffset(nextOffset);
+        offsetRef.current = nextOffset;
       } catch {
         // ignore
       } finally {
@@ -62,6 +65,7 @@ export default function GalleryPage() {
   // Initial load & sort change
   useEffect(() => {
     setOffset(0);
+    offsetRef.current = 0;
     setCards([]);
     fetchCards(0, false);
   }, [fetchCards]);
@@ -72,8 +76,8 @@ export default function GalleryPage() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasMore && !loadingMore) {
-          fetchCards(offset, true);
+        if (entries[0].isIntersecting) {
+          fetchCards(offsetRef.current, true);
         }
       },
       { threshold: 0.1 }
@@ -85,7 +89,7 @@ export default function GalleryPage() {
     return () => {
       if (el) observer.unobserve(el);
     };
-  }, [hasMore, loadingMore, offset, fetchCards]);
+  }, [hasMore, loadingMore, fetchCards]);
 
   return (
     <main className="flex flex-col items-center min-h-screen">
@@ -107,33 +111,39 @@ export default function GalleryPage() {
               role="tab"
               aria-selected={sort === "latest"}
               onClick={() => setSort("latest")}
-              className={`px-3 py-1.5 text-xs rounded-md transition-colors ${
+              className={`relative px-3 py-1.5 text-xs rounded-md transition-all ${
                 sort === "latest"
                   ? "bg-white/[0.08] text-text-primary"
                   : "text-text-muted hover:text-text-secondary"
               }`}
             >
               {t("sortLatest")}
+              {sort === "latest" && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-purple-500" />}
             </button>
             <button
               role="tab"
               aria-selected={sort === "popular"}
               onClick={() => setSort("popular")}
-              className={`px-3 py-1.5 text-xs rounded-md transition-colors ${
+              className={`relative px-3 py-1.5 text-xs rounded-md transition-all ${
                 sort === "popular"
                   ? "bg-white/[0.08] text-text-primary"
                   : "text-text-muted hover:text-text-secondary"
               }`}
             >
               {t("sortPopular")}
+              {sort === "popular" && <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 rounded-full bg-purple-500" />}
             </button>
           </div>
         </div>
 
         {/* Grid */}
         {loading ? (
-          <div className="flex items-center justify-center py-20">
-            <div className="w-6 h-6 border-2 border-purple-500/30 border-t-purple-500 rounded-full animate-spin" />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="animate-skeleton">
+                <div className="w-full aspect-[2/3] rounded-xl bg-bg-card border border-white/[0.06]" />
+              </div>
+            ))}
           </div>
         ) : cards.length === 0 ? (
           <div className="text-center py-20">
@@ -144,7 +154,7 @@ export default function GalleryPage() {
           </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
-            {cards.map((card) => {
+            {cards.map((card, index) => {
               let reading;
               try {
                 reading = reconstructReading(card.reading_data);
@@ -155,9 +165,11 @@ export default function GalleryPage() {
                 <button
                   key={card.id}
                   onClick={() => router.push(`/cards/${card.id}`)}
-                  className="group hover:scale-[1.02] transition-transform duration-200"
+                  aria-label={`${reading.dayMaster.metaphorInfo.displayName} card`}
+                  className="group hover:scale-105 hover:-translate-y-2 hover:shadow-lg hover:shadow-purple-500/[0.1] transition-all duration-300 animate-slide-up"
+                  style={{ animationDelay: `${Math.min(index * 50, 400)}ms` }}
                 >
-                  <div className="transform scale-[0.5] origin-top-left w-[160px] h-[240px] pointer-events-none">
+                  <div className="transform scale-[0.65] origin-top-left pointer-events-none" style={{ width: "208px", height: "312px" }}>
                     <DestinyCard reading={reading} style={card.style} />
                   </div>
                 </button>

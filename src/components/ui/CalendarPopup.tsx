@@ -166,7 +166,7 @@ export function CalendarPopup({
         transform: "translateX(-50%)",
       }}
     >
-      <div className="rounded-2xl bg-bg-card border border-white/[0.08] p-5 w-[min(750px,calc(100vw-2rem))] shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
+      <div className="rounded-2xl bg-bg-card border border-white/[0.08] p-5 w-[min(480px,calc(100vw-2rem))] shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
         {mode === "calendar" ? (
           <>
             {/* Month/Year header */}

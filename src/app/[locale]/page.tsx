@@ -1,9 +1,9 @@
 import { useTranslations } from "next-intl";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
-import { BirthInputForm } from "@/components/forms/BirthInputForm";
 import { Link } from "@/i18n/navigation";
 import { Sparkles, Layers, Sun, ArrowRight, Star, Users } from "lucide-react";
+import { WebGLShader } from "@/components/ui/web-gl-shader";
 
 export default function LandingPage() {
   const t = useTranslations("landing");
@@ -11,52 +11,58 @@ export default function LandingPage() {
 
   return (
     <main className="flex flex-col items-center min-h-screen">
-      <div className="w-full px-4">
-        <NavBar />
-      </div>
-
-      {/* Hero Section — cinematic, layered depth */}
-      <section className="relative w-full flex flex-col items-center text-center px-4 pt-16 md:pt-28 pb-20 overflow-hidden">
-        {/* Multi-layer animated background */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] rounded-full blur-[140px] pointer-events-none animate-gradient-shift" style={{ background: "radial-gradient(circle, rgba(139,92,246,0.1) 0%, rgba(99,102,241,0.05) 50%, transparent 70%)" }} />
-        <div className="absolute top-32 right-1/4 w-[400px] h-[400px] bg-indigo-500/[0.04] rounded-full blur-[100px] pointer-events-none animate-pulse-glow" />
-        <div className="absolute bottom-0 left-1/3 w-[300px] h-[300px] bg-purple-600/[0.03] rounded-full blur-[80px] pointer-events-none" />
-
-        {/* Floating oriental symbols */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-          <span className="absolute top-20 left-[15%] text-2xl text-white/[0.03] animate-float">☰</span>
-          <span className="absolute top-40 right-[18%] text-xl text-white/[0.03] animate-float delay-200">☵</span>
-          <span className="absolute top-60 left-[25%] text-lg text-white/[0.02] animate-float delay-400">☲</span>
-          <span className="absolute bottom-32 right-[28%] text-2xl text-white/[0.03] animate-float delay-300">☷</span>
+      {/* Hero Section — Full-screen WebGL background */}
+      <section className="relative w-full min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
+        {/* WebGL Background */}
+        <div className="absolute inset-0 z-0">
+          <WebGLShader />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
         </div>
 
-        <div className="relative z-10 flex flex-col items-center max-w-3xl">
-          {/* Badge with shimmer */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.04] border border-white/[0.08] text-text-muted text-xs mb-8 animate-slide-up animate-shimmer">
+        {/* NavBar floating on top */}
+        <div className="absolute top-0 left-0 right-0 z-20 px-4">
+          <NavBar />
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 flex flex-col items-center max-w-3xl px-4">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/[0.12] text-white/70 text-xs mb-8 backdrop-blur-sm animate-slide-up">
             <Sparkles className="w-3 h-3 text-purple-400" />
             {tCommon("subtitle")}
           </div>
 
           {/* Headline */}
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight font-[family-name:var(--font-heading)] leading-[1.1] mb-6 animate-slide-up delay-100">
-            <span className="text-text-primary">{t("heroTitle")}</span>
+          <h1 className="text-5xl sm:text-6xl md:text-8xl font-bold tracking-tight font-[family-name:var(--font-heading)] leading-[1.05] mb-6 animate-slide-up delay-100">
+            <span className="text-white">{t("heroTitle")}</span>
             <br />
             <span className="text-gradient-hero">{t("heroHighlight")}</span>
           </h1>
 
           {/* Subheading */}
-          <p className="text-text-secondary text-base md:text-lg max-w-xl leading-relaxed mb-12 animate-slide-up delay-200">
+          <p className="text-white/60 text-base md:text-lg max-w-xl leading-relaxed mb-12 animate-slide-up delay-200">
             {t("heroDescription")}
           </p>
 
-          {/* Form — glass card with glow */}
-          <div className="w-full max-w-md glass rounded-xl p-6 ring-glow-purple animate-scale-in delay-300">
-            <BirthInputForm />
+          {/* CTA Button → /start */}
+          <Link
+            href="/start"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-purple-500 text-white rounded-xl font-semibold text-lg hover:bg-purple-400 hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 hover:-translate-y-1 hover:scale-105 group animate-scale-in delay-300"
+          >
+            {t("cta")}
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </Link>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-8 z-10 animate-bounce">
+          <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-1.5">
+            <div className="w-1.5 h-2.5 rounded-full bg-white/40 animate-pulse" />
           </div>
         </div>
       </section>
 
-      {/* Social Proof Strip — shimmer bg */}
+      {/* Social Proof Strip */}
       <section className="w-full border-y border-white/[0.04] py-6 px-4 animate-shimmer">
         <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-text-muted text-sm">
           <div className="flex items-center gap-2">
@@ -72,7 +78,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* What is K-Fortune — Education for foreigners */}
+      {/* What is K-Fortune */}
       <section className="w-full max-w-4xl px-4 py-20">
         <div className="text-center mb-12 animate-slide-up">
           <h2 className="text-2xl md:text-3xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-3">
@@ -117,7 +123,6 @@ export default function LandingPage() {
             {t("cardSectionDesc")}
           </p>
 
-          {/* Sample card showcase — 3D perspective floating cards */}
           <div className="perspective-1000 mb-10">
             <div className="flex justify-center items-end gap-4 md:gap-6">
               <div className="w-28 md:w-36 aspect-[2/3] rounded-lg bg-gradient-to-b from-[#1A1A2E] to-[#0A0A1A] border border-purple-500/[0.2] p-3 flex flex-col items-center justify-center text-center opacity-80 hover:opacity-100 transition-all duration-500 hover:scale-110 hover:-translate-y-2 animate-slide-up delay-100 card-shine" style={{ transform: "rotateY(8deg) rotateX(2deg) rotate(-6deg)" }}>
@@ -155,7 +160,6 @@ export default function LandingPage() {
 
       {/* CTA Bottom */}
       <section className="relative w-full max-w-3xl px-4 py-20 text-center overflow-hidden">
-        {/* Subtle background glow */}
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
           <div className="w-[400px] h-[200px] bg-purple-500/[0.05] rounded-full blur-[100px]" />
         </div>
@@ -167,12 +171,8 @@ export default function LandingPage() {
             {t("ctaDescription")}
           </p>
           <Link
-            href="/"
+            href="/start"
             className="inline-flex items-center gap-2 px-6 py-3 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-400 hover:shadow-lg hover:shadow-purple-500/[0.2] transition-all duration-300 hover:-translate-y-0.5 group animate-slide-up delay-200"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: "smooth" });
-            }}
           >
             {t("cta")}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

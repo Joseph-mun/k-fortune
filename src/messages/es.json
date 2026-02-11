@@ -40,6 +40,11 @@
       "dayMasterDesc": "¿Eres El Sol, El Océano o La Espada? Encuentra tu arquetipo cósmico"
     }
   },
+  "start": {
+    "title": "Ingresa Tu Información",
+    "subtitle": "Tu mapa cósmico comienza aquí. Solo toma 30 segundos.",
+    "back": "Volver al Inicio"
+  },
   "form": {
     "birthDate": "Fecha de Nacimiento",
     "birthTime": "Hora de Nacimiento",

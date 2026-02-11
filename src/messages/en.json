@@ -40,6 +40,11 @@
       "dayMasterDesc": "Are you The Sun, The Ocean, or The Sword? Find your cosmic archetype"
     }
   },
+  "start": {
+    "title": "Enter Your Birth Info",
+    "subtitle": "Your cosmic blueprint starts here. It only takes 30 seconds.",
+    "back": "Back to Home"
+  },
   "form": {
     "birthDate": "Birth Date",
     "birthTime": "Birth Time",

@@ -116,7 +116,7 @@ export async function POST(request: NextRequest) {
       .from("readings")
       .select("result")
       .eq("session_id", readingId)
-      .single();
+      .maybeSingle();
 
     const cachedResult = cached?.result as Record<string, string> | null;
     if (cachedResult?.[cacheField]) {

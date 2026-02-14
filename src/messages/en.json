@@ -133,7 +133,16 @@
     "sectionDayPillar": "Day Pillar Reading",
     "dayPillarTitle": "Day Pillar — {metaphor}",
     "sectionElements": "Element Balance",
-    "sectionLucky": "Lucky Info"
+    "sectionLucky": "Lucky Info",
+    "aiSection": "AI Career Insight",
+    "aiFullSection": "AI Full Reading",
+    "aiGenerate": "Generate AI Interpretation",
+    "aiGenerating": "Reading your destiny...",
+    "aiGenerated": "AI-powered personalized interpretation",
+    "aiRegenerate": "Regenerate",
+    "aiDescription": "Get a personalized AI interpretation based on your unique Four Pillars chart.",
+    "aiError": "Failed to generate interpretation. Please try again.",
+    "aiRetry": "Try Again"
   },
   "elements": {
     "wood": "Wood",

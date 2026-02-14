@@ -13,6 +13,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^3.0.44",
     "@polar-sh/nextjs": "^0.9.3",
     "@polar-sh/sdk": "^0.42.5",
     "@radix-ui/react-slot": "^1.2.4",
@@ -22,6 +23,7 @@
     "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.36.2",
     "@vercel/analytics": "^1.6.1",
+    "ai": "^6.0.86",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.34.0",

@@ -133,7 +133,16 @@
     "sectionDayPillar": "일주 해석",
     "dayPillarTitle": "일주(日柱) — {metaphor}",
     "sectionElements": "오행 균형",
-    "sectionLucky": "행운 정보"
+    "sectionLucky": "행운 정보",
+    "aiSection": "AI 직업운 분석",
+    "aiFullSection": "AI 전체 해석",
+    "aiGenerate": "AI 해석 생성하기",
+    "aiGenerating": "운명을 읽는 중...",
+    "aiGenerated": "AI 기반 맞춤형 해석",
+    "aiRegenerate": "다시 생성",
+    "aiDescription": "사주팔자 데이터를 기반으로 AI가 맞춤형 해석을 생성합니다.",
+    "aiError": "해석 생성에 실패했습니다. 다시 시도해주세요.",
+    "aiRetry": "다시 시도"
   },
   "elements": {
     "wood": "목(木)",

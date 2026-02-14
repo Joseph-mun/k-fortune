@@ -2,6 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { Share2, Sparkles, ArrowRight, Compass, Palette, Hash, Star } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
@@ -23,10 +24,12 @@ import { MetaphorIcon } from "@/components/icons/MetaphorIcon";
 import { useIntersectionReveal } from "@/hooks/useIntersectionReveal";
 import { reconstructReading } from "@/lib/saju";
 import { useReadingStore } from "@/stores/useReadingStore";
+import { AiInterpretation } from "@/components/fortune/AiInterpretation";
 import { POLAR_PRODUCTS, PRICE_DISPLAY } from "@/lib/polar";
 
 export default function ReadingClient() {
   const { id } = useParams<{ id: string }>();
+  const locale = useLocale();
   const t = useTranslations("reading");
   const tCommon = useTranslations("common");
   const tInterp = useTranslations("interpretation");
@@ -218,6 +221,28 @@ export default function ReadingClient() {
                 <p className="text-lg font-bold text-text-primary">{storedReading.luckyInfo.direction}</p>
               </Card>
             </div>
+          </Accordion>
+
+          {/* AI Career Preview — free for all users */}
+          <Accordion
+            title={t("aiSection")}
+            icon={<Sparkles className="w-3.5 h-3.5 text-purple-400" />}
+            defaultOpen
+          >
+            <Card className="w-full glass">
+              <div className="p-2">
+                <AiInterpretation
+                  readingId={id}
+                  readingData={{
+                    fourPillars: storedReading.fourPillars,
+                    elementAnalysis: storedReading.elementAnalysis,
+                    dayMaster: storedReading.dayMaster,
+                  }}
+                  mode="preview"
+                  locale={locale}
+                />
+              </div>
+            </Card>
           </Accordion>
 
           {/* Gradient divider */}

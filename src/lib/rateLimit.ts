@@ -162,4 +162,6 @@ export const RATE_LIMITS = {
   COMPATIBILITY: { maxRequests: 5, windowMs: 60 * 1000 } as RateLimitConfig,
   /** User API: 30 requests per minute */
   USER_API: { maxRequests: 30, windowMs: 60 * 1000 } as RateLimitConfig,
+  /** AI Reading: 3 requests per minute */
+  AI_READING: { maxRequests: 3, windowMs: 60 * 1000 } as RateLimitConfig,
 };

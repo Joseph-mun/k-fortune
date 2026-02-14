@@ -133,7 +133,16 @@
     "sectionDayPillar": "Lectura del Pilar del Día",
     "dayPillarTitle": "Pilar del Día — {metaphor}",
     "sectionElements": "Balance Elemental",
-    "sectionLucky": "Información de Suerte"
+    "sectionLucky": "Información de Suerte",
+    "aiSection": "Análisis de Carrera IA",
+    "aiFullSection": "Lectura Completa IA",
+    "aiGenerate": "Generar Interpretación IA",
+    "aiGenerating": "Leyendo tu destino...",
+    "aiGenerated": "Interpretación personalizada con IA",
+    "aiRegenerate": "Regenerar",
+    "aiDescription": "Obtén una interpretación personalizada basada en tus Cuatro Pilares.",
+    "aiError": "Error al generar la interpretación. Inténtalo de nuevo.",
+    "aiRetry": "Reintentar"
   },
   "elements": {
     "wood": "Madera",

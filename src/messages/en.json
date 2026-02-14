@@ -88,8 +88,8 @@
       "time": "Time",
       "am": "AM",
       "pm": "PM",
-      "timeOn": "On",
-      "timeOff": "Off",
+      "timeOn": "Know time",
+      "timeOff": "Don't know",
       "backToCalendar": "Back to calendar",
       "selectDate": "Select date"
     }
@@ -682,5 +682,16 @@
       "privacy": "Privacy Policy",
       "terms": "Terms of Service"
     }
+  },
+  "onboarding": {
+    "skip": "Skip",
+    "next": "Next",
+    "getStarted": "Get Started",
+    "slide1Title": "What is Saju?",
+    "slide1Desc": "Saju (四柱) is Korea's ancient destiny system based on your birth moment. For 5,000 years, it has guided relationships, careers, and life decisions.",
+    "slide2Title": "Five Elements",
+    "slide2Desc": "Wood, Fire, Earth, Metal, Water — your unique element balance reveals your strengths, challenges, and cosmic blueprint.",
+    "slide3Title": "Your Destiny Awaits",
+    "slide3Desc": "Discover your Day Master archetype, lucky info, and personalized insights in just 30 seconds. No sign-up required."
   }
 }

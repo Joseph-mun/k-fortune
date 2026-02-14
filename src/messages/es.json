@@ -88,8 +88,8 @@
       "time": "Hora",
       "am": "AM",
       "pm": "PM",
-      "timeOn": "Sí",
-      "timeOff": "No",
+      "timeOn": "Sé la hora",
+      "timeOff": "No sé",
       "backToCalendar": "Volver al calendario",
       "selectDate": "Seleccionar fecha"
     }
@@ -682,5 +682,16 @@
       "privacy": "Política de Privacidad",
       "terms": "Términos de Servicio"
     }
+  },
+  "onboarding": {
+    "skip": "Omitir",
+    "next": "Siguiente",
+    "getStarted": "Comenzar",
+    "slide1Title": "¿Qué es Saju?",
+    "slide1Desc": "Saju (四柱) es el sistema de destino ancestral de Corea basado en tu momento de nacimiento. Durante 5,000 años ha guiado relaciones, carreras y decisiones de vida.",
+    "slide2Title": "Cinco Elementos",
+    "slide2Desc": "Madera, Fuego, Tierra, Metal, Agua — tu balance único de elementos revela tus fortalezas, desafíos y plano cósmico.",
+    "slide3Title": "Tu Destino Te Espera",
+    "slide3Desc": "Descubre tu arquetipo Day Master, información de suerte e insights personalizados en solo 30 segundos. Sin registro."
   }
 }

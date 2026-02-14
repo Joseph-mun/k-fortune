@@ -166,15 +166,15 @@ export function CalendarPopup({
         transform: "translateX(-50%)",
       }}
     >
-      <div className="rounded-2xl bg-bg-card border border-white/[0.08] p-5 w-[min(480px,calc(100vw-2rem))] shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
+      <div className="rounded-2xl bg-bg-card border border-white/[0.08] p-4 w-[min(340px,calc(100vw-2rem))] shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
         {mode === "calendar" ? (
           <>
             {/* Month/Year header */}
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-3">
               <button
                 type="button"
                 onClick={() => setMode("year")}
-                className="flex items-center gap-1 text-base font-semibold text-purple-400 hover:opacity-80 transition-opacity cursor-pointer"
+                className="flex items-center gap-1 text-sm font-semibold text-purple-400 hover:opacity-80 transition-opacity cursor-pointer"
               >
                 {MONTHS_EN[viewMonth - 1]} {viewYear}
                 <ChevronRight className="w-3.5 h-3.5" />
@@ -214,7 +214,7 @@ export function CalendarPopup({
                     disabled={future}
                     onClick={() => selectDay(d)}
                     className={`
-                      aspect-square flex items-center justify-center rounded-full text-[15px] font-medium transition-all duration-150 cursor-pointer
+                      aspect-square flex items-center justify-center rounded-full text-[13px] font-medium transition-all duration-150 cursor-pointer
                       ${future ? "text-text-muted/30 cursor-not-allowed" : "hover:bg-white/[0.08] text-purple-400"}
                       ${selected ? "!bg-purple-500 !text-white" : ""}
                     `}
@@ -226,15 +226,15 @@ export function CalendarPopup({
             </div>
 
             {/* Divider */}
-            <div className="h-px bg-white/[0.08] my-4" />
+            <div className="h-px bg-white/[0.08] my-3" />
 
             {/* Time section */}
             <div className="flex items-center justify-between">
-              <span className="text-base font-semibold text-text-primary">{t("time")}</span>
-              <div className="flex items-center gap-3">
+              <span className="text-sm font-semibold text-text-primary">{t("time")}</span>
+              <div className="flex items-center gap-2">
                 {!unknownTime && (
                   <div className="flex items-center bg-bg-surface rounded-lg overflow-hidden">
-                    <div className="flex items-center px-3 py-1.5">
+                    <div className="flex items-center px-2 py-1">
                       <input
                         type="number"
                         min={1}
@@ -247,9 +247,9 @@ export function CalendarPopup({
                           const h24 = isAM ? (v === 12 ? 0 : v) : (v === 12 ? 12 : v + 12);
                           setHour(h24);
                         }}
-                        className="w-7 bg-transparent text-center text-lg font-semibold text-text-primary outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        className="w-6 bg-transparent text-center text-sm font-semibold text-text-primary outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                       />
-                      <span className="text-lg font-semibold text-text-primary mx-0.5">:</span>
+                      <span className="text-sm font-semibold text-text-primary mx-0.5">:</span>
                       <input
                         type="number"
                         min={0}
@@ -261,21 +261,21 @@ export function CalendarPopup({
                           if (v < 0) v = 0;
                           setMinute(v);
                         }}
-                        className="w-7 bg-transparent text-center text-lg font-semibold text-text-primary outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        className="w-6 bg-transparent text-center text-sm font-semibold text-text-primary outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                       />
                     </div>
                     <div className="flex border-l border-white/[0.08]">
                       <button
                         type="button"
                         onClick={() => { if (!isAM) toggleAMPM(); }}
-                        className={`px-2.5 py-1.5 text-xs font-semibold transition-colors cursor-pointer ${isAM ? "bg-purple-500 text-white" : "text-text-muted hover:text-text-primary"}`}
+                        className={`px-2 py-1 text-[11px] font-semibold transition-colors cursor-pointer ${isAM ? "bg-purple-500 text-white" : "text-text-muted hover:text-text-primary"}`}
                       >
                         {t("am")}
                       </button>
                       <button
                         type="button"
                         onClick={() => { if (isAM) toggleAMPM(); }}
-                        className={`px-2.5 py-1.5 text-xs font-semibold transition-colors cursor-pointer ${!isAM ? "bg-purple-500 text-white" : "text-text-muted hover:text-text-primary"}`}
+                        className={`px-2 py-1 text-[11px] font-semibold transition-colors cursor-pointer ${!isAM ? "bg-purple-500 text-white" : "text-text-muted hover:text-text-primary"}`}
                       >
                         {t("pm")}
                       </button>
@@ -286,14 +286,14 @@ export function CalendarPopup({
                   <button
                     type="button"
                     onClick={() => onUnknownTimeChange(false)}
-                    className={`px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer ${!unknownTime ? "bg-purple-500/40 text-text-primary" : "text-text-muted hover:text-text-primary"}`}
+                    className={`px-2 py-1 text-[11px] font-semibold transition-colors cursor-pointer ${!unknownTime ? "bg-purple-500/40 text-text-primary" : "text-text-muted hover:text-text-primary"}`}
                   >
                     {t("timeOn")}
                   </button>
                   <button
                     type="button"
                     onClick={() => onUnknownTimeChange(true)}
-                    className={`px-3 py-1.5 text-xs font-semibold transition-colors cursor-pointer ${unknownTime ? "bg-purple-500/40 text-text-primary" : "text-text-muted hover:text-text-primary"}`}
+                    className={`px-2 py-1 text-[11px] font-semibold transition-colors cursor-pointer ${unknownTime ? "bg-purple-500/40 text-text-primary" : "text-text-muted hover:text-text-primary"}`}
                   >
                     {t("timeOff")}
                   </button>
@@ -303,18 +303,18 @@ export function CalendarPopup({
           </>
         ) : (
           <>
-            <div className="flex items-center justify-between mb-4">
-              <button type="button" onClick={() => setViewYear((y) => y - 12)} className="p-2 rounded-full hover:bg-white/[0.06] transition-colors cursor-pointer">
-                <ChevronLeft className="w-5 h-5 text-purple-400" />
+            <div className="flex items-center justify-between mb-3">
+              <button type="button" onClick={() => setViewYear((y) => y - 12)} className="p-1.5 rounded-full hover:bg-white/[0.06] transition-colors cursor-pointer">
+                <ChevronLeft className="w-4 h-4 text-purple-400" />
               </button>
-              <span className="text-base font-semibold text-text-primary">
+              <span className="text-sm font-semibold text-text-primary">
                 {yearRange[0]} – {yearRange[yearRange.length - 1]}
               </span>
-              <button type="button" onClick={() => setViewYear((y) => y + 12)} className="p-2 rounded-full hover:bg-white/[0.06] transition-colors cursor-pointer">
-                <ChevronRight className="w-5 h-5 text-purple-400" />
+              <button type="button" onClick={() => setViewYear((y) => y + 12)} className="p-1.5 rounded-full hover:bg-white/[0.06] transition-colors cursor-pointer">
+                <ChevronRight className="w-4 h-4 text-purple-400" />
               </button>
             </div>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-4 gap-1.5">
               {yearRange.map((y) => (
                 <button
                   key={y}
@@ -322,7 +322,7 @@ export function CalendarPopup({
                   disabled={y > currentYear}
                   onClick={() => selectYear(y)}
                   className={`
-                    py-3 rounded-lg text-sm font-medium transition-all cursor-pointer
+                    py-2 rounded-lg text-xs font-medium transition-all cursor-pointer
                     ${y > currentYear ? "text-text-muted/30 cursor-not-allowed" : "hover:bg-white/[0.08] text-purple-400"}
                     ${y === viewYear ? "!bg-purple-500 !text-white" : ""}
                   `}

@@ -7,6 +7,7 @@ import { WebGLShaderLazy as WebGLShader } from "@/components/ui/WebGLShaderLazy"
 import { ElementIcon } from "@/components/icons/ElementIcon";
 import { ServiceHighlight } from "@/components/landing/ServiceHighlight";
 import { CardPreview } from "@/components/landing/CardPreview";
+import { OnboardingOverlay } from "@/components/onboarding/OnboardingOverlay";
 
 export default async function LandingPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -230,6 +231,9 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
           </Link>
         </div>
       </div>
+
+      {/* Onboarding for first-time visitors */}
+      <OnboardingOverlay />
     </main>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useTranslations } from "next-intl";
 import type { Element, ElementAnalysis } from "@/lib/saju/types";
 import { ELEMENT_COLORS, ELEMENT_HANJA } from "@/lib/saju/constants";
 import { ElementIcon } from "@/components/icons/ElementIcon";
@@ -37,6 +38,7 @@ export function ElementPentagonChart({
   size = 240,
   animated = true,
 }: ElementPentagonChartProps) {
+  const t = useTranslations("elements");
   const cx = size / 2;
   const cy = size / 2;
   const maxRadius = size * 0.38;
@@ -171,6 +173,18 @@ export function ElementPentagonChart({
             </g>
           );
         })}
+
+        {/* Active element description in center */}
+        {activeElement && (
+          <foreignObject x={cx - 65} y={cy - 12} width={130} height={24}>
+            <p
+              className="text-[10px] text-text-muted text-center leading-tight"
+              style={{ color: ELEMENT_COLORS[activeElement] }}
+            >
+              {t(`${activeElement}Desc`)}
+            </p>
+          </foreignObject>
+        )}
       </svg>
     </div>
   );

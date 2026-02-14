@@ -5,6 +5,7 @@ import type { BirthInput } from "@/lib/saju/types";
 import { STEM_METAPHORS, BRANCH_ANIMALS } from "@/lib/saju/metaphors";
 import type { HeavenlyStem, EarthlyBranch, Pillar } from "@/lib/saju/types";
 import { checkRateLimit, getClientIdentifier, RATE_LIMITS } from "@/lib/rateLimit";
+import { createServerClient } from "@/lib/supabase";
 
 const BirthInputSchema = z.object({
   birthDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Invalid birth date format"),
@@ -114,6 +115,31 @@ export async function POST(request: Request) {
       },
       shareUrl: `${process.env.NEXT_PUBLIC_APP_URL || 'https://saju.vercel.app'}/reading/${reading.id}`,
     };
+
+    // Save reading metadata to Supabase for OG image generation (non-blocking)
+    try {
+      const supabase = createServerClient();
+      Promise.resolve(
+        supabase
+          .from("readings")
+          .insert({
+            session_id: reading.id,
+            type: "basic",
+            birth_date: input.birthDate,
+            gender: input.gender,
+            day_master_metaphor: reading.dayMaster.metaphorInfo.displayName,
+            locale: input.locale,
+            result: {
+              dayMasterElement: reading.dayMaster.element,
+              dayMasterYinYang: reading.dayMaster.yinYang,
+              metaphorIcon: reading.dayMaster.metaphorInfo.icon,
+              metaphorId: reading.dayMaster.metaphorInfo.id,
+            },
+          })
+      ).catch(console.error);
+    } catch {
+      // Non-critical: OG metadata save failed
+    }
 
     return NextResponse.json(response);
   } catch (error) {

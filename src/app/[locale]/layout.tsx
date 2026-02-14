@@ -26,6 +26,8 @@ export default async function LocaleLayout({
     <html lang={locale} className={pretendard.variable}>
       <head>
         <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/icon.svg" />
         <meta name="theme-color" content="#7C3AED" />
       </head>
       <body className={`${pretendard.className} antialiased korean-pattern min-h-screen`}>

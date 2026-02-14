@@ -3,12 +3,7 @@ import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { Link } from "@/i18n/navigation";
 import { Sparkles, Layers, Sun, ArrowRight, Star, Users, Heart } from "lucide-react";
-import dynamic from "next/dynamic";
-
-const WebGLShader = dynamic(
-  () => import("@/components/ui/web-gl-shader").then((mod) => mod.WebGLShader),
-  { ssr: false }
-);
+import { WebGLShaderLazy as WebGLShader } from "@/components/ui/WebGLShaderLazy";
 import { ElementIcon } from "@/components/icons/ElementIcon";
 import { ServiceHighlight } from "@/components/landing/ServiceHighlight";
 import { CardPreview } from "@/components/landing/CardPreview";

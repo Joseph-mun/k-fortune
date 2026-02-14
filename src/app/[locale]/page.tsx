@@ -52,7 +52,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
           {/* CTA Button → /start */}
           <Link
             href="/start"
-            className="inline-flex items-center gap-3 px-8 py-4 btn-cta text-white rounded-xl font-semibold text-lg animate-cta-pulse group animate-scale-in delay-300"
+            className="inline-flex items-center gap-3 px-8 py-4 btn-cta text-white rounded-xl font-semibold text-lg animate-cta-pulse group"
           >
             {t("cta")}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -206,7 +206,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
           </p>
           <Link
             href="/start"
-            className="inline-flex items-center gap-3 px-8 py-4 btn-cta text-white rounded-xl font-semibold text-lg animate-cta-pulse group animate-slide-up delay-200"
+            className="inline-flex items-center gap-3 px-8 py-4 btn-cta text-white rounded-xl font-semibold text-lg animate-cta-pulse group"
           >
             {t("cta")}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

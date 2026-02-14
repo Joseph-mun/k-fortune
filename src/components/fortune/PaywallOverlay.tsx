@@ -57,7 +57,7 @@ export function PaywallOverlay({ onUnlock, readingId, productId, price, dayMaste
       </div>
 
       {/* CTA Overlay */}
-      <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-center glass-premium p-8 rounded-xl max-w-md mx-4 ring-glow-purple">
           <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5 animate-glow-breathe" style={{ background: "var(--accent-bg-tint, rgba(168,85,247,0.1))", borderColor: "var(--accent-primary, #a855f7)", borderWidth: "1px" }}>
             <Lock className="w-6 h-6" style={{ color: "var(--accent-primary, #a855f7)" }} />

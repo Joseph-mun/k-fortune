@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Check } from "lucide-react";
-import { POLAR_PRODUCTS } from "@/lib/polar";
+import { POLAR_PRODUCTS, PRICE_DISPLAY } from "@/lib/polar";
 
 interface PricingPlan {
   id: string;
@@ -20,8 +20,8 @@ interface PricingPlan {
  *
  * Plans:
  * - Basic (FREE): Pillars, Element analysis, Lucky info
- * - Detail ($2.99): Full career, love, health, wealth, 2026 fortune
- * - Premium ($9.99/mo): All access + monthly updates + compatibility
+ * - Detail ($1.99): Full career, love, health, wealth, 2026 fortune
+ * - Premium ($2.99/mo): All access + monthly updates + compatibility
  */
 export function PricingTable() {
   const t = useTranslations("pricing");
@@ -43,7 +43,7 @@ export function PricingTable() {
       id: "detailed",
       polarProductId: POLAR_PRODUCTS.DETAILED_READING,
       name: t("detailed.name"),
-      price: t("detailed.price"),
+      price: t("detailed.price", { price: PRICE_DISPLAY.DETAILED_READING }),
       features: [
         t("detailed.features.0"),
         t("detailed.features.1"),
@@ -58,7 +58,7 @@ export function PricingTable() {
       id: "premium",
       polarProductId: POLAR_PRODUCTS.PREMIUM_SUBSCRIPTION,
       name: t("premium.name"),
-      price: t("premium.price"),
+      price: t("premium.price", { price: PRICE_DISPLAY.PREMIUM_SUBSCRIPTION }),
       period: t("premium.period"),
       features: [
         t("premium.features.0"),

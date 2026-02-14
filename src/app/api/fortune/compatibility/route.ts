@@ -31,7 +31,7 @@ export async function POST(request: Request) {
   try {
     // Rate limiting
     const clientId = getClientIdentifier(request);
-    const rateLimit = checkRateLimit(
+    const rateLimit = await checkRateLimit(
       `compatibility:${clientId}`,
       RATE_LIMITS.COMPATIBILITY
     );

@@ -1,41 +1,16 @@
 /**
- * In-memory rate limiter using Map
+ * Rate limiter with Upstash Redis + in-memory fallback
  *
  * Design spec: Section 4.1 - Rate limiting for API endpoints
  * - /api/fortune/basic: 10 requests per minute
  * - /api/fortune/detailed: 5 requests per minute
  *
- * Uses sliding window counter approach.
- * For production, consider Redis-based rate limiting.
+ * Uses Upstash Redis when UPSTASH_REDIS_REST_URL is configured.
+ * Falls back to in-memory Map when Redis is not available.
  */
 
-interface RateLimitEntry {
-  count: number;
-  resetTime: number;
-}
-
-const rateLimitMap = new Map<string, RateLimitEntry>();
-
-// Clean up expired entries every 5 minutes
-const CLEANUP_INTERVAL = 5 * 60 * 1000;
-
-let cleanupTimer: ReturnType<typeof setInterval> | null = null;
-
-function startCleanup() {
-  if (cleanupTimer) return;
-  cleanupTimer = setInterval(() => {
-    const now = Date.now();
-    for (const [key, entry] of rateLimitMap) {
-      if (now > entry.resetTime) {
-        rateLimitMap.delete(key);
-      }
-    }
-  }, CLEANUP_INTERVAL);
-  // Allow the process to exit without waiting for the timer
-  if (cleanupTimer && typeof cleanupTimer === "object" && "unref" in cleanupTimer) {
-    cleanupTimer.unref();
-  }
-}
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 
 export interface RateLimitConfig {
   /** Maximum number of requests allowed in the window */
@@ -55,56 +30,107 @@ export interface RateLimitResult {
   limit: number;
 }
 
-/**
- * Check rate limit for a given identifier (e.g., IP address or user ID)
- */
-export function checkRateLimit(
-  identifier: string,
-  config: RateLimitConfig
-): RateLimitResult {
-  startCleanup();
+// --- Upstash Redis (lazy init) ---
 
-  const now = Date.now();
-  const key = identifier;
-  const entry = rateLimitMap.get(key);
+let redis: Redis | null = null;
+const upstashLimiters = new Map<string, Ratelimit>();
 
-  // If no entry or window expired, create a new one
-  if (!entry || now > entry.resetTime) {
-    rateLimitMap.set(key, {
-      count: 1,
-      resetTime: now + config.windowMs,
+function getRedis(): Redis | null {
+  if (redis) return redis;
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+  redis = new Redis({ url, token });
+  return redis;
+}
+
+function getUpstashLimiter(config: RateLimitConfig): Ratelimit | null {
+  const r = getRedis();
+  if (!r) return null;
+
+  const key = `${config.maxRequests}:${config.windowMs}`;
+  let limiter = upstashLimiters.get(key);
+  if (!limiter) {
+    const windowSec = Math.ceil(config.windowMs / 1000);
+    limiter = new Ratelimit({
+      redis: r,
+      limiter: Ratelimit.slidingWindow(config.maxRequests, `${windowSec} s`),
     });
-    return {
-      allowed: true,
-      remaining: config.maxRequests - 1,
-      resetIn: config.windowMs,
-      limit: config.maxRequests,
-    };
+    upstashLimiters.set(key, limiter);
+  }
+  return limiter;
+}
+
+// --- In-memory fallback ---
+
+interface RateLimitEntry {
+  count: number;
+  resetTime: number;
+}
+
+const rateLimitMap = new Map<string, RateLimitEntry>();
+const CLEANUP_INTERVAL = 5 * 60 * 1000;
+let cleanupTimer: ReturnType<typeof setInterval> | null = null;
+
+function startCleanup() {
+  if (cleanupTimer) return;
+  cleanupTimer = setInterval(() => {
+    const now = Date.now();
+    for (const [key, entry] of rateLimitMap) {
+      if (now > entry.resetTime) rateLimitMap.delete(key);
+    }
+  }, CLEANUP_INTERVAL);
+  if (cleanupTimer && typeof cleanupTimer === "object" && "unref" in cleanupTimer) {
+    cleanupTimer.unref();
+  }
+}
+
+function checkInMemory(identifier: string, config: RateLimitConfig): RateLimitResult {
+  startCleanup();
+  const now = Date.now();
+  const entry = rateLimitMap.get(identifier);
+
+  if (!entry || now > entry.resetTime) {
+    rateLimitMap.set(identifier, { count: 1, resetTime: now + config.windowMs });
+    return { allowed: true, remaining: config.maxRequests - 1, resetIn: config.windowMs, limit: config.maxRequests };
   }
 
-  // Within the window
   const remaining = Math.max(0, config.maxRequests - entry.count - 1);
   const resetIn = entry.resetTime - now;
 
   if (entry.count >= config.maxRequests) {
-    return {
-      allowed: false,
-      remaining: 0,
-      resetIn,
-      limit: config.maxRequests,
-    };
+    return { allowed: false, remaining: 0, resetIn, limit: config.maxRequests };
   }
 
-  // Increment counter
   entry.count += 1;
-  rateLimitMap.set(key, entry);
+  return { allowed: true, remaining, resetIn, limit: config.maxRequests };
+}
 
-  return {
-    allowed: true,
-    remaining,
-    resetIn,
-    limit: config.maxRequests,
-  };
+/**
+ * Check rate limit for a given identifier.
+ * Uses Upstash Redis when available, falls back to in-memory.
+ */
+export async function checkRateLimit(
+  identifier: string,
+  config: RateLimitConfig
+): Promise<RateLimitResult> {
+  const limiter = getUpstashLimiter(config);
+
+  if (limiter) {
+    try {
+      const result = await limiter.limit(identifier);
+      return {
+        allowed: result.success,
+        remaining: result.remaining,
+        resetIn: Math.max(0, result.reset - Date.now()),
+        limit: result.limit,
+      };
+    } catch {
+      // Redis error — fall back to in-memory
+    }
+  }
+
+  return checkInMemory(identifier, config);
 }
 
 /**

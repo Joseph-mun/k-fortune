@@ -18,7 +18,7 @@ export async function POST(request: Request) {
   try {
     // Rate limiting: 10 requests per minute per IP
     const clientId = getClientIdentifier(request);
-    const rateLimit = checkRateLimit(
+    const rateLimit = await checkRateLimit(
       `basic:${clientId}`,
       RATE_LIMITS.BASIC_FORTUNE
     );

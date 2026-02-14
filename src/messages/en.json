@@ -23,7 +23,7 @@
   "landing": {
     "heroTitle": "Born to be",
     "heroHighlight": "told.",
-    "heroDescription": "In Korea, your birth date tells a 5,000-year-old story called Saju — the Four Pillars of Destiny. Discover yours in 30 seconds.",
+    "heroDescription": "In Korea, your birth date tells a 5,000-year-old story called Saju — the Four Pillars of Destiny. Discover yours in 30 seconds, starting at just $1.99.",
     "cta": "What's My Saju?",
     "trustBadge": "Trusted by {count}+ seekers worldwide",
     "whatIsTitle": "What is Saju?",
@@ -220,13 +220,13 @@
     },
     "detailed": {
       "name": "Full Reading",
-      "price": "$2.99",
+      "price": "{price}",
       "features": ["Everything in Basic", "Career & Purpose", "Love & Relationships", "Health & Wellness", "2026 Fortune", "Life Cycles Map"],
       "cta": "Buy Now"
     },
     "premium": {
       "name": "Premium",
-      "price": "$9.99",
+      "price": "{price}",
       "period": "/month",
       "features": ["All Readings Unlimited", "Monthly Fortune Updates", "Compatibility Analysis", "All Destiny Card Styles", "Priority Support"],
       "cta": "Subscribe"
@@ -372,11 +372,13 @@
   "paywall": {
     "title": "Unlock Your Full Reading",
     "description": "Discover your complete destiny with career insights, relationship guidance, and personalized life advice.",
-    "unlockButton": "Unlock Full Reading",
-    "price": "$2.99",
-    "feature1": "Complete career path and purpose analysis",
-    "feature2": "Relationship compatibility and guidance",
-    "feature3": "Personalized life advice and fortune timeline",
+    "unlockButton": "Unlock My Full Reading",
+    "price": "{price}",
+    "personalTeaser": "Your {dayMaster} personality reveals unique career paths and relationship insights...",
+    "socialProof": "Join {count}+ readers who discovered their destiny",
+    "feature1": "Complete career path aligned with your element",
+    "feature2": "Relationship compatibility & life partner guidance",
+    "feature3": "2026 Fortune timeline & life cycle map",
     "previewCareer": "Career Path",
     "previewCareerDesc": "Your natural talents align with leadership roles where you can...",
     "previewRelationship": "Relationships",

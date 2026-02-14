@@ -4,16 +4,20 @@ import { useTranslations } from "next-intl";
 import { Sparkles, Lock } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useCheckout } from "@/features/payment/hooks/useCheckout";
+import { PRICE_DISPLAY } from "@/lib/polar";
 
 interface PaywallOverlayProps {
   onUnlock?: () => void;
   readingId?: string;
   productId?: string;
+  price?: string;
+  dayMasterName?: string;
 }
 
-export function PaywallOverlay({ onUnlock, readingId, productId }: PaywallOverlayProps) {
+export function PaywallOverlay({ onUnlock, readingId, productId, price, dayMasterName }: PaywallOverlayProps) {
   const t = useTranslations("paywall");
   const { checkout, loading } = useCheckout();
+  const displayPrice = price || PRICE_DISPLAY.DETAILED_READING;
 
   const handleUnlock = () => {
     if (onUnlock) {
@@ -63,14 +67,20 @@ export function PaywallOverlay({ onUnlock, readingId, productId }: PaywallOverla
             {t("title")}
           </h2>
 
-          <p className="text-text-secondary text-sm mb-5">
-            {t("description")}
+          <p className="text-text-secondary text-sm mb-2">
+            {dayMasterName
+              ? t("personalTeaser", { dayMaster: dayMasterName })
+              : t("description")}
+          </p>
+
+          <p className="text-text-muted text-xs mb-5">
+            {t("socialProof", { count: "2,500" })}
           </p>
 
           <div className="flex flex-col gap-3">
             <Button variant="primary" size="lg" onClick={handleUnlock} disabled={loading}>
               <Sparkles className="w-4 h-4" />
-              {t("unlockButton")} - {t("price")}
+              {t("unlockButton")} - {t("price", { price: displayPrice })}
             </Button>
 
             <ul className="text-xs text-text-muted text-left space-y-1.5 mt-3">

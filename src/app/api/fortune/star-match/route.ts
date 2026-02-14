@@ -18,7 +18,7 @@ const StarMatchSchema = z.object({
 export async function POST(request: Request) {
   try {
     const clientId = getClientIdentifier(request);
-    const rateLimit = checkRateLimit(
+    const rateLimit = await checkRateLimit(
       `star-match:${clientId}`,
       RATE_LIMITS.COMPATIBILITY
     );

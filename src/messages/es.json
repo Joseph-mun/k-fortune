@@ -220,13 +220,13 @@
     },
     "detailed": {
       "name": "Lectura Completa",
-      "price": "$2.99",
+      "price": "{price}",
       "features": ["Todo en Basica", "Carrera y Proposito", "Amor y Relaciones", "Salud y Bienestar", "Fortuna 2026", "Mapa de Ciclos de Vida"],
       "cta": "Comprar Ahora"
     },
     "premium": {
       "name": "Premium",
-      "price": "$9.99",
+      "price": "{price}",
       "period": "/mes",
       "features": ["Todas las Lecturas Ilimitadas", "Actualizaciones Mensuales", "Analisis de Compatibilidad", "Todos los Estilos de Carta", "Soporte Prioritario"],
       "cta": "Suscribirse"
@@ -372,11 +372,13 @@
   "paywall": {
     "title": "Desbloquea Tu Lectura Completa",
     "description": "Descubre tu destino completo con análisis de carrera, guía de relaciones y consejos de vida personalizados.",
-    "unlockButton": "Desbloquear Lectura Completa",
-    "price": "$2.99",
-    "feature1": "Análisis completo de carrera y propósito",
-    "feature2": "Compatibilidad y guía de relaciones",
-    "feature3": "Consejos de vida personalizados y línea de tiempo de fortuna",
+    "unlockButton": "Desbloquear Mi Lectura Completa",
+    "price": "{price}",
+    "personalTeaser": "Tu personalidad {dayMaster} revela caminos profesionales y perspectivas de relaciones unicas...",
+    "socialProof": "Unete a {count}+ lectores que descubrieron su destino",
+    "feature1": "Carrera profesional alineada con tu elemento",
+    "feature2": "Compatibilidad y guia de pareja de vida",
+    "feature3": "Linea de tiempo 2026 y mapa de ciclos de vida",
     "previewCareer": "Carrera Profesional",
     "previewCareerDesc": "Tus talentos naturales se alinean con roles de liderazgo donde puedes...",
     "previewRelationship": "Relaciones",

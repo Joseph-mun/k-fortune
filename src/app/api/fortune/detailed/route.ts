@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
 
     // Rate limiting: 5 requests per minute per user
     const clientId = getClientIdentifier(request, token.sub);
-    const rateLimit = checkRateLimit(
+    const rateLimit = await checkRateLimit(
       `detailed:${clientId}`,
       RATE_LIMITS.DETAILED_FORTUNE
     );

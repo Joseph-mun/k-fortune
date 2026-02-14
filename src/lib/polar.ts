@@ -41,11 +41,20 @@ export const POLAR_PRODUCTS = {
 } as const;
 
 export const POLAR_PRICES = {
-  DETAILED_READING: 299,           // $2.99
-  PREMIUM_SUBSCRIPTION: 999,       // $9.99/mo
-  DESTINY_CARD_PREMIUM: 99,        // $0.99
-  DESTINY_CARD_PHOTO: 199,         // $1.99
-  PRINT_READY_PDF: 299,            // $2.99
+  DETAILED_READING: 199,           // $1.99
+  PREMIUM_SUBSCRIPTION: 299,       // $2.99/mo
+  DESTINY_CARD_PREMIUM: 49,        // $0.49
+  DESTINY_CARD_PHOTO: 99,          // $0.99
+  PRINT_READY_PDF: 149,            // $1.49
+} as const;
+
+/** Display-friendly price strings (single source of truth) */
+export const PRICE_DISPLAY = {
+  DETAILED_READING: '$1.99',
+  PREMIUM_SUBSCRIPTION: '$2.99',
+  DESTINY_CARD_PREMIUM: '$0.49',
+  DESTINY_CARD_PHOTO: '$0.99',
+  PRINT_READY_PDF: '$1.49',
 } as const;
 
 export type PolarProductType = keyof typeof POLAR_PRODUCTS;

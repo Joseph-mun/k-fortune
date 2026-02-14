@@ -105,7 +105,13 @@ export async function GET(
           </div>
         </div>
       ),
-      { width: 1200, height: 630 }
+      {
+        width: 1200,
+        height: 630,
+        headers: {
+          "Cache-Control": "public, max-age=86400, s-maxage=604800",
+        },
+      }
     );
   } catch {
     return new Response("Error generating image", { status: 500 });

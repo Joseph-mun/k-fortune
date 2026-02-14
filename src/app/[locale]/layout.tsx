@@ -1,6 +1,7 @@
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
+import { Analytics } from "@vercel/analytics/react";
 import { routing } from "@/i18n/routing";
 import { pretendard } from "@/styles/fonts";
 
@@ -23,6 +24,10 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={pretendard.variable}>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#7C3AED" />
+      </head>
       <body className={`${pretendard.className} antialiased korean-pattern min-h-screen`}>
         <a
           href="#main-content"
@@ -33,6 +38,7 @@ export default async function LocaleLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
         </NextIntlClientProvider>
+        <Analytics />
       </body>
     </html>
   );

@@ -72,7 +72,9 @@ export default async function middleware(req: NextRequest) {
       }
     }
     // Let API routes pass through without i18n processing
-    return NextResponse.next();
+    const apiResponse = NextResponse.next();
+    addSecurityHeaders(apiResponse);
+    return apiResponse;
   }
 
   // Page routes: check auth for protected pages
@@ -92,7 +94,19 @@ export default async function middleware(req: NextRequest) {
   }
 
   // Apply i18n middleware for all page routes
-  return intlMiddleware(req);
+  const response = intlMiddleware(req);
+  addSecurityHeaders(response);
+  return response;
+}
+
+function addSecurityHeaders(response: NextResponse) {
+  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  response.headers.set(
+    "Permissions-Policy",
+    "camera=(), microphone=(), geolocation=()"
+  );
 }
 
 export const config = {

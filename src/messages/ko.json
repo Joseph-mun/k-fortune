@@ -213,13 +213,13 @@
     },
     "detailed": {
       "name": "전체 감정",
-      "price": "$2.99",
+      "price": "{price}",
       "features": ["기본 감정 전체 포함", "직업 & 사명", "연애 & 인간관계", "건강 & 웰빙", "2026년 운세", "인생 주기 지도"],
       "cta": "지금 구매"
     },
     "premium": {
       "name": "프리미엄",
-      "price": "$9.99",
+      "price": "{price}",
       "period": "/월",
       "features": ["모든 감정 무제한", "월간 운세 업데이트", "궁합 분석", "모든 운명 카드 스타일", "우선 지원"],
       "cta": "구독하기"
@@ -364,11 +364,13 @@
   "paywall": {
     "title": "전체 감정 열기",
     "description": "직업 통찰, 인간관계 안내, 맞춤형 인생 조언으로 완전한 운명을 발견하세요.",
-    "unlockButton": "전체 감정 열기",
-    "price": "$2.99",
-    "feature1": "직업 진로 및 사명 분석",
-    "feature2": "인간관계 궁합 및 안내",
-    "feature3": "맞춤형 인생 조언 및 운세 타임라인",
+    "unlockButton": "나의 전체 감정 열기",
+    "price": "{price}",
+    "personalTeaser": "당신의 {dayMaster} 성격이 독특한 직업 경로와 인간관계 통찰을 드러냅니다...",
+    "socialProof": "{count}명 이상이 이미 운명을 발견했습니다",
+    "feature1": "오행에 맞는 직업 진로 분석",
+    "feature2": "인간관계 궁합 및 인생 동반자 안내",
+    "feature3": "2026년 운세 타임라인 & 인생 주기 지도",
     "previewCareer": "직업 진로",
     "previewCareerDesc": "당신의 천부적 재능은 리더십 역할에 잘 맞으며...",
     "previewRelationship": "인간관계",

@@ -4,55 +4,55 @@ import { checkRateLimit, getClientIdentifier, RATE_LIMITS } from "../rateLimit";
 describe("checkRateLimit", () => {
   const testConfig = { maxRequests: 3, windowMs: 1000 };
 
-  it("allows first request", () => {
-    const result = checkRateLimit("test-first-" + Date.now(), testConfig);
+  it("allows first request", async () => {
+    const result = await checkRateLimit("test-first-" + Date.now(), testConfig);
     expect(result.allowed).toBe(true);
     expect(result.remaining).toBe(2);
     expect(result.limit).toBe(3);
   });
 
-  it("tracks remaining correctly", () => {
+  it("tracks remaining correctly", async () => {
     const id = "test-track-" + Date.now();
-    const r1 = checkRateLimit(id, testConfig);
+    const r1 = await checkRateLimit(id, testConfig);
     expect(r1.allowed).toBe(true);
     expect(r1.remaining).toBe(2);
 
-    const r2 = checkRateLimit(id, testConfig);
+    const r2 = await checkRateLimit(id, testConfig);
     expect(r2.allowed).toBe(true);
     expect(r2.remaining).toBe(1);
 
-    const r3 = checkRateLimit(id, testConfig);
+    const r3 = await checkRateLimit(id, testConfig);
     expect(r3.allowed).toBe(true);
     expect(r3.remaining).toBe(0);
   });
 
-  it("blocks after limit is reached", () => {
+  it("blocks after limit is reached", async () => {
     const id = "test-block-" + Date.now();
 
     // Use up all requests
     for (let i = 0; i < 3; i++) {
-      checkRateLimit(id, testConfig);
+      await checkRateLimit(id, testConfig);
     }
 
     // Next request should be blocked
-    const result = checkRateLimit(id, testConfig);
+    const result = await checkRateLimit(id, testConfig);
     expect(result.allowed).toBe(false);
     expect(result.remaining).toBe(0);
   });
 
-  it("different identifiers have independent limits", () => {
+  it("different identifiers have independent limits", async () => {
     const id1 = "test-indep-a-" + Date.now();
     const id2 = "test-indep-b-" + Date.now();
 
     // Use up id1's limit
     for (let i = 0; i < 3; i++) {
-      checkRateLimit(id1, testConfig);
+      await checkRateLimit(id1, testConfig);
     }
-    const blocked = checkRateLimit(id1, testConfig);
+    const blocked = await checkRateLimit(id1, testConfig);
     expect(blocked.allowed).toBe(false);
 
     // id2 should still be allowed
-    const allowed = checkRateLimit(id2, testConfig);
+    const allowed = await checkRateLimit(id2, testConfig);
     expect(allowed.allowed).toBe(true);
   });
 
@@ -60,22 +60,22 @@ describe("checkRateLimit", () => {
     const shortConfig = { maxRequests: 1, windowMs: 50 };
     const id = "test-reset-" + Date.now();
 
-    const r1 = checkRateLimit(id, shortConfig);
+    const r1 = await checkRateLimit(id, shortConfig);
     expect(r1.allowed).toBe(true);
 
-    const r2 = checkRateLimit(id, shortConfig);
+    const r2 = await checkRateLimit(id, shortConfig);
     expect(r2.allowed).toBe(false);
 
     // Wait for window to expire
     await new Promise((resolve) => setTimeout(resolve, 60));
 
-    const r3 = checkRateLimit(id, shortConfig);
+    const r3 = await checkRateLimit(id, shortConfig);
     expect(r3.allowed).toBe(true);
   });
 
-  it("returns resetIn > 0 when within window", () => {
+  it("returns resetIn > 0 when within window", async () => {
     const id = "test-resetin-" + Date.now();
-    const result = checkRateLimit(id, testConfig);
+    const result = await checkRateLimit(id, testConfig);
     expect(result.resetIn).toBeGreaterThan(0);
     expect(result.resetIn).toBeLessThanOrEqual(testConfig.windowMs);
   });

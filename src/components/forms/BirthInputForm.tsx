@@ -208,7 +208,7 @@ export function BirthInputForm() {
                 <p className="text-xs text-red-400 text-center">{errors.form}</p>
               )}
 
-              <Button type="submit" size="lg" loading={loading} disabled={!stepValid[1]}>
+              <Button type="submit" size="lg" loading={loading} disabled={!stepValid[1]} className="btn-cta">
                 {t("submit")}
               </Button>
             </div>

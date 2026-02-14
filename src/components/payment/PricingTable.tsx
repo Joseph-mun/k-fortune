@@ -75,11 +75,11 @@ export function PricingTable() {
       {plans.map((plan) => (
         <Card
           key={plan.id}
-          className={plan.highlighted ? "border-gold-500 relative" : ""}
+          className={plan.highlighted ? "glass-premium border-gold-500 relative ring-glow-purple" : ""}
           glow={plan.highlighted}
         >
           {plan.highlighted && (
-            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-gold-500 text-bg-dark text-xs font-bold rounded-full">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-gold-500 text-bg-dark text-xs font-bold rounded-full animate-pulse">
               {t("popular")}
             </div>
           )}
@@ -92,7 +92,7 @@ export function PricingTable() {
 
             {/* Price */}
             <div className="mb-6">
-              <span className="text-4xl font-bold text-gradient-gold">
+              <span className={`font-bold text-gradient-gold ${plan.highlighted ? "text-5xl" : "text-4xl"}`}>
                 {plan.price}
               </span>
               {plan.period && (
@@ -117,7 +117,7 @@ export function PricingTable() {
               <a href={`/api/checkout?products=${plan.polarProductId}`}>
                 <Button
                   variant={plan.highlighted ? "gold" : "secondary"}
-                  className="w-full"
+                  className={plan.highlighted ? "btn-cta animate-cta-pulse w-full" : "w-full"}
                 >
                   {plan.cta}
                 </Button>

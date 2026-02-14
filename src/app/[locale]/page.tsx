@@ -32,8 +32,8 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col items-center max-w-3xl px-4">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.06] border border-white/[0.12] text-white/70 text-xs mb-8 backdrop-blur-sm animate-slide-up">
-            <Sparkles className="w-3 h-3 text-purple-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/15 border border-purple-500/30 text-white/80 text-xs mb-8 backdrop-blur-sm animate-slide-up">
+            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
             {tCommon("subtitle")}
           </div>
 
@@ -52,11 +52,14 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
           {/* CTA Button → /start */}
           <Link
             href="/start"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-purple-500 text-white rounded-xl font-semibold text-lg hover:bg-purple-400 hover:shadow-2xl hover:shadow-purple-500/30 transition-all duration-300 hover:-translate-y-1 hover:scale-105 group animate-scale-in delay-300"
+            className="inline-flex items-center gap-3 px-8 py-4 btn-cta text-white rounded-xl font-semibold text-lg animate-cta-pulse group animate-scale-in delay-300"
           >
             {t("cta")}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
+          <p className="text-sm text-white/40 mt-4 animate-fade-in delay-400">
+            {t("ctaSubtext")}
+          </p>
         </div>
 
         {/* Scroll indicator */}
@@ -68,17 +71,18 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
       </section>
 
       {/* Social Proof Strip */}
-      <section className="w-full border-y border-white/[0.04] py-6 px-4 animate-shimmer">
+      <section className="w-full border-y border-white/[0.06] bg-white/[0.02] py-6 px-4">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-text-muted text-sm">
           <div className="flex items-center gap-2">
             <Users className="w-4 h-4" />
             <span>{t("trustBadge", { count: "10,000" })}</span>
           </div>
+          <div className="hidden sm:block w-px h-4 bg-white/[0.1]" />
           <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-3.5 h-3.5 fill-gold-500 text-gold-500" />
             ))}
-            <span className="ml-1.5">4.9/5</span>
+            <span className="ml-1.5 text-gold-400 font-semibold">4.9/5</span>
           </div>
         </div>
       </section>
@@ -96,23 +100,26 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="animate-slide-up delay-100">
             <FeatureCard
-              icon={<Layers className="w-5 h-5 text-purple-400" />}
+              icon={<Layers className="w-6 h-6 text-purple-400" />}
               title={t("features.fourPillars")}
               description={t("features.fourPillarsDesc")}
+              accentColor="#8B5CF6"
             />
           </div>
           <div className="animate-slide-up delay-200">
             <FeatureCard
-              icon={<Sparkles className="w-5 h-5 text-gold-500" />}
+              icon={<Sparkles className="w-6 h-6 text-gold-500" />}
               title={t("features.elements")}
               description={t("features.elementsDesc")}
+              accentColor="#F59E0B"
             />
           </div>
           <div className="animate-slide-up delay-300">
             <FeatureCard
-              icon={<Sun className="w-5 h-5 text-purple-400" />}
+              icon={<Sun className="w-6 h-6 text-indigo-400" />}
               title={t("features.dayMaster")}
               description={t("features.dayMasterDesc")}
+              accentColor="#6366F1"
             />
           </div>
         </div>
@@ -188,7 +195,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
       {/* CTA Bottom */}
       <section className="relative w-full max-w-4xl px-4 sm:px-8 py-20 text-center overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="bg-purple-500/[0.05] rounded-full" style={{ width: "var(--size-glow-md)", height: "200px", filter: "blur(var(--size-blur-sm))" }} />
+          <div className="bg-purple-500/[0.08] rounded-full" style={{ width: "var(--size-glow-lg)", height: "300px", filter: "blur(var(--size-blur-lg))" }} />
         </div>
         <div className="relative z-10">
           <h2 className="typo-h1 text-text-primary mb-4 animate-slide-up">
@@ -199,10 +206,10 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
           </p>
           <Link
             href="/start"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-purple-500 text-white rounded-lg font-medium hover:bg-purple-400 hover:shadow-lg hover:shadow-purple-500/[0.2] transition-all duration-300 hover:-translate-y-0.5 group animate-slide-up delay-200"
+            className="inline-flex items-center gap-3 px-8 py-4 btn-cta text-white rounded-xl font-semibold text-lg animate-cta-pulse group animate-slide-up delay-200"
           >
             {t("cta")}
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
       </section>
@@ -216,7 +223,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
         <div className="px-4 py-3 bg-bg-dark/90 backdrop-blur-lg border-t border-white/[0.06]">
           <Link
             href="/start"
-            className="flex items-center justify-center gap-2 w-full py-3 bg-purple-500 text-white rounded-lg font-semibold text-sm hover:bg-purple-400 transition-colors"
+            className="flex items-center justify-center gap-2 w-full py-3 btn-cta text-white rounded-lg font-semibold text-sm"
           >
             {t("cta")}
             <ArrowRight className="w-4 h-4" />
@@ -231,18 +238,23 @@ function FeatureCard({
   icon,
   title,
   description,
+  accentColor,
 }: {
   icon: React.ReactNode;
   title: string;
   description: string;
+  accentColor: string;
 }) {
   return (
-    <div className="flex flex-col p-5 rounded-lg glass hover:border-white/[0.1] transition-all duration-300 group hover:-translate-y-1 hover:ring-glow-purple cursor-default">
-      <div className="w-9 h-9 rounded-lg bg-purple-500/[0.06] border border-purple-500/[0.1] flex items-center justify-center mb-3 group-hover:bg-purple-500/[0.1] transition-colors">
+    <div className="flex flex-col p-6 rounded-xl glass-interactive cursor-default group">
+      <div
+        className="w-11 h-11 rounded-xl flex items-center justify-center mb-4 transition-colors"
+        style={{ background: `${accentColor}15`, border: `1px solid ${accentColor}25` }}
+      >
         {icon}
       </div>
-      <h3 className="text-sm font-semibold text-text-primary mb-1.5">{title}</h3>
-      <p className="text-xs text-text-secondary leading-relaxed">{description}</p>
+      <h3 className="text-base font-semibold text-text-primary mb-2">{title}</h3>
+      <p className="text-sm text-text-secondary leading-relaxed">{description}</p>
     </div>
   );
 }

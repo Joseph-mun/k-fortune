@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sparkles } from "lucide-react";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 
 export function NavBar() {
@@ -75,7 +75,8 @@ export function NavBar() {
     >
       <div className="flex items-center gap-8">
         <Link href="/" className="flex items-center gap-2 group">
-          <span className="text-lg font-semibold text-text-primary tracking-tight font-[family-name:var(--font-heading)]">
+          <Sparkles className="w-4 h-4 text-purple-400 group-hover:text-purple-300 transition-colors" />
+          <span className="text-lg font-bold text-text-primary tracking-widest font-[family-name:var(--font-heading)]">
             SAJU
           </span>
         </Link>

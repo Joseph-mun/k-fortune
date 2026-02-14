@@ -25,6 +25,7 @@
     "heroHighlight": "ser revelado.",
     "heroDescription": "En Corea, tu fecha de nacimiento cuenta una historia de 5,000 años llamada Saju — los Cuatro Pilares del Destino. Descúbrela en 30 segundos.",
     "cta": "¿Cuál es mi Saju?",
+    "ctaSubtext": "Sin registro \u00b7 30 segundos",
     "trustBadge": "Más de {count}+ personas confían en nosotros",
     "whatIsTitle": "¿Qué es Saju?",
     "whatIsDescription": "Es la respuesta coreana a la astrología — pero basada en el momento exacto de tu nacimiento. El Saju ha guiado decisiones en Corea durante siglos. Ahora se expande al mundo.",
@@ -384,7 +385,9 @@
     "previewRelationship": "Relaciones",
     "previewRelationshipDesc": "En las relaciones, tiendes a ser comprensivo y solidario...",
     "previewAdvice": "Consejos de Vida",
-    "previewAdviceDesc": "Enfócate en construir bases sólidas en tus primeros años..."
+    "previewAdviceDesc": "Enfócate en construir bases sólidas en tus primeros años...",
+    "priceTag": "Solo {price}",
+    "urgency": "Compra única \u00b7 Acceso instantáneo"
   },
   "interpretation": {
     "personality": {

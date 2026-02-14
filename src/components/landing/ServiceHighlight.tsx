@@ -25,8 +25,7 @@ export function ServiceHighlight({ services }: ServiceHighlightProps) {
         <Link key={service.href} href={service.href as "/start" | "/star-match" | "/compatibility" | "/gallery"}>
           <TiltCard
             className={cn(
-              "glass-premium rounded-lg p-5 flex flex-col gap-3 group cursor-pointer",
-              "hover:border-white/[0.12] transition-all duration-300",
+              "glass-interactive rounded-xl p-6 flex flex-col gap-3 group cursor-pointer",
               "animate-slide-up"
             )}
             tiltMax={4}
@@ -48,10 +47,10 @@ export function ServiceHighlight({ services }: ServiceHighlightProps) {
 
             {/* Icon */}
             <div
-              className="w-10 h-10 rounded-lg flex items-center justify-center"
+              className="w-11 h-11 rounded-xl flex items-center justify-center transition-colors"
               style={{
-                background: `${service.color}10`,
-                border: `1px solid ${service.color}15`,
+                background: `${service.color}15`,
+                border: `1px solid ${service.color}25`,
               }}
             >
               {service.icon}
@@ -59,10 +58,10 @@ export function ServiceHighlight({ services }: ServiceHighlightProps) {
 
             {/* Title + Desc */}
             <div>
-              <h3 className="text-sm font-semibold text-text-primary mb-1">
+              <h3 className="text-base font-semibold text-text-primary mb-1">
                 {service.title}
               </h3>
-              <p className="text-xs text-text-secondary leading-relaxed">
+              <p className="text-sm text-text-secondary leading-relaxed">
                 {service.description}
               </p>
             </div>

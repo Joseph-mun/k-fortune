@@ -194,22 +194,28 @@ export default function ReadingPage() {
             defaultOpen
           >
             <div className="grid grid-cols-3 gap-3">
-              <Card className="text-center py-5 glass hover:-translate-y-1 transition-all duration-300 cursor-default">
-                <Palette className="w-4 h-4 text-purple-400 mx-auto mb-2" />
+              <Card className="text-center py-5 glass-interactive cursor-default">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center mx-auto mb-2" style={{ background: "rgba(139,92,246,0.1)" }}>
+                  <Palette className="w-4 h-4 text-purple-400" />
+                </div>
                 <p className="typo-overline mb-1">{t("lucky.color")}</p>
-                <p className="text-base font-semibold text-text-primary">{storedReading.luckyInfo.color}</p>
+                <p className="text-lg font-bold text-text-primary">{storedReading.luckyInfo.color}</p>
               </Card>
-              <Card className="text-center py-5 glass hover:-translate-y-1 transition-all duration-300 cursor-default">
-                <Hash className="w-4 h-4 text-gold-500 mx-auto mb-2" />
+              <Card className="text-center py-5 glass-interactive cursor-default">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center mx-auto mb-2" style={{ background: "rgba(245,158,11,0.1)" }}>
+                  <Hash className="w-4 h-4 text-gold-500" />
+                </div>
                 <p className="typo-overline mb-1">{t("lucky.number")}</p>
-                <p className="text-base font-semibold text-text-primary font-[family-name:var(--font-mono)]">
+                <p className="text-lg font-bold text-text-primary font-[family-name:var(--font-mono)]">
                   {storedReading.luckyInfo.number}
                 </p>
               </Card>
-              <Card className="text-center py-5 glass hover:-translate-y-1 transition-all duration-300 cursor-default">
-                <Compass className="w-4 h-4 text-purple-400 mx-auto mb-2" />
+              <Card className="text-center py-5 glass-interactive cursor-default">
+                <div className="w-8 h-8 rounded-lg flex items-center justify-center mx-auto mb-2" style={{ background: "rgba(99,102,241,0.1)" }}>
+                  <Compass className="w-4 h-4 text-indigo-400" />
+                </div>
                 <p className="typo-overline mb-1">{t("lucky.direction")}</p>
-                <p className="text-base font-semibold text-text-primary">{storedReading.luckyInfo.direction}</p>
+                <p className="text-lg font-bold text-text-primary">{storedReading.luckyInfo.direction}</p>
               </Card>
             </div>
           </Accordion>

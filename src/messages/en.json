@@ -25,6 +25,7 @@
     "heroHighlight": "told.",
     "heroDescription": "In Korea, your birth date tells a 5,000-year-old story called Saju — the Four Pillars of Destiny. Discover yours in 30 seconds, starting at just $1.99.",
     "cta": "What's My Saju?",
+    "ctaSubtext": "No sign-up required \u00b7 30 seconds",
     "trustBadge": "Trusted by {count}+ seekers worldwide",
     "whatIsTitle": "What is Saju?",
     "whatIsDescription": "Think of it as Korea's answer to astrology — but based on the exact moment you were born. Saju has been guiding decisions in Korea for centuries, from relationships to career moves. Now it's going global.",
@@ -384,7 +385,9 @@
     "previewRelationship": "Relationships",
     "previewRelationshipDesc": "In relationships, you tend to be supportive and understanding...",
     "previewAdvice": "Life Advice",
-    "previewAdviceDesc": "Focus on building strong foundations in your early years..."
+    "previewAdviceDesc": "Focus on building strong foundations in your early years...",
+    "priceTag": "Only {price}",
+    "urgency": "One-time purchase \u00b7 Instant access"
   },
   "interpretation": {
     "personality": {

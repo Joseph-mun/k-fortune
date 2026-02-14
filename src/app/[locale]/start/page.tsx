@@ -23,7 +23,7 @@ export default async function StartPage({ params }: { params: Promise<{ locale: 
           style={{
             width: "var(--size-glow-lg)",
             height: "var(--size-glow-lg)",
-            background: "radial-gradient(circle, rgba(139,92,246,0.08) 0%, rgba(99,102,241,0.04) 50%, transparent 70%)",
+            background: "radial-gradient(circle, rgba(139,92,246,0.12) 0%, rgba(99,102,241,0.06) 50%, transparent 70%)",
             filter: "blur(var(--size-blur-lg))"
           }}
         />

@@ -25,6 +25,7 @@
     "heroHighlight": "이미 쓰여진 이야기",
     "heroDescription": "사주(四柱) — 5천 년간 한국인의 삶을 이끌어온 운명 해석. 30초면 당신의 이야기가 시작됩니다.",
     "cta": "내 사주 알아보기",
+    "ctaSubtext": "회원가입 불필요 \u00b7 30초면 끝",
     "trustBadge": "전 세계 {count}명 이상이 신뢰합니다",
     "whatIsTitle": "사주(四柱)란?",
     "whatIsDescription": "사주(四柱)는 수천 년간 한국인의 삶을 이끌어온 운명 해석 체계입니다. 연애부터 커리어까지, 동양 최고의 운세 시스템을 지금 경험하세요.",
@@ -376,7 +377,9 @@
     "previewRelationship": "인간관계",
     "previewRelationshipDesc": "인간관계에서 당신은 따뜻하고 이해심 깊은...",
     "previewAdvice": "인생 조언",
-    "previewAdviceDesc": "초기에 탄탄한 기반을 쌓는 데 집중하세요..."
+    "previewAdviceDesc": "초기에 탄탄한 기반을 쌓는 데 집중하세요...",
+    "priceTag": "단돈 {price}",
+    "urgency": "1회 결제 \u00b7 즉시 열람"
   },
   "interpretation": {
     "personality": {

@@ -34,12 +34,12 @@ export function FortunePillarCard({ pillar, label, isHighlighted = false }: Fort
 
       {/* Stem Metaphor (top) */}
       <div className="flex flex-col items-center gap-0.5 py-1.5">
-        <MetaphorIcon metaphor={metaphor.id} size={32} />
-        <span className="text-xs font-semibold text-text-primary">
+        <MetaphorIcon metaphor={metaphor.id} size={36} />
+        <span className="text-sm font-bold text-text-primary">
           {metaphor.displayName.replace("The ", "")}
         </span>
-        <span className="text-[11px] font-medium text-text-secondary">
-          {metaphor.hanja} <span className="text-text-muted">({metaphor.romanization})</span>
+        <span className="text-[10px] text-text-muted">
+          {metaphor.hanja} ({metaphor.romanization})
         </span>
         <span
           className="text-[10px]"

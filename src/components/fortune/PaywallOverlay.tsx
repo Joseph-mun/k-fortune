@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Sparkles, Lock } from "lucide-react";
+import { Sparkles, Lock, Users } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useCheckout } from "@/features/payment/hooks/useCheckout";
 import { PRICE_DISPLAY } from "@/lib/polar";
@@ -58,42 +58,53 @@ export function PaywallOverlay({ onUnlock, readingId, productId, price, dayMaste
 
       {/* CTA Overlay */}
       <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
-        <div className="text-center glass p-6 rounded-lg max-w-md mx-4 shadow-2xl" style={{ boxShadow: "0 0 40px var(--accent-glow, rgba(168,85,247,0.15))" }}>
-          <div className="w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse-glow" style={{ background: "var(--accent-bg-tint, rgba(168,85,247,0.1))", borderColor: "var(--accent-primary, #a855f7)", borderWidth: "1px" }}>
-            <Lock className="w-5 h-5" style={{ color: "var(--accent-primary, #a855f7)" }} />
+        <div className="text-center glass-premium p-8 rounded-xl max-w-md mx-4 ring-glow-purple">
+          <div className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5 animate-glow-breathe" style={{ background: "var(--accent-bg-tint, rgba(168,85,247,0.1))", borderColor: "var(--accent-primary, #a855f7)", borderWidth: "1px" }}>
+            <Lock className="w-6 h-6" style={{ color: "var(--accent-primary, #a855f7)" }} />
           </div>
 
-          <h2 className="text-lg font-bold text-text-primary mb-1.5 font-[family-name:var(--font-heading)]">
+          <h2 className="text-xl font-bold text-text-primary mb-2 font-[family-name:var(--font-heading)]">
             {t("title")}
           </h2>
 
-          <p className="text-text-secondary text-sm mb-2">
+          <p className="text-text-secondary text-sm mb-3">
             {dayMasterName
               ? t("personalTeaser", { dayMaster: dayMasterName })
               : t("description")}
           </p>
 
-          <p className="text-text-muted text-xs mb-5">
-            {t("socialProof", { count: "2,500" })}
-          </p>
+          {/* Social proof */}
+          <div className="flex items-center justify-center gap-1.5 text-text-muted text-xs mb-5">
+            <Users className="w-3.5 h-3.5" />
+            <span>{t("socialProof", { count: "2,500" })}</span>
+          </div>
 
           <div className="flex flex-col gap-3">
-            <Button variant="primary" size="lg" onClick={handleUnlock} disabled={loading}>
+            {/* Price badge */}
+            <div className="flex items-center justify-center gap-2">
+              <span className="px-3 py-1 rounded-full bg-gold-500/15 border border-gold-500/30 text-gold-400 text-sm font-bold">
+                {t("priceTag", { price: displayPrice })}
+              </span>
+            </div>
+
+            <Button variant="primary" size="lg" className="btn-cta animate-cta-pulse w-full" onClick={handleUnlock} disabled={loading}>
               <Sparkles className="w-4 h-4" />
-              {t("unlockButton")} - {t("price", { price: displayPrice })}
+              {t("unlockButton")}
             </Button>
 
-            <ul className="text-xs text-text-muted text-left space-y-1.5 mt-3">
+            <p className="text-[10px] text-text-muted">{t("urgency")}</p>
+
+            <ul className="text-xs text-text-muted text-left space-y-1.5 mt-2">
               <li className="flex items-start gap-2">
-                <span className="mt-0.5" style={{ color: "var(--accent-primary, #a855f7)" }}>✓</span>
+                <span className="mt-0.5" style={{ color: "var(--accent-primary, #a855f7)" }}>&#10003;</span>
                 <span>{t("feature1")}</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="mt-0.5" style={{ color: "var(--accent-primary, #a855f7)" }}>✓</span>
+                <span className="mt-0.5" style={{ color: "var(--accent-primary, #a855f7)" }}>&#10003;</span>
                 <span>{t("feature2")}</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="mt-0.5" style={{ color: "var(--accent-primary, #a855f7)" }}>✓</span>
+                <span className="mt-0.5" style={{ color: "var(--accent-primary, #a855f7)" }}>&#10003;</span>
                 <span>{t("feature3")}</span>
               </li>
             </ul>

@@ -35,17 +35,17 @@ export function ReadingSummary({ dayMaster, elementAnalysis }: ReadingSummaryPro
   return (
     <div className="w-full glass-premium rounded-lg p-6 flex flex-col items-center text-center">
       {/* Metaphor Icon with glow ring */}
-      <div className="w-24 h-24 rounded-full flex items-center justify-center mb-5 animate-float accent-glow" style={{ background: "var(--accent-bg-tint)", border: "1px solid var(--accent-glow)" }}>
-        <MetaphorIcon metaphor={dayMaster.metaphorInfo.id} size={64} />
+      <div className="w-28 h-28 rounded-full flex items-center justify-center mb-6 animate-glow-breathe accent-glow" style={{ background: "var(--accent-bg-tint)", border: "1px solid var(--accent-glow)" }}>
+        <MetaphorIcon metaphor={dayMaster.metaphorInfo.id} size={72} />
       </div>
 
       {/* "You are" */}
-      <p className="text-text-muted text-[10px] uppercase tracking-[0.2em] mb-1.5">
+      <p className="text-purple-400 text-[11px] uppercase tracking-[0.25em] mb-2 font-medium">
         {t("youAre")}
       </p>
 
       {/* Metaphor Name */}
-      <h1 className="text-3xl md:text-4xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-1">
+      <h1 className="text-4xl md:text-5xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-1">
         {dayMaster.metaphorInfo.displayName}
       </h1>
 

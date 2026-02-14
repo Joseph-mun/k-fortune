@@ -1,4 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
+import { NextRequest } from "next/server";
 
 // Mock rate limiting to always allow
 vi.mock("@/lib/rateLimit", () => ({
@@ -8,16 +9,60 @@ vi.mock("@/lib/rateLimit", () => ({
     resetIn: 60000,
     limit: 5,
   }),
-  getClientIdentifier: () => "test-ip",
+  getClientIdentifier: () => "test-user",
   RATE_LIMITS: {
     DETAILED_FORTUNE: { maxRequests: 5, windowMs: 60000 },
   },
 }));
 
+// Mock next-auth/jwt to return a valid token
+vi.mock("next-auth/jwt", () => ({
+  getToken: () => Promise.resolve({ sub: "test-user-id" }),
+}));
+
+// Mock supabase to simulate a completed purchase
+vi.mock("@/lib/supabase", () => ({
+  createServerClient: () => ({
+    from: (table: string) => {
+      if (table === "purchases") {
+        return {
+          select: () => ({
+            eq: () => ({
+              eq: () => ({
+                eq: () => ({
+                  limit: () => ({
+                    maybeSingle: () =>
+                      Promise.resolve({ data: { id: "purchase-1" }, error: null }),
+                  }),
+                }),
+              }),
+            }),
+          }),
+        };
+      }
+      if (table === "subscriptions") {
+        return {
+          select: () => ({
+            eq: () => ({
+              eq: () => ({
+                limit: () => ({
+                  maybeSingle: () =>
+                    Promise.resolve({ data: null, error: null }),
+                }),
+              }),
+            }),
+          }),
+        };
+      }
+      return {};
+    },
+  }),
+}));
+
 import { POST } from "../route";
 
-function createRequest(body: Record<string, unknown>): Request {
-  return new Request("http://localhost:3000/api/fortune/detailed", {
+function createRequest(body: Record<string, unknown>): NextRequest {
+  return new NextRequest("http://localhost:3000/api/fortune/detailed", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),

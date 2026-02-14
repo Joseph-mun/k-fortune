@@ -129,6 +129,8 @@
     "topElements": "Top",
     "sectionIdentity": "Tu Identidad Cósmica",
     "sectionPillars": "Cuatro Pilares del Destino",
+    "sectionDayPillar": "Lectura del Pilar del Día",
+    "dayPillarTitle": "Pilar del Día — {metaphor}",
     "sectionElements": "Balance Elemental",
     "sectionLucky": "Información de Suerte"
   },

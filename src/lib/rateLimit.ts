@@ -108,9 +108,13 @@ export function checkRateLimit(
 }
 
 /**
- * Get the client identifier from a request (IP-based)
+ * Get the client identifier from a request.
+ * Uses user ID for authenticated requests, falls back to IP address.
  */
-export function getClientIdentifier(request: Request): string {
+export function getClientIdentifier(request: Request, userId?: string | null): string {
+  if (userId) {
+    return `user:${userId}`;
+  }
   const forwarded = request.headers.get("x-forwarded-for");
   if (forwarded) {
     return forwarded.split(",")[0].trim();

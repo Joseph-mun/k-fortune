@@ -1,4 +1,5 @@
 import { Checkout } from "@polar-sh/nextjs";
+import { NextResponse } from "next/server";
 
 /**
  * GET /api/checkout
@@ -10,11 +11,20 @@ import { Checkout } from "@polar-sh/nextjs";
  *
  * Design spec: Section 4.2 - GET /api/checkout
  */
-export const GET = Checkout({
-  accessToken: process.env.POLAR_ACCESS_TOKEN!,
-  successUrl:
-    (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000") +
-    "/checkout/success?checkout_id={CHECKOUT_ID}",
-  server:
-    (process.env.POLAR_ENVIRONMENT as "production" | "sandbox") || "production",
-});
+
+const polarAccessToken = process.env.POLAR_ACCESS_TOKEN;
+
+export const GET = polarAccessToken
+  ? Checkout({
+      accessToken: polarAccessToken,
+      successUrl:
+        (process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000") +
+        "/checkout/success?checkout_id={CHECKOUT_ID}",
+      server:
+        (process.env.POLAR_ENVIRONMENT as "production" | "sandbox") || "production",
+    })
+  : () =>
+      NextResponse.json(
+        { error: { code: "CONFIG_ERROR", message: "Payment service is not configured" } },
+        { status: 503 }
+      );

@@ -1,4 +1,5 @@
 import { Webhooks } from "@polar-sh/nextjs";
+import { NextResponse } from "next/server";
 import { createServerClient } from "@/lib/supabase";
 
 /**
@@ -14,16 +15,25 @@ import { createServerClient } from "@/lib/supabase";
  * - subscription.created: Start subscription record
  * - subscription.updated: Update subscription status
  */
-export const POST = Webhooks({
-  webhookSecret: process.env.POLAR_WEBHOOK_SECRET!,
+
+const isDev = process.env.NODE_ENV === "development";
+const webhookSecret = process.env.POLAR_WEBHOOK_SECRET;
+
+if (!webhookSecret) {
+  console.warn("[Polar Webhook] POLAR_WEBHOOK_SECRET is not configured. Webhook endpoint will reject all requests.");
+}
+
+export const POST = webhookSecret
+  ? Webhooks({
+  webhookSecret,
 
   onPayload: async (payload) => {
     // Fallback handler for unhandled events
-    console.log("[Polar Webhook] Received event:", payload.type);
+    isDev && console.log("[Polar Webhook] Received event:", payload.type);
   },
 
   onOrderPaid: async (payload) => {
-    console.log("[Polar Webhook] Order paid:", payload.data.id);
+    isDev && console.log("[Polar Webhook] Order paid:", payload.data.id);
 
     try {
       const supabase = createServerClient();
@@ -35,10 +45,39 @@ export const POST = Webhooks({
       const amount = order.totalAmount;
       const currency = order.currency;
 
-      // Determine product type from order metadata or product info
+      // Extract and validate metadata
       const productType = String(order.metadata.product_type || "detailed_reading");
       const userId = order.metadata.user_id ? String(order.metadata.user_id) : null;
       const readingId = order.metadata.reading_id ? String(order.metadata.reading_id) : null;
+
+      // Validate user_id exists in database if provided
+      if (userId) {
+        const { data: user } = await supabase
+          .from("users")
+          .select("id")
+          .eq("auth_id", userId)
+          .maybeSingle();
+
+        if (!user) {
+          console.error(`[Polar Webhook] Invalid user_id in metadata: ${userId}`);
+          return;
+        }
+      }
+
+      // Validate reading_id belongs to user if both are provided
+      if (readingId && userId) {
+        const { data: reading } = await supabase
+          .from("readings")
+          .select("id")
+          .eq("id", readingId)
+          .eq("user_id", userId)
+          .maybeSingle();
+
+        if (!reading) {
+          console.error(`[Polar Webhook] reading_id ${readingId} does not belong to user ${userId}`);
+          return;
+        }
+      }
 
       // Record purchase in database
       const { error: purchaseError } = await supabase
@@ -57,7 +96,7 @@ export const POST = Webhooks({
       if (purchaseError) {
         console.error("[Polar Webhook] Failed to record purchase:", purchaseError);
       } else {
-        console.log("[Polar Webhook] Purchase recorded:", orderId);
+        isDev && console.log("[Polar Webhook] Purchase recorded:", orderId);
       }
 
       // If there is a reading_id, mark it as paid
@@ -72,7 +111,7 @@ export const POST = Webhooks({
         }
       }
 
-      console.log(
+      isDev && console.log(
         `[Polar Webhook] Order processed: ${orderId}, customer: ${customerEmail}, amount: ${amount}`
       );
     } catch (error) {
@@ -81,7 +120,7 @@ export const POST = Webhooks({
   },
 
   onSubscriptionCreated: async (payload) => {
-    console.log("[Polar Webhook] Subscription created:", payload.data.id);
+    isDev && console.log("[Polar Webhook] Subscription created:", payload.data.id);
 
     try {
       const supabase = createServerClient();
@@ -108,7 +147,7 @@ export const POST = Webhooks({
           error
         );
       } else {
-        console.log(
+        isDev && console.log(
           "[Polar Webhook] Subscription recorded:",
           subscription.id
         );
@@ -130,7 +169,7 @@ export const POST = Webhooks({
   },
 
   onSubscriptionUpdated: async (payload) => {
-    console.log("[Polar Webhook] Subscription updated:", payload.data.id);
+    isDev && console.log("[Polar Webhook] Subscription updated:", payload.data.id);
 
     try {
       const supabase = createServerClient();
@@ -164,7 +203,7 @@ export const POST = Webhooks({
           error
         );
       } else {
-        console.log(
+        isDev && console.log(
           `[Polar Webhook] Subscription updated: ${subscription.id} -> ${status}`
         );
       }
@@ -190,4 +229,9 @@ export const POST = Webhooks({
       );
     }
   },
-});
+})
+  : () =>
+      NextResponse.json(
+        { error: { code: "CONFIG_ERROR", message: "Webhook is not configured" } },
+        { status: 503 }
+      );

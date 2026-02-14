@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { MetaphorIcon } from "@/components/icons/MetaphorIcon";
 import { ElementIcon } from "@/components/icons/ElementIcon";
 import { ChevronDown } from "lucide-react";
+import { ELEMENT_HANJA, YINYANG_HANJA } from "@/lib/saju/constants";
 import type { Element } from "@/lib/saju/types";
 
 interface ReadingSummaryProps {
@@ -33,13 +34,9 @@ export function ReadingSummary({ dayMaster, elementAnalysis }: ReadingSummaryPro
 
   return (
     <div className="w-full glass-premium rounded-lg p-6 flex flex-col items-center text-center">
-      {/* Metaphor Icon (3D) */}
-      <div className="mb-4 animate-float">
-        <MetaphorIcon
-          metaphor={dayMaster.metaphorInfo.id}
-          size={72}
-          className="icon-3d-glow"
-        />
+      {/* Metaphor Icon with glow ring */}
+      <div className="w-24 h-24 rounded-full flex items-center justify-center mb-5 animate-float accent-glow" style={{ background: "var(--accent-bg-tint)", border: "1px solid var(--accent-glow)" }}>
+        <MetaphorIcon metaphor={dayMaster.metaphorInfo.id} size={64} />
       </div>
 
       {/* "You are" */}
@@ -48,17 +45,27 @@ export function ReadingSummary({ dayMaster, elementAnalysis }: ReadingSummaryPro
       </p>
 
       {/* Metaphor Name */}
-      <h1 className="text-3xl md:text-4xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-1.5">
+      <h1 className="text-3xl md:text-4xl font-bold text-text-primary font-[family-name:var(--font-heading)] mb-1">
         {dayMaster.metaphorInfo.displayName}
       </h1>
 
-      {/* Element badge */}
-      <span className="inline-flex px-2.5 py-0.5 rounded-full accent-badge text-[10px] tracking-wider mb-5">
-        {elementLabel}
+      {/* Hanja + Romanization */}
+      <p className="text-sm text-text-secondary mb-1.5">
+        {dayMaster.metaphorInfo.hanja} · {dayMaster.metaphorInfo.romanization}
+      </p>
+
+      {/* Element badge with hanja */}
+      <span className="inline-flex px-2.5 py-0.5 rounded-full accent-badge text-[10px] tracking-wider mb-4">
+        {elementLabel} · {YINYANG_HANJA[dayMaster.yinYang]}{ELEMENT_HANJA[dayMaster.element]}
       </span>
 
+      {/* Personality description */}
+      <p className="text-sm text-text-secondary max-w-lg mb-5 leading-relaxed">
+        {resolveKey(dayMaster.personality)}
+      </p>
+
       {/* Top 3 Elements mini pills */}
-      <div className="flex items-center gap-2 mb-5">
+      <div className="flex items-center gap-2 mb-4">
         <span className="text-[10px] text-text-muted uppercase tracking-wider mr-1">
           {t("topElements")}
         </span>

@@ -129,6 +129,8 @@
     "topElements": "주요",
     "sectionIdentity": "나의 우주적 정체성",
     "sectionPillars": "사주팔자",
+    "sectionDayPillar": "일주 해석",
+    "dayPillarTitle": "일주(日柱) — {metaphor}",
     "sectionElements": "오행 균형",
     "sectionLucky": "행운 정보"
   },
@@ -248,7 +250,7 @@
     "signUp": {
       "title": "계정 만들기",
       "subtitle": "SAJU에 가입하고 완전한 운명 청사진을 열어보세요",
-      "hasAccount": "이미 계정이 있으신가요?",
+      "hasAccount": "이미 계정이 있���신가요?",
       "signInLink": "로그인"
     }
   },

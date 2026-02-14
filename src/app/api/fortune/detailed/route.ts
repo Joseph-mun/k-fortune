@@ -1,11 +1,14 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { getToken } from "next-auth/jwt";
+import type { NextRequest } from "next/server";
 import { calculateDetailedReading } from "@/lib/saju";
 import type { BirthInput } from "@/lib/saju/types";
 import { STEM_METAPHORS, BRANCH_ANIMALS } from "@/lib/saju/metaphors";
 import type { HeavenlyStem, EarthlyBranch, Pillar } from "@/lib/saju/types";
 import { checkRateLimit, getClientIdentifier, RATE_LIMITS } from "@/lib/rateLimit";
 import { calculateTenGods } from "@/lib/saju/tenGods";
+import { createServerClient } from "@/lib/supabase";
 
 /**
  * POST /api/fortune/detailed
@@ -26,10 +29,19 @@ const DetailedInputSchema = z.object({
   readingId: z.string().optional(),
 });
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    // Rate limiting: 5 requests per minute per IP
-    const clientId = getClientIdentifier(request);
+    // Verify authentication first
+    const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+    if (!token?.sub) {
+      return NextResponse.json(
+        { error: { code: "UNAUTHORIZED", message: "Please sign in to access detailed readings." } },
+        { status: 401 },
+      );
+    }
+
+    // Rate limiting: 5 requests per minute per user
+    const clientId = getClientIdentifier(request, token.sub);
     const rateLimit = checkRateLimit(
       `detailed:${clientId}`,
       RATE_LIMITS.DETAILED_FORTUNE
@@ -82,14 +94,31 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: In production, verify authentication and payment status
-    // const session = await getServerSession(authOptions);
-    // if (!session) {
-    //   return NextResponse.json(
-    //     { error: { code: "UNAUTHORIZED", message: "Please sign in to access detailed readings." } },
-    //     { status: 401 },
-    //   );
-    // }
+    // Verify payment status
+    const supabase = createServerClient();
+    const { data: purchase } = await supabase
+      .from("purchases")
+      .select("id")
+      .eq("user_id", token.sub)
+      .eq("product_type", "detailed_reading")
+      .eq("status", "completed")
+      .limit(1)
+      .maybeSingle();
+
+    const { data: subscription } = await supabase
+      .from("subscriptions")
+      .select("id")
+      .eq("user_id", token.sub)
+      .eq("status", "active")
+      .limit(1)
+      .maybeSingle();
+
+    if (!purchase && !subscription) {
+      return NextResponse.json(
+        { error: { code: "PAYMENT_REQUIRED", message: "Please purchase a detailed reading to continue." } },
+        { status: 402 },
+      );
+    }
 
     const input: BirthInput = {
       birthDate: validation.data.birthDate,

@@ -69,11 +69,30 @@ export default function CardViewClient() {
     const cardEl = document.getElementById(`destiny-card-${id}`);
     if (!cardEl) return;
     try {
-      const html2canvas = (await import("html2canvas")).default;
-      const canvas = await html2canvas(cardEl, { backgroundColor: null, scale: 2 });
+      const { toPng } = await import("html-to-image");
+      const innerCard = cardEl.firstElementChild as HTMLElement | null;
+      const saved = {
+        outerPerspective: cardEl.style.perspective,
+        innerTransform: innerCard?.style.transform,
+        innerTransformStyle: innerCard?.style.transformStyle,
+      };
+      cardEl.style.perspective = "none";
+      if (innerCard) {
+        innerCard.style.transform = "none";
+        innerCard.style.transformStyle = "flat";
+      }
+
+      const dataUrl = await toPng(cardEl, { pixelRatio: 2, cacheBust: true });
+
+      cardEl.style.perspective = saved.outerPerspective;
+      if (innerCard) {
+        innerCard.style.transform = saved.innerTransform ?? "";
+        innerCard.style.transformStyle = saved.innerTransformStyle ?? "";
+      }
+
       const link = document.createElement("a");
       link.download = `saju-card-${id}.png`;
-      link.href = canvas.toDataURL("image/png");
+      link.href = dataUrl;
       link.click();
     } catch {
       // ignore

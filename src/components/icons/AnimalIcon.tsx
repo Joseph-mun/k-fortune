@@ -4,6 +4,7 @@ interface AnimalIconProps {
   animal: string;
   size?: number;
   className?: string;
+  alt?: string;
 }
 
 const ANIMAL_INITIALS: Record<string, string> = {
@@ -36,9 +37,26 @@ const ANIMAL_COLORS: Record<string, string> = {
   pig: "#F9A8D4",
 };
 
-export function AnimalIcon({ animal, size = 24, className }: AnimalIconProps) {
+const ANIMAL_NAMES: Record<string, string> = {
+  rat: "Rat",
+  ox: "Ox",
+  tiger: "Tiger",
+  rabbit: "Rabbit",
+  dragon: "Dragon",
+  snake: "Snake",
+  horse: "Horse",
+  goat: "Goat",
+  monkey: "Monkey",
+  rooster: "Rooster",
+  dog: "Dog",
+  pig: "Pig",
+};
+
+export function AnimalIcon({ animal, size = 24, className, alt }: AnimalIconProps) {
   const initial = ANIMAL_INITIALS[animal] ?? "?";
   const color = ANIMAL_COLORS[animal] ?? "#A1A1AA";
+  const animalName = ANIMAL_NAMES[animal] ?? animal;
+  const ariaLabel = alt || `${animalName} zodiac animal`;
 
   return (
     <div
@@ -46,6 +64,8 @@ export function AnimalIcon({ animal, size = 24, className }: AnimalIconProps) {
         "flex items-center justify-center rounded-full icon-3d shrink-0",
         className
       )}
+      role="img"
+      aria-label={ariaLabel}
       style={{
         width: size,
         height: size,

@@ -22,7 +22,7 @@ export function Accordion({
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <div className={cn("rounded-lg glass", className)}>
+    <div className={cn("w-full rounded-lg glass", className)}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}

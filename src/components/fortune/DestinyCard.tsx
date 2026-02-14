@@ -61,8 +61,9 @@ export function DestinyCard({
     <div className="relative perspective-1000" id={`destiny-card-${reading.id}`}>
       <div
         ref={cardRef}
-        className={`w-[320px] aspect-[2/3] rounded-xl overflow-hidden relative preserve-3d transition-all duration-300 ${styleClasses.container} ${isHovered ? "ring-glow-purple" : ""}`}
+        className={`aspect-[2/3] rounded-xl overflow-hidden relative preserve-3d transition-all duration-300 ${styleClasses.container} ${isHovered ? "ring-glow-purple" : ""}`}
         style={{
+          width: "var(--size-card-width)",
           transform: `rotateX(${tilt.rotateX}deg) rotateY(${tilt.rotateY}deg)`,
         }}
         onMouseMove={handleMouseMove}
@@ -108,7 +109,7 @@ export function DestinyCard({
             <p className={`text-[10px] mb-1 ${styleClasses.muted}`}>
               {dayMaster.metaphorInfo.hanja} · {dayMaster.metaphorInfo.romanization}
             </p>
-            <p className={`text-[11px] leading-relaxed max-w-[240px] ${styleClasses.text}`}>
+            <p className={`text-[11px] leading-relaxed ${styleClasses.text}`} style={{ maxWidth: "var(--size-card-text-max)" }}>
               {t(`${dayMaster.metaphor}.nature`).slice(0, 80)}...
             </p>
           </div>

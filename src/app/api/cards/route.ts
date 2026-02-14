@@ -4,9 +4,29 @@ import type { NextRequest } from "next/server";
 import { z } from "zod";
 import { createServerClient } from "@/lib/supabase";
 
+const ReadingDataSchema = z.object({
+  id: z.string(),
+  fourPillars: z.object({
+    year: z.record(z.string(), z.unknown()),
+    month: z.record(z.string(), z.unknown()),
+    day: z.record(z.string(), z.unknown()),
+    hour: z.record(z.string(), z.unknown()),
+  }),
+  dayMaster: z.object({
+    element: z.string(),
+    yinYang: z.string(),
+    metaphor: z.string(),
+    metaphorInfo: z.object({
+      displayName: z.string(),
+    }).passthrough(),
+  }).passthrough(),
+  elementAnalysis: z.record(z.string(), z.number()),
+  luckyInfo: z.record(z.string(), z.unknown()),
+}).passthrough();
+
 const CreateCardSchema = z.object({
   style: z.enum(["classic", "tarot", "neon", "ink", "photo", "seasonal"]),
-  readingData: z.record(z.string(), z.unknown()),
+  readingData: ReadingDataSchema,
   isPublic: z.boolean().default(false),
 });
 

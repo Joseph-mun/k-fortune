@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Menu, X } from "lucide-react";
@@ -9,11 +9,55 @@ import { LocaleSwitcher } from "./LocaleSwitcher";
 export function NavBar() {
   const tNav = useTranslations("nav");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  // Focus trap and Escape key handling
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    // Focus the close button when modal opens
+    closeButtonRef.current?.focus();
+
+    // Handle Escape key
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setMobileMenuOpen(false);
+      }
+    };
+
+    // Handle Tab key for focus trap
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== "Tab" || !modalRef.current) return;
+
+      const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+
+      if (e.shiftKey && document.activeElement === firstElement) {
+        e.preventDefault();
+        lastElement?.focus();
+      } else if (!e.shiftKey && document.activeElement === lastElement) {
+        e.preventDefault();
+        firstElement?.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscape);
+    document.addEventListener("keydown", handleTab);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+      document.removeEventListener("keydown", handleTab);
     };
   }, [mobileMenuOpen]);
 
@@ -25,7 +69,10 @@ export function NavBar() {
   ];
 
   return (
-    <nav className="w-full max-w-5xl mx-auto flex items-center justify-between py-4">
+    <nav
+      className="w-full max-w-5xl mx-auto flex items-center justify-between py-4"
+      aria-label="Primary navigation"
+    >
       <div className="flex items-center gap-8">
         <Link href="/" className="flex items-center gap-2 group">
           <span className="text-lg font-semibold text-text-primary tracking-tight font-[family-name:var(--font-heading)]">
@@ -67,9 +114,11 @@ export function NavBar() {
       {/* Mobile menu overlay */}
       {mobileMenuOpen && (
         <div
+          ref={modalRef}
           className="fixed inset-0 z-50 md:hidden"
           role="dialog"
           aria-modal="true"
+          aria-label={tNav("menu")}
         >
           {/* Backdrop */}
           <div
@@ -78,13 +127,14 @@ export function NavBar() {
           />
 
           {/* Panel */}
-          <div className="absolute top-0 right-0 bottom-0 w-[280px] bg-bg-card border-l border-white/[0.06] flex flex-col animate-slide-in-right">
+          <div className="absolute top-0 right-0 bottom-0 bg-bg-card border-l border-white/[0.06] flex flex-col animate-slide-in-right" style={{ width: "var(--size-menu-mobile)" }}>
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
               <span className="text-sm font-semibold text-text-primary font-[family-name:var(--font-heading)]">
                 {tNav("menu")}
               </span>
               <button
+                ref={closeButtonRef}
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-1.5 text-text-muted hover:text-text-primary transition-colors"
                 aria-label={tNav("close")}

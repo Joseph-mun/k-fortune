@@ -3,7 +3,12 @@ import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { Link } from "@/i18n/navigation";
 import { Sparkles, Layers, Sun, ArrowRight, Star, Users, Heart } from "lucide-react";
-import { WebGLShader } from "@/components/ui/web-gl-shader";
+import dynamic from "next/dynamic";
+
+const WebGLShader = dynamic(
+  () => import("@/components/ui/web-gl-shader").then((mod) => mod.WebGLShader),
+  { ssr: false }
+);
 import { ElementIcon } from "@/components/icons/ElementIcon";
 import { ServiceHighlight } from "@/components/landing/ServiceHighlight";
 import { CardPreview } from "@/components/landing/CardPreview";
@@ -15,7 +20,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
   const tCommon = await getTranslations("common");
 
   return (
-    <main className="flex flex-col items-center min-h-screen">
+    <main className="flex flex-col items-center min-h-screen" id="main-content" aria-label="Main content">
       {/* Hero Section — Full-screen WebGL background */}
       <section className="relative w-full min-h-screen flex flex-col items-center justify-center text-center overflow-hidden">
         {/* WebGL Background */}
@@ -188,7 +193,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
       {/* CTA Bottom */}
       <section className="relative w-full max-w-4xl px-4 sm:px-8 py-20 text-center overflow-hidden">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-          <div className="w-[400px] h-[200px] bg-purple-500/[0.05] rounded-full blur-[100px]" />
+          <div className="bg-purple-500/[0.05] rounded-full" style={{ width: "var(--size-glow-md)", height: "200px", filter: "blur(var(--size-blur-sm))" }} />
         </div>
         <div className="relative z-10">
           <h2 className="typo-h1 text-text-primary mb-4 animate-slide-up">

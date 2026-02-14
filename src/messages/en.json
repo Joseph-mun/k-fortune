@@ -129,6 +129,8 @@
     "topElements": "Top",
     "sectionIdentity": "Your Cosmic Identity",
     "sectionPillars": "Four Pillars of Destiny",
+    "sectionDayPillar": "Day Pillar Reading",
+    "dayPillarTitle": "Day Pillar — {metaphor}",
     "sectionElements": "Element Balance",
     "sectionLucky": "Lucky Info"
   },

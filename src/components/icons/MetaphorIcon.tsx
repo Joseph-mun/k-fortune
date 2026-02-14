@@ -5,15 +5,39 @@ interface MetaphorIconProps {
   metaphor: StemMetaphor | string;
   size?: number;
   className?: string;
+  alt?: string;
 }
 
-export function MetaphorIcon({ metaphor, size = 48, className }: MetaphorIconProps) {
+export function MetaphorIcon({ metaphor, size = 48, className, alt }: MetaphorIconProps) {
   const id = `mp-${metaphor}-${Math.random().toString(36).slice(2, 6)}`;
   const s = size;
 
+  const metaphorLabels: Record<string, string> = {
+    "great-tree": "Great tree",
+    "flower": "Flower",
+    "sun": "Sun",
+    "candle": "Candle",
+    "mountain": "Mountain",
+    "garden": "Garden",
+    "sword": "Sword",
+    "jewel": "Jewel",
+    "ocean": "Ocean",
+    "rain": "Rain",
+  };
+
+  const ariaLabel = alt || metaphorLabels[metaphor] || metaphor;
+
   const icons: Record<string, React.ReactElement> = {
     "great-tree": (
-      <svg viewBox="0 0 48 48" width={s} height={s} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 48 48"
+        width={s}
+        height={s}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g1`} x1="50%" y1="0%" x2="50%" y2="100%">
             <stop offset="0%" stopColor="#4ADE80" />
@@ -32,7 +56,15 @@ export function MetaphorIcon({ metaphor, size = 48, className }: MetaphorIconPro
       </svg>
     ),
     flower: (
-      <svg viewBox="0 0 48 48" width={s} height={s} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 48 48"
+        width={s}
+        height={s}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#F9A8D4" />
@@ -56,7 +88,15 @@ export function MetaphorIcon({ metaphor, size = 48, className }: MetaphorIconPro
       </svg>
     ),
     sun: (
-      <svg viewBox="0 0 48 48" width={s} height={s} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 48 48"
+        width={s}
+        height={s}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <radialGradient id={`${id}-g`} cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="#FDE68A" />
@@ -82,7 +122,15 @@ export function MetaphorIcon({ metaphor, size = 48, className }: MetaphorIconPro
       </svg>
     ),
     candle: (
-      <svg viewBox="0 0 48 48" width={s} height={s} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 48 48"
+        width={s}
+        height={s}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g1`} x1="50%" y1="0%" x2="50%" y2="100%">
             <stop offset="0%" stopColor="#FDE68A" />
@@ -101,7 +149,15 @@ export function MetaphorIcon({ metaphor, size = 48, className }: MetaphorIconPro
       </svg>
     ),
     mountain: (
-      <svg viewBox="0 0 48 48" width={s} height={s} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 48 48"
+        width={s}
+        height={s}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g1`} x1="50%" y1="0%" x2="50%" y2="100%">
             <stop offset="0%" stopColor="#A8A29E" />
@@ -119,7 +175,15 @@ export function MetaphorIcon({ metaphor, size = 48, className }: MetaphorIconPro
       </svg>
     ),
     garden: (
-      <svg viewBox="0 0 48 48" width={s} height={s} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 48 48"
+        width={s}
+        height={s}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#4ADE80" />
@@ -135,7 +199,15 @@ export function MetaphorIcon({ metaphor, size = 48, className }: MetaphorIconPro
       </svg>
     ),
     sword: (
-      <svg viewBox="0 0 48 48" width={s} height={s} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 48 48"
+        width={s}
+        height={s}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g`} x1="50%" y1="0%" x2="50%" y2="100%">
             <stop offset="0%" stopColor="#E4E4E7" />
@@ -151,7 +223,15 @@ export function MetaphorIcon({ metaphor, size = 48, className }: MetaphorIconPro
       </svg>
     ),
     jewel: (
-      <svg viewBox="0 0 48 48" width={s} height={s} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 48 48"
+        width={s}
+        height={s}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g1`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#C4B5FD" />
@@ -170,7 +250,15 @@ export function MetaphorIcon({ metaphor, size = 48, className }: MetaphorIconPro
       </svg>
     ),
     ocean: (
-      <svg viewBox="0 0 48 48" width={s} height={s} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 48 48"
+        width={s}
+        height={s}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g`} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#818CF8" />
@@ -201,7 +289,15 @@ export function MetaphorIcon({ metaphor, size = 48, className }: MetaphorIconPro
       </svg>
     ),
     rain: (
-      <svg viewBox="0 0 48 48" width={s} height={s} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 48 48"
+        width={s}
+        height={s}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g`} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#818CF8" />

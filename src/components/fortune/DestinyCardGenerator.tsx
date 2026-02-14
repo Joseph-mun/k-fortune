@@ -3,7 +3,6 @@
 import { useCallback, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Download, Share2, Loader2 } from "lucide-react";
-import html2canvas from "html2canvas";
 
 import { DestinyCard } from "@/components/fortune/DestinyCard";
 import { Button } from "@/components/ui/Button";
@@ -16,14 +15,6 @@ interface DestinyCardGeneratorProps {
 
 const CARD_STYLES = ["classic", "tarot", "neon", "ink", "photo", "seasonal"] as const;
 
-/**
- * DestinyCardGenerator - Canvas-based card generation with download and share
- *
- * Design spec: Section 5.5 - DestinyCard with download/share functionality
- * - Renders DestinyCard component for each available style
- * - Uses html2canvas to capture card as PNG for download
- * - Uses Web Share API for sharing (with PNG fallback)
- */
 export function DestinyCardGenerator({
   reading,
   defaultStyle = "classic",
@@ -34,25 +25,44 @@ export function DestinyCardGenerator({
   const cardRef = useRef<HTMLDivElement>(null);
 
   const generateImage = useCallback(async (): Promise<Blob | null> => {
-    const cardElement = document.getElementById(`destiny-card-${reading.id}`);
+    const cardElement = cardRef.current?.querySelector("[id^='destiny-card-']") as HTMLElement | null;
     if (!cardElement) return null;
 
     try {
-      const canvas = await html2canvas(cardElement, {
-        backgroundColor: null,
-        scale: 2,
-        useCORS: true,
-        logging: false,
+      const { toPng } = await import("html-to-image");
+
+      // Temporarily disable all 3D CSS for clean capture
+      const innerCard = cardElement.firstElementChild as HTMLElement | null;
+      const saved = {
+        outerPerspective: cardElement.style.perspective,
+        innerTransform: innerCard?.style.transform,
+        innerTransformStyle: innerCard?.style.transformStyle,
+      };
+      cardElement.style.perspective = "none";
+      if (innerCard) {
+        innerCard.style.transform = "none";
+        innerCard.style.transformStyle = "flat";
+      }
+
+      const dataUrl = await toPng(cardElement, {
+        pixelRatio: 2,
+        cacheBust: true,
       });
 
-      return new Promise<Blob | null>((resolve) => {
-        canvas.toBlob((blob) => resolve(blob), "image/png", 1.0);
-      });
+      // Restore 3D CSS
+      cardElement.style.perspective = saved.outerPerspective;
+      if (innerCard) {
+        innerCard.style.transform = saved.innerTransform ?? "";
+        innerCard.style.transformStyle = saved.innerTransformStyle ?? "";
+      }
+
+      const res = await fetch(dataUrl);
+      return await res.blob();
     } catch (error) {
       console.error("Failed to generate card image:", error);
       return null;
     }
-  }, [reading.id]);
+  }, []);
 
   const handleDownload = useCallback(async () => {
     setGenerating(true);

@@ -2,14 +2,13 @@
 
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
-import { Share2, Sparkles, ArrowRight, Compass, Palette, Hash } from "lucide-react";
+import { Share2, Sparkles, ArrowRight, Compass, Palette, Hash, Star } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { SkeletonReading } from "@/components/fortune/SkeletonReading";
 import { ReadingSummary } from "@/components/fortune/ReadingSummary";
-import { DayMasterHero } from "@/components/fortune/DayMasterHero";
 import { FourPillarsDisplay } from "@/components/fortune/FourPillarsDisplay";
 import { ElementChart } from "@/components/fortune/ElementChart";
 import { PaywallOverlay } from "@/components/fortune/PaywallOverlay";
@@ -17,10 +16,10 @@ import { Card } from "@/components/ui/Card";
 import { GraphCard } from "@/components/ui/GraphCard";
 import { Button } from "@/components/ui/Button";
 import { Accordion } from "@/components/ui/Accordion";
-import { TiltCard } from "@/components/ui/TiltCard";
 import { ElementThemeProvider } from "@/contexts/ElementThemeContext";
 import { ElementPentagonChart } from "@/components/fortune/ElementPentagonChart";
 import { ElementIcon } from "@/components/icons/ElementIcon";
+import { MetaphorIcon } from "@/components/icons/MetaphorIcon";
 import { useIntersectionReveal } from "@/hooks/useIntersectionReveal";
 import { reconstructReading } from "@/lib/saju";
 import { useReadingStore } from "@/stores/useReadingStore";
@@ -30,6 +29,7 @@ export default function ReadingPage() {
   const { id } = useParams<{ id: string }>();
   const t = useTranslations("reading");
   const tCommon = useTranslations("common");
+  const tInterp = useTranslations("interpretation");
   const storedReading = useReadingStore((s) => s.getReading(id));
 
   if (!storedReading) {
@@ -46,6 +46,11 @@ export default function ReadingPage() {
   const reading = reconstructReading(storedReading);
 
   const paywallReveal = useIntersectionReveal();
+
+  const resolveKey = (key: string) => {
+    const prefix = "interpretation.";
+    return key.startsWith(prefix) ? tInterp(key.slice(prefix.length)) : key;
+  };
 
   const handleShare = async () => {
     const text = t("shareText", { metaphor: reading.dayMaster.metaphorInfo.displayName });
@@ -69,42 +74,92 @@ export default function ReadingPage() {
       {/* Multi-layer background glow */}
       <div className="relative w-full">
         <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full blur-[140px] pointer-events-none animate-pulse-glow"
-          style={{ background: "var(--accent-glow)" }}
+          className="absolute top-0 left-1/2 -translate-x-1/2 rounded-full pointer-events-none animate-pulse-glow"
+          style={{
+            width: "var(--size-glow-lg)",
+            height: "var(--size-glow-lg)",
+            background: "var(--accent-glow)",
+            filter: "blur(var(--size-blur-md))"
+          }}
         />
         <div
-          className="absolute top-40 right-1/4 w-[300px] h-[300px] rounded-full blur-[100px] pointer-events-none"
-          style={{ background: "var(--accent-bg-tint)" }}
+          className="absolute top-40 right-1/4 rounded-full pointer-events-none"
+          style={{
+            width: "var(--size-glow-sm)",
+            height: "var(--size-glow-sm)",
+            background: "var(--accent-bg-tint)",
+            filter: "blur(var(--size-blur-sm))"
+          }}
         />
       </div>
 
       <ElementThemeProvider element={reading.dayMaster.element}>
         <div className="relative w-full max-w-3xl px-4 sm:px-8 flex flex-col items-center gap-6 py-8">
-          {/* Quick Summary — instantly visible */}
+          {/* Quick Summary — merged hero (no more duplicate identity section) */}
           <ReadingSummary
             dayMaster={reading.dayMaster}
             elementAnalysis={reading.elementAnalysis}
             luckyInfo={storedReading.luckyInfo}
           />
 
-          {/* Accordion: Your Cosmic Identity */}
-          <Accordion
-            title={t("sectionIdentity")}
-            icon={<Sparkles className="w-3.5 h-3.5 text-purple-400" />}
-            defaultOpen
-          >
-            <TiltCard className="rounded-lg">
-              <DayMasterHero dayMaster={reading.dayMaster} />
-            </TiltCard>
-          </Accordion>
-
           {/* Accordion: Four Pillars of Destiny */}
           <Accordion
             title={t("sectionPillars")}
             icon={<Sparkles className="w-3.5 h-3.5 text-purple-400" />}
+            defaultOpen
           >
             <Card className="w-full glass">
               <FourPillarsDisplay fourPillars={reading.fourPillars} />
+            </Card>
+          </Accordion>
+
+          {/* Accordion: Day Pillar Interpretation (free detailed section) */}
+          <Accordion
+            title={t("sectionDayPillar")}
+            icon={<Star className="w-3.5 h-3.5 text-purple-400" />}
+            defaultOpen
+          >
+            <Card className="w-full glass">
+              <div className="flex flex-col items-center text-center p-2">
+                {/* Day pillar metaphor icon */}
+                <div className="w-16 h-16 rounded-full flex items-center justify-center mb-4 accent-glow" style={{ background: "var(--accent-bg-tint)", border: "1px solid var(--accent-glow)" }}>
+                  <MetaphorIcon metaphor={reading.dayMaster.metaphorInfo.id} size={40} />
+                </div>
+
+                <h3 className="text-lg font-bold text-text-primary mb-1 font-[family-name:var(--font-heading)]">
+                  {t("dayPillarTitle", { metaphor: reading.dayMaster.metaphorInfo.displayName })}
+                </h3>
+
+                <p className="text-sm text-text-secondary max-w-md mb-5 leading-relaxed">
+                  {resolveKey(reading.dayMaster.personality)}
+                </p>
+
+                {/* Strengths & Weaknesses */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full text-left">
+                  <div className="p-4 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                    <p className="text-xs text-text-muted uppercase tracking-wider mb-3">{t("strengths")}</p>
+                    <ul className="space-y-2">
+                      {reading.dayMaster.strengths.map((strength, i) => (
+                        <li key={i} className="text-sm text-text-secondary flex items-start gap-2">
+                          <span className="mt-0.5" style={{ color: "var(--accent-primary, #a855f7)" }}>+</span>
+                          {resolveKey(strength)}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="p-4 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                    <p className="text-xs text-text-muted uppercase tracking-wider mb-3">{t("weaknesses")}</p>
+                    <ul className="space-y-2">
+                      {reading.dayMaster.weaknesses.map((weakness, i) => (
+                        <li key={i} className="text-sm text-text-secondary flex items-start gap-2">
+                          <span className="text-text-muted mt-0.5">-</span>
+                          {resolveKey(weakness)}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </Card>
           </Accordion>
 
@@ -114,6 +169,7 @@ export default function ReadingPage() {
             icon={<ElementIcon element={reading.dayMaster.element} size={14} />}
           >
             <GraphCard
+              className="w-full"
               title={t("sectionElements")}
               icon={<ElementIcon element={reading.dayMaster.element} size={14} />}
               legend={[
@@ -164,7 +220,7 @@ export default function ReadingPage() {
           {/* Section: Unlock Full Reading */}
           <div
             ref={paywallReveal.ref}
-            className={`transition-all duration-700 ease-out ${
+            className={`w-full transition-all duration-700 ease-out ${
               paywallReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
             }`}
           >

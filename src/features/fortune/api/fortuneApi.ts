@@ -3,15 +3,17 @@
  * Application layer - handles API communication for fortune readings
  */
 
-import type { BirthInput, BasicReading } from "@/lib/saju/types";
+import type { BirthInput, BasicReading, DetailedReading } from "@/lib/saju/types";
+
+interface FortuneApiError {
+  code: string;
+  message: string;
+  details?: Record<string, string>;
+}
 
 interface FortuneApiResponse {
   data?: BasicReading;
-  error?: {
-    code: string;
-    message: string;
-    details?: Record<string, any>;
-  };
+  error?: FortuneApiError;
 }
 
 /**
@@ -43,7 +45,7 @@ export async function fetchBasicReading(input: BirthInput): Promise<BasicReading
 /**
  * Fetch detailed (paid) fortune reading from API
  */
-export async function fetchDetailedReading(input: BirthInput & { readingId?: string }): Promise<any> {
+export async function fetchDetailedReading(input: BirthInput & { readingId?: string }): Promise<DetailedReading> {
   const response = await fetch("/api/fortune/detailed", {
     method: "POST",
     headers: {
@@ -53,9 +55,9 @@ export async function fetchDetailedReading(input: BirthInput & { readingId?: str
   });
 
   if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.error?.message || "Failed to fetch detailed reading");
+    const errorData: { error?: FortuneApiError } = await response.json();
+    throw new Error(errorData.error?.message || "Failed to fetch detailed reading");
   }
 
-  return response.json();
+  return response.json() as Promise<DetailedReading>;
 }

@@ -5,14 +5,33 @@ interface ElementIconProps {
   element: Element;
   size?: number;
   className?: string;
+  alt?: string;
 }
 
-export function ElementIcon({ element, size = 24, className }: ElementIconProps) {
+export function ElementIcon({ element, size = 24, className, alt }: ElementIconProps) {
   const id = `el-${element}-${Math.random().toString(36).slice(2, 6)}`;
+
+  const elementLabels: Record<Element, string> = {
+    wood: "Wood element",
+    fire: "Fire element",
+    earth: "Earth element",
+    metal: "Metal element",
+    water: "Water element",
+  };
+
+  const ariaLabel = alt || elementLabels[element];
 
   const icons: Record<Element, React.ReactElement> = {
     wood: (
-      <svg viewBox="0 0 24 24" width={size} height={size} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 24 24"
+        width={size}
+        height={size}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#22C55E" />
@@ -29,7 +48,15 @@ export function ElementIcon({ element, size = 24, className }: ElementIconProps)
       </svg>
     ),
     fire: (
-      <svg viewBox="0 0 24 24" width={size} height={size} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 24 24"
+        width={size}
+        height={size}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g`} x1="50%" y1="0%" x2="50%" y2="100%">
             <stop offset="0%" stopColor="#FDE68A" />
@@ -46,7 +73,15 @@ export function ElementIcon({ element, size = 24, className }: ElementIconProps)
       </svg>
     ),
     earth: (
-      <svg viewBox="0 0 24 24" width={size} height={size} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 24 24"
+        width={size}
+        height={size}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g`} x1="50%" y1="0%" x2="50%" y2="100%">
             <stop offset="0%" stopColor="#FBBF24" />
@@ -67,7 +102,15 @@ export function ElementIcon({ element, size = 24, className }: ElementIconProps)
       </svg>
     ),
     metal: (
-      <svg viewBox="0 0 24 24" width={size} height={size} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 24 24"
+        width={size}
+        height={size}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#E4E4E7" />
@@ -85,7 +128,15 @@ export function ElementIcon({ element, size = 24, className }: ElementIconProps)
       </svg>
     ),
     water: (
-      <svg viewBox="0 0 24 24" width={size} height={size} className={cn("icon-3d", className)} fill="none">
+      <svg
+        viewBox="0 0 24 24"
+        width={size}
+        height={size}
+        className={cn("icon-3d", className)}
+        fill="none"
+        role="img"
+        aria-label={ariaLabel}
+      >
         <defs>
           <linearGradient id={`${id}-g`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#6366F1" />

@@ -18,7 +18,15 @@ export default async function StartPage({ params }: { params: Promise<{ locale: 
 
       <section className="relative w-full flex-1 flex flex-col items-center justify-center px-4 py-16 overflow-hidden">
         {/* Background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[160px] pointer-events-none" style={{ background: "radial-gradient(circle, rgba(139,92,246,0.08) 0%, rgba(99,102,241,0.04) 50%, transparent 70%)" }} />
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full pointer-events-none"
+          style={{
+            width: "var(--size-glow-lg)",
+            height: "var(--size-glow-lg)",
+            background: "radial-gradient(circle, rgba(139,92,246,0.08) 0%, rgba(99,102,241,0.04) 50%, transparent 70%)",
+            filter: "blur(var(--size-blur-lg))"
+          }}
+        />
 
         <div className="relative z-10 flex flex-col items-center max-w-lg w-full">
           {/* Back link */}

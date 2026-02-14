@@ -1,15 +1,47 @@
 "use client"
 
-import { useEffect, useRef } from "react"
-import * as THREE from "three"
+import { useEffect, useRef, useState } from "react"
+import type * as THREE_TYPE from "three"
+
+// Static gradient fallback for mobile/low-end devices
+function StaticGradientFallback() {
+  return (
+    <div
+      className="absolute inset-0 w-full h-full"
+      style={{
+        background: "radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 70%)",
+      }}
+    />
+  )
+}
+
+// Detect if device is mobile or has low performance
+function isMobileOrLowEnd(): boolean {
+  if (typeof window === "undefined") return false
+
+  // Check screen size
+  const isMobile = window.innerWidth < 768 ||
+                   (window.matchMedia && window.matchMedia("(max-width: 768px)").matches)
+
+  // Check hardware concurrency (CPU cores)
+  const lowCPU = navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4
+
+  // Check if WebGL is supported
+  const canvas = document.createElement("canvas")
+  const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl")
+  const hasWebGL = !!gl
+
+  return isMobile || lowCPU || !hasWebGL
+}
 
 export function WebGLShader() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [useFallback, setUseFallback] = useState(false)
   const sceneRef = useRef<{
-    scene: THREE.Scene | null
-    camera: THREE.OrthographicCamera | null
-    renderer: THREE.WebGLRenderer | null
-    mesh: THREE.Mesh | null
+    scene: THREE_TYPE.Scene | null
+    camera: THREE_TYPE.OrthographicCamera | null
+    renderer: THREE_TYPE.WebGLRenderer | null
+    mesh: THREE_TYPE.Mesh | null
     uniforms: any
     animationId: number | null
   }>({
@@ -22,6 +54,12 @@ export function WebGLShader() {
   })
 
   useEffect(() => {
+    // Check if we should use fallback
+    if (isMobileOrLowEnd()) {
+      setUseFallback(true)
+      return
+    }
+
     if (!canvasRef.current) return
 
     const canvas = canvasRef.current
@@ -44,9 +82,9 @@ export function WebGLShader() {
 
       void main() {
         vec2 p = (gl_FragCoord.xy * 2.0 - resolution) / min(resolution.x, resolution.y);
-        
+
         float d = length(p) * distortion;
-        
+
         float rx = p.x * (1.0 + d);
         float gx = p.x;
         float bx = p.x * (1.0 - d);
@@ -54,16 +92,22 @@ export function WebGLShader() {
         float r = 0.05 / abs(p.y + sin((rx + time) * xScale) * yScale);
         float g = 0.05 / abs(p.y + sin((gx + time) * xScale) * yScale);
         float b = 0.05 / abs(p.y + sin((bx + time) * xScale) * yScale);
-        
+
         gl_FragColor = vec4(r, g, b, 1.0);
       }
     `
 
-    const initScene = () => {
+    const initScene = async () => {
+      // Dynamic import for code splitting
+      const THREE = await import("three")
+
       refs.scene = new THREE.Scene()
-      refs.renderer = new THREE.WebGLRenderer({ canvas })
-      refs.renderer.setPixelRatio(window.devicePixelRatio)
-      refs.renderer.setClearColor(new THREE.Color(0x000000))
+      refs.renderer = new THREE.WebGLRenderer({ canvas, alpha: true })
+
+      // Limit pixel ratio for better performance (max 1.5 instead of 2.0+ on retina)
+      const pixelRatio = Math.min(window.devicePixelRatio, 1.5)
+      refs.renderer.setPixelRatio(pixelRatio)
+      refs.renderer.setClearColor(new THREE.Color(0x000000), 0)
 
       refs.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, -1)
 
@@ -98,9 +142,10 @@ export function WebGLShader() {
       })
 
       refs.mesh = new THREE.Mesh(geometry, material)
-      refs.scene.add(refs.mesh)
+      refs.scene!.add(refs.mesh)
 
       handleResize()
+      animate()
     }
 
     const animate = () => {
@@ -120,7 +165,6 @@ export function WebGLShader() {
     }
 
     initScene()
-    animate()
     window.addEventListener("resize", handleResize)
 
     return () => {
@@ -129,13 +173,18 @@ export function WebGLShader() {
       if (refs.mesh) {
         refs.scene?.remove(refs.mesh)
         refs.mesh.geometry.dispose()
-        if (refs.mesh.material instanceof THREE.Material) {
-          refs.mesh.material.dispose()
+        if ("dispose" in refs.mesh.material) {
+          (refs.mesh.material as any).dispose()
         }
       }
       refs.renderer?.dispose()
     }
   }, [])
+
+  // Use fallback for mobile/low-end devices
+  if (useFallback) {
+    return <StaticGradientFallback />
+  }
 
   return (
     <canvas

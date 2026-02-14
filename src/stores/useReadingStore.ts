@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist, createJSONStorage } from "zustand/middleware";
 
 interface PillarData {
   metaphor: string;
@@ -55,11 +56,19 @@ interface ReadingStore {
   getReading: (id: string) => ReadingData | undefined;
 }
 
-export const useReadingStore = create<ReadingStore>((set, get) => ({
-  readings: {},
-  setReading: (id, data) =>
-    set((state) => ({
-      readings: { ...state.readings, [id]: data },
-    })),
-  getReading: (id) => get().readings[id],
-}));
+export const useReadingStore = create<ReadingStore>()(
+  persist(
+    (set, get) => ({
+      readings: {},
+      setReading: (id, data) =>
+        set((state) => ({
+          readings: { ...state.readings, [id]: data },
+        })),
+      getReading: (id) => get().readings[id],
+    }),
+    {
+      name: "saju-readings",
+      storage: createJSONStorage(() => sessionStorage),
+    }
+  )
+);

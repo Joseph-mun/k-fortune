@@ -1,7 +1,15 @@
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 import type { NextRequest } from "next/server";
+import { z } from "zod";
 import { createServerClient } from "@/lib/supabase";
+
+const ProfileUpdateSchema = z.object({
+  name: z.string().min(1).max(100).optional(),
+  avatar_url: z.string().url().max(500).optional(),
+}).refine((data) => data.name !== undefined || data.avatar_url !== undefined, {
+  message: "At least one field (name or avatar_url) is required",
+});
 
 /**
  * GET /api/user/profile
@@ -83,21 +91,18 @@ export async function PUT(request: NextRequest) {
     }
 
     const body = await request.json();
-    const allowedFields = ["name", "avatar_url"];
-    const updates: Record<string, string> = {};
+    const parsed = ProfileUpdateSchema.safeParse(body);
 
-    for (const field of allowedFields) {
-      if (field in body && typeof body[field] === "string") {
-        updates[field] = body[field];
-      }
-    }
-
-    if (Object.keys(updates).length === 0) {
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: { code: "INVALID_INPUT", message: "No valid fields to update" } },
+        { error: { code: "INVALID_INPUT", message: parsed.error.issues[0].message } },
         { status: 400 }
       );
     }
+
+    const updates: Record<string, string> = {};
+    if (parsed.data.name !== undefined) updates.name = parsed.data.name;
+    if (parsed.data.avatar_url !== undefined) updates.avatar_url = parsed.data.avatar_url;
 
     const supabase = createServerClient();
 

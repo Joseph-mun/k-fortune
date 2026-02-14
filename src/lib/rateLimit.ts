@@ -114,10 +114,10 @@ export async function checkRateLimit(
   identifier: string,
   config: RateLimitConfig
 ): Promise<RateLimitResult> {
-  const limiter = getUpstashLimiter(config);
+  try {
+    const limiter = getUpstashLimiter(config);
 
-  if (limiter) {
-    try {
+    if (limiter) {
       const result = await limiter.limit(identifier);
       return {
         allowed: result.success,
@@ -125,9 +125,9 @@ export async function checkRateLimit(
         resetIn: Math.max(0, result.reset - Date.now()),
         limit: result.limit,
       };
-    } catch {
-      // Redis error — fall back to in-memory
     }
+  } catch {
+    // Redis error — fall back to in-memory
   }
 
   return checkInMemory(identifier, config);

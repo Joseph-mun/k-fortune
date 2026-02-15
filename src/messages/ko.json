@@ -80,6 +80,7 @@
     "back": "이전",
     "yearInsight": "{animal}띠로 태어나셨군요!",
     "timeInsight": "{hanja}시 — {animal}의 시간",
+    "insightLoading": "사주팔자를 계산하고 있습니다...",
     "validation": {
       "birthDateRequired": "생년월일을 입력해 주세요",
       "genderRequired": "성별을 선택해 주세요"
@@ -717,5 +718,22 @@
     "slide2Desc": "목(木), 화(火), 토(土), 금(金), 수(水) — 당신만의 오행 균형이 강점, 약점, 운명의 청사진을 드러냅니다.",
     "slide3Title": "당신의 운명이 기다립니다",
     "slide3Desc": "30초 만에 일간 원형, 행운 정보, 맞춤 해석을 확인하세요. 회원가입이 필요 없습니다."
+  },
+  "teaser": {
+    "tagline": "당신의 운명은 이미 쓰여져 있습니다. 가장 먼저 읽어보세요.",
+    "inputTitle": "태어난 해를 알려주세요",
+    "inputDesc": "출생 연도를 입력하면 즉시 띠 동물과 오행을 확인할 수 있습니다.",
+    "revealButton": "확인하기",
+    "comingSoon": "전체 사주 감정 곧 오픈",
+    "emailTitle": "전체 감정을 원하시나요?",
+    "emailDesc": "론칭 시 무료 전체 사주 감정을 받을 선착순 1,000명에 포함되세요. 스팸 없이, 운명만 전합니다.",
+    "emailPlaceholder": "이메일 주소",
+    "emailButton": "알림 받기",
+    "emailSubmitting": "등록 중...",
+    "emailPrivacy": "개인정보를 존중합니다. 언제든 수신 거부 가능합니다.",
+    "emailInvalid": "올바른 이메일 주소를 입력해 주세요",
+    "successTitle": "등록 완료!",
+    "successDesc": "전체 감정 론칭 시 알려드리겠습니다. 선착순 1,000명에게 무료 상세 감정을 제공합니다.",
+    "successFooter": "확인 메일을 확인해 주세요"
   }
 }

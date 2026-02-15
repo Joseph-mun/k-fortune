@@ -80,6 +80,7 @@
     "back": "Back",
     "yearInsight": "You were born in the Year of the {animal}!",
     "timeInsight": "{hanja} Hour — The Hour of the {animal}",
+    "insightLoading": "Calculating your Four Pillars of Destiny...",
     "validation": {
       "birthDateRequired": "Please enter your birth date",
       "genderRequired": "Please select your gender"
@@ -725,5 +726,22 @@
     "slide2Desc": "Wood, Fire, Earth, Metal, Water — your unique element balance reveals your strengths, challenges, and cosmic blueprint.",
     "slide3Title": "Your Destiny Awaits",
     "slide3Desc": "Discover your Day Master archetype, lucky info, and personalized insights in just 30 seconds. No sign-up required."
+  },
+  "teaser": {
+    "tagline": "Your destiny is already written. Be the first to read it.",
+    "inputTitle": "What Year Were You Born?",
+    "inputDesc": "Enter your birth year to instantly discover your zodiac animal and element.",
+    "revealButton": "Reveal",
+    "comingSoon": "Full Saju readings launching soon",
+    "emailTitle": "Want the Full Reading?",
+    "emailDesc": "Be the first 1,000 to get a free full Four Pillars reading when we launch. No spam, just destiny.",
+    "emailPlaceholder": "your@email.com",
+    "emailButton": "Notify Me",
+    "emailSubmitting": "Subscribing...",
+    "emailPrivacy": "We respect your privacy. Unsubscribe anytime.",
+    "emailInvalid": "Please enter a valid email address",
+    "successTitle": "You're on the List!",
+    "successDesc": "We'll notify you when full readings launch. The first 1,000 subscribers get a free detailed reading.",
+    "successFooter": "Check your inbox for a confirmation"
   }
 }

@@ -8,6 +8,7 @@ import { ArrowLeft, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { CalendarPopup } from "@/components/ui/CalendarPopup";
 import { StepProgress } from "./StepProgress";
+import { InsightFlash } from "@/components/fortune/InsightFlash";
 import { useReadingStore } from "@/stores/useReadingStore";
 import { calculateYearPillar } from "@/lib/saju/pillars";
 import { BRANCH_ANIMALS } from "@/lib/saju/metaphors";
@@ -35,6 +36,7 @@ export function BirthInputForm() {
   const [gender, setGender] = useState<"male" | "female" | "other" | "">("");
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [showFlash, setShowFlash] = useState(false);
 
   const birthDate = year && month && day
     ? `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`
@@ -58,15 +60,20 @@ export function BirthInputForm() {
     !!gender,
   ];
 
-  const yearAnimal = useMemo(() => {
+  // Year pillar for InsightFlash (full pillar object)
+  const yearPillar = useMemo(() => {
     if (!year) return null;
     try {
-      const pillar = calculateYearPillar(Number(year));
-      return BRANCH_ANIMALS[pillar.branch];
+      return calculateYearPillar(Number(year));
     } catch {
       return null;
     }
   }, [year]);
+
+  const yearAnimal = useMemo(() => {
+    if (!yearPillar) return null;
+    return BRANCH_ANIMALS[yearPillar.branch];
+  }, [yearPillar]);
 
   const timeAnimal = useMemo(() => {
     if (!birthTime || unknownTime) return null;
@@ -108,6 +115,11 @@ export function BirthInputForm() {
     setLoading(true);
     setErrors({});
 
+    // Show InsightFlash immediately with client-side data
+    if (yearPillar && yearAnimal) {
+      setShowFlash(true);
+    }
+
     try {
       const res = await fetch("/api/fortune/basic", {
         method: "POST",
@@ -127,10 +139,20 @@ export function BirthInputForm() {
       setReading(data.id, data);
       router.push(`/${locale}/reading/${data.id}`);
     } catch {
+      setShowFlash(false);
       setErrors({ form: "Something went wrong. Please try again." });
     } finally {
       setLoading(false);
     }
+  }
+
+  // Show InsightFlash overlay when loading
+  if (showFlash && yearPillar && yearAnimal) {
+    return (
+      <div className="flex flex-col gap-6 w-full">
+        <InsightFlash yearPillar={yearPillar} animalInfo={yearAnimal} />
+      </div>
+    );
   }
 
   return (

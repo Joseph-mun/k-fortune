@@ -80,6 +80,7 @@
     "back": "Atrás",
     "yearInsight": "¡Naciste en el Año del {animal}!",
     "timeInsight": "Hora {hanja} — La Hora del {animal}",
+    "insightLoading": "Calculando tus Cuatro Pilares del Destino...",
     "validation": {
       "birthDateRequired": "Por favor ingresa tu fecha de nacimiento",
       "genderRequired": "Por favor selecciona tu género"
@@ -725,5 +726,22 @@
     "slide2Desc": "Madera, Fuego, Tierra, Metal, Agua — tu balance único de elementos revela tus fortalezas, desafíos y plano cósmico.",
     "slide3Title": "Tu Destino Te Espera",
     "slide3Desc": "Descubre tu arquetipo Day Master, información de suerte e insights personalizados en solo 30 segundos. Sin registro."
+  },
+  "teaser": {
+    "tagline": "Tu destino ya está escrito. Sé el primero en leerlo.",
+    "inputTitle": "¿En qué año naciste?",
+    "inputDesc": "Ingresa tu año de nacimiento para descubrir al instante tu animal zodiacal y elemento.",
+    "revealButton": "Revelar",
+    "comingSoon": "Lecturas Saju completas próximamente",
+    "emailTitle": "¿Quieres la lectura completa?",
+    "emailDesc": "Sé de los primeros 1,000 en recibir una lectura completa gratuita de los Cuatro Pilares. Sin spam, solo destino.",
+    "emailPlaceholder": "tu@email.com",
+    "emailButton": "Notificarme",
+    "emailSubmitting": "Suscribiendo...",
+    "emailPrivacy": "Respetamos tu privacidad. Cancela cuando quieras.",
+    "emailInvalid": "Por favor ingresa un email válido",
+    "successTitle": "¡Estás en la lista!",
+    "successDesc": "Te notificaremos cuando lancemos las lecturas completas. Los primeros 1,000 suscriptores reciben una lectura detallada gratis.",
+    "successFooter": "Revisa tu bandeja de entrada"
   }
 }

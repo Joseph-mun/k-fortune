@@ -32,13 +32,17 @@ export function getPolarClient(): Polar {
 }
 
 // Polar product configuration (from design spec Section 5.2)
+// .trim() guards against env vars with trailing whitespace/newlines
+const env = (key: string, fallback: string) =>
+  (process.env[key] || fallback).trim();
+
 export const POLAR_PRODUCTS = {
-  DETAILED_READING: process.env.NEXT_PUBLIC_POLAR_PRODUCT_DETAILED_READING || '50ad1cfe-da26-41cd-80c7-862258baaa39',
-  PREMIUM_SUBSCRIPTION: process.env.NEXT_PUBLIC_POLAR_PRODUCT_PREMIUM_SUBSCRIPTION || 'e6efae19-0081-4df3-8c17-2f9fd76fd89c',
-  PREMIUM_ANNUAL: process.env.NEXT_PUBLIC_POLAR_PRODUCT_PREMIUM_ANNUAL || 'premium_annual',
-  DESTINY_CARD_PREMIUM: process.env.NEXT_PUBLIC_POLAR_PRODUCT_DESTINY_CARD_PREMIUM || 'destiny_card_premium',
-  DESTINY_CARD_PHOTO: process.env.NEXT_PUBLIC_POLAR_PRODUCT_DESTINY_CARD_PHOTO || 'destiny_card_photo',
-  PRINT_READY_PDF: process.env.NEXT_PUBLIC_POLAR_PRODUCT_PRINT_READY_PDF || 'print_ready_pdf',
+  DETAILED_READING: env('NEXT_PUBLIC_POLAR_PRODUCT_DETAILED_READING', '50ad1cfe-da26-41cd-80c7-862258baaa39'),
+  PREMIUM_SUBSCRIPTION: env('NEXT_PUBLIC_POLAR_PRODUCT_PREMIUM_SUBSCRIPTION', 'e6efae19-0081-4df3-8c17-2f9fd76fd89c'),
+  PREMIUM_ANNUAL: env('NEXT_PUBLIC_POLAR_PRODUCT_PREMIUM_ANNUAL', 'premium_annual'),
+  DESTINY_CARD_PREMIUM: env('NEXT_PUBLIC_POLAR_PRODUCT_DESTINY_CARD_PREMIUM', 'destiny_card_premium'),
+  DESTINY_CARD_PHOTO: env('NEXT_PUBLIC_POLAR_PRODUCT_DESTINY_CARD_PHOTO', 'destiny_card_photo'),
+  PRINT_READY_PDF: env('NEXT_PUBLIC_POLAR_PRODUCT_PRINT_READY_PDF', 'print_ready_pdf'),
 } as const;
 
 export const POLAR_PRICES = {

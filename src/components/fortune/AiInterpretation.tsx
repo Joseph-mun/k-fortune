@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Sparkles, RefreshCw } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { Button } from "@/components/ui/Button";
 
 interface AiInterpretationProps {
@@ -78,6 +79,7 @@ export function AiInterpretation({
       }
 
       setCachedText(fullText);
+      track(mode === "preview" ? "ai_preview_viewed" : "ai_full_generated", { readingId });
     } catch (err) {
       if (err instanceof Error && err.name !== "AbortError") {
         setError(err);

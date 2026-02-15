@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import { track } from "@vercel/analytics";
 
 /**
  * useCheckout hook - Polar Checkout integration
@@ -44,6 +45,7 @@ export function useCheckout(): UseCheckoutReturn {
       }
 
       // Redirect to the Polar checkout endpoint
+      track("checkout_initiated", { source: "hook", productId: options.productId });
       const checkoutUrl = `/api/checkout?${params.toString()}`;
       window.location.href = checkoutUrl;
     } catch (err) {

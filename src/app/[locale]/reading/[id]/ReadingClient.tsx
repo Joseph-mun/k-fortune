@@ -4,8 +4,10 @@ import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 import { Share2, Sparkles, ArrowRight, Compass, Palette, Hash, Star } from "lucide-react";
+import { track } from "@vercel/analytics";
 import { Link } from "@/i18n/navigation";
 
+import { useEffect, useRef } from "react";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { SkeletonReading } from "@/components/fortune/SkeletonReading";
@@ -47,6 +49,14 @@ export default function ReadingClient() {
   }
 
   const reading = reconstructReading(storedReading);
+  const readingTrackedRef = useRef(false);
+
+  useEffect(() => {
+    if (!readingTrackedRef.current) {
+      track("reading_completed", { readingId: id, element: reading.dayMaster.element });
+      readingTrackedRef.current = true;
+    }
+  }, [id, reading.dayMaster.element]);
 
   const paywallReveal = useIntersectionReveal();
 
@@ -56,6 +66,7 @@ export default function ReadingClient() {
   };
 
   const handleShare = async () => {
+    track("share_clicked", { source: "reading", readingId: id });
     const text = t("shareText", { metaphor: reading.dayMaster.metaphorInfo.displayName });
     try {
       if (navigator.share) {
@@ -260,6 +271,8 @@ export default function ReadingClient() {
               productId={POLAR_PRODUCTS.DETAILED_READING}
               price={PRICE_DISPLAY.DETAILED_READING}
               dayMasterName={reading.dayMaster.metaphorInfo.displayName}
+              dayMasterElement={reading.dayMaster.element}
+              dayMasterMetaphor={reading.dayMaster.metaphor}
             />
           </div>
 

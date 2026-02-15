@@ -13,7 +13,7 @@
     "pricing": "Precios",
     "compatibility": "Compatibilidad",
     "gallery": "Galería",
-    "starMatch": "Star Match",
+    "starMatch": "Compatibilidad",
     "dashboard": "Mis Lecturas",
     "signIn": "Iniciar Sesión",
     "signOut": "Cerrar Sesión",
@@ -222,6 +222,11 @@
     "subtitle": "Desbloquea el poder completo de la sabiduría de los Cuatro Pilares coreanos",
     "badge": "Mas Popular",
     "popular": "MAS POPULAR",
+    "toggle": {
+      "monthly": "Mensual",
+      "annual": "Anual",
+      "save": "-30%"
+    },
     "basic": {
       "name": "Lectura Basica",
       "price": "GRATIS",
@@ -238,8 +243,12 @@
       "name": "Premium",
       "price": "{price}",
       "period": "/mes",
+      "periodYear": "/año",
+      "saveBadge": "Ahorra 30%",
       "features": ["Todas las Lecturas Ilimitadas", "Actualizaciones Mensuales", "Analisis de Compatibilidad", "Todos los Estilos de Carta", "Soporte Prioritario"],
-      "cta": "Suscribirse"
+      "cta": "Suscribirse",
+      "trialCta": "Prueba Gratis {days} Días",
+      "trialNote": "Gratis por {days} días, luego se renueva. Cancela cuando quieras."
     }
   },
   "auth": {
@@ -383,20 +392,34 @@
     "title": "Desbloquea Tu Lectura Completa",
     "description": "Descubre tu destino completo con análisis de carrera, guía de relaciones y consejos de vida personalizados.",
     "unlockButton": "Desbloquear Mi Lectura Completa",
+    "unlockButtonDiscount": "Desbloquear Ahora — $0.99",
     "price": "{price}",
-    "personalTeaser": "Tu personalidad {dayMaster} revela caminos profesionales y perspectivas de relaciones unicas...",
-    "socialProof": "Unete a {count}+ lectores que descubrieron su destino",
+    "personalTeaser": "Tu personalidad {dayMaster} revela caminos profesionales y perspectivas de relaciones únicas...",
+    "personalTeaser_wood": "Tu energía de Madera esconde caminos profesionales en liderazgo y campos creativos. Desbloquea tu lectura completa para descubrir cómo canalizar tu potencial de crecimiento.",
+    "personalTeaser_fire": "Tu energía de Fuego revela oportunidades profesionales apasionantes y dinámicas de relación magnéticas. Descubre cómo tu resplandor moldea tu destino.",
+    "personalTeaser_earth": "Tu energía de Tierra señala estrategias de acumulación de riqueza estable y relaciones profundamente leales. Descubre el panorama completo de tu destino sólido.",
+    "personalTeaser_metal": "Tu energía de Metal indica éxito profesional impulsado por la precisión y patrones de relación refinados. Desbloquea tu análisis completo de los Cuatro Pilares.",
+    "personalTeaser_water": "Tu energía de Agua sugiere estrategias profesionales adaptativas y relaciones profundamente intuitivas. Explora las profundidades ocultas de tu mapa cósmico.",
+    "socialProof": "Únete a {count}+ lectores que descubrieron su destino",
     "feature1": "Carrera profesional alineada con tu elemento",
-    "feature2": "Compatibilidad y guia de pareja de vida",
-    "feature3": "Linea de tiempo 2026 y mapa de ciclos de vida",
+    "feature2": "Compatibilidad y guía de pareja de vida",
+    "feature3": "Línea de tiempo 2026 y mapa de ciclos de vida",
+    "feature4": "Consejos de salud y orientación de vida personalizada",
     "previewCareer": "Carrera Profesional",
     "previewCareerDesc": "Tus talentos naturales se alinean con roles de liderazgo donde puedes...",
     "previewRelationship": "Relaciones",
     "previewRelationshipDesc": "En las relaciones, tiendes a ser comprensivo y solidario...",
+    "previewHealth": "Salud y Bienestar",
+    "previewHealthDesc": "Tu equilibrio elemental sugiere enfocarte en áreas específicas de...",
+    "previewFortune": "Fortuna 2026",
+    "previewFortuneDesc": "Este año trae energía transformadora a tu carrera y...",
     "previewAdvice": "Consejos de Vida",
     "previewAdviceDesc": "Enfócate en construir bases sólidas en tus primeros años...",
     "priceTag": "Solo {price}",
-    "urgency": "Compra única \u00b7 Acceso instantáneo"
+    "urgency": "Compra única · Acceso instantáneo",
+    "urgencyDiscount": "Oferta limitada · 50% descuento · Acceso instantáneo",
+    "discountBanner": "Oferta especial termina en {time}",
+    "trialUpsell": "O prueba Premium gratis por {days} días →"
   },
   "interpretation": {
     "personality": {
@@ -534,22 +557,22 @@
     }
   },
   "starMatch": {
-    "badge": "K-Pop Star Match",
-    "title": "Compatibilidad con Estrellas",
-    "subtitle": "Verifica tu compatibilidad cosmica con tus estrellas K-Pop favoritas basada en los Cuatro Pilares del Destino.",
+    "badge": "Compatibilidad de Cumpleanos",
+    "title": "Compatibilidad por Fecha de Nacimiento",
+    "subtitle": "Verifica tu compatibilidad cosmica con fechas de nacimiento famosas basada en los Cinco Elementos y los Cuatro Pilares del Destino.",
     "yourInfo": "Tu Informacion de Nacimiento",
-    "chooseStar": "Elige Tu Estrella",
+    "chooseStar": "Elige un Perfil de Cumpleanos",
     "checkMatch": "Verificar Compatibilidad",
-    "fillAll": "Por favor completa todos los campos y selecciona una estrella.",
+    "fillAll": "Por favor completa todos los campos y selecciona un perfil.",
     "error": "Algo salio mal. Por favor intenta de nuevo.",
     "you": "Tu",
     "compatibilityScore": "Compatibilidad Cosmica",
     "breakdown": "Desglose de Compatibilidad",
     "analysis": "Analisis",
     "advice": "Consejo",
-    "tryAnother": "Probar Otra Estrella",
+    "tryAnother": "Probar Otro Perfil",
     "share": "Compartir",
-    "shareText": "Mi compatibilidad Saju con {star} es {score}%! Verifica la tuya en SAJU."
+    "shareText": "Mi puntuacion de compatibilidad Saju es {score}%! Verifica la tuya en SAJU."
   },
   "legal": {
     "privacy": {

@@ -7,11 +7,20 @@ import { Footer } from "@/components/layout/Footer";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
 import { Card } from "@/components/ui/Card";
-import { getGroups, getStarsByGroup } from "@/lib/saju/celebrities";
+import { ELEMENT_CATEGORIES, getStarsByElement, formatStarLabel } from "@/lib/saju/celebrities";
+import { track } from "@vercel/analytics";
 import { Heart, Sparkles, Share2 } from "lucide-react";
 
+const ELEMENT_LABELS: Record<string, { ko: string; en: string; es: string; icon: string }> = {
+  wood: { ko: "목 (木)", en: "Wood", es: "Madera", icon: "🌿" },
+  fire: { ko: "화 (火)", en: "Fire", es: "Fuego", icon: "🔥" },
+  earth: { ko: "토 (土)", en: "Earth", es: "Tierra", icon: "🏔️" },
+  metal: { ko: "금 (金)", en: "Metal", es: "Metal", icon: "⚔️" },
+  water: { ko: "수 (水)", en: "Water", es: "Agua", icon: "💧" },
+};
+
 interface StarMatchResult {
-  star: { id: string; stageName: string; group: string; emoji: string };
+  star: { id: string; emoji: string; birthDate: string; element: string };
   overallScore: number;
   categories: Record<string, number>;
   analysis: string;
@@ -27,6 +36,7 @@ interface StarMatchResult {
 export default function StarMatchPage() {
   const t = useTranslations("starMatch");
   const tForm = useTranslations("form");
+  const tElements = useTranslations("elements");
   const locale = useLocale();
 
   const [birthDate, setBirthDate] = useState("");
@@ -34,12 +44,10 @@ export default function StarMatchPage() {
   const [unknownTime, setUnknownTime] = useState(false);
   const [gender, setGender] = useState<"male" | "female" | "other" | "">("");
   const [selectedStar, setSelectedStar] = useState("");
-  const [activeGroup, setActiveGroup] = useState(getGroups()[0]);
+  const [activeElement, setActiveElement] = useState<string>(ELEMENT_CATEGORIES[0]);
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<StarMatchResult | null>(null);
   const [error, setError] = useState("");
-
-  const groups = getGroups();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -69,6 +77,7 @@ export default function StarMatchPage() {
       if (!res.ok) throw new Error("Failed");
       const data = await res.json();
       setResult(data);
+      track("star_match_completed", { score: data.overallScore, element: data.star?.element });
     } catch {
       setError(t("error"));
     } finally {
@@ -81,6 +90,25 @@ export default function StarMatchPage() {
     if (score >= 60) return "text-gold-400";
     if (score >= 40) return "text-purple-400";
     return "text-text-muted";
+  }
+
+  function getElementLabel(element: string): string {
+    const labels = ELEMENT_LABELS[element];
+    if (!labels) return element;
+    return labels[locale as keyof typeof labels] || labels.en;
+  }
+
+  function formatMatchLabel(birthDate: string): string {
+    const date = new Date(birthDate);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    if (locale === "ko") return `${year}년 ${month}월생`;
+    if (locale === "es") {
+      const m = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+      return `${m[month - 1]} ${year}`;
+    }
+    const m = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return `${m[month - 1]} ${year}`;
   }
 
   return (
@@ -159,31 +187,32 @@ export default function StarMatchPage() {
               </div>
             </Card>
 
-            {/* Step 2: Choose Star */}
+            {/* Step 2: Choose Profile by Element */}
             <Card>
               <h2 className="text-sm font-semibold text-text-primary mb-4">{t("chooseStar")}</h2>
 
-              {/* Group tabs */}
+              {/* Element tabs */}
               <div className="flex gap-1 flex-wrap mb-4">
-                {groups.map((group) => (
+                {ELEMENT_CATEGORIES.map((el) => (
                   <button
-                    key={group}
+                    key={el}
                     type="button"
-                    onClick={() => setActiveGroup(group)}
-                    className={`px-2.5 py-1 text-[11px] rounded-md transition-colors ${
-                      activeGroup === group
+                    onClick={() => setActiveElement(el)}
+                    className={`px-2.5 py-1 text-[11px] rounded-md transition-colors flex items-center gap-1 ${
+                      activeElement === el
                         ? "bg-white/[0.08] text-text-primary"
                         : "text-text-muted hover:text-text-secondary"
                     }`}
                   >
-                    {group}
+                    <span>{ELEMENT_LABELS[el]?.icon}</span>
+                    {getElementLabel(el)}
                   </button>
                 ))}
               </div>
 
-              {/* Star grid */}
+              {/* Profile grid */}
               <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
-                {getStarsByGroup(activeGroup).map((star) => (
+                {getStarsByElement(activeElement).map((star) => (
                   <button
                     key={star.id}
                     type="button"
@@ -195,7 +224,9 @@ export default function StarMatchPage() {
                     }`}
                   >
                     <span className="text-2xl">{star.emoji}</span>
-                    <span className="text-xs font-medium">{star.stageName}</span>
+                    <span className="text-[10px] font-medium text-center leading-tight">
+                      {formatStarLabel(star, locale)}
+                    </span>
                   </button>
                 ))}
               </div>
@@ -223,7 +254,7 @@ export default function StarMatchPage() {
                 </div>
                 <div className="flex flex-col items-center">
                   <span className="text-3xl mb-1">{result.star.emoji}</span>
-                  <span className="text-xs text-text-muted">{result.star.stageName}</span>
+                  <span className="text-xs text-text-muted">{formatMatchLabel(result.star.birthDate)}</span>
                 </div>
               </div>
               <div className={`text-5xl font-bold font-[family-name:var(--font-heading)] mb-1 ${getScoreColor(result.overallScore)}`}>
@@ -271,7 +302,7 @@ export default function StarMatchPage() {
               <Button
                 variant="ghost"
                 onClick={() => {
-                  const text = `${t("shareText", { star: result.star.stageName, score: result.overallScore })}`;
+                  const text = `${t("shareText", { score: result.overallScore })}`;
                   if (navigator.share) {
                     navigator.share({ text, url: window.location.href });
                   } else {

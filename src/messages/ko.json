@@ -13,7 +13,7 @@
     "pricing": "요금제",
     "compatibility": "궁합",
     "gallery": "갤러리",
-    "starMatch": "스타 궁합",
+    "starMatch": "생일 궁합",
     "dashboard": "내 감정",
     "signIn": "로그인",
     "signOut": "로그아웃",
@@ -215,6 +215,11 @@
     "subtitle": "한국 전통 사주팔자의 완전한 지혜를 열어보세요",
     "badge": "가장 인기",
     "popular": "가장 인기",
+    "toggle": {
+      "monthly": "월간",
+      "annual": "연간",
+      "save": "-30%"
+    },
     "basic": {
       "name": "기본 감정",
       "price": "무료",
@@ -231,8 +236,12 @@
       "name": "프리미엄",
       "price": "{price}",
       "period": "/월",
+      "periodYear": "/년",
+      "saveBadge": "30% 할인",
       "features": ["모든 감정 무제한", "월간 운세 업데이트", "궁합 분석", "모든 운명 카드 스타일", "우선 지원"],
-      "cta": "구독하기"
+      "cta": "구독하기",
+      "trialCta": "{days}일 무료 체험 시작",
+      "trialNote": "{days}일간 무료, 이후 자동 갱신. 언제든 취소 가능."
     }
   },
   "auth": {
@@ -375,20 +384,34 @@
     "title": "전체 감정 열기",
     "description": "직업 통찰, 인간관계 안내, 맞춤형 인생 조언으로 완전한 운명을 발견하세요.",
     "unlockButton": "나의 전체 감정 열기",
+    "unlockButtonDiscount": "지금 열기 — $0.99",
     "price": "{price}",
     "personalTeaser": "당신의 {dayMaster} 성격이 독특한 직업 경로와 인간관계 통찰을 드러냅니다...",
+    "personalTeaser_wood": "목(木)의 기운이 리더십과 창조적 분야의 숨겨진 진로를 품고 있습니다. 전체 감정을 열어 성장 잠재력을 어떻게 발휘할지 확인하세요.",
+    "personalTeaser_fire": "화(火)의 기운이 열정적인 직업 기회와 매력적인 인간관계 역학을 드러냅니다. 당신의 빛이 어떻게 운명을 빚는지 확인하세요.",
+    "personalTeaser_earth": "토(土)의 기운이 꾸준한 재물 축적 전략과 깊은 인간관계를 가리킵니다. 당신만의 안정적인 운명의 전체 그림을 확인하세요.",
+    "personalTeaser_metal": "금(金)의 기운이 정밀한 직업적 성공과 세련된 인간관계 패턴을 보여줍니다. 사주 전체 분석을 열어보세요.",
+    "personalTeaser_water": "수(水)의 기운이 적응적 진로 전략과 깊은 직관적 인간관계를 암시합니다. 우주적 청사진의 숨겨진 깊이를 탐험하세요.",
     "socialProof": "{count}명 이상이 이미 운명을 발견했습니다",
     "feature1": "오행에 맞는 직업 진로 분석",
     "feature2": "인간관계 궁합 및 인생 동반자 안내",
     "feature3": "2026년 운세 타임라인 & 인생 주기 지도",
+    "feature4": "건강 통찰 & 맞춤형 인생 조언",
     "previewCareer": "직업 진로",
     "previewCareerDesc": "당신의 천부적 재능은 리더십 역할에 잘 맞으며...",
     "previewRelationship": "인간관계",
     "previewRelationshipDesc": "인간관계에서 당신은 따뜻하고 이해심 깊은...",
+    "previewHealth": "건강 & 웰빙",
+    "previewHealthDesc": "당신의 오행 균형은 특정 영역에 집중할 것을...",
+    "previewFortune": "2026년 운세",
+    "previewFortuneDesc": "올해는 직업과 인간관계에 변혁적 에너지를...",
     "previewAdvice": "인생 조언",
     "previewAdviceDesc": "초기에 탄탄한 기반을 쌓는 데 집중하세요...",
     "priceTag": "단돈 {price}",
-    "urgency": "1회 결제 \u00b7 즉시 열람"
+    "urgency": "1회 결제 · 즉시 열람",
+    "urgencyDiscount": "한정 특가 · 50% 할인 · 즉시 열람",
+    "discountBanner": "특별 할인 종료까지 {time}",
+    "trialUpsell": "또는 프리미엄 {days}일 무료 체험 →"
   },
   "interpretation": {
     "personality": {
@@ -526,22 +549,22 @@
     }
   },
   "starMatch": {
-    "badge": "K-Pop 스타 궁합",
-    "title": "스타 궁합 보기",
-    "subtitle": "사주팔자로 좋아하는 K-Pop 스타와의 우주적 궁합을 확인하세요.",
+    "badge": "생일 궁합",
+    "title": "생년월일 궁합 보기",
+    "subtitle": "오행과 사주팔자로 유명인의 생년월일과 나의 우주적 궁합을 확인하세요.",
     "yourInfo": "내 생년월일 정보",
-    "chooseStar": "스타 선택",
+    "chooseStar": "생년월일 프로필 선택",
     "checkMatch": "궁합 확인하기",
-    "fillAll": "모든 항목을 입력하고 스타를 선택해 주세요.",
+    "fillAll": "모든 항목을 입력하고 프로필을 선택해 주세요.",
     "error": "문제가 발생했습니다. 다시 시도해 주세요.",
     "you": "나",
     "compatibilityScore": "우주적 궁합",
     "breakdown": "궁합 상세",
     "analysis": "분석",
     "advice": "조언",
-    "tryAnother": "다른 스타 해보기",
+    "tryAnother": "다른 프로필 해보기",
     "share": "공유",
-    "shareText": "나와 {star}의 사주 궁합은 {score}%! SAJU에서 확인해보세요."
+    "shareText": "나의 사주 궁합 점수는 {score}%! SAJU에서 확인해보세요."
   },
   "legal": {
     "privacy": {

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 
+import { track } from "@vercel/analytics";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { Card } from "@/components/ui/Card";
@@ -75,6 +76,7 @@ export default function CardCreatePage() {
         const data = await response.json();
         setCardId(data.card.id);
       }
+      track("card_created", { style: selectedStyle, isPublic });
       // Proceed to success step regardless (card viewable locally)
       setStep(3);
     } catch {

@@ -12,6 +12,42 @@
   --font-korean: var(--font-pretendard), "Pretendard", sans-serif;
   --font-mono: ui-monospace, "SF Mono", monospace;
 
+  /* 묵(Ink) Layer Fonts */
+  --font-ink-heading-ko: var(--font-nanum-myeongjo), "Nanum Myeongjo", Georgia, serif;
+  --font-ink-heading-en: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-ink-body: var(--font-pretendard), "Pretendard", system-ui, sans-serif;
+
+  /* 놀이(Play) Layer Fonts */
+  --font-play-heading: var(--font-outfit), "Outfit", system-ui, sans-serif;
+  --font-play-body: var(--font-pretendard), "Pretendard", system-ui, sans-serif;
+  --font-play-handwriting: var(--font-gaegu), "Gaegu", cursive;
+
+  /* 묵(Ink) Colors */
+  --color-ink-hanji: #F5F0E8;
+  --color-ink-hanji-cream: #EDE7DB;
+  --color-ink-muk-black: #1A1611;
+  --color-ink-gray: #6B6358;
+  --color-ink-wash: #A89F91;
+  --color-ink-cinnabar: #C5372E;
+  --color-ink-indigo: #2B4162;
+  --color-ink-bamboo: #4A7C59;
+  --color-ink-ochre: #B8860B;
+  --color-ink-silver: #8B8589;
+
+  /* 놀이(Play) Colors */
+  --color-play-cloud: #FAFBFE;
+  --color-play-lavender: #F0EDFF;
+  --color-play-purple: #7C3AED;
+  --color-play-pink: #FF6B9D;
+  --color-play-lime: #C4FF3E;
+  --color-play-deep-purple: #2D1B69;
+  --color-play-plum: #7C6BA0;
+  --color-play-mint: #34D399;
+  --color-play-coral: #FF7A7A;
+  --color-play-peach: #FFB088;
+  --color-play-lavender-silver: #C4B5FD;
+  --color-play-sky: #60A5FA;
+
   /* Size Tokens - Component Sizes */
   --size-card-width: 320px;
   --size-menu-mobile: 280px;
@@ -108,6 +144,29 @@
   --accent-light: #A78BFA;
   --accent-glow: rgba(139, 92, 246, 0.15);
   --accent-bg-tint: rgba(139, 92, 246, 0.04);
+
+  /* ── 묵놀이 (Ink+Play) Design System Tokens ── */
+  /* Ink Layer - Core reading experience */
+  --ink-bg: #F5F0E8;
+  --ink-bg-dark: #1A1611;
+  --ink-text: #1A1611;
+  --ink-text-secondary: #6B6358;
+  --ink-text-muted: #A89F91;
+  --ink-accent: #C5372E;
+  --ink-accent-secondary: #2B4162;
+  --ink-border: rgba(26, 22, 17, 0.08);
+  --ink-border-dark: rgba(245, 240, 232, 0.08);
+
+  /* Play Layer - Social sharing experience */
+  --play-bg: #FAFBFE;
+  --play-bg-alt: #F0EDFF;
+  --play-text: #2D1B69;
+  --play-text-secondary: #7C6BA0;
+  --play-accent: #7C3AED;
+  --play-accent-secondary: #FF6B9D;
+  --play-accent-tertiary: #C4FF3E;
+  --play-border: rgba(124, 58, 237, 0.1);
+  --play-shadow: rgba(124, 58, 237, 0.08);
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -700,4 +759,526 @@ body {
   border-color: rgba(139, 92, 246, 0.2);
   box-shadow: 0 0 30px rgba(139, 92, 246, 0.08);
   transform: translateY(-2px);
+}
+
+/* ══════════════════════════════════════════════════════════
+   묵놀이 (Ink + Play) Hybrid Design System
+   Core experience = Ink (수묵화 aesthetic)
+   Social layer = Play (Gen-Z playful)
+   ══════════════════════════════════════════════════════════ */
+
+/* ── 묵 (Ink) Layer: Typography ──────────────── */
+.ink-display {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.05;
+  font-family: var(--font-ink-heading-ko);
+  color: var(--ink-text);
+  letter-spacing: -0.01em;
+}
+@media (min-width: 768px) {
+  .ink-display { font-size: 5rem; }
+}
+
+.ink-display-en {
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  font-family: var(--font-ink-heading-en);
+  color: var(--ink-text);
+  letter-spacing: -0.02em;
+}
+@media (min-width: 768px) {
+  .ink-display-en { font-size: 4.5rem; }
+}
+
+.ink-h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.15;
+  font-family: var(--font-ink-heading-ko);
+}
+@media (min-width: 768px) {
+  .ink-h1 { font-size: 3rem; }
+}
+
+.ink-h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  font-family: var(--font-ink-heading-ko);
+}
+@media (min-width: 768px) {
+  .ink-h2 { font-size: 1.875rem; }
+}
+
+.ink-body {
+  font-size: 1rem;
+  line-height: 1.75;
+  font-weight: 300;
+  font-family: var(--font-ink-body);
+  color: var(--ink-text-secondary);
+}
+
+/* ── 묵 (Ink) Layer: Backgrounds & Textures ──── */
+.ink-bg-hanji {
+  background-color: var(--ink-bg);
+}
+
+.ink-bg-dark {
+  background-color: var(--ink-bg-dark);
+}
+
+/* Hanji paper fiber texture overlay */
+.ink-texture-hanji {
+  position: relative;
+}
+.ink-texture-hanji::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  z-index: 0;
+}
+
+/* Ink wash gradient background */
+.ink-wash {
+  background: linear-gradient(180deg,
+    var(--ink-bg) 0%,
+    var(--color-ink-hanji-cream) 50%,
+    var(--ink-bg) 100%
+  );
+}
+
+.ink-wash-dark {
+  background: linear-gradient(180deg,
+    var(--ink-bg-dark) 0%,
+    rgba(26, 22, 17, 0.95) 50%,
+    var(--ink-bg-dark) 100%
+  );
+}
+
+/* ── 묵 (Ink) Layer: Components ──────────────── */
+
+/* Brush stroke divider */
+.ink-divider {
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--ink-text-muted) 20%,
+    var(--ink-text) 50%,
+    var(--ink-text-muted) 80%,
+    transparent 100%
+  );
+  opacity: 0.2;
+  border-radius: 1px;
+}
+
+.ink-divider-dark {
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--ink-text-muted) 20%,
+    var(--color-ink-hanji) 50%,
+    var(--ink-text-muted) 80%,
+    transparent 100%
+  );
+  opacity: 0.15;
+}
+
+/* Cinnabar Red Seal Stamp CTA */
+.ink-btn-seal {
+  background-color: var(--ink-accent);
+  color: #FAFAFA;
+  border: none;
+  border-radius: 4px;
+  font-family: var(--font-ink-heading-ko);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 12px 32px;
+  position: relative;
+  transition: all 0.2s ease;
+}
+.ink-btn-seal:hover {
+  background-color: #A52D25;
+  transform: scale(1.02);
+}
+.ink-btn-seal:active {
+  transform: scale(0.98);
+}
+
+/* Indigo secondary button */
+.ink-btn-secondary {
+  background: transparent;
+  color: var(--ink-accent-secondary);
+  border: 1px solid var(--ink-accent-secondary);
+  border-radius: 4px;
+  font-family: var(--font-ink-heading-ko);
+  font-weight: 700;
+  padding: 12px 32px;
+  transition: all 0.2s ease;
+}
+.ink-btn-secondary:hover {
+  background-color: rgba(43, 65, 98, 0.08);
+}
+
+/* Paper card — like layered hanji */
+.ink-card {
+  background: var(--ink-bg);
+  border: 1px solid var(--ink-border);
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(26, 22, 17, 0.06);
+  padding: 24px;
+}
+
+.ink-card-dark {
+  background: rgba(26, 22, 17, 0.95);
+  border: 1px solid var(--ink-border-dark);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Traditional 사주 명식 vertical layout */
+.ink-pillar-vertical {
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  font-family: var(--font-ink-heading-ko);
+  letter-spacing: 0.3em;
+}
+
+/* Ink text colors */
+.ink-text-primary { color: var(--ink-text); }
+.ink-text-secondary { color: var(--ink-text-secondary); }
+.ink-text-muted { color: var(--ink-text-muted); }
+.ink-text-cinnabar { color: var(--ink-accent); }
+.ink-text-indigo { color: var(--ink-accent-secondary); }
+
+/* ── 놀이 (Play) Layer: Typography ───────────── */
+.play-display {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 1.1;
+  font-family: var(--font-play-heading);
+  color: var(--play-text);
+}
+@media (min-width: 768px) {
+  .play-display { font-size: 3.5rem; }
+}
+
+.play-h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.15;
+  font-family: var(--font-play-heading);
+  color: var(--play-text);
+}
+@media (min-width: 768px) {
+  .play-h1 { font-size: 2.5rem; }
+}
+
+.play-h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  font-family: var(--font-play-heading);
+  color: var(--play-text);
+}
+
+.play-body {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: var(--font-play-body);
+  color: var(--play-text-secondary);
+}
+
+.play-handwriting {
+  font-family: var(--font-play-handwriting);
+  font-weight: 400;
+}
+
+/* ── 놀이 (Play) Layer: Backgrounds ──────────── */
+.play-bg {
+  background-color: var(--play-bg);
+}
+
+.play-bg-alt {
+  background-color: var(--play-bg-alt);
+}
+
+/* Gradient mesh background */
+.play-gradient-mesh {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(255, 107, 157, 0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(196, 255, 62, 0.04) 0%, transparent 50%),
+    var(--play-bg);
+}
+
+/* ── 놀이 (Play) Layer: Components ───────────── */
+
+/* Rounded pill button */
+.play-btn {
+  background: linear-gradient(135deg, var(--play-accent) 0%, #9333EA 100%);
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  font-family: var(--font-play-heading);
+  font-weight: 700;
+  padding: 14px 32px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px var(--play-shadow);
+}
+.play-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.2);
+}
+.play-btn:active {
+  transform: scale(0.97);
+}
+
+/* Ghost/outline button */
+.play-btn-ghost {
+  background: transparent;
+  color: var(--play-accent);
+  border: 2px solid var(--play-accent);
+  border-radius: 9999px;
+  font-family: var(--font-play-heading);
+  font-weight: 600;
+  padding: 12px 28px;
+  transition: all 0.2s ease;
+}
+.play-btn-ghost:hover {
+  background: rgba(124, 58, 237, 0.06);
+}
+
+/* Rounded card */
+.play-card {
+  background: white;
+  border-radius: 20px;
+  border: 1px solid rgba(124, 58, 237, 0.06);
+  box-shadow: 0 4px 24px var(--play-shadow);
+  padding: 24px;
+  transition: all 0.2s ease;
+}
+.play-card:hover {
+  box-shadow: 0 8px 32px rgba(124, 58, 237, 0.12);
+  transform: translateY(-2px);
+}
+
+/* Sticker-like tag */
+.play-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--play-bg-alt);
+  color: var(--play-accent);
+  border-radius: 9999px;
+  padding: 4px 12px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: var(--font-play-heading);
+  transform: rotate(-1deg);
+}
+
+/* Blob shape container */
+.play-blob {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+/* Story dots progress indicator */
+.play-story-dots {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+.play-story-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--play-text-secondary);
+  opacity: 0.3;
+  transition: all 0.3s ease;
+}
+.play-story-dot-active {
+  width: 20px;
+  opacity: 1;
+  background: var(--play-accent);
+}
+
+/* Play text colors */
+.play-text-primary { color: var(--play-text); }
+.play-text-secondary { color: var(--play-text-secondary); }
+.play-text-accent { color: var(--play-accent); }
+.play-text-pink { color: var(--play-accent-secondary); }
+
+/* ── 묵놀이 Animations ──────────────────────── */
+
+/* Ink reveal — text appearing like ink bleeding on paper */
+@keyframes ink-reveal {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+  }
+}
+.animate-ink-reveal {
+  opacity: 0;
+  animation: ink-reveal 0.6s ease-out forwards;
+}
+
+/* Seal stamp press — CTA appears with stamping effect */
+@keyframes stamp-press {
+  0% { opacity: 0; transform: scale(1.5) rotate(-5deg); }
+  60% { opacity: 1; transform: scale(0.95) rotate(0deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0deg); }
+}
+.animate-stamp {
+  opacity: 0;
+  animation: stamp-press 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Confetti burst — play layer celebration */
+@keyframes confetti-pop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.animate-confetti-pop {
+  opacity: 0;
+  animation: confetti-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Bounce entrance for play cards */
+@keyframes bounce-in {
+  0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+  60% { opacity: 1; transform: translateY(-4px) scale(1.01); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-bounce-in {
+  opacity: 0;
+  animation: bounce-in 0.5s ease-out forwards;
+}
+
+/* Ink drip — decorative element */
+@keyframes ink-drip {
+  0% { height: 0; opacity: 0; }
+  30% { opacity: 1; }
+  100% { height: 100%; opacity: 0.6; }
+}
+.animate-ink-drip {
+  animation: ink-drip 1.5s ease-out forwards;
+}
+
+/* ── Accessibility ──────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-pulse-glow,
+  .animate-shimmer,
+  .animate-gradient-shift,
+  .animate-glow-breathe,
+  .animate-cta-pulse,
+  .animate-ink-reveal,
+  .animate-stamp,
+  .animate-confetti-pop,
+  .animate-bounce-in,
+  .animate-ink-drip,
+  .animate-skeleton {
+    animation: none !important;
+  }
+
+  .animate-fade-in,
+  .animate-slide-up,
+  .animate-scale-in,
+  .animate-slide-in-right {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+
+  .card-flip-inner {
+    transition: none !important;
+  }
+
+  .glass-interactive,
+  .play-btn,
+  .play-card,
+  .ink-btn-seal {
+    transition: none !important;
+  }
+
+  .card-shine:hover::after {
+    animation: none !important;
+  }
+}
+
+/* Minimum touch target enforcement */
+.touch-target {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* ── Gradient Text for Ink Layer ────────────── */
+.text-gradient-ink {
+  background: linear-gradient(135deg, var(--ink-accent) 0%, var(--ink-accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Gradient Text for Play Layer ──────────── */
+.text-gradient-play {
+  background: linear-gradient(135deg, var(--play-accent) 0%, var(--play-accent-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Scroll Snap for Story-style reading ───── */
+.snap-y-mandatory {
+  scroll-snap-type: y mandatory;
+  overflow-y: auto;
+}
+.snap-section {
+  scroll-snap-align: start;
+  min-height: 100vh;
+}
+
+/* ── Ink layer form styles ─────────────────── */
+.ink-input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--ink-text-muted);
+  color: var(--ink-text);
+  font-family: var(--font-ink-body);
+  padding: 8px 0;
+  transition: border-color 0.2s ease;
+  outline: none;
+}
+.ink-input:focus {
+  border-bottom-color: var(--ink-accent);
+}
+.ink-input::placeholder {
+  color: var(--ink-text-muted);
+}
+
+/* ── Play layer form styles ────────────────── */
+.play-input {
+  background: white;
+  border: 2px solid rgba(124, 58, 237, 0.1);
+  border-radius: 16px;
+  color: var(--play-text);
+  font-family: var(--font-play-body);
+  padding: 14px 18px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+.play-input:focus {
+  border-color: var(--play-accent);
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.08);
 }

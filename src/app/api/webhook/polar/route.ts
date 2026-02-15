@@ -96,7 +96,15 @@ export const POST = webhookSecret
       if (purchaseError) {
         console.error("[Polar Webhook] Failed to record purchase:", purchaseError);
       } else {
-        isDev && console.log("[Polar Webhook] Purchase recorded:", orderId);
+        // Structured log for Vercel Logs — purchase_completed event
+        console.log(JSON.stringify({
+          event: "purchase_completed",
+          orderId,
+          amount,
+          currency,
+          productType,
+          customerEmail,
+        }));
       }
 
       // If there is a reading_id, mark it as paid

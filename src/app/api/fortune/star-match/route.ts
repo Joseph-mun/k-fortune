@@ -52,7 +52,7 @@ export async function POST(request: Request) {
     const star = getStarById(starId);
     if (!star) {
       return NextResponse.json(
-        { error: { code: "STAR_NOT_FOUND", message: "Celebrity not found." } },
+        { error: { code: "STAR_NOT_FOUND", message: "Profile not found." } },
         { status: 404 }
       );
     }
@@ -78,9 +78,9 @@ export async function POST(request: Request) {
     const response = {
       star: {
         id: star.id,
-        stageName: star.stageName,
-        group: star.group,
         emoji: star.emoji,
+        birthDate: star.birthDate,
+        element: star.element,
       },
       overallScore: result.overallScore,
       categories: result.categories,

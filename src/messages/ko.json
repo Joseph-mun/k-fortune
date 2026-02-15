@@ -92,7 +92,8 @@
       "timeOn": "시간 입력",
       "timeOff": "모르겠어요",
       "backToCalendar": "달력으로 돌아가기",
-      "selectDate": "날짜 선택"
+      "selectDate": "날짜 선택",
+      "selectTimePeriod": "태어난 시간대를 선택하세요"
     }
   },
   "reading": {

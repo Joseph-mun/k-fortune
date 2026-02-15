@@ -92,7 +92,8 @@
       "timeOn": "Know time",
       "timeOff": "Don't know",
       "backToCalendar": "Back to calendar",
-      "selectDate": "Select date"
+      "selectDate": "Select date",
+      "selectTimePeriod": "Select your birth time period"
     }
   },
   "reading": {

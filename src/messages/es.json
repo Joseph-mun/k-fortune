@@ -92,7 +92,8 @@
       "timeOn": "Sé la hora",
       "timeOff": "No sé",
       "backToCalendar": "Volver al calendario",
-      "selectDate": "Seleccionar fecha"
+      "selectDate": "Seleccionar fecha",
+      "selectTimePeriod": "Selecciona tu período de nacimiento"
     }
   },
   "reading": {

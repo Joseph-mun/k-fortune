@@ -24,6 +24,27 @@ const MONTHS_EN = [
   "July", "August", "September", "October", "November", "December",
 ];
 
+/* Saju 12 time periods (시주) — earthly branches mapped to zodiac animals */
+const SAJU_PERIODS = [
+  { emoji: "🐀", range: "23-01", mid: 0 },
+  { emoji: "🐂", range: "01-03", mid: 2 },
+  { emoji: "🐅", range: "03-05", mid: 4 },
+  { emoji: "🐇", range: "05-07", mid: 6 },
+  { emoji: "🐉", range: "07-09", mid: 8 },
+  { emoji: "🐍", range: "09-11", mid: 10 },
+  { emoji: "🐴", range: "11-13", mid: 12 },
+  { emoji: "🐑", range: "13-15", mid: 14 },
+  { emoji: "🐵", range: "15-17", mid: 16 },
+  { emoji: "🐔", range: "17-19", mid: 18 },
+  { emoji: "🐕", range: "19-21", mid: 20 },
+  { emoji: "🐷", range: "21-23", mid: 22 },
+];
+
+function getSelectedPeriodIndex(hour: number): number {
+  if (hour >= 23 || hour < 1) return 0;
+  return Math.floor((hour + 1) / 2);
+}
+
 function getDaysInMonth(year: number, month: number) {
   return new Date(year, month, 0).getDate();
 }
@@ -54,11 +75,10 @@ export function CalendarPopup({
 
   const [viewYear, setViewYear] = useState(year ? Number(year) : currentYear - 30);
   const [viewMonth, setViewMonth] = useState(month ? Number(month) : now.getMonth() + 1);
-  const [mode, setMode] = useState<"calendar" | "year">("calendar");
+  const [mode, setMode] = useState<"calendar" | "year" | "time">("calendar");
 
   const timeHour = birthTime ? parseInt(birthTime.split(":")[0], 10) : 9;
-  const timeMin = birthTime ? parseInt(birthTime.split(":")[1], 10) : 41;
-  const isAM = timeHour < 12;
+  const selectedPeriod = getSelectedPeriodIndex(timeHour);
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -122,19 +142,10 @@ export function CalendarPopup({
     setMode("calendar");
   }
 
-  function toggleAMPM() {
-    const h = timeHour >= 12 ? timeHour - 12 : timeHour + 12;
-    onTimeChange(`${String(h).padStart(2, "0")}:${String(timeMin).padStart(2, "0")}`);
-  }
-
-  function setHour(h: number) {
-    const clamped = Math.max(0, Math.min(23, h));
-    onTimeChange(`${String(clamped).padStart(2, "0")}:${String(timeMin).padStart(2, "0")}`);
-  }
-
-  function setMinute(m: number) {
-    const clamped = Math.max(0, Math.min(59, m));
-    onTimeChange(`${String(timeHour).padStart(2, "0")}:${String(clamped).padStart(2, "0")}`);
+  function selectPeriod(index: number) {
+    const period = SAJU_PERIODS[index];
+    onTimeChange(`${String(period.mid).padStart(2, "0")}:00`);
+    setMode("calendar");
   }
 
   const isSelected = (d: number) =>
@@ -149,12 +160,13 @@ export function CalendarPopup({
   const displayValue =
     year && month && day
       ? `${year}. ${month.padStart(2, "0")}. ${day.padStart(2, "0")}` +
-        (!unknownTime && birthTime ? ` ${String(timeHour % 12 || 12).padStart(2, "0")}:${String(timeMin).padStart(2, "0")} ${isAM ? t("am") : t("pm")}` : "")
+        (!unknownTime && birthTime
+          ? ` ${SAJU_PERIODS[selectedPeriod].emoji} ${SAJU_PERIODS[selectedPeriod].range}`
+          : "")
       : "";
 
   const yearStart = Math.floor(viewYear / 12) * 12;
   const yearRange = Array.from({ length: 12 }, (_, i) => yearStart + i);
-  const display12Hour = timeHour % 12 || 12;
 
   const calendarPanel = (
     <div
@@ -233,67 +245,30 @@ export function CalendarPopup({
               <span className="text-sm font-semibold text-text-primary">{t("time")}</span>
               <div className="flex items-center gap-2">
                 {!unknownTime && (
-                  <div className="flex items-center bg-bg-surface rounded-lg overflow-hidden">
-                    <div className="flex items-center px-2 py-1">
-                      <input
-                        type="number"
-                        min={1}
-                        max={12}
-                        value={display12Hour}
-                        onChange={(e) => {
-                          let v = parseInt(e.target.value, 10) || 0;
-                          if (v > 12) v = 12;
-                          if (v < 1) v = 1;
-                          const h24 = isAM ? (v === 12 ? 0 : v) : (v === 12 ? 12 : v + 12);
-                          setHour(h24);
-                        }}
-                        className="w-6 bg-transparent text-center text-sm font-semibold text-text-primary outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                      />
-                      <span className="text-sm font-semibold text-text-primary mx-0.5">:</span>
-                      <input
-                        type="number"
-                        min={0}
-                        max={59}
-                        value={String(timeMin).padStart(2, "0")}
-                        onChange={(e) => {
-                          let v = parseInt(e.target.value, 10) || 0;
-                          if (v > 59) v = 59;
-                          if (v < 0) v = 0;
-                          setMinute(v);
-                        }}
-                        className="w-6 bg-transparent text-center text-sm font-semibold text-text-primary outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-                      />
-                    </div>
-                    <div className="flex border-l border-white/[0.08]">
-                      <button
-                        type="button"
-                        onClick={() => { if (!isAM) toggleAMPM(); }}
-                        className={`px-2 py-1 text-[11px] font-semibold transition-colors cursor-pointer ${isAM ? "bg-purple-500 text-white" : "text-text-muted hover:text-text-primary"}`}
-                      >
-                        {t("am")}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => { if (isAM) toggleAMPM(); }}
-                        className={`px-2 py-1 text-[11px] font-semibold transition-colors cursor-pointer ${!isAM ? "bg-purple-500 text-white" : "text-text-muted hover:text-text-primary"}`}
-                      >
-                        {t("pm")}
-                      </button>
-                    </div>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setMode("time")}
+                    className="flex items-center gap-1.5 bg-bg-surface rounded-lg px-3 py-1.5 hover:bg-white/[0.08] transition-colors cursor-pointer"
+                  >
+                    <span className="text-base leading-none">{SAJU_PERIODS[selectedPeriod].emoji}</span>
+                    <span className="text-sm font-semibold text-purple-400">{SAJU_PERIODS[selectedPeriod].range}</span>
+                  </button>
                 )}
                 <div className="flex bg-bg-surface rounded-lg overflow-hidden">
                   <button
                     type="button"
-                    onClick={() => onUnknownTimeChange(false)}
-                    className={`px-2 py-1 text-[11px] font-semibold transition-colors cursor-pointer ${!unknownTime ? "bg-purple-500/40 text-text-primary" : "text-text-muted hover:text-text-primary"}`}
+                    onClick={() => {
+                      onUnknownTimeChange(false);
+                      if (!birthTime) setMode("time");
+                    }}
+                    className={`px-2 py-1.5 text-[11px] font-semibold transition-colors cursor-pointer ${!unknownTime ? "bg-purple-500/40 text-text-primary" : "text-text-muted hover:text-text-primary"}`}
                   >
                     {t("timeOn")}
                   </button>
                   <button
                     type="button"
                     onClick={() => onUnknownTimeChange(true)}
-                    className={`px-2 py-1 text-[11px] font-semibold transition-colors cursor-pointer ${unknownTime ? "bg-purple-500/40 text-text-primary" : "text-text-muted hover:text-text-primary"}`}
+                    className={`px-2 py-1.5 text-[11px] font-semibold transition-colors cursor-pointer ${unknownTime ? "bg-purple-500/40 text-text-primary" : "text-text-muted hover:text-text-primary"}`}
                   >
                     {t("timeOff")}
                   </button>
@@ -301,8 +276,45 @@ export function CalendarPopup({
               </div>
             </div>
           </>
+        ) : mode === "time" ? (
+          <>
+            {/* Time period selector */}
+            <div className="flex items-center justify-between mb-3">
+              <button
+                type="button"
+                onClick={() => setMode("calendar")}
+                className="flex items-center gap-1 text-sm font-semibold text-purple-400 hover:opacity-80 transition-opacity cursor-pointer"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+                {t("backToCalendar")}
+              </button>
+            </div>
+            <p className="text-xs text-text-muted mb-3">{t("selectTimePeriod")}</p>
+            <div className="grid grid-cols-3 gap-1.5">
+              {SAJU_PERIODS.map((period, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => selectPeriod(i)}
+                  className={`
+                    flex flex-col items-center gap-0.5 py-2.5 px-1 rounded-lg text-xs font-medium transition-all cursor-pointer
+                    ${selectedPeriod === i
+                      ? "bg-purple-500 text-white ring-1 ring-purple-400/50"
+                      : "hover:bg-white/[0.08] text-purple-400 bg-bg-surface"
+                    }
+                  `}
+                >
+                  <span className="text-lg leading-none">{period.emoji}</span>
+                  <span className={`text-[11px] ${selectedPeriod === i ? "text-white/90" : "text-text-secondary"}`}>
+                    {period.range}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </>
         ) : (
           <>
+            {/* Year selector */}
             <div className="flex items-center justify-between mb-3">
               <button type="button" onClick={() => setViewYear((y) => y - 12)} className="p-1.5 rounded-full hover:bg-white/[0.06] transition-colors cursor-pointer">
                 <ChevronLeft className="w-4 h-4 text-purple-400" />

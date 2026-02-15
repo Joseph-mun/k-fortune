@@ -7,14 +7,14 @@ import { Share2, Sparkles, ArrowRight, Compass, Palette, Hash, Star } from "luci
 import { track } from "@vercel/analytics";
 import { Link } from "@/i18n/navigation";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { SkeletonReading } from "@/components/fortune/SkeletonReading";
 import { ReadingSummary } from "@/components/fortune/ReadingSummary";
 import { FourPillarsDisplay } from "@/components/fortune/FourPillarsDisplay";
 import { ElementChart } from "@/components/fortune/ElementChart";
-import { PaywallOverlay } from "@/components/fortune/PaywallOverlay";
+import { PaywallOverlay, getCheckoutIntent, clearCheckoutIntent } from "@/components/fortune/PaywallOverlay";
 import { Card } from "@/components/ui/Card";
 import { GraphCard } from "@/components/ui/GraphCard";
 import { Button } from "@/components/ui/Button";
@@ -26,6 +26,8 @@ import { MetaphorIcon } from "@/components/icons/MetaphorIcon";
 import { useIntersectionReveal } from "@/hooks/useIntersectionReveal";
 import { reconstructReading } from "@/lib/saju";
 import { useReadingStore } from "@/stores/useReadingStore";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { useCheckout } from "@/features/payment/hooks/useCheckout";
 import { AiInterpretation } from "@/components/fortune/AiInterpretation";
 import { POLAR_PRODUCTS, PRICE_DISPLAY } from "@/lib/polar";
 
@@ -36,8 +38,77 @@ export default function ReadingClient() {
   const tCommon = useTranslations("common");
   const tInterp = useTranslations("interpretation");
   const storedReading = useReadingStore((s) => s.getReading(id));
+  const getBirthInput = useReadingStore((s) => s.getBirthInput);
+  const { isAuthenticated, user, isLoading: authLoading } = useAuth();
+  const { checkout } = useCheckout();
+  const intentProcessedRef = useRef(false);
+  const [serverReading, setServerReading] = useState<typeof storedReading | null>(null);
 
-  if (!storedReading) {
+  // Post-login: detect checkout intent and auto-resume payment flow
+  useEffect(() => {
+    if (authLoading || intentProcessedRef.current) return;
+    if (!isAuthenticated) return;
+
+    const intent = getCheckoutIntent();
+    if (!intent || intent.readingId !== id) return;
+
+    intentProcessedRef.current = true;
+    clearCheckoutIntent();
+
+    // Onboard: save birth data + link reading
+    const birthInput = getBirthInput(id);
+    const onboard = async () => {
+      try {
+        await fetch("/api/user/onboard", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            readingId: id,
+            birthDate: birthInput?.birthDate,
+            birthTime: birthInput?.birthTime,
+            timezone: birthInput?.timezone,
+            gender: birthInput?.gender,
+            locale: birthInput?.locale || locale,
+          }),
+        });
+      } catch {
+        // Non-blocking — continue to checkout even if onboard fails
+      }
+
+      // Auto-redirect to checkout
+      checkout({
+        productId: intent.productId,
+        readingId: id,
+        customerEmail: user?.email || undefined,
+        userId: (user as Record<string, unknown>)?.id as string | undefined,
+      });
+    };
+
+    onboard();
+  }, [authLoading, isAuthenticated, id, user, locale, getBirthInput, checkout]);
+
+  // Server-side reading fallback for returning users
+  useEffect(() => {
+    if (storedReading || !isAuthenticated || authLoading) return;
+
+    const fetchServerReading = async () => {
+      try {
+        const res = await fetch(`/api/user/readings/${id}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data) setServerReading(data);
+        }
+      } catch {
+        // Silently fail
+      }
+    };
+
+    fetchServerReading();
+  }, [storedReading, isAuthenticated, authLoading, id]);
+
+  const activeReading = storedReading || serverReading;
+
+  if (!activeReading) {
     return (
       <main className="flex flex-col items-center min-h-screen">
         <div className="w-full px-4">
@@ -48,7 +119,7 @@ export default function ReadingClient() {
     );
   }
 
-  const reading = reconstructReading(storedReading);
+  const reading = reconstructReading(activeReading);
   const readingTrackedRef = useRef(false);
 
   useEffect(() => {
@@ -113,7 +184,7 @@ export default function ReadingClient() {
           <ReadingSummary
             dayMaster={reading.dayMaster}
             elementAnalysis={reading.elementAnalysis}
-            luckyInfo={storedReading.luckyInfo}
+            luckyInfo={activeReading.luckyInfo}
           />
 
           {/* Accordion: Four Pillars of Destiny */}
@@ -213,7 +284,7 @@ export default function ReadingClient() {
                   <Palette className="w-4 h-4 text-purple-400" />
                 </div>
                 <p className="typo-overline mb-1">{t("lucky.color")}</p>
-                <p className="text-lg font-bold text-text-primary">{storedReading.luckyInfo.color}</p>
+                <p className="text-lg font-bold text-text-primary">{activeReading.luckyInfo.color}</p>
               </Card>
               <Card className="text-center py-5 glass-interactive cursor-default">
                 <div className="w-8 h-8 rounded-lg flex items-center justify-center mx-auto mb-2" style={{ background: "rgba(245,158,11,0.1)" }}>
@@ -221,7 +292,7 @@ export default function ReadingClient() {
                 </div>
                 <p className="typo-overline mb-1">{t("lucky.number")}</p>
                 <p className="text-lg font-bold text-text-primary font-[family-name:var(--font-mono)]">
-                  {storedReading.luckyInfo.number}
+                  {activeReading.luckyInfo.number}
                 </p>
               </Card>
               <Card className="text-center py-5 glass-interactive cursor-default">
@@ -229,7 +300,7 @@ export default function ReadingClient() {
                   <Compass className="w-4 h-4 text-indigo-400" />
                 </div>
                 <p className="typo-overline mb-1">{t("lucky.direction")}</p>
-                <p className="text-lg font-bold text-text-primary">{storedReading.luckyInfo.direction}</p>
+                <p className="text-lg font-bold text-text-primary">{activeReading.luckyInfo.direction}</p>
               </Card>
             </div>
           </Accordion>
@@ -245,9 +316,9 @@ export default function ReadingClient() {
                 <AiInterpretation
                   readingId={id}
                   readingData={{
-                    fourPillars: storedReading.fourPillars,
-                    elementAnalysis: storedReading.elementAnalysis,
-                    dayMaster: storedReading.dayMaster,
+                    fourPillars: activeReading.fourPillars,
+                    elementAnalysis: activeReading.elementAnalysis,
+                    dayMaster: activeReading.dayMaster,
                   }}
                   mode="preview"
                   locale={locale}

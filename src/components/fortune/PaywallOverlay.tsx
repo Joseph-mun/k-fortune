@@ -14,9 +14,43 @@ import {
 } from "lucide-react";
 import { track } from "@vercel/analytics";
 import { Button } from "@/components/ui/Button";
+import { signIn } from "next-auth/react";
 import { useCheckout } from "@/features/payment/hooks/useCheckout";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 import { POLAR_PRODUCTS, PRICE_DISPLAY, TRIAL_DAYS } from "@/lib/polar";
 import type { Element, StemMetaphor } from "@/lib/saju/types";
+
+/* ─── Checkout intent persistence ─── */
+
+const CHECKOUT_INTENT_KEY = "saju-checkout-intent";
+
+export interface CheckoutIntent {
+  readingId?: string;
+  productId: string;
+  returnPath: string;
+}
+
+function saveCheckoutIntent(intent: CheckoutIntent): void {
+  if (typeof window !== "undefined") {
+    localStorage.setItem(CHECKOUT_INTENT_KEY, JSON.stringify(intent));
+  }
+}
+
+export function getCheckoutIntent(): CheckoutIntent | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const raw = localStorage.getItem(CHECKOUT_INTENT_KEY);
+    return raw ? (JSON.parse(raw) as CheckoutIntent) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function clearCheckoutIntent(): void {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem(CHECKOUT_INTENT_KEY);
+  }
+}
 
 /* ─── 24h countdown discount logic ─── */
 
@@ -82,6 +116,7 @@ export function PaywallOverlay({
 }: PaywallOverlayProps) {
   const t = useTranslations("paywall");
   const { checkout, loading } = useCheckout();
+  const { isAuthenticated, user } = useAuth();
   const displayPrice = price || PRICE_DISPLAY.DETAILED_READING;
   const trackedRef = useRef(false);
 
@@ -128,15 +163,37 @@ export function PaywallOverlay({
       source: "paywall",
       productId: productId || "",
       discountActive: String(discountActive),
+      authenticated: String(isAuthenticated),
     });
+
     if (onUnlock) {
       onUnlock();
       return;
     }
-    if (productId) {
-      checkout({ productId, readingId });
+
+    if (!isAuthenticated) {
+      // Save checkout intent before redirecting to login
+      if (productId) {
+        saveCheckoutIntent({
+          readingId,
+          productId,
+          returnPath: window.location.pathname,
+        });
+      }
+      signIn("google", { callbackUrl: window.location.href });
+      return;
     }
-  }, [onUnlock, productId, readingId, checkout, discountActive]);
+
+    // Authenticated — proceed to checkout
+    if (productId) {
+      checkout({
+        productId,
+        readingId,
+        customerEmail: user?.email || undefined,
+        userId: (user as Record<string, unknown>)?.id as string | undefined,
+      });
+    }
+  }, [onUnlock, productId, readingId, checkout, discountActive, isAuthenticated, user]);
 
   // Resolve element-specific personalized teaser
   const elementTeaserKey = dayMasterElement
@@ -286,7 +343,11 @@ export function PaywallOverlay({
               disabled={loading}
             >
               <Sparkles className="w-4 h-4" />
-              {discountActive ? t("unlockButtonDiscount") : t("unlockButton")}
+              {!isAuthenticated
+                ? t("loginToUnlock")
+                : discountActive
+                  ? t("unlockButtonDiscount")
+                  : t("unlockButton")}
             </Button>
 
             <p className="text-[10px] text-text-muted">
@@ -294,18 +355,28 @@ export function PaywallOverlay({
             </p>
 
             {/* Premium trial upsell */}
-            <a
-              href={`/api/checkout?products=${POLAR_PRODUCTS.PREMIUM_SUBSCRIPTION}`}
+            <button
+              type="button"
               className="text-xs text-purple-400 hover:text-purple-300 transition-colors"
-              onClick={() =>
+              onClick={(e) => {
+                e.preventDefault();
                 track("checkout_initiated", {
                   source: "paywall_trial",
                   productId: POLAR_PRODUCTS.PREMIUM_SUBSCRIPTION,
-                })
-              }
+                });
+                if (!isAuthenticated) {
+                  saveCheckoutIntent({
+                    productId: POLAR_PRODUCTS.PREMIUM_SUBSCRIPTION,
+                    returnPath: window.location.pathname,
+                  });
+                  signIn("google", { callbackUrl: window.location.href });
+                  return;
+                }
+                window.location.href = `/api/checkout?products=${POLAR_PRODUCTS.PREMIUM_SUBSCRIPTION}`;
+              }}
             >
               {t("trialUpsell", { days: TRIAL_DAYS })}
-            </a>
+            </button>
 
             {/* Feature checklist */}
             <ul className="text-xs text-text-muted text-left space-y-1.5 mt-2">

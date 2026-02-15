@@ -14,6 +14,7 @@ interface CheckoutOptions {
   productId: string;
   customerEmail?: string;
   readingId?: string;
+  userId?: string;
   successUrl?: string;
 }
 
@@ -41,7 +42,11 @@ export function useCheckout(): UseCheckoutReturn {
       }
 
       if (options.readingId) {
-        params.set("metadata[readingId]", options.readingId);
+        params.set("metadata[reading_id]", options.readingId);
+      }
+
+      if (options.userId) {
+        params.set("metadata[user_id]", options.userId);
       }
 
       // Redirect to the Polar checkout endpoint

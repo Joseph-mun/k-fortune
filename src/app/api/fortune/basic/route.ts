@@ -129,12 +129,8 @@ export async function POST(request: Request) {
             gender: input.gender,
             day_master_metaphor: reading.dayMaster.metaphorInfo.displayName,
             locale: input.locale,
-            result: {
-              dayMasterElement: reading.dayMaster.element,
-              dayMasterYinYang: reading.dayMaster.yinYang,
-              metaphorIcon: reading.dayMaster.metaphorInfo.icon,
-              metaphorId: reading.dayMaster.metaphorInfo.id,
-            },
+            birth_time: input.birthTime,
+            result: response,
           })
       ).catch(console.error);
     } catch {

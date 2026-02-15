@@ -3,11 +3,13 @@
 import { useState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Menu, X, Sparkles } from "lucide-react";
+import { Menu, X, Sparkles, LogIn, LogOut } from "lucide-react";
 import { LocaleSwitcher } from "./LocaleSwitcher";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 
 export function NavBar() {
   const tNav = useTranslations("nav");
+  const { isAuthenticated, user, login, logout } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -102,6 +104,34 @@ export function NavBar() {
           <LocaleSwitcher />
         </div>
 
+        {/* Auth state — desktop */}
+        <div className="hidden md:block">
+          {isAuthenticated ? (
+            <button
+              onClick={() => logout()}
+              className="flex items-center gap-2 px-3 py-1.5 text-sm text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/[0.05]"
+              title={user?.email || ""}
+            >
+              {user?.image ? (
+                <img src={user.image} alt="" className="w-5 h-5 rounded-full" />
+              ) : (
+                <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center text-[10px] text-purple-300">
+                  {user?.name?.[0] || "U"}
+                </div>
+              )}
+              <LogOut className="w-3.5 h-3.5" />
+            </button>
+          ) : (
+            <button
+              onClick={() => login("google")}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/[0.05]"
+            >
+              <LogIn className="w-3.5 h-3.5" />
+              {tNav("signIn")}
+            </button>
+          )}
+        </div>
+
         {/* Mobile hamburger */}
         <button
           onClick={() => setMobileMenuOpen(true)}
@@ -162,8 +192,32 @@ export function NavBar() {
               ))}
             </div>
 
-            {/* Footer: Locale switcher */}
-            <div className="p-4 border-t border-white/[0.06]">
+            {/* Footer: Auth + Locale switcher */}
+            <div className="p-4 border-t border-white/[0.06] flex flex-col gap-3">
+              {isAuthenticated ? (
+                <button
+                  onClick={() => { logout(); setMobileMenuOpen(false); }}
+                  className="flex items-center gap-2 px-3 py-2.5 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-white/[0.05] w-full"
+                >
+                  {user?.image ? (
+                    <img src={user.image} alt="" className="w-5 h-5 rounded-full" />
+                  ) : (
+                    <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center text-[10px] text-purple-300">
+                      {user?.name?.[0] || "U"}
+                    </div>
+                  )}
+                  <span className="flex-1 text-left truncate">{user?.name || user?.email}</span>
+                  <LogOut className="w-3.5 h-3.5 text-text-muted" />
+                </button>
+              ) : (
+                <button
+                  onClick={() => { login("google"); setMobileMenuOpen(false); }}
+                  className="flex items-center gap-2 px-3 py-2.5 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-white/[0.05] w-full"
+                >
+                  <LogIn className="w-3.5 h-3.5" />
+                  {tNav("signIn")}
+                </button>
+              )}
               <LocaleSwitcher />
             </div>
           </div>

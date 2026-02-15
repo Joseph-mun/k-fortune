@@ -50,7 +50,8 @@ export const POST = webhookSecret
       const userId = order.metadata.user_id ? String(order.metadata.user_id) : null;
       const readingId = order.metadata.reading_id ? String(order.metadata.reading_id) : null;
 
-      // Validate user_id exists in database if provided
+      // Resolve auth_id → Supabase UUID for consistent user references
+      let supabaseUserId: string | null = null;
       if (userId) {
         const { data: user } = await supabase
           .from("users")
@@ -62,29 +63,31 @@ export const POST = webhookSecret
           console.error(`[Polar Webhook] Invalid user_id in metadata: ${userId}`);
           return;
         }
+        supabaseUserId = user.id;
       }
 
-      // Validate reading_id belongs to user if both are provided
-      if (readingId && userId) {
-        const { data: reading } = await supabase
+      // Resolve reading UUID from session_id
+      let readingUuid: string | null = null;
+      if (readingId) {
+        const query = supabase
           .from("readings")
           .select("id")
-          .eq("id", readingId)
-          .eq("user_id", userId)
-          .maybeSingle();
+          .eq("session_id", readingId);
 
-        if (!reading) {
-          console.error(`[Polar Webhook] reading_id ${readingId} does not belong to user ${userId}`);
-          return;
+        if (supabaseUserId) {
+          query.eq("user_id", userId);
         }
+
+        const { data: reading } = await query.maybeSingle();
+        readingUuid = reading?.id || null;
       }
 
       // Record purchase in database
       const { error: purchaseError } = await supabase
         .from("purchases")
         .insert({
-          user_id: userId,
-          reading_id: readingId,
+          user_id: supabaseUserId,
+          reading_id: readingUuid,
           polar_order_id: orderId,
           polar_customer_id: order.customer.id,
           product_type: productType,
@@ -107,12 +110,12 @@ export const POST = webhookSecret
         }));
       }
 
-      // If there is a reading_id, mark it as paid
+      // If there is a reading, mark it as paid
       if (readingId) {
         const { error: readingError } = await supabase
           .from("readings")
           .update({ is_paid: true })
-          .eq("id", readingId);
+          .eq("session_id", readingId);
 
         if (readingError) {
           console.error("[Polar Webhook] Failed to update reading:", readingError);

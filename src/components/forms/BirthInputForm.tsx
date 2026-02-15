@@ -26,6 +26,7 @@ export function BirthInputForm() {
   const locale = useLocale();
   const router = useRouter();
   const setReading = useReadingStore((s) => s.setReading);
+  const setBirthInput = useReadingStore((s) => s.setBirthInput);
 
   const [currentStep, setCurrentStep] = useState(0);
   const [year, setYear] = useState("");
@@ -137,6 +138,13 @@ export function BirthInputForm() {
 
       const data = await res.json();
       setReading(data.id, data);
+      setBirthInput(data.id, {
+        birthDate,
+        birthTime: unknownTime ? null : birthTime || null,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        gender,
+        locale,
+      });
       router.push(`/${locale}/reading/${data.id}`);
     } catch {
       setShowFlash(false);

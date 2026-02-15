@@ -3,6 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { Analytics } from "@vercel/analytics/react";
 import { routing } from "@/i18n/routing";
+import { AuthProvider } from "@/components/providers/AuthProvider";
 import {
   pretendard,
   nanumMyeongjo,
@@ -44,7 +45,9 @@ export default async function LocaleLayout({
           Skip to main content
         </a>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {children}
+          <AuthProvider>
+            {children}
+          </AuthProvider>
         </NextIntlClientProvider>
         <Analytics />
       </body>

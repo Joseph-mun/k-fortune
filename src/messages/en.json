@@ -25,7 +25,7 @@
     "heroHighlight": "told.",
     "heroDescription": "In Korea, your birth date tells a 5,000-year-old story called Saju — the Four Pillars of Destiny. Discover yours in 30 seconds, starting at just $1.99.",
     "cta": "What's My Saju?",
-    "ctaSubtext": "No sign-up required \u00b7 30 seconds",
+    "ctaSubtext": "No sign-up required · 30 seconds",
     "trustBadge": "Trusted by {count}+ seekers worldwide",
     "whatIsTitle": "What is Saju?",
     "whatIsDescription": "Think of it as Korea's answer to astrology — but based on the exact moment you were born. Saju has been guiding decisions in Korea for centuries, from relationships to career moves. Now it's going global.",
@@ -171,52 +171,102 @@
     "great-tree": {
       "name": "The Great Tree",
       "nature": "Like an ancient tree reaching for the sky, you stand tall with unwavering determination and natural leadership.",
-      "keywords": ["Growth", "Leadership", "Ambition", "Resilience"]
+      "keywords": [
+        "Growth",
+        "Leadership",
+        "Ambition",
+        "Resilience"
+      ]
     },
     "flower": {
       "name": "The Flower",
       "nature": "Like a graceful flower bending with the wind, you adapt beautifully to any environment with charm and elegance.",
-      "keywords": ["Flexibility", "Grace", "Creativity", "Diplomacy"]
+      "keywords": [
+        "Flexibility",
+        "Grace",
+        "Creativity",
+        "Diplomacy"
+      ]
     },
     "sun": {
       "name": "The Sun",
       "nature": "Like the sun itself, you radiate warmth and light wherever you go, naturally drawing others to your brilliance.",
-      "keywords": ["Radiance", "Passion", "Charisma", "Leadership"]
+      "keywords": [
+        "Radiance",
+        "Passion",
+        "Charisma",
+        "Leadership"
+      ]
     },
     "candle": {
       "name": "The Candle",
       "nature": "Like a gentle candlelight, you offer warmth and intimacy, illuminating the lives of those closest to you.",
-      "keywords": ["Warmth", "Sensitivity", "Devotion", "Insight"]
+      "keywords": [
+        "Warmth",
+        "Sensitivity",
+        "Devotion",
+        "Insight"
+      ]
     },
     "mountain": {
       "name": "The Mountain",
       "nature": "Like an immovable mountain, you are the pillar of stability and trust that everyone depends on.",
-      "keywords": ["Stability", "Trust", "Patience", "Strength"]
+      "keywords": [
+        "Stability",
+        "Trust",
+        "Patience",
+        "Strength"
+      ]
     },
     "garden": {
       "name": "The Garden",
       "nature": "Like a nurturing garden, you cultivate growth in others and create abundance wherever you plant your roots.",
-      "keywords": ["Nurturing", "Abundance", "Care", "Harmony"]
+      "keywords": [
+        "Nurturing",
+        "Abundance",
+        "Care",
+        "Harmony"
+      ]
     },
     "sword": {
       "name": "The Sword",
       "nature": "Like a finely forged sword, you cut through confusion with decisive action and an unwavering sense of justice.",
-      "keywords": ["Decisiveness", "Justice", "Courage", "Integrity"]
+      "keywords": [
+        "Decisiveness",
+        "Justice",
+        "Courage",
+        "Integrity"
+      ]
     },
     "jewel": {
       "name": "The Jewel",
       "nature": "Like a polished jewel, you shine with refined elegance and possess an eye for detail that others admire.",
-      "keywords": ["Precision", "Elegance", "Refinement", "Brilliance"]
+      "keywords": [
+        "Precision",
+        "Elegance",
+        "Refinement",
+        "Brilliance"
+      ]
     },
     "ocean": {
       "name": "The Ocean",
       "nature": "Like the vast ocean, you hold immeasurable depth and power, embracing all with an open and generous spirit.",
-      "keywords": ["Depth", "Power", "Wisdom", "Generosity"]
+      "keywords": [
+        "Depth",
+        "Power",
+        "Wisdom",
+        "Generosity"
+      ]
     },
     "rain": {
       "name": "The Rain",
       "nature": "Like gentle rain nourishing the earth, you bring clarity and renewal, cleansing and refreshing everything you touch.",
-      "keywords": ["Clarity", "Wisdom", "Renewal", "Gentleness"]
+      "keywords": [
+        "Clarity",
+        "Wisdom",
+        "Renewal",
+        "Gentleness"
+      ]
     }
   },
   "pricing": {
@@ -232,13 +282,25 @@
     "basic": {
       "name": "Basic Reading",
       "price": "FREE",
-      "features": ["Four Pillars Analysis", "Element Balance", "Day Master Identity", "Lucky Info"],
+      "features": [
+        "Four Pillars Analysis",
+        "Element Balance",
+        "Day Master Identity",
+        "Lucky Info"
+      ],
       "cta": "Get Free Reading"
     },
     "detailed": {
       "name": "Full Reading",
       "price": "{price}",
-      "features": ["Everything in Basic", "Career & Purpose", "Love & Relationships", "Health & Wellness", "2026 Fortune", "Life Cycles Map"],
+      "features": [
+        "Everything in Basic",
+        "Career & Purpose",
+        "Love & Relationships",
+        "Health & Wellness",
+        "2026 Fortune",
+        "Life Cycles Map"
+      ],
       "cta": "Buy Now"
     },
     "premium": {
@@ -247,7 +309,13 @@
       "period": "/month",
       "periodYear": "/year",
       "saveBadge": "Save 30%",
-      "features": ["All Readings Unlimited", "Monthly Fortune Updates", "Compatibility Analysis", "All Destiny Card Styles", "Priority Support"],
+      "features": [
+        "All Readings Unlimited",
+        "Monthly Fortune Updates",
+        "Compatibility Analysis",
+        "All Destiny Card Styles",
+        "Priority Support"
+      ],
       "cta": "Subscribe",
       "trialCta": "Start {days}-Day Free Trial",
       "trialNote": "Free for {days} days, then auto-renews. Cancel anytime."
@@ -418,10 +486,12 @@
     "previewAdvice": "Life Advice",
     "previewAdviceDesc": "Focus on building strong foundations in your early years...",
     "priceTag": "Only {price}",
-    "urgency": "One-time purchase \u00b7 Instant access",
-    "urgencyDiscount": "Limited-time offer \u00b7 50% off \u00b7 Instant access",
+    "urgency": "One-time purchase · Instant access",
+    "urgencyDiscount": "Limited-time offer · 50% off · Instant access",
     "discountBanner": "Special offer ends in {time}",
-    "trialUpsell": "Or try Premium free for {days} days \u2192"
+    "trialUpsell": "Or try Premium free for {days} days →",
+    "loginToUnlock": "Sign in to Unlock",
+    "loginSubtext": "Sign in with Google in 3 seconds — permanent access to your reading"
   },
   "interpretation": {
     "personality": {
@@ -437,18 +507,58 @@
       "rain": "You are The Rain — gentle, wise, and transformative. Your Yin Water energy cleanses and renews, bringing fresh perspective and quiet clarity wherever you flow."
     },
     "strengths": {
-      "wood": ["Creative vision", "Natural leadership", "Growth mindset", "Compassion"],
-      "fire": ["Charisma", "Enthusiasm", "Strong intuition", "Warm-hearted"],
-      "earth": ["Reliability", "Practical wisdom", "Patience", "Groundedness"],
-      "metal": ["Discipline", "Clear judgment", "Integrity", "Determination"],
-      "water": ["Adaptability", "Deep thinking", "Emotional intelligence", "Resourcefulness"]
+      "wood": [
+        "Creative vision",
+        "Natural leadership",
+        "Growth mindset",
+        "Compassion"
+      ],
+      "fire": [
+        "Charisma",
+        "Enthusiasm",
+        "Strong intuition",
+        "Warm-hearted"
+      ],
+      "earth": [
+        "Reliability",
+        "Practical wisdom",
+        "Patience",
+        "Groundedness"
+      ],
+      "metal": [
+        "Discipline",
+        "Clear judgment",
+        "Integrity",
+        "Determination"
+      ],
+      "water": [
+        "Adaptability",
+        "Deep thinking",
+        "Emotional intelligence",
+        "Resourcefulness"
+      ]
     },
     "weaknesses": {
-      "wood": ["Stubbornness", "Overcommitment"],
-      "fire": ["Impatience", "Burnout tendency"],
-      "earth": ["Overthinking", "Resistance to change"],
-      "metal": ["Perfectionism", "Emotional rigidity"],
-      "water": ["Indecisiveness", "Emotional overwhelm"]
+      "wood": [
+        "Stubbornness",
+        "Overcommitment"
+      ],
+      "fire": [
+        "Impatience",
+        "Burnout tendency"
+      ],
+      "earth": [
+        "Overthinking",
+        "Resistance to change"
+      ],
+      "metal": [
+        "Perfectionism",
+        "Emotional rigidity"
+      ],
+      "water": [
+        "Indecisiveness",
+        "Emotional overwhelm"
+      ]
     },
     "career": {
       "great-tree": "Your Great Tree energy gives you natural leadership abilities. You thrive in roles where you can pioneer new paths and grow organizations. Consider careers in entrepreneurship, management, or environmental work where your steady growth mindset creates lasting impact.",
@@ -518,16 +628,66 @@
       "growth": "A period of accelerated growth and expanding potential."
     },
     "tenGods": {
-      "bijeon": { "name": "Parallel", "hanja": "比肩", "romanization": "Bi-gyeon", "description": "Independence and self-reliance. You stand strong on your own, drawing confidence from your core identity." },
-      "geopjae": { "name": "Rob Wealth", "hanja": "劫財", "romanization": "Geop-jae", "description": "Competition and ambition. You are driven to seize opportunities and thrive in challenging environments." },
-      "siksin": { "name": "Eating God", "hanja": "食神", "romanization": "Sik-sin", "description": "Creativity and nurturing. Your natural talents flow effortlessly, bringing joy and abundance to those around you." },
-      "sanggwan": { "name": "Hurting Officer", "hanja": "傷官", "romanization": "Sang-gwan", "description": "Innovation and bold expression. You challenge conventions and express yourself with fearless originality." },
-      "pyeonjae": { "name": "Indirect Wealth", "hanja": "偏財", "romanization": "Pyeon-jae", "description": "Opportunistic and versatile. You have a gift for spotting hidden opportunities and creating unconventional success." },
-      "jeongjae": { "name": "Direct Wealth", "hanja": "正財", "romanization": "Jeong-jae", "description": "Steady accumulation and diligence. You build lasting wealth through consistent effort and careful planning." },
-      "pyeongwan": { "name": "Indirect Authority", "hanja": "偏官", "romanization": "Pyeong-gwan", "description": "Power and transformation. You possess an intense drive that can reshape your world through sheer force of will." },
-      "jeonggwan": { "name": "Direct Authority", "hanja": "正官", "romanization": "Jeong-gwan", "description": "Discipline and order. You thrive in structured environments and naturally earn respect through integrity." },
-      "pyeonin": { "name": "Indirect Seal", "hanja": "偏印", "romanization": "Pyeon-in", "description": "Unconventional wisdom. You learn through unique experiences, gaining insights that others miss entirely." },
-      "jeongin": { "name": "Direct Seal", "hanja": "正印", "romanization": "Jeong-in", "description": "Knowledge and support. You are nurtured by learning and mentorship, building wisdom through traditional paths." },
+      "bijeon": {
+        "name": "Parallel",
+        "hanja": "比肩",
+        "romanization": "Bi-gyeon",
+        "description": "Independence and self-reliance. You stand strong on your own, drawing confidence from your core identity."
+      },
+      "geopjae": {
+        "name": "Rob Wealth",
+        "hanja": "劫財",
+        "romanization": "Geop-jae",
+        "description": "Competition and ambition. You are driven to seize opportunities and thrive in challenging environments."
+      },
+      "siksin": {
+        "name": "Eating God",
+        "hanja": "食神",
+        "romanization": "Sik-sin",
+        "description": "Creativity and nurturing. Your natural talents flow effortlessly, bringing joy and abundance to those around you."
+      },
+      "sanggwan": {
+        "name": "Hurting Officer",
+        "hanja": "傷官",
+        "romanization": "Sang-gwan",
+        "description": "Innovation and bold expression. You challenge conventions and express yourself with fearless originality."
+      },
+      "pyeonjae": {
+        "name": "Indirect Wealth",
+        "hanja": "偏財",
+        "romanization": "Pyeon-jae",
+        "description": "Opportunistic and versatile. You have a gift for spotting hidden opportunities and creating unconventional success."
+      },
+      "jeongjae": {
+        "name": "Direct Wealth",
+        "hanja": "正財",
+        "romanization": "Jeong-jae",
+        "description": "Steady accumulation and diligence. You build lasting wealth through consistent effort and careful planning."
+      },
+      "pyeongwan": {
+        "name": "Indirect Authority",
+        "hanja": "偏官",
+        "romanization": "Pyeong-gwan",
+        "description": "Power and transformation. You possess an intense drive that can reshape your world through sheer force of will."
+      },
+      "jeonggwan": {
+        "name": "Direct Authority",
+        "hanja": "正官",
+        "romanization": "Jeong-gwan",
+        "description": "Discipline and order. You thrive in structured environments and naturally earn respect through integrity."
+      },
+      "pyeonin": {
+        "name": "Indirect Seal",
+        "hanja": "偏印",
+        "romanization": "Pyeon-in",
+        "description": "Unconventional wisdom. You learn through unique experiences, gaining insights that others miss entirely."
+      },
+      "jeongin": {
+        "name": "Direct Seal",
+        "hanja": "正印",
+        "romanization": "Jeong-in",
+        "description": "Knowledge and support. You are nurtured by learning and mentorship, building wisdom through traditional paths."
+      },
       "summary": {
         "bijeon": "Your chart is dominated by Parallel energy — a strong sense of self and independence defines your path. You are most powerful when you trust your own abilities.",
         "geopjae": "Your chart is dominated by Rob Wealth energy — your competitive spirit and ambition drive you toward bold achievements. Channel this energy wisely.",

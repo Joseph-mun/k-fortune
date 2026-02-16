@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import { createPortal } from "react-dom";
 import { ChevronLeft, ChevronRight, Calendar } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -18,27 +18,72 @@ interface CalendarPopupProps {
   locale?: string;
 }
 
-const WEEKDAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-const MONTHS_EN = [
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December",
-];
-
 /* Saju 12 time periods (시주) — earthly branches mapped to zodiac animals */
 const SAJU_PERIODS = [
-  { emoji: "🐀", range: "23-01", mid: 0 },
-  { emoji: "🐂", range: "01-03", mid: 2 },
-  { emoji: "🐅", range: "03-05", mid: 4 },
-  { emoji: "🐇", range: "05-07", mid: 6 },
-  { emoji: "🐉", range: "07-09", mid: 8 },
-  { emoji: "🐍", range: "09-11", mid: 10 },
-  { emoji: "🐴", range: "11-13", mid: 12 },
-  { emoji: "🐑", range: "13-15", mid: 14 },
-  { emoji: "🐵", range: "15-17", mid: 16 },
-  { emoji: "🐔", range: "17-19", mid: 18 },
-  { emoji: "🐕", range: "19-21", mid: 20 },
-  { emoji: "🐷", range: "21-23", mid: 22 },
+  { emoji: "🐀", start: 23, end: 1, mid: 0 },
+  { emoji: "🐂", start: 1, end: 3, mid: 2 },
+  { emoji: "🐅", start: 3, end: 5, mid: 4 },
+  { emoji: "🐇", start: 5, end: 7, mid: 6 },
+  { emoji: "🐉", start: 7, end: 9, mid: 8 },
+  { emoji: "🐍", start: 9, end: 11, mid: 10 },
+  { emoji: "🐴", start: 11, end: 13, mid: 12 },
+  { emoji: "🐑", start: 13, end: 15, mid: 14 },
+  { emoji: "🐵", start: 15, end: 17, mid: 16 },
+  { emoji: "🐔", start: 17, end: 19, mid: 18 },
+  { emoji: "🐕", start: 19, end: 21, mid: 20 },
+  { emoji: "🐷", start: 21, end: 23, mid: 22 },
 ];
+
+/** Format a single hour for display */
+function fmtHour(h: number, locale: string): string {
+  const h24 = ((h % 24) + 24) % 24;
+  if (locale === "ko") {
+    const period = h24 < 12 ? "오전" : "오후";
+    const display = h24 === 0 ? 12 : h24 > 12 ? h24 - 12 : h24;
+    return `${period} ${display}시`;
+  }
+  const period = h24 < 12 ? "AM" : "PM";
+  const display = h24 === 0 ? 12 : h24 > 12 ? h24 - 12 : h24;
+  return `${display}${period}`;
+}
+
+/** Compact format for grid cells */
+function fmtHourShort(h: number, locale: string): string {
+  const h24 = ((h % 24) + 24) % 24;
+  if (locale === "ko") {
+    const period = h24 < 12 ? "오전" : "오후";
+    const display = h24 === 0 ? 12 : h24 > 12 ? h24 - 12 : h24;
+    return `${period}${display}`;
+  }
+  const period = h24 < 12 ? "a" : "p";
+  const display = h24 === 0 ? 12 : h24 > 12 ? h24 - 12 : h24;
+  return `${display}${period}`;
+}
+
+/** Format time range for display */
+function formatTimeRange(start: number, end: number, locale: string): string {
+  return `${fmtHour(start, locale)}~${fmtHour(end, locale)}`;
+}
+
+/** Compact time range for grid */
+function formatTimeRangeShort(start: number, end: number, locale: string): string {
+  return `${fmtHourShort(start, locale)}~${fmtHourShort(end, locale)}`;
+}
+
+/** Get localized month name using Intl API */
+function getMonthName(monthIndex: number, locale: string, style: "long" | "short" = "long"): string {
+  return new Intl.DateTimeFormat(locale, { month: style }).format(new Date(2000, monthIndex));
+}
+
+/** Get localized weekday names using Intl API */
+function getWeekdayNames(locale: string): string[] {
+  const base = new Date(2024, 0, 7); // Sunday
+  return Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(base);
+    d.setDate(base.getDate() + i);
+    return new Intl.DateTimeFormat(locale, { weekday: "short" }).format(d);
+  });
+}
 
 function getSelectedPeriodIndex(hour: number): number {
   if (hour >= 23 || hour < 1) return 0;
@@ -62,6 +107,7 @@ export function CalendarPopup({
   onDateSelect,
   onTimeChange,
   onUnknownTimeChange,
+  locale = "en",
 }: CalendarPopupProps) {
   const t = useTranslations("form.calendar");
   const [open, setOpen] = useState(false);
@@ -73,12 +119,14 @@ export function CalendarPopup({
   const now = new Date();
   const currentYear = now.getFullYear();
 
-  const [viewYear, setViewYear] = useState(year ? Number(year) : currentYear - 30);
-  const [viewMonth, setViewMonth] = useState(month ? Number(month) : now.getMonth() + 1);
-  const [mode, setMode] = useState<"calendar" | "year" | "time">("calendar");
+  const [viewYear, setViewYear] = useState(year ? Number(year) : 1995);
+  const [viewMonth, setViewMonth] = useState(month ? Number(month) : 3);
+  const [mode, setMode] = useState<"calendar" | "year" | "month" | "time">("calendar");
 
   const timeHour = birthTime ? parseInt(birthTime.split(":")[0], 10) : 9;
   const selectedPeriod = getSelectedPeriodIndex(timeHour);
+
+  const weekdays = useMemo(() => getWeekdayNames(locale), [locale]);
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -139,6 +187,11 @@ export function CalendarPopup({
 
   function selectYear(y: number) {
     setViewYear(y);
+    setMode("month");
+  }
+
+  function selectMonth(m: number) {
+    setViewMonth(m);
     setMode("calendar");
   }
 
@@ -151,17 +204,21 @@ export function CalendarPopup({
   const isSelected = (d: number) =>
     Number(year) === viewYear && Number(month) === viewMonth && Number(day) === d;
 
+  const isToday = (d: number) =>
+    currentYear === viewYear && (now.getMonth() + 1) === viewMonth && now.getDate() === d;
+
   const isFuture = (d: number) => {
     const check = new Date(viewYear, viewMonth - 1, d);
     const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     return check > today;
   };
 
+  const period = SAJU_PERIODS[selectedPeriod];
   const displayValue =
     year && month && day
       ? `${year}. ${month.padStart(2, "0")}. ${day.padStart(2, "0")}` +
         (!unknownTime && birthTime
-          ? ` ${SAJU_PERIODS[selectedPeriod].emoji} ${SAJU_PERIODS[selectedPeriod].range}`
+          ? `  ${period.emoji} ${formatTimeRange(period.start, period.end, locale)}`
           : "")
       : "";
 
@@ -178,7 +235,7 @@ export function CalendarPopup({
         transform: "translateX(-50%)",
       }}
     >
-      <div className="rounded-2xl bg-bg-card border border-white/[0.08] p-4 w-[min(340px,calc(100vw-2rem))] shadow-[0_8px_40px_rgba(0,0,0,0.5)]">
+      <div className="rounded-2xl bg-white border border-[#E8DFD3] p-4 w-[min(340px,calc(100vw-2rem))] shadow-[0_8px_40px_rgba(0,0,0,0.1)]">
         {mode === "calendar" ? (
           <>
             {/* Month/Year header */}
@@ -186,49 +243,59 @@ export function CalendarPopup({
               <button
                 type="button"
                 onClick={() => setMode("year")}
-                className="flex items-center gap-1 text-sm font-semibold text-purple-400 hover:opacity-80 transition-opacity cursor-pointer"
+                className="flex items-center gap-1 text-sm font-semibold text-[#C5372E] hover:opacity-80 transition-opacity cursor-pointer"
               >
-                {MONTHS_EN[viewMonth - 1]} {viewYear}
+                {locale === "ko"
+                  ? `${viewYear}년 ${viewMonth}월`
+                  : `${getMonthName(viewMonth - 1, locale)} ${viewYear}`}
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
               <div className="flex items-center gap-1">
-                <button type="button" onClick={prevMonth} className="p-2 rounded-full hover:bg-white/[0.06] transition-colors cursor-pointer">
-                  <ChevronLeft className="w-5 h-5 text-purple-400" />
+                <button type="button" onClick={prevMonth} className="p-2 rounded-full hover:bg-[#FAFAF7] transition-colors cursor-pointer">
+                  <ChevronLeft className="w-5 h-5 text-[#C5372E]" />
                 </button>
-                <button type="button" onClick={nextMonth} className="p-2 rounded-full hover:bg-white/[0.06] transition-colors cursor-pointer">
-                  <ChevronRight className="w-5 h-5 text-purple-400" />
+                <button type="button" onClick={nextMonth} className="p-2 rounded-full hover:bg-[#FAFAF7] transition-colors cursor-pointer">
+                  <ChevronRight className="w-5 h-5 text-[#C5372E]" />
                 </button>
               </div>
             </div>
 
             {/* Weekday headers */}
             <div className="grid grid-cols-7 mb-1">
-              {WEEKDAYS.map((d) => (
-                <div key={d} className="text-center text-[11px] font-medium text-text-muted tracking-wider py-1">
+              {weekdays.map((d) => (
+                <div key={d} className="text-center text-[11px] font-medium text-[#6B6358] tracking-wider py-1">
                   {d}
                 </div>
               ))}
             </div>
 
             {/* Day grid */}
-            <div className="grid grid-cols-7 gap-y-0.5">
+            <div className="grid grid-cols-7 gap-y-0.5" role="grid">
               {Array.from({ length: firstDay }, (_, i) => (
-                <div key={`e-${i}`} className="aspect-square" />
+                <div key={`e-${i}`} className="min-w-[44px] min-h-[44px]" />
               ))}
               {Array.from({ length: daysInMonth }, (_, i) => {
                 const d = i + 1;
                 const future = isFuture(d);
                 const selected = isSelected(d);
+                const today = isToday(d);
+                const dateLabel = locale === "ko"
+                  ? `${viewYear}년 ${viewMonth}월 ${d}일`
+                  : `${getMonthName(viewMonth - 1, locale)} ${d}, ${viewYear}`;
                 return (
                   <button
                     key={d}
                     type="button"
+                    role="gridcell"
+                    aria-label={dateLabel}
+                    aria-selected={selected}
                     disabled={future}
                     onClick={() => selectDay(d)}
                     className={`
-                      aspect-square flex items-center justify-center rounded-full text-[13px] font-medium transition-all duration-150 cursor-pointer
-                      ${future ? "text-text-muted/30 cursor-not-allowed" : "hover:bg-white/[0.08] text-purple-400"}
-                      ${selected ? "!bg-purple-500 !text-white" : ""}
+                      min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-[13px] font-medium transition-all duration-150 cursor-pointer
+                      ${future ? "text-text-muted/30 cursor-not-allowed" : "hover:bg-[#C5372E]/10 text-[#1A1611]"}
+                      ${selected ? "!bg-[#C5372E] !text-white" : ""}
+                      ${today && !selected ? "border border-[#C5372E]/30" : ""}
                     `}
                   >
                     {d}
@@ -238,37 +305,40 @@ export function CalendarPopup({
             </div>
 
             {/* Divider */}
-            <div className="h-px bg-white/[0.08] my-3" />
+            <div className="h-px bg-[#E8DFD3] my-3" />
 
             {/* Time section */}
             <div className="flex items-center justify-between">
-              <span className="text-sm font-semibold text-text-primary">{t("time")}</span>
+              <span className="text-sm font-semibold text-[#1A1611]">{t("time")}</span>
               <div className="flex items-center gap-2">
                 {!unknownTime && (
                   <button
                     type="button"
                     onClick={() => setMode("time")}
-                    className="flex items-center gap-1.5 bg-bg-surface rounded-lg px-3 py-1.5 hover:bg-white/[0.08] transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 bg-[#FAFAF7] rounded-lg px-3 py-1.5 hover:bg-[#E8DFD3] transition-colors cursor-pointer"
                   >
                     <span className="text-base leading-none">{SAJU_PERIODS[selectedPeriod].emoji}</span>
-                    <span className="text-sm font-semibold text-purple-400">{SAJU_PERIODS[selectedPeriod].range}</span>
+                    <span className="text-sm font-semibold text-[#C5372E]">
+                      {formatTimeRange(SAJU_PERIODS[selectedPeriod].start, SAJU_PERIODS[selectedPeriod].end, locale)}
+                    </span>
                   </button>
                 )}
-                <div className="flex bg-bg-surface rounded-lg overflow-hidden">
+                <div className="flex bg-[#FAFAF7] rounded-lg overflow-hidden">
                   <button
                     type="button"
                     onClick={() => {
                       onUnknownTimeChange(false);
                       if (!birthTime) setMode("time");
                     }}
-                    className={`px-2 py-1.5 text-[11px] font-semibold transition-colors cursor-pointer ${!unknownTime ? "bg-purple-500/40 text-text-primary" : "text-text-muted hover:text-text-primary"}`}
+                    className={`px-2 py-1.5 text-[11px] font-semibold transition-colors cursor-pointer ${!unknownTime ? "bg-[#C5372E]/40 text-[#1A1611]" : "text-[#6B6358] hover:text-[#1A1611]"}`}
                   >
                     {t("timeOn")}
                   </button>
                   <button
                     type="button"
                     onClick={() => onUnknownTimeChange(true)}
-                    className={`px-2 py-1.5 text-[11px] font-semibold transition-colors cursor-pointer ${unknownTime ? "bg-purple-500/40 text-text-primary" : "text-text-muted hover:text-text-primary"}`}
+                    className={`px-2 py-1.5 text-[11px] font-semibold transition-colors cursor-pointer ${unknownTime ? "bg-[#C5372E]/40 text-[#1A1611]" : "text-[#6B6358] hover:text-[#1A1611]"}`}
+                    title={locale === "ko" ? "시간을 모르면 시주(時柱)가 제외됩니다" : "If you don't know the time, the hour pillar will be excluded"}
                   >
                     {t("timeOff")}
                   </button>
@@ -283,15 +353,15 @@ export function CalendarPopup({
               <button
                 type="button"
                 onClick={() => setMode("calendar")}
-                className="flex items-center gap-1 text-sm font-semibold text-purple-400 hover:opacity-80 transition-opacity cursor-pointer"
+                className="flex items-center gap-1 text-sm font-semibold text-[#C5372E] hover:opacity-80 transition-opacity cursor-pointer"
               >
                 <ChevronLeft className="w-3.5 h-3.5" />
                 {t("backToCalendar")}
               </button>
             </div>
-            <p className="text-xs text-text-muted mb-3">{t("selectTimePeriod")}</p>
+            <p className="text-xs text-[#6B6358] mb-3">{t("selectTimePeriod")}</p>
             <div className="grid grid-cols-3 gap-1.5">
-              {SAJU_PERIODS.map((period, i) => (
+              {SAJU_PERIODS.map((p, i) => (
                 <button
                   key={i}
                   type="button"
@@ -299,31 +369,73 @@ export function CalendarPopup({
                   className={`
                     flex flex-col items-center gap-0.5 py-2.5 px-1 rounded-lg text-xs font-medium transition-all cursor-pointer
                     ${selectedPeriod === i
-                      ? "bg-purple-500 text-white ring-1 ring-purple-400/50"
-                      : "hover:bg-white/[0.08] text-purple-400 bg-bg-surface"
+                      ? "bg-[#C5372E] text-white ring-1 ring-[#C5372E]/50"
+                      : "hover:bg-[#FAFAF7] text-[#C5372E] bg-white border border-[#E8DFD3]"
                     }
                   `}
                 >
-                  <span className="text-lg leading-none">{period.emoji}</span>
-                  <span className={`text-[11px] ${selectedPeriod === i ? "text-white/90" : "text-text-secondary"}`}>
-                    {period.range}
+                  <span className="text-lg leading-none">{p.emoji}</span>
+                  <span className={`text-[10px] leading-tight ${selectedPeriod === i ? "text-white/90" : "text-[#6B6358]"}`}>
+                    {formatTimeRangeShort(p.start, p.end, locale)}
                   </span>
                 </button>
               ))}
             </div>
           </>
+        ) : mode === "month" ? (
+          <>
+            {/* Month selector grid */}
+            <div className="flex items-center justify-between mb-3">
+              <button
+                type="button"
+                onClick={() => setMode("year")}
+                className="flex items-center gap-1 text-sm font-semibold text-[#C5372E] hover:opacity-80 transition-opacity cursor-pointer"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+                {viewYear}
+              </button>
+            </div>
+            <div className="grid grid-cols-3 gap-1.5">
+              {Array.from({ length: 12 }, (_, i) => {
+                const m = i + 1;
+                const isFutureMonth = viewYear === currentYear && m > now.getMonth() + 1;
+                return (
+                  <button
+                    key={m}
+                    type="button"
+                    disabled={isFutureMonth}
+                    onClick={() => selectMonth(m)}
+                    className={`
+                      py-2.5 rounded-lg text-xs font-medium transition-all cursor-pointer
+                      ${isFutureMonth ? "text-[#6B6358]/30 cursor-not-allowed" : "hover:bg-[#FAFAF7] text-[#1A1611]"}
+                      ${m === viewMonth ? "!bg-[#C5372E] !text-white" : ""}
+                    `}
+                  >
+                    {getMonthName(i, locale, "short")}
+                  </button>
+                );
+              })}
+            </div>
+            <button
+              type="button"
+              onClick={() => setMode("calendar")}
+              className="mt-3 w-full text-center text-sm text-[#C5372E] hover:opacity-80 transition-opacity cursor-pointer py-2"
+            >
+              {t("backToCalendar")}
+            </button>
+          </>
         ) : (
           <>
             {/* Year selector */}
             <div className="flex items-center justify-between mb-3">
-              <button type="button" onClick={() => setViewYear((y) => y - 12)} className="p-1.5 rounded-full hover:bg-white/[0.06] transition-colors cursor-pointer">
-                <ChevronLeft className="w-4 h-4 text-purple-400" />
+              <button type="button" onClick={() => setViewYear((y) => y - 12)} className="p-1.5 rounded-full hover:bg-[#FAFAF7] transition-colors cursor-pointer">
+                <ChevronLeft className="w-4 h-4 text-[#C5372E]" />
               </button>
-              <span className="text-sm font-semibold text-text-primary">
+              <span className="text-sm font-semibold text-[#1A1611]">
                 {yearRange[0]} – {yearRange[yearRange.length - 1]}
               </span>
-              <button type="button" onClick={() => setViewYear((y) => y + 12)} className="p-1.5 rounded-full hover:bg-white/[0.06] transition-colors cursor-pointer">
-                <ChevronRight className="w-4 h-4 text-purple-400" />
+              <button type="button" onClick={() => setViewYear((y) => y + 12)} className="p-1.5 rounded-full hover:bg-[#FAFAF7] transition-colors cursor-pointer">
+                <ChevronRight className="w-4 h-4 text-[#C5372E]" />
               </button>
             </div>
             <div className="grid grid-cols-4 gap-1.5">
@@ -335,8 +447,8 @@ export function CalendarPopup({
                   onClick={() => selectYear(y)}
                   className={`
                     py-2 rounded-lg text-xs font-medium transition-all cursor-pointer
-                    ${y > currentYear ? "text-text-muted/30 cursor-not-allowed" : "hover:bg-white/[0.08] text-purple-400"}
-                    ${y === viewYear ? "!bg-purple-500 !text-white" : ""}
+                    ${y > currentYear ? "text-[#6B6358]/30 cursor-not-allowed" : "hover:bg-[#FAFAF7] text-[#1A1611]"}
+                    ${y === viewYear ? "!bg-[#C5372E] !text-white" : ""}
                   `}
                 >
                   {y}
@@ -346,7 +458,7 @@ export function CalendarPopup({
             <button
               type="button"
               onClick={() => setMode("calendar")}
-              className="mt-3 w-full text-center text-sm text-purple-400 hover:opacity-80 transition-opacity cursor-pointer py-2"
+              className="mt-3 w-full text-center text-sm text-[#C5372E] hover:opacity-80 transition-opacity cursor-pointer py-2"
             >
               {t("backToCalendar")}
             </button>
@@ -363,10 +475,10 @@ export function CalendarPopup({
         ref={triggerRef}
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center gap-2 rounded-lg bg-bg-surface border border-white/[0.08] px-4 py-2.5 text-sm text-left transition-all duration-200 cursor-pointer hover:border-white/[0.15] focus:outline-none focus:border-purple-500/40 focus:ring-1 focus:ring-purple-500/20"
+        className="w-full flex items-center gap-2 rounded-lg bg-white border border-[#E8DFD3] px-4 py-2.5 text-sm text-left transition-all duration-200 cursor-pointer hover:border-[#C5372E]/30 focus:outline-none focus:border-[#C5372E]/40 focus:ring-1 focus:ring-[#C5372E]/30"
       >
-        <Calendar className="w-4 h-4 text-text-muted shrink-0" />
-        <span className={displayValue ? "text-text-primary" : "text-text-muted"}>
+        <Calendar className="w-4 h-4 text-[#6B6358] shrink-0" />
+        <span className={displayValue ? "text-[#1A1611]" : "text-[#6B6358]"}>
           {displayValue || t("selectDate")}
         </span>
       </button>

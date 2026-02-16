@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
-import { Menu, X, Sparkles, LogIn, LogOut } from "lucide-react";
+import { Menu, X, Sparkles, LogIn, LogOut, LayoutDashboard } from "lucide-react";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { useAuth } from "@/features/auth/hooks/useAuth";
 
@@ -64,6 +64,7 @@ export function NavBar() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
+    ...(isAuthenticated ? [{ href: "/dashboard" as const, label: tNav("dashboard") }] : []),
     { href: "/pricing" as const, label: tNav("pricing") },
     { href: "/compatibility" as const, label: tNav("compatibility") },
     { href: "/gallery" as const, label: tNav("gallery") },
@@ -77,7 +78,7 @@ export function NavBar() {
     >
       <div className="flex items-center gap-8">
         <Link href="/" className="flex items-center gap-2 group">
-          <Sparkles className="w-4 h-4 text-purple-400 group-hover:text-purple-300 transition-colors" />
+          <Sparkles className="w-4 h-4 text-[#C5372E] group-hover:text-[#D4584F] transition-colors" />
           <span className="text-lg font-bold text-text-primary tracking-widest font-[family-name:var(--font-heading)]">
             SAJU
           </span>
@@ -115,7 +116,7 @@ export function NavBar() {
               {user?.image ? (
                 <img src={user.image} alt="" className="w-5 h-5 rounded-full" />
               ) : (
-                <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center text-[10px] text-purple-300">
+                <div className="w-5 h-5 rounded-full bg-[#C5372E]/20 flex items-center justify-center text-[10px] text-[#C5372E]">
                   {user?.name?.[0] || "U"}
                 </div>
               )}
@@ -202,7 +203,7 @@ export function NavBar() {
                   {user?.image ? (
                     <img src={user.image} alt="" className="w-5 h-5 rounded-full" />
                   ) : (
-                    <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center text-[10px] text-purple-300">
+                    <div className="w-5 h-5 rounded-full bg-[#C5372E]/20 flex items-center justify-center text-[10px] text-[#C5372E]">
                       {user?.name?.[0] || "U"}
                     </div>
                   )}

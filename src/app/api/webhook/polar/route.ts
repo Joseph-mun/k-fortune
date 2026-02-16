@@ -29,11 +29,11 @@ export const POST = webhookSecret
 
   onPayload: async (payload) => {
     // Fallback handler for unhandled events
-    isDev && console.log("[Polar Webhook] Received event:", payload.type);
+    if (isDev) console.log("[Polar Webhook] Received event:", payload.type);
   },
 
   onOrderPaid: async (payload) => {
-    isDev && console.log("[Polar Webhook] Order paid:", payload.data.id);
+    if (isDev) console.log("[Polar Webhook] Order paid:", payload.data.id);
 
     try {
       const supabase = createServerClient();
@@ -45,6 +45,18 @@ export const POST = webhookSecret
       const amount = order.totalAmount;
       const currency = order.currency;
 
+      // Idempotency check: prevent duplicate processing
+      const { data: existingPurchase } = await supabase
+        .from("purchases")
+        .select("id")
+        .eq("polar_order_id", orderId)
+        .maybeSingle();
+
+      if (existingPurchase) {
+        if (isDev) console.log(`[Polar Webhook] Order ${orderId} already processed, skipping`);
+        return;
+      }
+
       // Extract and validate metadata
       const productType = String(order.metadata.product_type || "detailed_reading");
       const userId = order.metadata.user_id ? String(order.metadata.user_id) : null;
@@ -53,32 +65,36 @@ export const POST = webhookSecret
       // Resolve auth_id → Supabase UUID for consistent user references
       let supabaseUserId: string | null = null;
       if (userId) {
-        const { data: user } = await supabase
+        const { data: user, error: userError } = await supabase
           .from("users")
           .select("id")
           .eq("auth_id", userId)
           .maybeSingle();
 
-        if (!user) {
-          console.error(`[Polar Webhook] Invalid user_id in metadata: ${userId}`);
-          return;
+        if (userError) {
+          console.error(`[Polar Webhook] Database error resolving user_id: ${userId}`, userError);
+          throw new Error(`Failed to resolve user: ${userError.message}`);
         }
+
+        if (!user) {
+          console.error(`[Polar Webhook] User not found for user_id: ${userId}`);
+          throw new Error(`User not found: ${userId}`);
+        }
+
         supabaseUserId = user.id;
       }
+
+      console.log(`[Polar Webhook] Processing order: ${orderId}, readingId: ${readingId}, userId: ${userId}, supabaseUserId: ${supabaseUserId}`);
 
       // Resolve reading UUID from session_id
       let readingUuid: string | null = null;
       if (readingId) {
-        const query = supabase
+        const { data: reading } = await supabase
           .from("readings")
           .select("id")
-          .eq("session_id", readingId);
+          .eq("session_id", readingId)
+          .maybeSingle();
 
-        if (supabaseUserId) {
-          query.eq("user_id", userId);
-        }
-
-        const { data: reading } = await query.maybeSingle();
         readingUuid = reading?.id || null;
       }
 
@@ -98,17 +114,18 @@ export const POST = webhookSecret
 
       if (purchaseError) {
         console.error("[Polar Webhook] Failed to record purchase:", purchaseError);
-      } else {
-        // Structured log for Vercel Logs — purchase_completed event
-        console.log(JSON.stringify({
-          event: "purchase_completed",
-          orderId,
-          amount,
-          currency,
-          productType,
-          customerEmail,
-        }));
+        throw new Error(`Failed to record purchase: ${purchaseError.message}`);
       }
+
+      // Structured log for Vercel Logs — purchase_completed event
+      console.log(JSON.stringify({
+        event: "purchase_completed",
+        orderId,
+        amount,
+        currency,
+        productType,
+        customerEmail,
+      }));
 
       // If there is a reading, mark it as paid
       if (readingId) {
@@ -119,10 +136,11 @@ export const POST = webhookSecret
 
         if (readingError) {
           console.error("[Polar Webhook] Failed to update reading:", readingError);
+          throw new Error(`Failed to update reading status: ${readingError.message}`);
         }
       }
 
-      isDev && console.log(
+      if (isDev) console.log(
         `[Polar Webhook] Order processed: ${orderId}, customer: ${customerEmail}, amount: ${amount}`
       );
     } catch (error) {
@@ -131,7 +149,7 @@ export const POST = webhookSecret
   },
 
   onSubscriptionCreated: async (payload) => {
-    isDev && console.log("[Polar Webhook] Subscription created:", payload.data.id);
+    if (isDev) console.log("[Polar Webhook] Subscription created:", payload.data.id);
 
     try {
       const supabase = createServerClient();
@@ -158,7 +176,7 @@ export const POST = webhookSecret
           error
         );
       } else {
-        isDev && console.log(
+        if (isDev) console.log(
           "[Polar Webhook] Subscription recorded:",
           subscription.id
         );
@@ -180,7 +198,7 @@ export const POST = webhookSecret
   },
 
   onSubscriptionUpdated: async (payload) => {
-    isDev && console.log("[Polar Webhook] Subscription updated:", payload.data.id);
+    if (isDev) console.log("[Polar Webhook] Subscription updated:", payload.data.id);
 
     try {
       const supabase = createServerClient();
@@ -214,7 +232,7 @@ export const POST = webhookSecret
           error
         );
       } else {
-        isDev && console.log(
+        if (isDev) console.log(
           `[Polar Webhook] Subscription updated: ${subscription.id} -> ${status}`
         );
       }

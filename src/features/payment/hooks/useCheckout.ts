@@ -41,12 +41,17 @@ export function useCheckout(): UseCheckoutReturn {
         params.set("customerEmail", options.customerEmail);
       }
 
-      if (options.readingId) {
-        params.set("metadata[reading_id]", options.readingId);
+      // Polar SDK expects metadata as a single JSON string parameter
+      const metadata: Record<string, string> = {};
+      if (options.readingId) metadata.reading_id = options.readingId;
+      if (options.userId) metadata.user_id = options.userId;
+      if (Object.keys(metadata).length > 0) {
+        params.set("metadata", JSON.stringify(metadata));
       }
 
-      if (options.userId) {
-        params.set("metadata[user_id]", options.userId);
+      // Save reading ID so checkout/success page can redirect back
+      if (options.readingId) {
+        localStorage.setItem("saju-last-checkout-reading", options.readingId);
       }
 
       // Redirect to the Polar checkout endpoint

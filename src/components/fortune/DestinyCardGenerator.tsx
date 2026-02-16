@@ -22,6 +22,7 @@ export function DestinyCardGenerator({
   const t = useTranslations("cardGenerator");
   const [selectedStyle, setSelectedStyle] = useState<typeof CARD_STYLES[number]>(defaultStyle);
   const [generating, setGenerating] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
   const generateImage = useCallback(async (): Promise<Blob | null> => {
@@ -44,10 +45,18 @@ export function DestinyCardGenerator({
         innerCard.style.transformStyle = "flat";
       }
 
-      const dataUrl = await toPng(cardElement, {
-        pixelRatio: 2,
-        cacheBust: true,
+      // Add timeout wrapper
+      const timeoutPromise = new Promise<never>((_, reject) => {
+        setTimeout(() => reject(new Error("Generation timeout")), 30000);
       });
+
+      const dataUrl = await Promise.race([
+        toPng(cardElement, {
+          pixelRatio: 2,
+          cacheBust: true,
+        }),
+        timeoutPromise,
+      ]);
 
       // Restore 3D CSS
       cardElement.style.perspective = saved.outerPerspective;
@@ -66,9 +75,13 @@ export function DestinyCardGenerator({
 
   const handleDownload = useCallback(async () => {
     setGenerating(true);
+    setError(null);
     try {
       const blob = await generateImage();
-      if (!blob) return;
+      if (!blob) {
+        setError("카드 생성에 실패했습니다. 다시 시도해주세요. / Failed to generate card. Please try again.");
+        return;
+      }
 
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
@@ -85,11 +98,17 @@ export function DestinyCardGenerator({
 
   const handleShare = useCallback(async () => {
     setGenerating(true);
+    setError(null);
     try {
       const blob = await generateImage();
 
+      if (!blob) {
+        setError("카드 생성에 실패했습니다. 다시 시도해주세요. / Failed to generate card. Please try again.");
+        return;
+      }
+
       // Try Web Share API with file
-      if (blob && navigator.share && navigator.canShare) {
+      if (navigator.share && navigator.canShare) {
         const file = new File(
           [blob],
           `saju-${reading.dayMaster.metaphor}.png`,
@@ -159,6 +178,21 @@ export function DestinyCardGenerator({
       <div ref={cardRef}>
         <DestinyCard reading={reading} style={selectedStyle} />
       </div>
+
+      {/* Error Message */}
+      {error && (
+        <div className="w-full max-w-md p-4 bg-red-500/10 border border-red-500/20 rounded-lg">
+          <p className="text-sm text-red-400 text-center mb-3">{error}</p>
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => setError(null)}
+            className="w-full"
+          >
+            확인 / OK
+          </Button>
+        </div>
+      )}
 
       {/* Action Buttons */}
       <div className="flex gap-3">

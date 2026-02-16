@@ -24,10 +24,10 @@ function CardItem({ metaphor, name, sub, size, featured }: typeof CARDS[number] 
       tiltMax={8}
     >
       <MetaphorIcon metaphor={metaphor} size={size} className="mb-2" />
-      <span className="text-[10px] md:text-xs text-gold-400 font-semibold font-[family-name:var(--font-heading)]">
+      <span className="text-xs text-gold-400 font-semibold font-[family-name:var(--font-heading)]">
         {name}
       </span>
-      <span className="text-[8px] md:text-[10px] text-text-muted mt-0.5">{sub}</span>
+      <span className="text-xs text-text-muted mt-0.5">{sub}</span>
       {featured && (
         <div className="flex gap-0.5 mt-2">
           {(["wood", "fire", "earth", "metal", "water"] as const).map((el) => (

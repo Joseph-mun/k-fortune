@@ -22,7 +22,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
         {/* WebGL Background */}
         <div className="absolute inset-0 z-0">
           <WebGLShader />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/80" />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60" />
         </div>
 
         {/* NavBar floating on top */}
@@ -33,20 +33,20 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col items-center max-w-3xl px-4">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/15 border border-purple-500/30 text-white/80 text-xs mb-8 backdrop-blur-sm animate-slide-up">
-            <Sparkles className="w-3.5 h-3.5 text-purple-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#C5372E]/8 border border-[#C5372E]/20 text-[#1A1611]/70 text-xs mb-8 backdrop-blur-sm animate-slide-up">
+            <Sparkles className="w-3.5 h-3.5 text-[#C5372E]" />
             {tCommon("subtitle")}
           </div>
 
           {/* Headline */}
           <h1 className="typo-display mb-6 animate-slide-up delay-100">
-            <span className="text-white">{t("heroTitle")}</span>
+            <span className="text-[#1A1611]">{t("heroTitle")}</span>
             <br />
             <span className="text-gradient-hero">{t("heroHighlight")}</span>
           </h1>
 
           {/* Subheading */}
-          <p className="typo-body-lg text-white/60 max-w-xl mb-12 animate-slide-up delay-200">
+          <p className="typo-body-lg text-[#6B6358] max-w-xl mb-12 animate-slide-up delay-200">
             {t("heroDescription")}
           </p>
 
@@ -58,27 +58,27 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
             {t("cta")}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
-          <p className="text-sm text-white/40 mt-4 animate-fade-in delay-400">
+          <p className="text-sm text-[#A89F91] mt-4 animate-fade-in delay-400">
             {t("ctaSubtext")}
           </p>
         </div>
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 z-10 animate-bounce">
-          <div className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-1.5">
-            <div className="w-1.5 h-2.5 rounded-full bg-white/40 animate-pulse" />
+          <div className="w-6 h-10 rounded-full border-2 border-[#1A1611]/15 flex items-start justify-center p-1.5">
+            <div className="w-1.5 h-2.5 rounded-full bg-[#1A1611]/30 animate-pulse" />
           </div>
         </div>
       </section>
 
       {/* Social Proof Strip */}
-      <section className="w-full border-y border-white/[0.06] bg-white/[0.02] py-6 px-4">
+      <section className="w-full border-y border-[#1A1611]/[0.06] bg-[#F5F0E8]/60 py-6 px-4">
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-text-muted text-sm">
           <div className="flex items-center gap-2">
             <Users className="w-4 h-4" />
             <span>{t("trustBadge", { count: "10,000" })}</span>
           </div>
-          <div className="hidden sm:block w-px h-4 bg-white/[0.1]" />
+          <div className="hidden sm:block w-px h-4 bg-[#1A1611]/[0.08]" />
           <div className="flex items-center gap-1">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-3.5 h-3.5 fill-gold-500 text-gold-500" />
@@ -172,7 +172,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
       </section>
 
       {/* Card Preview Section */}
-      <section className="w-full bg-white/[0.01] border-y border-white/[0.04] py-20 px-4">
+      <section className="w-full bg-[#F5F0E8]/40 border-y border-[#1A1611]/[0.04] py-20 px-4">
         <div className="max-w-5xl mx-auto text-center">
           <h2 className="typo-h2 text-text-primary mb-3 animate-slide-up">
             {t("cardSectionTitle")}
@@ -185,7 +185,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
 
           <Link
             href="/gallery"
-            className="inline-flex items-center gap-2 text-sm text-purple-400 hover:text-purple-300 transition-colors group"
+            className="inline-flex items-center gap-2 text-sm text-[#C5372E] hover:text-[#D4584F] transition-colors group"
           >
             {t("viewGallery")}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -221,7 +221,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
 
       {/* Mobile fixed CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-30 md:hidden pb-safe">
-        <div className="px-4 py-3 bg-bg-dark/90 backdrop-blur-lg border-t border-white/[0.06]">
+        <div className="px-4 py-3 bg-[#F0EEE9]/95 backdrop-blur-lg border-t border-white/[0.06]">
           <Link
             href="/start"
             className="flex items-center justify-center gap-2 w-full py-3 btn-cta text-white rounded-lg font-semibold text-sm"

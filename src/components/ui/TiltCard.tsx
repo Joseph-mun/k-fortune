@@ -29,6 +29,11 @@ export function TiltCard({
       const card = cardRef.current;
       if (!card) return;
 
+      // Respect prefers-reduced-motion
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+      }
+
       const rect = card.getBoundingClientRect();
       const clientX = "touches" in e ? e.touches[0].clientX : e.clientX;
       const clientY = "touches" in e ? e.touches[0].clientY : e.clientY;

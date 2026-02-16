@@ -49,7 +49,7 @@ export function OnboardingOverlay() {
         {/* Slide content */}
         <div className="flex flex-col items-center text-center min-h-[280px] justify-center">
           {slide === 0 && (
-            <div className="animate-fade-in flex flex-col items-center">
+            <div className="animate-fade-in flex flex-col items-center" aria-label="Onboarding slide 1 of 3">
               <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6" style={{ background: "rgba(139,92,246,0.1)", border: "1px solid rgba(139,92,246,0.2)" }}>
                 <Sparkles className="w-8 h-8 text-purple-400" />
               </div>
@@ -63,7 +63,7 @@ export function OnboardingOverlay() {
           )}
 
           {slide === 1 && (
-            <div className="animate-fade-in flex flex-col items-center">
+            <div className="animate-fade-in flex flex-col items-center" aria-label="Onboarding slide 2 of 3">
               <div className="flex items-center gap-3 mb-6">
                 {(["wood", "fire", "earth", "metal", "water"] as const).map((el) => (
                   <div key={el} className="w-10 h-10 rounded-full flex items-center justify-center" style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}>
@@ -81,7 +81,7 @@ export function OnboardingOverlay() {
           )}
 
           {slide === 2 && (
-            <div className="animate-fade-in flex flex-col items-center">
+            <div className="animate-fade-in flex flex-col items-center" aria-label="Onboarding slide 3 of 3">
               <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6 animate-glow-breathe" style={{ background: "rgba(139,92,246,0.15)", border: "1px solid rgba(139,92,246,0.3)" }}>
                 <span className="text-3xl">&#10024;</span>
               </div>

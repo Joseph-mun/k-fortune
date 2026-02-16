@@ -23,7 +23,7 @@ export async function GET(
 
   const { data: reading, error } = await supabase
     .from("readings")
-    .select("result")
+    .select("result, is_paid")
     .eq("session_id", id)
     .eq("user_id", authId)
     .maybeSingle();
@@ -32,5 +32,5 @@ export async function GET(
     return NextResponse.json(null, { status: 404 });
   }
 
-  return NextResponse.json(reading.result);
+  return NextResponse.json({ ...reading.result, _is_paid: reading.is_paid ?? false });
 }

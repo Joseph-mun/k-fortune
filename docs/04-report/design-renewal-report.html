@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>K-Destiny 디자인 리뉴얼 종합 보고서</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: #F0EEE9;
+      color: #1A1611;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, h5, h6 { line-height: 1.3; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    img { max-width: 100%; }
+
+    /* ── Report Header ── */
+    .report-header {
+      background: linear-gradient(180deg, #F5F0E8, #F0EEE9);
+      padding: 64px 32px 48px;
+      text-align: center;
+      border-bottom: 1px solid rgba(26, 22, 17, 0.06);
+    }
+    .report-header h1 {
+      font-size: 40px;
+      font-weight: 800;
+      color: #1A1611;
+      margin-bottom: 8px;
+      letter-spacing: -0.02em;
+    }
+    .report-header .subtitle {
+      font-size: 16px;
+      color: #A89F91;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .report-header .report-date {
+      font-size: 14px;
+      color: #6B6358;
+      margin-bottom: 24px;
+    }
+    .report-header .overview {
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 15px;
+      color: #6B6358;
+      line-height: 1.8;
+    }
+
+    /* ── Tab Navigation ── */
+    .team-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(245, 240, 232, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(26, 22, 17, 0.06);
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #6B6358;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .tab-btn:hover {
+      background: rgba(197, 55, 46, 0.06);
+      color: #C5372E;
+    }
+    .tab-btn.active {
+      background: #C5372E;
+      color: #FFFFFF;
+      border-color: #C5372E;
+      box-shadow: 0 2px 8px rgba(197, 55, 46, 0.24);
+    }
+
+    /* ── Team Section Base ── */
+    .team-section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 48px 24px 64px;
+    }
+    .team-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .team-header .team-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+    .team-header h2, .team-header .team-name {
+      font-size: 32px;
+      font-weight: 800;
+      color: #1A1611;
+      margin-bottom: 8px;
+    }
+    .team-header p, .team-header .team-role, .team-header .team-tagline, .team-header .team-description {
+      font-size: 16px;
+      color: #6B6358;
+    }
+
+    /* ── Section Titles ── */
+    .proposals-main h3,
+    .proposals-sub h3,
+    .proposals-container h3,
+    .palette-section h3,
+    .mockup-container h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1A1611;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid rgba(197, 55, 46, 0.15);
+    }
+    .proposal-card h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1A1611;
+      margin-bottom: 16px;
+    }
+
+    /* ── Proposal Cards ── */
+    .proposals-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .proposal-card {
+      background: #FFFFFF;
+      border: 1px solid #E8DFD3;
+      border-radius: 16px;
+      padding: 28px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      margin-bottom: 24px;
+    }
+    .proposal-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(164, 119, 100, 0.1);
+    }
+    .proposal-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #C5372E, #A47764);
+      color: white;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .proposal-title, .proposal-card h4 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1A1611;
+      margin-bottom: 8px;
+    }
+    .proposal-description, .proposal-card p {
+      font-size: 14px;
+      color: #6B6358;
+      line-height: 1.7;
+    }
+
+    /* ── Proposals Container (team 3/4) ── */
+    .proposals-container {
+      margin-bottom: 40px;
+    }
+    .proposals-container .proposal-card {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .proposals-container .proposal-card .proposal-number {
+      flex-shrink: 0;
+      margin-bottom: 0;
+    }
+    .proposals-container .proposal-card h4 {
+      margin-bottom: 4px;
+    }
+
+    /* ── Sub Proposals ── */
+    .proposals-sub, .sub-proposals-list {
+      margin-bottom: 40px;
+    }
+    .sub-list, .sub-proposals-list {
+      display: grid;
+      gap: 10px;
+    }
+    .sub-list li, .sub-proposals-list li {
+      background: #FAFAF7;
+      border: 1px solid #E8DFD3;
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 14px;
+      color: #6B6358;
+      position: relative;
+      padding-left: 36px;
+    }
+    .sub-list li::before, .sub-proposals-list li::before {
+      content: '→';
+      position: absolute;
+      left: 16px;
+      color: #A47764;
+      font-weight: 700;
+    }
+
+    /* ── Color Swatches ── */
+    .color-swatches {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .color-swatch {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 40px;
+      border-radius: 8px;
+      font-size: 10px;
+      font-weight: 600;
+      transition: transform 0.15s;
+    }
+    .color-swatch:hover { transform: scale(1.05); }
+    .color-swatch .swatch-label { font-size: 10px; }
+    .color-swatch.dark .swatch-label { color: #FFFFFF; }
+
+    /* ── Palette Grid ── */
+    .palette-section {
+      margin-bottom: 40px;
+    }
+    .palette-section h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #1A1611;
+      margin: 24px 0 12px;
+    }
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .palette-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #FFFFFF;
+      border: 1px solid #E8DFD3;
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .palette-color {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      flex-shrink: 0;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .palette-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .palette-name { font-size: 12px; font-weight: 600; color: #1A1611; }
+    .palette-hex { font-size: 13px; font-weight: 700; color: #C5372E; font-family: monospace; }
+    .palette-desc { font-size: 11px; color: #A89F91; }
+
+    /* ── Team 5 Palette Swatches ── */
+    #team-5 .color-swatch {
+      width: auto;
+      height: auto;
+      flex-direction: column;
+      background: #FFFFFF;
+      border: 1px solid #E8DFD3;
+      border-radius: 12px;
+      padding: 12px;
+      min-width: 140px;
+    }
+    #team-5 .swatch-color {
+      width: 100%;
+      height: 48px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+    #team-5 .swatch-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      text-align: center;
+    }
+    #team-5 .swatch-name { font-size: 12px; font-weight: 600; color: #1A1611; }
+    #team-5 .swatch-code { font-size: 12px; font-weight: 700; color: #C5372E; font-family: monospace; }
+    #team-5 .swatch-label { font-size: 11px; color: #A89F91; }
+    #team-5 .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    /* ── Mockup Container ── */
+    .mockup-container {
+      margin-bottom: 48px;
+    }
+    .mockup-container h4 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1A1611;
+      margin-bottom: 20px;
+    }
+
+    /* ── Before/After ── */
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .mockup-side { position: relative; }
+    .mockup-label {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+    }
+    .before .mockup-label {
+      background: #27272A;
+      color: #A1A1AA;
+    }
+    .after .mockup-label {
+      background: #C5372E;
+      color: #FFFFFF;
+    }
+
+    /* ── Component Comparison Grid ── */
+    .component-comparison-grid {
+      display: grid;
+      gap: 24px;
+    }
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+    .comparison-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: #A89F91;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .comparison-before {
+      background: #09090B;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .comparison-after {
+      background: #F5F0E8;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    /* ── Typography Sample ── */
+    .typography-sample {
+      font-style: italic;
+      opacity: 0.8;
+    }
+
+    /* ── User Flow (Team 3) ── */
+    .user-flow {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      overflow-x: auto;
+      padding: 20px 0;
+    }
+    .flow-step {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex-shrink: 0;
+    }
+    .step-card {
+      background: #F0EEE9;
+      border-radius: 16px;
+      padding: 24px;
+      width: 240px;
+      text-align: center;
+    }
+    .step-card h4 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1A1611;
+      margin-bottom: 8px;
+    }
+    .step-icon {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+    .step-description {
+      font-size: 13px;
+      color: #6B6358;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+    .flow-arrow {
+      font-size: 28px;
+      color: #C5372E;
+      font-weight: 700;
+      padding: 0 12px;
+    }
+    .progress-bar {
+      height: 6px;
+      background: #E8DFD3;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.3s;
+    }
+    .progress-label {
+      font-size: 11px;
+      color: #A89F91;
+      font-weight: 600;
+      display: block;
+      margin-top: 4px;
+    }
+    .input-mockup {
+      text-align: left;
+      margin: 12px 0;
+    }
+    .input-field {
+      background: #FAFAF7;
+      border: 1px solid #E8DFD3;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #6B6358;
+      margin-bottom: 6px;
+    }
+    .calendar-toggle {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .toggle-option {
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #E8DFD3;
+      color: #6B6358;
+    }
+    .toggle-option.active {
+      background: #C5372E;
+      color: white;
+    }
+    .result-tabs {
+      display: flex;
+      gap: 6px;
+      margin: 12px 0 8px;
+    }
+    .result-tabs .tab {
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .result-preview {
+      background: #FAFAF7;
+      border-radius: 8px;
+      padding: 8px 12px;
+      margin-top: 4px;
+    }
+
+    /* ── Elements Grid (Team 3) ── */
+    .elements-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+    .element-card {
+      border-radius: 12px;
+      padding: 20px 16px;
+      text-align: center;
+    }
+    .element-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+    .element-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    /* ── Positioning Map (Team 4) ── */
+    .positioning-map {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      background: #FFFFFF;
+      border: 1px solid #E8DFD3;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .map-axes {
+      position: absolute;
+      inset: 0;
+    }
+    .axis-line {
+      position: absolute;
+      background: #E8DFD3;
+    }
+    .axis-line.vertical {
+      width: 1px;
+      height: 100%;
+      left: 50%;
+    }
+    .axis-line.horizontal {
+      height: 1px;
+      width: 100%;
+      top: 50%;
+    }
+    .y-axis, .x-axis {
+      position: absolute;
+    }
+    .y-axis {
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: #E8DFD3;
+    }
+    .x-axis {
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #E8DFD3;
+    }
+    .axis-label {
+      position: absolute;
+      font-size: 12px;
+      font-weight: 600;
+      color: #A89F91;
+      white-space: nowrap;
+    }
+    .axis-label.top { top: 8px; left: 50%; transform: translateX(-50%); }
+    .axis-label.bottom { bottom: 8px; left: 50%; transform: translateX(-50%); }
+    .axis-label.left { left: 8px; top: 50%; transform: translateY(-50%); }
+    .axis-label.right { right: 8px; top: 50%; transform: translateY(-50%); }
+    .map-content {
+      position: absolute;
+      inset: 0;
+    }
+    .map-dot {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot-marker {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 2px solid white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+    .dot-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #6B6358;
+      line-height: 1.3;
+    }
+
+    /* ── Palette Row (Team 4) ── */
+    .palette-row {
+      margin-bottom: 16px;
+    }
+    .palette-row h4 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1A1611;
+      margin-bottom: 8px;
+    }
+    .palette-row .color-swatches {
+      margin-top: 0;
+    }
+    .palette-row .color-swatch {
+      width: 100px;
+      height: 44px;
+    }
+    .palette-row .color-swatch span {
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    /* ── Adoption Tables (Team 5) ── */
+    .adopted-section {
+      margin-bottom: 32px;
+    }
+    .adopted-section h4 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1A1611;
+      margin-bottom: 12px;
+    }
+    .adoption-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    .adoption-table th {
+      background: #F5F0E8;
+      color: #6B6358;
+      font-weight: 600;
+      text-align: left;
+      padding: 10px 16px;
+      border-bottom: 2px solid #E8DFD3;
+    }
+    .adoption-table th:first-child { width: 40px; text-align: center; border-radius: 8px 0 0 0; }
+    .adoption-table th:last-child { width: 100px; text-align: center; border-radius: 0 8px 0 0; }
+    .adoption-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid #E8DFD3;
+      color: #1A1611;
+    }
+    .adoption-table td:first-child { text-align: center; font-weight: 700; color: #C5372E; }
+    .adoption-table td:last-child { text-align: center; }
+    .priority-high {
+      background: #C5372E;
+      color: white;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .priority-medium {
+      background: #A47764;
+      color: white;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .priority-low {
+      background: #E8DFD3;
+      color: #6B6358;
+      padding: 3px 10px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* ── Roadmap Timeline ── */
+    .roadmap-timeline {
+      position: relative;
+      padding-left: 32px;
+    }
+    .roadmap-timeline::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #E8DFD3;
+    }
+    .timeline-item {
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .timeline-marker {
+      position: absolute;
+      left: -32px;
+      top: 4px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 3px solid #FFFFFF;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .timeline-content h4 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1A1611;
+      margin-bottom: 4px;
+    }
+    .timeline-duration {
+      font-size: 13px;
+      font-weight: 600;
+      color: #C5372E;
+      margin-bottom: 12px;
+    }
+    .timeline-content ul {
+      display: grid;
+      gap: 6px;
+    }
+    .timeline-content li {
+      font-size: 14px;
+      color: #6B6358;
+      padding-left: 20px;
+      position: relative;
+    }
+    .timeline-content li::before {
+      content: '•';
+      position: absolute;
+      left: 4px;
+      color: #A47764;
+      font-weight: 700;
+    }
+
+    /* ── Mockup Frame ── */
+    .mockup-frame {
+      border: 1px solid #E8DFD3;
+      overflow: hidden;
+    }
+
+    /* ── Footer ── */
+    .report-footer {
+      background: #1A1611;
+      color: #A89F91;
+      padding: 40px 24px;
+      text-align: center;
+    }
+    .footer-copyright {
+      font-size: 14px;
+      font-weight: 600;
+      color: #F5F0E8;
+      margin-bottom: 8px;
+    }
+    .footer-note {
+      font-size: 13px;
+      color: #6B6358;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .report-header h1 { font-size: 28px; }
+      .team-nav { gap: 2px; padding: 8px; }
+      .tab-btn { padding: 8px 14px; font-size: 12px; }
+      .team-section { padding: 32px 16px 48px; }
+      .proposals-grid { grid-template-columns: 1fr; }
+      .before-after { grid-template-columns: 1fr; }
+      .comparison-row { grid-template-columns: 1fr; gap: 8px; }
+      .comparison-label { text-align: left; }
+      .elements-grid { grid-template-columns: repeat(2, 1fr); }
+      .user-flow { flex-direction: column; align-items: center; }
+      .flow-arrow { transform: rotate(90deg); }
+      .palette-grid { grid-template-columns: repeat(2, 1fr); }
+      #team-5 .palette-grid { grid-template-columns: repeat(2, 1fr); }
+      .positioning-map { aspect-ratio: 1/1; }
+      .mockup-frame div[style*="grid-template-columns: repeat(3"] {
+        display: flex !important;
+        flex-direction: column;
+      }
+      .proposals-container .proposal-card {
+        flex-direction: column;
+      }
+    }
+
+    /* ── Print ── */
+    @media print {
+      .team-nav { position: static; }
+      .team-section { display: block !important; page-break-before: always; }
+      .tab-btn { border: 1px solid #E8DFD3; }
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .team-section { animation: fadeIn 0.35s ease-out; }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- REPORT HEADER                                           -->
+<!-- ════════════════════════════════════════════════════════ -->
+<header class="report-header">
+  <div class="report-title">
+    <h1>K-Destiny 디자인 리뉴얼 종합 보고서</h1>
+    <p class="subtitle">Design Renewal Comprehensive Report 2026</p>
+    <p class="report-date">2026년 2월 15일</p>
+  </div>
+  <div class="overview">
+    <p>현재 K-Destiny의 어두운 디자인(#09090B)은 사용자에게 불편함을 주고 있습니다. 본 보고서는 따뜻하고 친근한 색상 시스템으로의 전환을 통해 사용자 경험을 개선하고, 한국 전통 미학과 현대적 트렌드를 조화롭게 결합한 디자인 리뉴얼 방향을 제시합니다. 5개 전문팀(트렌드 분석, UI, UX, 리서치, 총괄)의 심층 분석을 바탕으로 팀별 주요 5가지 + 보조 5가지, 총 50개 제안과 총괄팀의 20개 핵심 개선점을 도출하였습니다.</p>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TAB NAVIGATION                                          -->
+<!-- ════════════════════════════════════════════════════════ -->
+<nav class="team-nav">
+  <button class="tab-btn active" data-tab="team-1">📊 트렌드 분석팀</button>
+  <button class="tab-btn" data-tab="team-2">🎨 UI팀</button>
+  <button class="tab-btn" data-tab="team-3">🧭 UX팀</button>
+  <button class="tab-btn" data-tab="team-4">🔍 리서치팀</button>
+  <button class="tab-btn" data-tab="team-5">👑 총괄팀</button>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TEAM 1: 디자인트렌드 분석팀                                -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="team-1" class="team-section" style="display:block;">
+  <div class="team-header">
+    <div class="team-icon">📊</div>
+    <h2 class="team-name">디자인트렌드 분석팀</h2>
+    <p class="team-role">2025-2026 글로벌 디자인 트렌드 기반 K-Destiny 비주얼 방향성 제안</p>
+  </div>
+
+  <div class="proposals-main">
+    <h3>주요 제안사항</h3>
+    <div class="proposals-grid">
+      <div class="proposal-card">
+        <div class="proposal-number">01</div>
+        <h4 class="proposal-title">Cloud Dancer 기반 라이트 모드 도입</h4>
+        <p class="proposal-description">2026 Pantone Cloud Dancer(#F0EEE9)를 기본 배경으로, 다크 모드는 옵션으로 전환. 현재 #09090B 어두운 배경에서 밝고 따뜻한 배경으로의 전환이 핵심.</p>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: #F0EEE9; border: 1px solid #E8DFD3;" title="#F0EEE9">
+            <span class="swatch-label" style="color:#6B6358;">#F0EEE9</span>
+          </div>
+          <div class="color-swatch dark" style="background: #09090B;" title="#09090B">
+            <span class="swatch-label" style="color:#fff;">#09090B</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proposal-card">
+        <div class="proposal-number">02</div>
+        <h4 class="proposal-title">Mocha Mousse 워밍 액센트</h4>
+        <p class="proposal-description">2025 Pantone Mocha Mousse(#A47764)를 보조 액센트로 활용하여 따뜻하고 신뢰감 있는 톤 구성. 기존 차가운 퍼플 중심에서 워밍 톤 추가.</p>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: #A47764;" title="#A47764">
+            <span class="swatch-label" style="color:#fff;">#A47764</span>
+          </div>
+          <div class="color-swatch" style="background: #8B7EC8;" title="#8B7EC8">
+            <span class="swatch-label" style="color:#fff;">#8B7EC8</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proposal-card">
+        <div class="proposal-number">03</div>
+        <h4 class="proposal-title">소프트 그라디언트 트랜지션</h4>
+        <p class="proposal-description">하드 컬러 블록 대신 라벤더→로즈, 크림→세이지 등 부드러운 그라디언트 적용. 현대적이면서도 영적인 분위기 연출.</p>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: linear-gradient(135deg, #8B7EC8, #D4A5A5);" title="Lavender to Rose">
+            <span class="swatch-label" style="color:#fff;">Gradient</span>
+          </div>
+          <div class="color-swatch" style="background: linear-gradient(135deg, #F5F0E8, #D4E2D4);" title="Cream to Sage">
+            <span class="swatch-label" style="color:#6B6358;">Gradient</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proposal-card">
+        <div class="proposal-number">04</div>
+        <h4 class="proposal-title">네오 미니멀리즘</h4>
+        <p class="proposal-description">과도한 글래스모피즘 축소, 텍스처와 따뜻한 음영을 활용한 깊이감 표현. 한지 텍스처 은은하게 활용.</p>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: #F5F0E8; border: 1px solid #E8DFD3;" title="#F5F0E8">
+            <span class="swatch-label" style="color:#6B6358;">#F5F0E8</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proposal-card">
+        <div class="proposal-number">05</div>
+        <h4 class="proposal-title">에디토리얼 타이포그래피</h4>
+        <p class="proposal-description">Pretendard 기본 + 특별 포인트(운세 결과 제목 등)에만 캘리그라피 폰트(Gaegu) 사용. 명조체/궁서체 완전 배제.</p>
+        <div class="typography-sample" style="font-size: 28px; color: #1A1611; margin-top: 12px; font-weight: 800; letter-spacing: -0.02em;">
+          당신의 운명을 읽다
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proposals-sub">
+    <h3>보조 제안사항</h3>
+    <ul class="sub-list">
+      <li>마이크로 인터랙션으로 따뜻한 피드백 (호버 시 미세 확대 + 그림자)</li>
+      <li>둥근 필 형태 버튼/태그로 친근감 강화</li>
+      <li>계절 기반 다이나믹 테마 (봄/여름/가을/겨울 자동 전환)</li>
+      <li>핸드드로잉 요소로 AI 느낌 탈피 (Gaegu 폰트 활용)</li>
+      <li>자연 소재 텍스처 (한지, 나무결) 은은한 백그라운드 패턴</li>
+    </ul>
+  </div>
+
+  <div class="palette-section">
+    <h3>제안 컬러 팔레트</h3>
+    <div class="palette-grid">
+      <div class="palette-item">
+        <div class="palette-color" style="background: #F0EEE9;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Primary BG</span>
+          <span class="palette-hex">#F0EEE9</span>
+          <span class="palette-desc">Cloud Dancer</span>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-color" style="background: #F5F0E8;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Secondary BG</span>
+          <span class="palette-hex">#F5F0E8</span>
+          <span class="palette-desc">Hanji Cream</span>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-color" style="background: #A47764;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Accent Warm</span>
+          <span class="palette-hex">#A47764</span>
+          <span class="palette-desc">Mocha Mousse</span>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-color" style="background: #8B7EC8;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Accent Purple</span>
+          <span class="palette-hex">#8B7EC8</span>
+          <span class="palette-desc">Soft Lavender</span>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-color" style="background: #1A1611;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Text Primary</span>
+          <span class="palette-hex">#1A1611</span>
+          <span class="palette-desc">Muk Black</span>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-color" style="background: #6B6358;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Text Secondary</span>
+          <span class="palette-hex">#6B6358</span>
+          <span class="palette-desc">Warm Gray</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup-container">
+    <h3>Before / After 비교 — 랜딩 히어로 섹션</h3>
+    <div class="before-after">
+      <div class="mockup-side before">
+        <div class="mockup-label">Before (현재)</div>
+        <div style="background: #09090B; padding: 60px 32px; border-radius: 16px; text-align: center;">
+          <div style="font-size: 10px; display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:100px; background:rgba(139,92,246,0.15); border:1px solid rgba(139,92,246,0.3); color:rgba(255,255,255,0.8); margin-bottom:20px;">✨ AI 사주 분석</div>
+          <h1 style="color: #FFFFFF; font-size: 40px; margin: 0 0 12px 0; font-weight: 800;">K-Destiny</h1>
+          <p style="color: #A1A1AA; font-size: 16px; margin: 0 0 28px 0;">한국의 운명을 읽다</p>
+          <button style="background: linear-gradient(135deg, #8B5CF6, #EC4899); color: white; border: none; padding: 14px 40px; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: 0 0 32px rgba(139, 92, 246, 0.5);">
+            운세 보기 →
+          </button>
+          <p style="color: rgba(255,255,255,0.3); font-size:12px; margin-top:12px;">무료 · 3분 소요</p>
+        </div>
+      </div>
+      <div class="mockup-side after">
+        <div class="mockup-label">After (제안)</div>
+        <div style="background: linear-gradient(180deg, #F0EEE9, #F5F0E8); padding: 60px 32px; border-radius: 16px; text-align: center; position:relative; overflow:hidden;">
+          <div style="position:absolute; top:-40px; right:-40px; width:200px; height:200px; background:radial-gradient(circle, rgba(197,55,46,0.06), transparent); border-radius:50%; filter:blur(40px);"></div>
+          <div style="font-size: 10px; display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:100px; background:rgba(197,55,46,0.08); border:1px solid rgba(197,55,46,0.15); color:#C5372E; margin-bottom:20px; position:relative;">✨ AI 사주 분석</div>
+          <h1 style="color: #1A1611; font-size: 40px; margin: 0 0 12px 0; font-weight: 800; position:relative; letter-spacing: -0.03em;">K-Destiny</h1>
+          <p style="color: #6B6358; font-size: 16px; margin: 0 0 28px 0; position:relative;">한국의 운명을 읽다</p>
+          <button style="background: linear-gradient(135deg, #C5372E, #A47764); color: white; border: none; padding: 14px 40px; border-radius: 100px; font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 16px rgba(197, 55, 46, 0.2); position:relative;">
+            운세 보기 →
+          </button>
+          <p style="color: #A89F91; font-size:12px; margin-top:12px; position:relative;">무료 · 3분 소요</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TEAM 2: UI팀                                            -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="team-2" class="team-section" style="display:none;">
+  <div class="team-header">
+    <div class="team-icon">🎨</div>
+    <h2 class="team-name">UI팀</h2>
+    <p class="team-role">컴포넌트 시스템 리뉴얼 및 라이트 모드 UI 구현 방안</p>
+  </div>
+
+  <div class="proposals-main">
+    <h3>주요 제안사항</h3>
+    <div class="proposals-grid">
+      <div class="proposal-card">
+        <div class="proposal-number">01</div>
+        <h4 class="proposal-title">버튼 시스템 리뉴얼</h4>
+        <p class="proposal-description">솔리드 퍼플 → 워밍 그라디언트(#A47764→#C5372E) + 라운드 xl + 소프트 섀도우. 다양한 사이즈와 상태(hover, active, disabled) 포함.</p>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: linear-gradient(135deg, #A47764, #C5372E);" title="Button Gradient">
+            <span class="swatch-label" style="color:#fff;">Primary</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proposal-card">
+        <div class="proposal-number">02</div>
+        <h4 class="proposal-title">카드 컴포넌트 개선</h4>
+        <p class="proposal-description">다크 글래스 → 화이트 베이스 카드 + 미세 보더(#E8DFD3) + 따뜻한 그림자. 호버 시 살짝 떠오르는 효과.</p>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: #FFFFFF; border: 1px solid #E8DFD3;" title="#FFFFFF">
+            <span class="swatch-label" style="color:#6B6358;">#FFFFFF</span>
+          </div>
+          <div class="color-swatch" style="background: #E8DFD3;" title="#E8DFD3">
+            <span class="swatch-label" style="color:#6B6358;">#E8DFD3</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proposal-card">
+        <div class="proposal-number">03</div>
+        <h4 class="proposal-title">네비게이션 바 밝은 모드</h4>
+        <p class="proposal-description">투명 다크 → 크림 배경(rgba(245,240,232,0.85)) + 하단 미세 라인 + 스크롤 시 backdrop-blur 효과.</p>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: rgba(245,240,232,0.85); border: 1px solid #E8DFD3;" title="Nav BG">
+            <span class="swatch-label" style="color:#6B6358;">Nav BG</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proposal-card">
+        <div class="proposal-number">04</div>
+        <h4 class="proposal-title">입력 폼 재설계</h4>
+        <p class="proposal-description">다크 배경 입력 → 밝은 배경(#FAFAF7) + 워밍 포커스 링(#A47764) + 플로팅 라벨 패턴.</p>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: #FAFAF7; border: 1px solid #E8DFD3;" title="#FAFAF7">
+            <span class="swatch-label" style="color:#6B6358;">#FAFAF7</span>
+          </div>
+          <div class="color-swatch" style="background: #A47764;" title="#A47764">
+            <span class="swatch-label" style="color:#fff;">Focus</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proposal-card">
+        <div class="proposal-number">05</div>
+        <h4 class="proposal-title">두오톤 아이콘 시스템</h4>
+        <p class="proposal-description">모노크롬 → 두오톤(따뜻한 색조 + 보라) 아이콘 세트. 오행 요소별 컬러 매핑.</p>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: linear-gradient(135deg, #A47764, #8B7EC8);" title="Duotone">
+            <span class="swatch-label" style="color:#fff;">Duotone</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="proposals-sub">
+    <h3>보조 제안사항</h3>
+    <ul class="sub-list">
+      <li>Skeleton 로더 색상 밝은 톤 전환</li>
+      <li>뱃지/태그 파스텔 배경 + 컬러 텍스트</li>
+      <li>디바이더를 은은한 패턴 라인으로</li>
+      <li>토스트/알림 UI 밝은 테마 적용</li>
+      <li>프로그레스 바 컬러를 오행 색상에 맞춤</li>
+    </ul>
+  </div>
+
+  <div class="palette-section">
+    <h3>제안 컬러 팔레트</h3>
+    <div class="palette-grid">
+      <div class="palette-item">
+        <div class="palette-color" style="background: linear-gradient(135deg, #A47764, #C5372E);"></div>
+        <div class="palette-info">
+          <span class="palette-name">Button Primary</span>
+          <span class="palette-hex">Gradient</span>
+          <span class="palette-desc">#A47764 → #C5372E</span>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-color" style="background: #F5F0E8; border: 1px solid #E8DFD3;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Button Secondary</span>
+          <span class="palette-hex">#F5F0E8</span>
+          <span class="palette-desc">Border #E8DFD3</span>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-color" style="background: #FFFFFF; border: 1px solid #E8DFD3;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Card BG</span>
+          <span class="palette-hex">#FFFFFF</span>
+          <span class="palette-desc">White</span>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-color" style="background: #FAFAF7;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Input BG</span>
+          <span class="palette-hex">#FAFAF7</span>
+          <span class="palette-desc">Off White</span>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-color" style="background: #A47764;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Focus Ring</span>
+          <span class="palette-hex">#A47764</span>
+          <span class="palette-desc">Mocha Mousse</span>
+        </div>
+      </div>
+      <div class="palette-item">
+        <div class="palette-color" style="background: rgba(245,240,232,0.85); border: 1px solid #E8DFD3;"></div>
+        <div class="palette-info">
+          <span class="palette-name">Nav BG</span>
+          <span class="palette-hex">rgba(245,240,232,0.85)</span>
+          <span class="palette-desc">Frosted Cream</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup-container">
+    <h3>컴포넌트 Before / After 비교</h3>
+    <div class="component-comparison-grid">
+      <!-- Buttons Row -->
+      <div class="comparison-row">
+        <div class="comparison-label">Buttons</div>
+        <div class="comparison-before">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button style="background: #8B5CF6; color: white; border: none; padding: 10px 22px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;">Primary</button>
+            <button style="background: transparent; color: #8B5CF6; border: 1px solid #8B5CF6; padding: 10px 22px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;">Secondary</button>
+            <button style="background: transparent; color: #A1A1AA; border: none; padding: 10px 22px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;">Ghost</button>
+          </div>
+        </div>
+        <div class="comparison-after">
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button style="background: linear-gradient(135deg, #A47764, #C5372E); color: white; border: none; padding: 10px 22px; border-radius: 100px; font-size: 13px; font-weight: 600; cursor: pointer; box-shadow: 0 2px 8px rgba(164, 119, 100, 0.2);">Primary</button>
+            <button style="background: #F5F0E8; color: #A47764; border: 1px solid #E8DFD3; padding: 10px 22px; border-radius: 100px; font-size: 13px; font-weight: 600; cursor: pointer;">Secondary</button>
+            <button style="background: transparent; color: #6B6358; border: none; padding: 10px 22px; border-radius: 100px; font-size: 13px; font-weight: 600; cursor: pointer;">Ghost</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card Row -->
+      <div class="comparison-row">
+        <div class="comparison-label">Card</div>
+        <div class="comparison-before">
+          <div style="background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 20px;">
+            <h4 style="margin: 0 0 6px 0; font-size: 16px; color: #FFFFFF;">사주 운세</h4>
+            <p style="margin: 0; font-size: 13px; color: #A1A1AA;">오늘의 운세를 확인하세요</p>
+          </div>
+        </div>
+        <div class="comparison-after">
+          <div style="background: #FFFFFF; border: 1px solid #E8DFD3; border-radius: 12px; padding: 20px; box-shadow: 0 2px 12px rgba(164, 119, 100, 0.06);">
+            <h4 style="margin: 0 0 6px 0; font-size: 16px; color: #1A1611;">사주 운세</h4>
+            <p style="margin: 0; font-size: 13px; color: #6B6358;">오늘의 운세를 확인하세요</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Nav Row -->
+      <div class="comparison-row">
+        <div class="comparison-label">Nav</div>
+        <div class="comparison-before">
+          <div style="background: rgba(9, 9, 11, 0.8); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px;">
+            <div style="color: #FFFFFF; font-weight: 700; font-size: 16px;">K-Destiny</div>
+            <div style="display: flex; gap: 20px; color: #A1A1AA; font-size: 13px;">
+              <span>홈</span><span>운세</span><span>궁합</span>
+            </div>
+          </div>
+        </div>
+        <div class="comparison-after">
+          <div style="background: rgba(245, 240, 232, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid #E8DFD3; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-radius: 8px;">
+            <div style="color: #1A1611; font-weight: 700; font-size: 16px; letter-spacing: -0.02em;">K-Destiny</div>
+            <div style="display: flex; gap: 20px; color: #6B6358; font-size: 13px;">
+              <span>홈</span><span>운세</span><span>궁합</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Row -->
+      <div class="comparison-row">
+        <div class="comparison-label">Input</div>
+        <div class="comparison-before">
+          <input type="text" placeholder="생년월일을 입력하세요" style="width: 100%; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; padding: 10px 14px; color: white; font-size: 13px; box-sizing: border-box;" readonly />
+        </div>
+        <div class="comparison-after">
+          <input type="text" placeholder="생년월일을 입력하세요" style="width: 100%; background: #FAFAF7; border: 2px solid #E8DFD3; border-radius: 12px; padding: 10px 14px; color: #1A1611; font-size: 13px; box-sizing: border-box; outline: none;" onfocus="this.style.borderColor='#A47764'; this.style.boxShadow='0 0 0 3px rgba(164, 119, 100, 0.1)';" onblur="this.style.borderColor='#E8DFD3'; this.style.boxShadow='none';" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TEAM 3: UX팀                                            -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="team-3" class="team-section" style="display:none;">
+  <div class="team-header">
+    <div class="team-icon">🧭</div>
+    <h2 class="team-name">UX팀</h2>
+    <p class="team-role">사용자 경험 개선을 통한 접근성과 직관성 강화</p>
+  </div>
+
+  <div class="proposals-main">
+    <h3>주요 제안사항</h3>
+    <div class="proposals-grid">
+      <div class="proposal-card">
+        <div class="proposal-number">01</div>
+        <h4>온보딩 플로우 개선</h4>
+        <p>3단계 일러스트 가이드 (사주란? → 생년월일 입력 → 결과 미리보기) + 프로그레스 인디케이터. 처음 방문한 사용자가 서비스를 쉽게 이해할 수 있도록.</p>
+      </div>
+      <div class="proposal-card">
+        <div class="proposal-number">02</div>
+        <h4>결과 페이지 정보 계층화</h4>
+        <p>현재 긴 스크롤 → 탭/아코디언 기반 섹션 분리 (운세 요약 / 상세 해석 / 조언). 사용자가 원하는 정보를 빠르게 찾을 수 있도록.</p>
+      </div>
+      <div class="proposal-card">
+        <div class="proposal-number">03</div>
+        <h4>접근성 강화</h4>
+        <p>최소 대비비 4.5:1, 포커스 링 가시성, 키보드 네비게이션 완전 지원. WCAG 2.1 AA 기준 충족.</p>
+      </div>
+      <div class="proposal-card">
+        <div class="proposal-number">04</div>
+        <h4>모바일 UX 최적화</h4>
+        <p>하단 고정 CTA 크기 증대 + 스와이프 제스처 지원 + 바텀시트 네비게이션. 엄지 영역(thumb zone) 최적화.</p>
+      </div>
+      <div class="proposal-card">
+        <div class="proposal-number">05</div>
+        <h4>감정 기반 색상 피드백</h4>
+        <p>오행 결과에 따라 페이지 전체 색조가 미세하게 변화. 목(木)=그린, 화(火)=웜, 토(土)=앰버, 금(金)=실버, 수(水)=블루 틴트.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="proposals-sub">
+    <h3>보조 제안사항</h3>
+    <ul class="sub-list">
+      <li>로딩 상태에 사주 관련 미니 팁 표시</li>
+      <li>결과 공유 시 OG 이미지 자동 생성으로 공유 경험 개선</li>
+      <li>음력/양력 전환 시 즉시 피드백</li>
+      <li>히스토리 타임라인 시각화</li>
+      <li>첫 방문 vs 재방문 사용자 맞춤 경험</li>
+    </ul>
+  </div>
+
+  <div class="mockup-container">
+    <h3>사용자 플로우 목업</h3>
+    <div class="user-flow">
+      <div class="flow-step">
+        <div class="step-card" style="border: 2px solid #C5372E;">
+          <div class="step-icon">📖</div>
+          <h4>Step 1: 사주란?</h4>
+          <p class="step-description">사주는 태어난 시간을 기반으로 운명과 성격을 알아보는 전통 학문</p>
+          <div class="progress-bar"><div class="progress-fill" style="width: 33%; background: #C5372E;"></div></div>
+          <span class="progress-label">33%</span>
+        </div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-card" style="border: 2px solid #A47764;">
+          <div class="step-icon">📅</div>
+          <h4>Step 2: 생년월일 입력</h4>
+          <div class="input-mockup">
+            <div class="input-field">생년월일: YYYY-MM-DD</div>
+            <div class="input-field">태어난 시간: HH:MM</div>
+            <div class="calendar-toggle">
+              <span class="toggle-option active">양력</span>
+              <span class="toggle-option">음력</span>
+            </div>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 66%; background: #C5372E;"></div></div>
+          <span class="progress-label">66%</span>
+        </div>
+        <div class="flow-arrow">→</div>
+      </div>
+      <div class="flow-step">
+        <div class="step-card" style="border: 2px solid #4A7C59;">
+          <div class="step-icon">✨</div>
+          <h4>Step 3: 나의 운세 결과</h4>
+          <div class="result-tabs">
+            <span class="tab active" style="background: #C5372E; color: white;">요약</span>
+            <span class="tab" style="background: #E8DFD3; color: #6B6358;">상세</span>
+            <span class="tab" style="background: #E8DFD3; color: #6B6358;">조언</span>
+          </div>
+          <div class="result-preview">
+            <p style="font-size: 12px; color: #6B6358;">당신의 사주를 분석했습니다</p>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" style="width: 100%; background: #4A7C59;"></div></div>
+          <span class="progress-label">100%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup-container">
+    <h3>오행 색상 피드백 시스템</h3>
+    <div class="elements-grid">
+      <div class="element-card" style="background: linear-gradient(135deg, #F0EEE9 0%, #E8F5E9 100%); border-left: 4px solid #4A7C59;">
+        <div class="element-icon">🌳</div>
+        <h4 style="color: #2E5D3E;">목 (木)</h4>
+        <p style="font-size: 12px; color: #4A7C59;">Wood · Green Tint</p>
+      </div>
+      <div class="element-card" style="background: linear-gradient(135deg, #F0EEE9 0%, #FFEBEE 100%); border-left: 4px solid #C5372E;">
+        <div class="element-icon">🔥</div>
+        <h4 style="color: #A62D23;">화 (火)</h4>
+        <p style="font-size: 12px; color: #C5372E;">Fire · Warm Tint</p>
+      </div>
+      <div class="element-card" style="background: linear-gradient(135deg, #F0EEE9 0%, #FFF8E1 100%); border-left: 4px solid #B8860B;">
+        <div class="element-icon">🏔️</div>
+        <h4 style="color: #9A6F08;">토 (土)</h4>
+        <p style="font-size: 12px; color: #B8860B;">Earth · Amber Tint</p>
+      </div>
+      <div class="element-card" style="background: linear-gradient(135deg, #F0EEE9 0%, #F5F5F5 100%); border-left: 4px solid #8B8589;">
+        <div class="element-icon">⚙️</div>
+        <h4 style="color: #616161;">금 (金)</h4>
+        <p style="font-size: 12px; color: #8B8589;">Metal · Silver Tint</p>
+      </div>
+      <div class="element-card" style="background: linear-gradient(135deg, #F0EEE9 0%, #E3F2FD 100%); border-left: 4px solid #2B4162;">
+        <div class="element-icon">💧</div>
+        <h4 style="color: #1A2E4A;">수 (水)</h4>
+        <p style="font-size: 12px; color: #2B4162;">Water · Blue Tint</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TEAM 4: 리서치팀                                         -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="team-4" class="team-section" style="display:none;">
+  <div class="team-header">
+    <div class="team-icon">🔍</div>
+    <h2 class="team-name">리서치팀</h2>
+    <p class="team-role">경쟁사 분석 및 시장 트렌드 리서치 기반 디자인 제안</p>
+  </div>
+
+  <div class="proposals-main">
+    <h3>주요 제안사항</h3>
+    <div class="proposals-grid">
+      <div class="proposal-card">
+        <div class="proposal-number">01</div>
+        <h4>Co-Star 스타일 미니멀 흑백</h4>
+        <p>Co-Star 앱의 대담한 타이포그래피 + 미니멀 레이아웃 참고, 그러나 따뜻한 색조로 차별화. 핵심: 과감한 폰트 사이즈 + 여백.</p>
+      </div>
+      <div class="proposal-card">
+        <div class="proposal-number">02</div>
+        <h4>The Pattern 감성 UI</h4>
+        <p>부드러운 그라디언트 배경 + 카드 기반 인사이트 + 개인화된 메시지 톤. 핵심: 감성적 그라디언트 + 따뜻한 메시지.</p>
+      </div>
+      <div class="proposal-card">
+        <div class="proposal-number">03</div>
+        <h4>토스(Toss) 클린 3D 디자인</h4>
+        <p>깔끔한 화이트 베이스 + 3D 아이콘 + 부드러운 모션. 핵심: 화이트 스페이스 활용 + 직관적 레이아웃.</p>
+      </div>
+      <div class="proposal-card">
+        <div class="proposal-number">04</div>
+        <h4>산신각 전통 컬러 모던화</h4>
+        <p>한국 전통 오방색(파랑·빨강·노랑·백·흑)을 현대적 톤으로 재해석. 핵심: 인디고, 주사, 황토, 한지, 먹.</p>
+      </div>
+      <div class="proposal-card">
+        <div class="proposal-number">05</div>
+        <h4>카카오 친화성</h4>
+        <p>한국 사용자에게 익숙한 카카오톡 스타일의 둥근 UI + 따뜻한 옐로우 포인트. 핵심: 친숙한 둥근 형태 + 부드러운 배경.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="proposals-sub">
+    <h3>보조 제안사항</h3>
+    <ul class="sub-list">
+      <li>Headspace 명상앱의 일러스트 스타일 참고</li>
+      <li>점신/신한점 등 국내 점술 앱의 전통 패턴 활용</li>
+      <li>핀터레스트 트렌딩 "아스트로 에스테틱" 무드보드 분석</li>
+      <li>Z세대 선호 파스텔 + 네온 포인트 조합</li>
+      <li>인스타그램 스토리 공유 최적화 카드 디자인</li>
+    </ul>
+  </div>
+
+  <div class="mockup-container">
+    <h3>레퍼런스 컬러 팔레트</h3>
+    <div style="display: grid; gap: 20px; margin-bottom: 40px;">
+      <div class="palette-row">
+        <h4>Co-Star</h4>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: #000000;"><span style="color: white; font-size:10px;">#000000</span></div>
+          <div class="color-swatch" style="background: #FFFFFF; border: 1px solid #E8DFD3;"><span style="color: #1A1611; font-size:10px;">#FFFFFF</span></div>
+        </div>
+      </div>
+      <div class="palette-row">
+        <h4>The Pattern</h4>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: #1A1A2E;"><span style="color: white; font-size:10px;">#1A1A2E</span></div>
+          <div class="color-swatch" style="background: #6C63FF;"><span style="color: white; font-size:10px;">#6C63FF</span></div>
+          <div class="color-swatch" style="background: #FF6B6B;"><span style="color: white; font-size:10px;">#FF6B6B</span></div>
+        </div>
+      </div>
+      <div class="palette-row">
+        <h4>Toss (토스)</h4>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: #FFFFFF; border: 1px solid #E8DFD3;"><span style="color: #1A1611; font-size:10px;">#FFFFFF</span></div>
+          <div class="color-swatch" style="background: #3182F6;"><span style="color: white; font-size:10px;">#3182F6</span></div>
+          <div class="color-swatch" style="background: #191F28;"><span style="color: white; font-size:10px;">#191F28</span></div>
+        </div>
+      </div>
+      <div class="palette-row">
+        <h4>Kakao (카카오)</h4>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: #FEE500;"><span style="color: #1A1611; font-size:10px;">#FEE500</span></div>
+          <div class="color-swatch" style="background: #3C1E1E;"><span style="color: white; font-size:10px;">#3C1E1E</span></div>
+          <div class="color-swatch" style="background: #FFFFFF; border: 1px solid #E8DFD3;"><span style="color: #1A1611; font-size:10px;">#FFFFFF</span></div>
+        </div>
+      </div>
+      <div class="palette-row">
+        <h4>산신각 Modern (오방색)</h4>
+        <div class="color-swatches">
+          <div class="color-swatch" style="background: #2B4162;"><span style="color: white; font-size:10px;">#2B4162</span></div>
+          <div class="color-swatch" style="background: #C5372E;"><span style="color: white; font-size:10px;">#C5372E</span></div>
+          <div class="color-swatch" style="background: #F5F0E8; border:1px solid #E8DFD3;"><span style="color: #1A1611; font-size:10px;">#F5F0E8</span></div>
+          <div class="color-swatch" style="background: #4A7C59;"><span style="color: white; font-size:10px;">#4A7C59</span></div>
+          <div class="color-swatch" style="background: #B8860B;"><span style="color: white; font-size:10px;">#B8860B</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup-container">
+    <h3>포지셔닝 맵</h3>
+    <div class="positioning-map">
+      <!-- Axis Labels -->
+      <div class="axis-label top" style="position:absolute; top:12px; left:50%; transform:translateX(-50%);">심플 (Simple)</div>
+      <div class="axis-label bottom" style="position:absolute; bottom:12px; left:50%; transform:translateX(-50%);">화려 (Rich)</div>
+      <div class="axis-label left" style="position:absolute; left:12px; top:50%; transform:translateY(-50%);">전통적</div>
+      <div class="axis-label right" style="position:absolute; right:12px; top:50%; transform:translateY(-50%);">현대적</div>
+      <!-- Axes -->
+      <div class="y-axis"></div>
+      <div class="x-axis"></div>
+      <!-- Dots -->
+      <div class="map-content">
+        <div class="map-dot" style="top: 18%; left: 72%;"><span class="dot-marker" style="background: #000000;"></span><span class="dot-label">Co-Star</span></div>
+        <div class="map-dot" style="top: 65%; left: 78%;"><span class="dot-marker" style="background: #6C63FF;"></span><span class="dot-label">The Pattern</span></div>
+        <div class="map-dot" style="top: 22%; left: 76%;"><span class="dot-marker" style="background: #3182F6;"></span><span class="dot-label">Toss</span></div>
+        <div class="map-dot" style="top: 28%; left: 48%;"><span class="dot-marker" style="background: #FEE500; border-color:#1A1611;"></span><span class="dot-label">Kakao</span></div>
+        <div class="map-dot" style="top: 62%; left: 22%;"><span class="dot-marker" style="background: #09090B; border: 2px solid #8B5CF6;"></span><span class="dot-label">K-Destiny<br>Current</span></div>
+        <div class="map-dot" style="top: 38%; left: 60%;"><span class="dot-marker" style="background: #C5372E; box-shadow: 0 0 0 6px rgba(197, 55, 46, 0.15);"></span><span class="dot-label" style="font-weight: 700; color: #C5372E;">K-Destiny<br>Proposed ✨</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup-container">
+    <h3>Best Practice Mix — 최적 디자인 방향</h3>
+    <div style="background: #FFFFFF; padding: 40px 32px; border-radius: 16px; border: 2px solid rgba(197,55,46,0.15);">
+      <!-- Bold Typography (Co-Star inspired) -->
+      <div style="margin-bottom: 32px;">
+        <h2 style="font-size: 48px; font-weight: 800; color: #1A1611; margin: 0; line-height: 1.1;">당신의 사주</h2>
+        <p style="font-size: 14px; color: #A89F91; margin-top: 6px;">↑ Co-Star Bold Typography</p>
+      </div>
+      <!-- Traditional Colors (산신각 inspired) -->
+      <div style="background: linear-gradient(135deg, #F5F0E8, #F0EEE9); padding: 24px; border-radius: 12px; border-left: 4px solid #C5372E; margin-bottom: 32px;">
+        <div style="display: flex; gap: 12px; align-items: center; margin-bottom: 12px;">
+          <div style="width: 8px; height: 48px; background: #2B4162; border-radius: 4px;"></div>
+          <div style="width: 8px; height: 48px; background: #C5372E; border-radius: 4px;"></div>
+          <div style="width: 8px; height: 48px; background: #4A7C59; border-radius: 4px;"></div>
+          <div style="width: 8px; height: 48px; background: #B8860B; border-radius: 4px;"></div>
+          <div style="width: 8px; height: 48px; background: #1A1611; border-radius: 4px;"></div>
+        </div>
+        <p style="font-size: 13px; color: #6B6358;">↑ Traditional Korean Warm Colors (오방색 Modern)</p>
+      </div>
+      <!-- Clean Layout (Toss inspired) -->
+      <div style="background: #FFFFFF; padding: 24px; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); border: 1px solid #F0EEE9;">
+        <h4 style="color: #1A1611; font-size: 20px; margin: 0 0 8px 0;">2026년 운세</h4>
+        <p style="color: #6B6358; font-size: 15px; line-height: 1.7; margin: 0;">올해는 새로운 시작의 해입니다. 꾸준한 노력이 결실을 맺을 것입니다.</p>
+        <p style="font-size: 13px; color: #A89F91; margin-top: 12px; text-align: center;">↑ Toss-like White Space + Clean Layout</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- TEAM 5: 총괄팀                                           -->
+<!-- ════════════════════════════════════════════════════════ -->
+<section id="team-5" class="team-section" style="display:none;">
+  <div class="team-header">
+    <div class="team-icon">👑</div>
+    <h2 class="team-name">총괄팀</h2>
+    <p class="team-role">4개 팀의 제안을 종합 검토하여 최종 디자인 시스템 확정 및 실행 로드맵 수립</p>
+  </div>
+
+  <!-- Executive Summary -->
+  <div class="proposal-card">
+    <h3>Executive Summary</h3>
+    <p>4개 팀의 50개 제안을 검토하여 <strong>실행 가능성</strong>, <strong>사용자 임팩트</strong>, <strong>기술적 적합성</strong>을 기준으로 팀별 5개, 총 20개의 핵심 개선점을 선정하였습니다. 선정된 개선안은 K-Destiny의 브랜드 아이덴티티를 유지하면서도 사용자 친화적인 따뜻한 경험을 제공하며, 한국 전통 미학의 현대적 재해석을 통해 차별화된 가치를 창출합니다.</p>
+  </div>
+
+  <!-- Team-by-Team Adoption -->
+  <div class="proposal-card">
+    <h3>팀별 채택 개선안 (총 20개)</h3>
+
+    <div class="adopted-section">
+      <h4>📊 트렌드팀에서 채택 (5개)</h4>
+      <table class="adoption-table">
+        <thead><tr><th>#</th><th>개선안</th><th>우선순위</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Cloud Dancer + Hanji 크림 기반 라이트 모드를 기본값으로 전환</td><td><span class="priority-high">High</span></td></tr>
+          <tr><td>2</td><td>Mocha Mousse를 워밍 액센트로 통합</td><td><span class="priority-high">High</span></td></tr>
+          <tr><td>3</td><td>소프트 그라디언트 시스템 도입</td><td><span class="priority-high">High</span></td></tr>
+          <tr><td>4</td><td>에디토리얼 타이포그래피 레이아웃 적용</td><td><span class="priority-medium">Medium</span></td></tr>
+          <tr><td>5</td><td>계절 테마 자동 전환 (Phase 2 검토)</td><td><span class="priority-low">Low</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="adopted-section">
+      <h4>🎨 UI팀에서 채택 (5개)</h4>
+      <table class="adoption-table">
+        <thead><tr><th>#</th><th>개선안</th><th>우선순위</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>워밍 그라디언트 버튼 시스템 전면 적용</td><td><span class="priority-high">High</span></td></tr>
+          <tr><td>2</td><td>화이트 베이스 카드 + 워밍 섀도우 전환</td><td><span class="priority-high">High</span></td></tr>
+          <tr><td>3</td><td>밝은 네비게이션 바 도입</td><td><span class="priority-high">High</span></td></tr>
+          <tr><td>4</td><td>플로팅 라벨 입력 폼 개선</td><td><span class="priority-medium">Medium</span></td></tr>
+          <tr><td>5</td><td>두오톤 아이콘 시스템 구축</td><td><span class="priority-medium">Medium</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="adopted-section">
+      <h4>🧭 UX팀에서 채택 (5개)</h4>
+      <table class="adoption-table">
+        <thead><tr><th>#</th><th>개선안</th><th>우선순위</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>3단계 온보딩 가이드 도입</td><td><span class="priority-high">High</span></td></tr>
+          <tr><td>2</td><td>탭/아코디언 기반 결과 페이지 재구성</td><td><span class="priority-high">High</span></td></tr>
+          <tr><td>3</td><td>WCAG 2.1 AA 접근성 기준 충족</td><td><span class="priority-high">High</span></td></tr>
+          <tr><td>4</td><td>모바일 하단 네비게이션 개선</td><td><span class="priority-medium">Medium</span></td></tr>
+          <tr><td>5</td><td>오행 기반 색상 피드백 시스템</td><td><span class="priority-medium">Medium</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="adopted-section">
+      <h4>🔍 리서치팀에서 채택 (5개)</h4>
+      <table class="adoption-table">
+        <thead><tr><th>#</th><th>개선안</th><th>우선순위</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>토스 스타일 클린 3D 기반 레이아웃 적용</td><td><span class="priority-high">High</span></td></tr>
+          <tr><td>2</td><td>한국 전통 오방색 현대적 재해석 팔레트 확정</td><td><span class="priority-high">High</span></td></tr>
+          <tr><td>3</td><td>카카오 스타일 둥근 UI 패턴 도입</td><td><span class="priority-high">High</span></td></tr>
+          <tr><td>4</td><td>인스타그램/카카오톡 공유 최적화 카드</td><td><span class="priority-medium">Medium</span></td></tr>
+          <tr><td>5</td><td>The Pattern 감성 그라디언트 배경 참고</td><td><span class="priority-medium">Medium</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Final Color System -->
+  <div class="proposal-card">
+    <h3>최종 확정 컬러 시스템</h3>
+
+    <div class="palette-section">
+      <h4>기본 (Light Mode)</h4>
+      <div class="palette-grid">
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #F0EEE9;"></div><div class="swatch-info"><span class="swatch-name">Background Primary</span><span class="swatch-code">#F0EEE9</span><span class="swatch-label">Cloud Dancer</span></div></div>
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #F5F0E8;"></div><div class="swatch-info"><span class="swatch-name">Background Secondary</span><span class="swatch-code">#F5F0E8</span><span class="swatch-label">Hanji Cream</span></div></div>
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #FFFFFF; border: 1px solid #E0E0E0;"></div><div class="swatch-info"><span class="swatch-name">Background Card</span><span class="swatch-code">#FFFFFF</span><span class="swatch-label">Pure White</span></div></div>
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #FAFAF7;"></div><div class="swatch-info"><span class="swatch-name">Surface Elevated</span><span class="swatch-code">#FAFAF7</span><span class="swatch-label">Warm White</span></div></div>
+      </div>
+    </div>
+
+    <div class="palette-section">
+      <h4>텍스트</h4>
+      <div class="palette-grid">
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #1A1611;"></div><div class="swatch-info"><span class="swatch-name">Text Primary</span><span class="swatch-code">#1A1611</span><span class="swatch-label">Muk Black</span></div></div>
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #6B6358;"></div><div class="swatch-info"><span class="swatch-name">Text Secondary</span><span class="swatch-code">#6B6358</span><span class="swatch-label">Warm Gray</span></div></div>
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #A89F91;"></div><div class="swatch-info"><span class="swatch-name">Text Muted</span><span class="swatch-code">#A89F91</span><span class="swatch-label">Ink Wash</span></div></div>
+      </div>
+    </div>
+
+    <div class="palette-section">
+      <h4>액센트</h4>
+      <div class="palette-grid">
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #C5372E;"></div><div class="swatch-info"><span class="swatch-name">Accent Primary</span><span class="swatch-code">#C5372E</span><span class="swatch-label">Cinnabar (주사)</span></div></div>
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #A47764;"></div><div class="swatch-info"><span class="swatch-name">Accent Secondary</span><span class="swatch-code">#A47764</span><span class="swatch-label">Mocha Mousse</span></div></div>
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #2B4162;"></div><div class="swatch-info"><span class="swatch-name">Accent Tertiary</span><span class="swatch-code">#2B4162</span><span class="swatch-label">Deep Indigo</span></div></div>
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #4A7C59;"></div><div class="swatch-info"><span class="swatch-name">Accent Success</span><span class="swatch-code">#4A7C59</span><span class="swatch-label">Bamboo Green</span></div></div>
+      </div>
+    </div>
+
+    <div class="palette-section">
+      <h4>오행 (Five Elements)</h4>
+      <div class="palette-grid">
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #4A7C59;"></div><div class="swatch-info"><span class="swatch-name">Wood 목(木)</span><span class="swatch-code">#4A7C59</span><span class="swatch-label">Bamboo</span></div></div>
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #C5372E;"></div><div class="swatch-info"><span class="swatch-name">Fire 화(火)</span><span class="swatch-code">#C5372E</span><span class="swatch-label">Cinnabar</span></div></div>
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #B8860B;"></div><div class="swatch-info"><span class="swatch-name">Earth 토(土)</span><span class="swatch-code">#B8860B</span><span class="swatch-label">Ochre</span></div></div>
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #8B8589;"></div><div class="swatch-info"><span class="swatch-name">Metal 금(金)</span><span class="swatch-code">#8B8589</span><span class="swatch-label">Silver</span></div></div>
+        <div class="color-swatch"><div class="swatch-color" style="background-color: #2B4162;"></div><div class="swatch-info"><span class="swatch-name">Water 수(水)</span><span class="swatch-code">#2B4162</span><span class="swatch-label">Indigo</span></div></div>
+      </div>
+    </div>
+
+    <div class="palette-section">
+      <h4>그라디언트</h4>
+      <div class="palette-grid">
+        <div class="color-swatch"><div class="swatch-color" style="background: linear-gradient(135deg, #C5372E, #A47764);"></div><div class="swatch-info"><span class="swatch-name">CTA Gradient</span><span class="swatch-code">#C5372E → #A47764</span></div></div>
+        <div class="color-swatch"><div class="swatch-color" style="background: linear-gradient(180deg, #F0EEE9, #F5F0E8);"></div><div class="swatch-info"><span class="swatch-name">Hero Gradient</span><span class="swatch-code">#F0EEE9 → #F5F0E8</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final Integrated Mockups -->
+  <div class="proposal-card">
+    <h3>최종 통합 목업</h3>
+
+    <div class="mockup-container">
+      <h4>Mockup 1: 랜딩 페이지</h4>
+      <div class="mockup-frame" style="background: #F0EEE9; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08);">
+        <!-- Nav -->
+        <div style="background: #F5F0E8; padding: 14px 32px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(26, 22, 17, 0.06);">
+          <div style="font-size: 22px; font-weight: 800; color: #1A1611; letter-spacing: -0.03em;">K-Destiny</div>
+          <div style="display: flex; gap: 28px; font-size: 14px;">
+            <span style="color: #1A1611; font-weight: 600;">사주보기</span>
+            <span style="color: #6B6358;">소개</span>
+            <span style="color: #6B6358;">가이드</span>
+          </div>
+        </div>
+        <!-- Hero -->
+        <div style="background: linear-gradient(180deg, #F0EEE9, #F5F0E8); padding: 72px 32px; text-align: center; position: relative; overflow: hidden;">
+          <div style="position: absolute; top: -60px; right: -60px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(197, 55, 46, 0.06), transparent); border-radius: 50%; filter: blur(60px);"></div>
+          <div style="position: absolute; bottom: -80px; left: -80px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(164, 119, 100, 0.06), transparent); border-radius: 50%; filter: blur(80px);"></div>
+          <h1 style="font-size: 48px; font-weight: 800; color: #1A1611; margin: 0 0 20px 0; position: relative; z-index: 1; letter-spacing: -0.03em;">당신의 사주를<br>발견하세요</h1>
+          <p style="font-size: 18px; color: #6B6358; margin: 0 0 40px 0; position: relative; z-index: 1;">전통과 현대가 만나는 특별한 운세 경험</p>
+          <button style="background: linear-gradient(135deg, #C5372E, #A47764); color: white; padding: 16px 44px; font-size: 17px; font-weight: 600; border: none; border-radius: 100px; cursor: pointer; box-shadow: 0 8px 24px rgba(197, 55, 46, 0.2); position: relative; z-index: 1;">무료로 시작하기 →</button>
+        </div>
+        <!-- Feature Cards -->
+        <div style="padding: 56px 32px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+          <div style="background: white; padding: 28px; border-radius: 16px; box-shadow: 0 4px 16px rgba(197, 55, 46, 0.06);">
+            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #C5372E, #A47764); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 24px;">✨</div>
+            <h3 style="font-size: 18px; font-weight: 700; color: #1A1611; margin: 0 0 8px 0;">정확한 사주 분석</h3>
+            <p style="color: #6B6358; line-height: 1.6; font-size: 14px; margin: 0;">음양오행 이론을 바탕으로 당신의 사주를 정밀하게 분석합니다.</p>
+          </div>
+          <div style="background: white; padding: 28px; border-radius: 16px; box-shadow: 0 4px 16px rgba(184, 134, 11, 0.06);">
+            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #B8860B, #DAA520); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 24px;">🎯</div>
+            <h3 style="font-size: 18px; font-weight: 700; color: #1A1611; margin: 0 0 8px 0;">맞춤형 운세</h3>
+            <p style="color: #6B6358; line-height: 1.6; font-size: 14px; margin: 0;">오늘의 운세부터 연간 운세까지, 당신만을 위한 조언을 제공합니다.</p>
+          </div>
+          <div style="background: white; padding: 28px; border-radius: 16px; box-shadow: 0 4px 16px rgba(43, 65, 98, 0.06);">
+            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, #2B4162, #4A6FA5); border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 24px;">📱</div>
+            <h3 style="font-size: 18px; font-weight: 700; color: #1A1611; margin: 0 0 8px 0;">간편한 공유</h3>
+            <p style="color: #6B6358; line-height: 1.6; font-size: 14px; margin: 0;">카카오톡과 인스타그램으로 친구들과 쉽게 공유하세요.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mockup-container" style="margin-top: 40px;">
+      <h4>Mockup 2: 결과 페이지</h4>
+      <div class="mockup-frame" style="background: #F0EEE9; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.08); max-width: 480px; margin: 0 auto;">
+        <!-- Top Nav -->
+        <div style="background: #F5F0E8; padding: 14px 20px; display: flex; align-items: center; gap: 14px; border-bottom: 1px solid rgba(26, 22, 17, 0.06);">
+          <span style="font-size: 18px; color: #1A1611; cursor: pointer;">←</span>
+          <span style="font-weight: 600; color: #1A1611; font-size: 16px;">사주 분석 결과</span>
+        </div>
+        <!-- Content -->
+        <div style="padding: 28px 20px;">
+          <!-- DayMaster Hero -->
+          <div style="background: linear-gradient(135deg, rgba(197, 55, 46, 0.06), rgba(197, 55, 46, 0.02)); border-radius: 20px; padding: 36px; margin-bottom: 28px; border: 1px solid rgba(197, 55, 46, 0.1); text-align: center;">
+            <div style="width: 72px; height: 72px; background: linear-gradient(135deg, #C5372E, #A47764); border-radius: 50%; margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(197, 55, 46, 0.2);">
+              <span style="font-size: 36px; color: white; font-weight: 700;">火</span>
+            </div>
+            <h2 style="font-size: 28px; font-weight: 800; color: #1A1611; margin: 0 0 8px 0; letter-spacing: -0.02em;">丙火 (병화)</h2>
+            <p style="color: #6B6358; font-size: 15px; margin: 0;">태양처럼 밝고 따뜻한 에너지의 일주</p>
+          </div>
+          <!-- Tabs -->
+          <div style="display: flex; gap: 0; margin-bottom: 20px; border-bottom: 2px solid #E8DFD3;">
+            <button style="background: none; border: none; padding: 10px 20px; color: #C5372E; font-weight: 700; font-size: 15px; cursor: pointer; border-bottom: 3px solid #C5372E; margin-bottom: -2px;">요약</button>
+            <button style="background: none; border: none; padding: 10px 20px; color: #A89F91; font-weight: 600; font-size: 15px; cursor: pointer;">상세</button>
+            <button style="background: none; border: none; padding: 10px 20px; color: #A89F91; font-weight: 600; font-size: 15px; cursor: pointer;">조언</button>
+          </div>
+          <!-- Content Card -->
+          <div style="background: white; padding: 24px; border-radius: 16px; box-shadow: 0 4px 16px rgba(197, 55, 46, 0.06); margin-bottom: 20px;">
+            <h3 style="font-size: 18px; font-weight: 700; color: #1A1611; margin: 0 0 12px 0;">성격 특징</h3>
+            <p style="color: #6B6358; line-height: 1.8; font-size: 14px; margin: 0;">병화 일주는 태양의 기운을 가진 사람으로, 밝고 따뜻한 성품을 지니고 있습니다. 주변 사람들에게 긍정적인 에너지를 전달하며, 리더십이 강한 편입니다.</p>
+          </div>
+          <!-- Share CTA -->
+          <button style="width: 100%; background: linear-gradient(135deg, #C5372E, #A47764); color: white; padding: 16px; font-size: 16px; font-weight: 600; border: none; border-radius: 100px; cursor: pointer; box-shadow: 0 8px 24px rgba(197, 55, 46, 0.2);">친구에게 공유하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Implementation Roadmap -->
+  <div class="proposal-card">
+    <h3>실행 로드맵</h3>
+    <div class="roadmap-timeline">
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background: #C5372E;"></div>
+        <div class="timeline-content">
+          <h4>Phase 1: 디자인 토큰 & 컬러 시스템 전환</h4>
+          <p class="timeline-duration">2주 (Week 1-2)</p>
+          <ul>
+            <li>디자인 토큰 정의 및 CSS 변수 설정</li>
+            <li>라이트 모드 기본 컬러 시스템 적용</li>
+            <li>오행 기반 색상 팔레트 구축</li>
+            <li>그라디언트 시스템 구현</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background: #A47764;"></div>
+        <div class="timeline-content">
+          <h4>Phase 2: UI 컴포넌트 리뉴얼</h4>
+          <p class="timeline-duration">2주 (Week 3-4)</p>
+          <ul>
+            <li>워밍 그라디언트 버튼 시스템 적용</li>
+            <li>화이트 베이스 카드 + 워밍 섀도우 전환</li>
+            <li>밝은 네비게이션 바 구현</li>
+            <li>플로팅 라벨 입력 폼 개선</li>
+            <li>두오톤 아이콘 시스템 구축</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background: #4A7C59;"></div>
+        <div class="timeline-content">
+          <h4>Phase 3: UX 개선</h4>
+          <p class="timeline-duration">2주 (Week 5-6)</p>
+          <ul>
+            <li>3단계 온보딩 가이드 구현</li>
+            <li>탭/아코디언 기반 결과 페이지 재구성</li>
+            <li>WCAG 2.1 AA 접근성 검증 및 수정</li>
+            <li>모바일 하단 네비게이션 최적화</li>
+            <li>공유 기능 카드 최적화</li>
+          </ul>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-marker" style="background: #2B4162;"></div>
+        <div class="timeline-content">
+          <h4>Phase 4: 테스트 & QA</h4>
+          <p class="timeline-duration">1주 (Week 7)</p>
+          <ul>
+            <li>크로스 브라우저 테스트</li>
+            <li>모바일 반응형 검증</li>
+            <li>접근성 자동화 테스트</li>
+            <li>성능 최적화 및 번들 사이즈 검증</li>
+            <li>사용자 수용 테스트 (UAT)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div style="background: #F5F0E8; padding: 24px; border-radius: 12px; margin-top: 24px; border-left: 4px solid #C5372E;">
+      <h4 style="margin: 0 0 8px 0; color: #1A1611;">총 개발 기간</h4>
+      <p style="margin: 0; color: #C5372E; font-size: 20px; font-weight: 700;">7주 (약 2개월)</p>
+      <p style="margin: 12px 0 0 0; color: #6B6358; font-size: 14px;">Phase 1-2 완료 후 점진적 배포를 통해 사용자 피드백을 수집하고, Phase 3-4에서 최종 완성도를 높입니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- FOOTER                                                  -->
+<!-- ════════════════════════════════════════════════════════ -->
+<footer class="report-footer">
+  <p class="footer-copyright">K-Destiny Design Team &copy; 2026</p>
+  <p class="footer-note">본 보고서는 K-Destiny 디자인 리뉴얼 프로젝트를 위해 작성되었습니다.</p>
+</footer>
+
+<!-- ════════════════════════════════════════════════════════ -->
+<!-- JAVASCRIPT                                              -->
+<!-- ════════════════════════════════════════════════════════ -->
+<script>
+  // Tab Navigation
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      // Update tabs
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      // Update sections
+      document.querySelectorAll('.team-section').forEach(section => {
+        section.style.display = section.id === target ? 'block' : 'none';
+      });
+      // Scroll to top of content
+      window.scrollTo({ top: document.querySelector('.team-nav').offsetTop + 60, behavior: 'smooth' });
+    });
+  });
+</script>
+
+</body>
+</html>

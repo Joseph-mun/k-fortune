@@ -17,18 +17,18 @@ export function StepProgress({ currentStep, totalSteps, labels }: StepProgressPr
           <div className="flex flex-col items-center gap-1">
             <div
               className={cn(
-                "w-3 h-3 rounded-full border-2 transition-all duration-300",
+                "w-5 h-5 rounded-full border-2 transition-all duration-300",
                 i < currentStep
-                  ? "bg-purple-500 border-purple-500"
+                  ? "bg-[#C5372E] border-[#C5372E]"
                   : i === currentStep
-                    ? "bg-purple-500 border-purple-500 animate-pulse"
-                    : "bg-transparent border-white/20",
+                    ? "bg-[#C5372E] border-[#C5372E] animate-pulse"
+                    : "bg-transparent border-[#E8DFD3]",
               )}
             />
             {labels?.[i] && (
               <span
                 className={cn(
-                  "text-[10px] transition-colors duration-300",
+                  "text-sm transition-colors duration-300",
                   i <= currentStep ? "text-text-secondary" : "text-text-muted",
                 )}
               >
@@ -42,7 +42,7 @@ export function StepProgress({ currentStep, totalSteps, labels }: StepProgressPr
             <div
               className={cn(
                 "w-12 h-0.5 mx-1 transition-all duration-300",
-                i < currentStep ? "bg-purple-500" : "bg-white/10",
+                i < currentStep ? "bg-[#C5372E]" : "bg-[#E8DFD3]/30",
               )}
             />
           )}

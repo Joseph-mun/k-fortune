@@ -113,6 +113,7 @@ export function Carousel({
                   : "bg-white/[0.15] hover:bg-white/[0.25]",
               )}
               aria-label={`Go to slide ${i + 1}`}
+              aria-current={i === current ? "true" : "false"}
             />
           ))}
         </div>

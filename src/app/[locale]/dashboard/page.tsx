@@ -29,6 +29,7 @@ interface ReadingEntry {
   gender: string;
   dayMasterMetaphor: string | null;
   overallScore: number | null;
+  isPaid: boolean;
   createdAt: string;
 }
 
@@ -199,7 +200,7 @@ export default function DashboardPage() {
                 <Card
                   key={reading.id}
                   className="cursor-pointer hover:border-purple-500/30 transition-colors"
-                  onClick={() => router.push(`/reading/${reading.id}`)}
+                  onClick={() => router.push(`/reading/${reading.id}${reading.isPaid ? "?paid=1" : ""}`)}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-4">

@@ -28,9 +28,9 @@ export const authOptions: NextAuthOptions = {
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
   pages: {
-    signIn: "/auth/signin",
-    signOut: "/auth/signin",
-    error: "/auth/signin",
+    signIn: "/ko/auth/signin",
+    signOut: "/ko/auth/signin",
+    error: "/ko/auth/signin",
   },
   callbacks: {
     async signIn({ user }) {

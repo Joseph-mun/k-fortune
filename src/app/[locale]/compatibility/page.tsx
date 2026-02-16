@@ -68,7 +68,8 @@ export default function CompatibilityPage() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to check compatibility");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to check compatibility");
       }
 
       const data = await response.json();
@@ -78,8 +79,8 @@ export default function CompatibilityPage() {
         analysis: data.analysis,
         advice: data.advice,
       });
-    } catch {
-      setError("Something went wrong. Please try again.");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }

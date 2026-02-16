@@ -1,6 +1,6 @@
 "use client";
 
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
 import { Share2, Sparkles, ArrowRight, Compass, Palette, Hash, Star } from "lucide-react";
@@ -33,6 +33,7 @@ import { POLAR_PRODUCTS, PRICE_DISPLAY } from "@/lib/polar";
 
 export default function ReadingClient() {
   const { id } = useParams<{ id: string }>();
+  const searchParams = useSearchParams();
   const locale = useLocale();
   const t = useTranslations("reading");
   const tCommon = useTranslations("common");
@@ -43,6 +44,7 @@ export default function ReadingClient() {
   const { checkout } = useCheckout();
   const intentProcessedRef = useRef(false);
   const [serverReading, setServerReading] = useState<typeof storedReading | null>(null);
+  const [isPaid, setIsPaid] = useState(false);
 
   // Post-login: detect checkout intent and auto-resume payment flow
   useEffect(() => {
@@ -87,24 +89,34 @@ export default function ReadingClient() {
     onboard();
   }, [authLoading, isAuthenticated, id, user, locale, getBirthInput, checkout]);
 
-  // Server-side reading fallback for returning users
+  // Server-side reading fallback + payment status check
   useEffect(() => {
-    if (storedReading || !isAuthenticated || authLoading) return;
+    if (!isAuthenticated || authLoading) return;
 
-    const fetchServerReading = async () => {
+    const fetchReadingStatus = async () => {
       try {
         const res = await fetch(`/api/user/readings/${id}`);
         if (res.ok) {
           const data = await res.json();
-          if (data) setServerReading(data);
+          if (data) {
+            if (!storedReading) setServerReading(data);
+            if (data._is_paid) setIsPaid(true);
+          }
         }
       } catch {
         // Silently fail
       }
     };
 
-    fetchServerReading();
-  }, [storedReading, isAuthenticated, authLoading, id]);
+    fetchReadingStatus();
+  }, [isAuthenticated, authLoading, id, storedReading]);
+
+  // Instant paid feedback from checkout success redirect (?paid=1)
+  useEffect(() => {
+    if (searchParams.get("paid") === "1") {
+      setIsPaid(true);
+    }
+  }, [searchParams]);
 
   const activeReading = storedReading || serverReading;
 
@@ -330,22 +342,47 @@ export default function ReadingClient() {
           {/* Gradient divider */}
           <div className="divider-gradient w-full" />
 
-          {/* Section: Unlock Full Reading */}
-          <div
-            ref={paywallReveal.ref}
-            className={`w-full transition-all duration-700 ease-out ${
-              paywallReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
-            }`}
-          >
-            <PaywallOverlay
-              readingId={id}
-              productId={POLAR_PRODUCTS.DETAILED_READING}
-              price={PRICE_DISPLAY.DETAILED_READING}
-              dayMasterName={reading.dayMaster.metaphorInfo.displayName}
-              dayMasterElement={reading.dayMaster.element}
-              dayMasterMetaphor={reading.dayMaster.metaphor}
-            />
-          </div>
+          {/* Section: Unlock Full Reading / Premium Content */}
+          {isPaid ? (
+            <div className="w-full">
+              <Accordion
+                title={t("aiSection") + " — Full"}
+                icon={<Sparkles className="w-3.5 h-3.5 text-purple-400" />}
+                defaultOpen
+              >
+                <Card className="w-full glass">
+                  <div className="p-2">
+                    <AiInterpretation
+                      readingId={id}
+                      readingData={{
+                        fourPillars: activeReading.fourPillars,
+                        elementAnalysis: activeReading.elementAnalysis,
+                        dayMaster: activeReading.dayMaster,
+                      }}
+                      mode="full"
+                      locale={locale}
+                    />
+                  </div>
+                </Card>
+              </Accordion>
+            </div>
+          ) : (
+            <div
+              ref={paywallReveal.ref}
+              className={`w-full transition-all duration-700 ease-out ${
+                paywallReveal.isRevealed ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+              }`}
+            >
+              <PaywallOverlay
+                readingId={id}
+                productId={POLAR_PRODUCTS.DETAILED_READING}
+                price={PRICE_DISPLAY.DETAILED_READING}
+                dayMasterName={reading.dayMaster.metaphorInfo.displayName}
+                dayMasterElement={reading.dayMaster.element}
+                dayMasterMetaphor={reading.dayMaster.metaphor}
+              />
+            </div>
+          )}
 
           {/* Actions */}
           <div className="flex flex-col items-center gap-4 w-full mt-4">

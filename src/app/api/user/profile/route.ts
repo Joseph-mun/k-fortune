@@ -52,12 +52,28 @@ export async function GET(request: NextRequest) {
       });
     }
 
+    // Determine effective tier: check purchases if no subscription
+    let effectiveTier = profile.subscription_tier || "free";
+    if (effectiveTier === "free") {
+      const { data: purchase } = await supabase
+        .from("purchases")
+        .select("id")
+        .eq("user_id", profile.id)
+        .eq("status", "completed")
+        .limit(1)
+        .maybeSingle();
+
+      if (purchase) {
+        effectiveTier = "detailed";
+      }
+    }
+
     return NextResponse.json({
       id: profile.id,
       email: profile.email,
       name: profile.name,
       avatarUrl: profile.avatar_url,
-      subscriptionTier: profile.subscription_tier || "free",
+      subscriptionTier: effectiveTier,
       subscriptionStatus: profile.subscription_status || null,
       createdAt: profile.created_at,
     });

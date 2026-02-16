@@ -30,6 +30,7 @@ export default function GalleryPage() {
   const [hasMore, setHasMore] = useState(true);
   const [sort, setSort] = useState<SortType>("latest");
   const [offset, setOffset] = useState(0);
+  const [error, setError] = useState<string | null>(null);
   const offsetRef = useRef(0);
   const observerRef = useRef<HTMLDivElement>(null);
 
@@ -44,7 +45,10 @@ export default function GalleryPage() {
         const res = await fetch(
           `/api/cards?public=true&limit=${LIMIT}&offset=${newOffset}&sort=${sort}`
         );
-        if (!res.ok) return;
+        if (!res.ok) {
+          setError("Failed to load cards. Please try again.");
+          return;
+        }
         const data = await res.json();
 
         setCards((prev) => (append ? [...prev, ...data.cards] : data.cards));
@@ -52,8 +56,9 @@ export default function GalleryPage() {
         const nextOffset = newOffset + LIMIT;
         setOffset(nextOffset);
         offsetRef.current = nextOffset;
+        setError(null);
       } catch {
-        // ignore
+        setError("Failed to load cards. Please try again.");
       } finally {
         setLoading(false);
         setLoadingMore(false);
@@ -144,6 +149,13 @@ export default function GalleryPage() {
                 <div className="w-full aspect-[2/3] rounded-lg bg-bg-card border border-white/[0.06]" />
               </div>
             ))}
+          </div>
+        ) : error ? (
+          <div className="text-center py-20">
+            <p className="text-text-muted mb-4">{error}</p>
+            <Button onClick={() => { setError(null); fetchCards(0, false); }} variant="secondary">
+              {t("retry") || "Retry"}
+            </Button>
           </div>
         ) : cards.length === 0 ? (
           <div className="text-center py-20">

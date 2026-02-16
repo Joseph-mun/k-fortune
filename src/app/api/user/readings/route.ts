@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
 
     let query = supabase
       .from("readings")
-      .select("id, type, birth_date, birth_time, gender, day_master_metaphor, overall_score, created_at", { count: "exact" })
+      .select("id, session_id, type, birth_date, birth_time, gender, day_master_metaphor, overall_score, is_paid, created_at", { count: "exact" })
       .eq("user_id", token.sub)
       .order("created_at", { ascending: false })
       .range(offset, offset + limit - 1);
@@ -58,13 +58,14 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({
       readings: (readings || []).map((r) => ({
-        id: r.id,
+        id: r.session_id || r.id,
         type: r.type,
         birthDate: r.birth_date,
         birthTime: r.birth_time,
         gender: r.gender,
         dayMasterMetaphor: r.day_master_metaphor,
         overallScore: r.overall_score,
+        isPaid: r.is_paid ?? false,
         createdAt: r.created_at,
       })),
       pagination: {

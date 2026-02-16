@@ -84,28 +84,47 @@ export async function POST(request: NextRequest) {
       }
 
       const supabase = createServerClient();
-      const { data: purchase } = await supabase
-        .from("purchases")
-        .select("id")
-        .eq("user_id", token.sub)
-        .eq("product_type", "detailed_reading")
-        .eq("status", "completed")
-        .limit(1)
+
+      // Check 1: reading is directly marked as paid (set by webhook)
+      const { data: readingRow } = await supabase
+        .from("readings")
+        .select("is_paid")
+        .eq("session_id", readingId)
         .maybeSingle();
 
-      const { data: subscription } = await supabase
-        .from("subscriptions")
-        .select("id")
-        .eq("user_id", token.sub)
-        .eq("status", "active")
-        .limit(1)
-        .maybeSingle();
+      if (!readingRow?.is_paid) {
+        // Check 2: user has a purchase or active subscription (resolve auth_id → UUID)
+        const { data: userRow } = await supabase
+          .from("users")
+          .select("id")
+          .eq("auth_id", token.sub)
+          .maybeSingle();
 
-      if (!purchase && !subscription) {
-        return new Response(
-          JSON.stringify({ error: { code: "PAYMENT_REQUIRED", message: "Please purchase a detailed reading." } }),
-          { status: 402, headers: { "Content-Type": "application/json" } }
-        );
+        const userId = userRow?.id || token.sub;
+
+        const { data: purchase } = await supabase
+          .from("purchases")
+          .select("id")
+          .eq("user_id", userId)
+          .eq("product_type", "detailed_reading")
+          .eq("status", "completed")
+          .limit(1)
+          .maybeSingle();
+
+        const { data: subscription } = await supabase
+          .from("subscriptions")
+          .select("id")
+          .eq("user_id", userId)
+          .eq("status", "active")
+          .limit(1)
+          .maybeSingle();
+
+        if (!purchase && !subscription) {
+          return new Response(
+            JSON.stringify({ error: { code: "PAYMENT_REQUIRED", message: "Please purchase a detailed reading." } }),
+            { status: 402, headers: { "Content-Type": "application/json" } }
+          );
+        }
       }
     }
 

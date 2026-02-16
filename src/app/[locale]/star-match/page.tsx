@@ -51,8 +51,16 @@ export default function StarMatchPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!birthDate || !gender || !selectedStar) {
-      setError(t("fillAll"));
+    if (!birthDate) {
+      setError(t("errors.birthDateRequired"));
+      return;
+    }
+    if (!gender) {
+      setError(t("errors.genderRequired"));
+      return;
+    }
+    if (!selectedStar) {
+      setError(t("errors.starRequired"));
       return;
     }
 
@@ -74,12 +82,15 @@ export default function StarMatchPage() {
         }),
       });
 
-      if (!res.ok) throw new Error("Failed");
+      if (!res.ok) {
+        const errorData = await res.json().catch(() => ({}));
+        throw new Error(errorData.error || "Failed to check compatibility");
+      }
       const data = await res.json();
       setResult(data);
       track("star_match_completed", { score: data.overallScore, element: data.star?.element });
-    } catch {
-      setError(t("error"));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : t("error"));
     } finally {
       setLoading(false);
     }

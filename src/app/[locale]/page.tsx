@@ -22,31 +22,31 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
         {/* WebGL Background */}
         <div className="absolute inset-0 z-0">
           <WebGLShader />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-transparent to-white/60" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#F0EEE9]/90" />
         </div>
 
         {/* NavBar floating on top */}
-        <div className="absolute top-0 left-0 right-0 z-20 px-4">
+        <div className="absolute top-0 left-0 right-0 z-20 px-4 bg-white/70 backdrop-blur-md border-b border-[#1A1611]/[0.06]">
           <NavBar />
         </div>
 
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col items-center max-w-3xl px-4">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#C5372E]/8 border border-[#C5372E]/20 text-[#1A1611]/70 text-xs mb-8 backdrop-blur-sm animate-slide-up">
-            <Sparkles className="w-3.5 h-3.5 text-[#C5372E]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/80 text-xs mb-8 backdrop-blur-sm animate-slide-up">
+            <Sparkles className="w-3.5 h-3.5 text-[#FF8A80]" />
             {tCommon("subtitle")}
           </div>
 
           {/* Headline */}
           <h1 className="typo-display mb-6 animate-slide-up delay-100">
-            <span className="text-[#1A1611]">{t("heroTitle")}</span>
+            <span className="text-white/90">{t("heroTitle")}</span>
             <br />
             <span className="text-gradient-hero">{t("heroHighlight")}</span>
           </h1>
 
           {/* Subheading */}
-          <p className="typo-body-lg text-[#6B6358] max-w-xl mb-12 animate-slide-up delay-200">
+          <p className="typo-body-lg text-white/60 max-w-xl mb-12 animate-slide-up delay-200">
             {t("heroDescription")}
           </p>
 
@@ -58,15 +58,15 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
             {t("cta")}
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </Link>
-          <p className="text-sm text-[#A89F91] mt-4 animate-fade-in delay-400">
+          <p className="text-sm text-white/50 mt-4 animate-fade-in delay-400">
             {t("ctaSubtext")}
           </p>
         </div>
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 z-10 animate-bounce">
-          <div className="w-6 h-10 rounded-full border-2 border-[#1A1611]/15 flex items-start justify-center p-1.5">
-            <div className="w-1.5 h-2.5 rounded-full bg-[#1A1611]/30 animate-pulse" />
+          <div className="w-6 h-10 rounded-full border-2 border-white/25 flex items-start justify-center p-1.5">
+            <div className="w-1.5 h-2.5 rounded-full bg-white/40 animate-pulse" />
           </div>
         </div>
       </section>

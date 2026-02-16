@@ -203,25 +203,25 @@ export default function CardCreatePage() {
           <div className="w-full space-y-4 text-center">
             {saveError === "LOGIN_REQUIRED" ? (
               <div className="bg-amber-500/10 border border-amber-500 rounded-lg p-4 text-amber-600">
-                <p className="font-semibold">로그인이 필요합니다</p>
-                <p className="text-sm mt-1">카드를 저장하려면 먼저 로그인해 주세요.</p>
+                <p className="font-semibold">{t("loginRequired")}</p>
+                <p className="text-sm mt-1">{t("loginRequiredDesc")}</p>
                 <Button
                   onClick={() => login("google")}
                   className="mt-3"
                 >
-                  Google로 로그인
+                  {t("loginButton")}
                 </Button>
               </div>
             ) : saveError ? (
               <div className="bg-red-500/10 border border-red-500 rounded-lg p-4 text-red-500">
-                <p className="font-semibold">카드 저장에 실패했습니다.</p>
-                <p className="text-sm mt-1">잠시 후 다시 시도해 주세요.</p>
+                <p className="font-semibold">{t("saveFailed")}</p>
+                <p className="text-sm mt-1">{t("saveFailedDesc")}</p>
                 <Button
                   variant="secondary"
                   onClick={() => { setSaveError(false); setStep(2); }}
                   className="mt-3"
                 >
-                  다시 시도
+                  {t("retryButton")}
                 </Button>
               </div>
             ) : (
@@ -238,7 +238,7 @@ export default function CardCreatePage() {
                   variant="secondary"
                   onClick={() => router.push(`/cards/${cardId}`)}
                 >
-                  View Card
+                  {t("viewCard")}
                 </Button>
               )}
               <Button

@@ -1,11 +1,11 @@
 {
-  "name": "K-Fortune - Korean Four Pillars",
-  "short_name": "K-Fortune",
-  "description": "Discover your destiny through ancient Korean Four Pillars wisdom",
+  "name": "SAJU — Born to be told.",
+  "short_name": "SAJU",
+  "description": "Discover your cosmic identity with Korea's ancient Four Pillars of Destiny.",
   "start_url": "/",
   "display": "standalone",
   "theme_color": "#7C3AED",
-  "background_color": "#0a0a0a",
+  "background_color": "#F0EEE9",
   "icons": [
     {
       "src": "/icon.svg",

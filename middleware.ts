@@ -8,6 +8,7 @@ import { routing } from "./src/i18n/routing";
  *
  * Protected page routes (require authentication):
  *   - /[locale]/dashboard
+ *   - /[locale]/cards/create
  *
  * Protected API routes:
  *   - /api/fortune/detailed
@@ -27,7 +28,7 @@ import { routing } from "./src/i18n/routing";
 const intlMiddleware = createIntlMiddleware(routing);
 
 // Page routes that require authentication (without locale prefix)
-const protectedPagePatterns = ["/dashboard"];
+const protectedPagePatterns = ["/dashboard", "/cards/create"];
 
 // API routes that require authentication
 const protectedApiPatterns = [
@@ -106,6 +107,25 @@ function addSecurityHeaders(response: NextResponse) {
   response.headers.set(
     "Permissions-Policy",
     "camera=(), microphone=(), geolocation=()"
+  );
+  response.headers.set(
+    "Content-Security-Policy",
+    [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' https://cdn.vercel-insights.com https://vercel.live https://va.vercel-scripts.com",
+      "style-src 'self' 'unsafe-inline'",
+      "img-src 'self' data: https: blob:",
+      "font-src 'self' data:",
+      "connect-src 'self' https://*.supabase.co https://*.ingest.sentry.io https://*.vercel-insights.com wss://*.supabase.co",
+      "worker-src 'self' blob:",
+      "frame-ancestors 'none'",
+      "base-uri 'self'",
+      "form-action 'self'",
+    ].join("; ")
+  );
+  response.headers.set(
+    "Strict-Transport-Security",
+    "max-age=31536000; includeSubDomains"
   );
 }
 

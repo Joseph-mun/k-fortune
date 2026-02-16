@@ -158,7 +158,14 @@
     "fireDesc": "열정, 에너지, 변화",
     "earthDesc": "안정, 양육, 기반",
     "metalDesc": "정밀, 규율, 명확함",
-    "waterDesc": "지혜, 적응력, 직관"
+    "waterDesc": "지혜, 적응력, 직관",
+    "woodHanja": "木",
+    "fireHanja": "火",
+    "earthHanja": "土",
+    "metalHanja": "金",
+    "waterHanja": "水",
+    "yangHanja": "陽",
+    "yinHanja": "陰"
   },
   "metaphors": {
     "great-tree": {
@@ -339,7 +346,7 @@
     "signUp": {
       "title": "계정 만들기",
       "subtitle": "SAJU에 가입하고 완전한 운명 청사진을 열어보세요",
-      "hasAccount": "이미 계정이 있���신가요?",
+      "hasAccount": "이미 계정이 있으신가요?",
       "signInLink": "로그인"
     }
   },
@@ -435,7 +442,15 @@
       "success": "카드가 만들어졌습니다!",
       "createButton": "카드 만들기",
       "viewGallery": "갤러리 보기",
-      "needReading": "카드를 만들려면 먼저 감정을 받아야 합니다."
+      "needReading": "카드를 만들려면 먼저 감정을 받아야 합니다.",
+      "needReadingAction": "먼저 감정 받기",
+      "loginRequired": "로그인이 필요합니다",
+      "loginRequiredDesc": "카드를 저장하려면 먼저 로그인해 주세요.",
+      "loginButton": "Google로 로그인",
+      "saveFailed": "카드 저장에 실패했습니다.",
+      "saveFailedDesc": "잠시 후 다시 시도해 주세요.",
+      "retryButton": "다시 시도",
+      "viewCard": "카드 보기"
     },
     "view": {
       "title": "운명 카드",

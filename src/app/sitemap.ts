@@ -6,9 +6,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const locales = ["ko", "en", "es"];
   const routes = [
     "",
+    "/start",
     "/pricing",
     "/compatibility",
     "/gallery",
+    "/star-match",
+    "/legal/privacy",
+    "/legal/terms",
   ];
 
   const entries: MetadataRoute.Sitemap = [];

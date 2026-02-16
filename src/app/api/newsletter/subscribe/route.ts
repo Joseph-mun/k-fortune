@@ -42,7 +42,9 @@ export async function POST(request: Request) {
       .upsert(
         {
           email: normalizedEmail,
-          birth_year: birthYear ? Number(birthYear) : null,
+          birth_year: birthYear && Number.isFinite(Number(birthYear)) && Number(birthYear) >= 1900 && Number(birthYear) <= new Date().getFullYear()
+            ? Number(birthYear)
+            : null,
           element: element || null,
           animal: animal || null,
           subscribed_at: new Date().toISOString(),

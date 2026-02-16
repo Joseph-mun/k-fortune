@@ -443,7 +443,14 @@
       "createButton": "Create Card",
       "viewGallery": "View Gallery",
       "needReading": "You need a reading first to create a card.",
-      "needReadingAction": "Get a Reading First"
+      "needReadingAction": "Get a Reading First",
+      "loginRequired": "Login Required",
+      "loginRequiredDesc": "Please sign in to save your card.",
+      "loginButton": "Sign in with Google",
+      "saveFailed": "Failed to save card.",
+      "saveFailedDesc": "Please try again later.",
+      "retryButton": "Try Again",
+      "viewCard": "View Card"
     },
     "view": {
       "title": "Destiny Card",

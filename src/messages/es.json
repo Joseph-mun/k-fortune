@@ -443,7 +443,14 @@
       "createButton": "Crear Carta",
       "viewGallery": "Ver Galeria",
       "needReading": "Necesitas una lectura primero para crear una carta.",
-      "needReadingAction": "Obtener una Lectura Primero"
+      "needReadingAction": "Obtener una Lectura Primero",
+      "loginRequired": "Inicio de Sesión Requerido",
+      "loginRequiredDesc": "Inicia sesión para guardar tu carta.",
+      "loginButton": "Iniciar sesión con Google",
+      "saveFailed": "Error al guardar la carta.",
+      "saveFailedDesc": "Inténtalo de nuevo más tarde.",
+      "retryButton": "Reintentar",
+      "viewCard": "Ver Carta"
     },
     "view": {
       "title": "Carta del Destino",

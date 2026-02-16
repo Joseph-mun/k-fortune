@@ -113,6 +113,7 @@ export const config = {
   matcher: [
     "/",
     "/(ko|en|es)/:path*",
+    "/((?!api|_next|.*\\..*).*)",
     "/api/fortune/detailed",
     "/api/user/:path*",
   ],

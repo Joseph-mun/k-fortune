@@ -195,7 +195,7 @@ export function BirthInputForm() {
                 placeholder={t("birthTimePlaceholder")}
                 locale={locale}
               />
-              {errors.birthDate && <p className="text-sm text-[#C5372E] text-center">{errors.birthDate}</p>}
+              {errors.birthDate && <p className="text-sm text-red-400 text-center">{errors.birthDate}</p>}
               {yearAnimal && (
                 <p className="text-sm text-text-muted text-center animate-fade-in">
                   {yearAnimal.icon} {t("yearInsight", { animal: yearAnimal.displayName })}
@@ -224,18 +224,18 @@ export function BirthInputForm() {
                     onClick={() => setGender(g)}
                     className={`flex-1 py-2.5 rounded-lg border text-sm font-medium transition-all cursor-pointer ${
                       gender === g
-                        ? "bg-[#C5372E]/15 border-[#C5372E]/40 text-[#C5372E]"
-                        : "bg-transparent border-[#E8DFD3] text-[#6B6358] hover:border-[#C5372E]/30"
+                        ? "bg-purple-500/15 border-purple-500/40 text-purple-400"
+                        : "bg-transparent border-white/[0.08] text-text-muted hover:border-purple-500/30"
                     }`}
                   >
                     {t(g)}
                   </button>
                 ))}
               </div>
-              {errors.gender && <p className="text-sm text-[#C5372E]">{errors.gender}</p>}
+              {errors.gender && <p className="text-sm text-red-400">{errors.gender}</p>}
 
               {errors.form && (
-                <p className="text-sm text-[#C5372E] text-center">{errors.form}</p>
+                <p className="text-sm text-red-400 text-center">{errors.form}</p>
               )}
 
               <Button type="submit" size="lg" loading={loading} disabled={!stepValid[1]} className="btn-cta">

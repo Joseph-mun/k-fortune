@@ -235,7 +235,7 @@ export function CalendarPopup({
         transform: "translateX(-50%)",
       }}
     >
-      <div className="rounded-2xl bg-white border border-[#E8DFD3] p-4 w-[min(340px,calc(100vw-2rem))] shadow-[0_8px_40px_rgba(0,0,0,0.1)]">
+      <div className="rounded-2xl bg-zinc-900 border border-white/[0.08] p-4 w-[min(340px,calc(100vw-2rem))] shadow-[0_8px_40px_rgba(0,0,0,0.4)]">
         {mode === "calendar" ? (
           <>
             {/* Month/Year header */}
@@ -243,7 +243,7 @@ export function CalendarPopup({
               <button
                 type="button"
                 onClick={() => setMode("year")}
-                className="flex items-center gap-1 text-sm font-semibold text-[#C5372E] hover:opacity-80 transition-opacity cursor-pointer"
+                className="flex items-center gap-1 text-sm font-semibold text-purple-400 hover:opacity-80 transition-opacity cursor-pointer"
               >
                 {locale === "ko"
                   ? `${viewYear}년 ${viewMonth}월`
@@ -251,11 +251,11 @@ export function CalendarPopup({
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
               <div className="flex items-center gap-1">
-                <button type="button" onClick={prevMonth} className="p-2 rounded-full hover:bg-[#FAFAF7] transition-colors cursor-pointer">
-                  <ChevronLeft className="w-5 h-5 text-[#C5372E]" />
+                <button type="button" onClick={prevMonth} className="p-2 rounded-full hover:bg-white/[0.06] transition-colors cursor-pointer">
+                  <ChevronLeft className="w-5 h-5 text-purple-400" />
                 </button>
-                <button type="button" onClick={nextMonth} className="p-2 rounded-full hover:bg-[#FAFAF7] transition-colors cursor-pointer">
-                  <ChevronRight className="w-5 h-5 text-[#C5372E]" />
+                <button type="button" onClick={nextMonth} className="p-2 rounded-full hover:bg-white/[0.06] transition-colors cursor-pointer">
+                  <ChevronRight className="w-5 h-5 text-purple-400" />
                 </button>
               </div>
             </div>
@@ -263,7 +263,7 @@ export function CalendarPopup({
             {/* Weekday headers */}
             <div className="grid grid-cols-7 mb-1">
               {weekdays.map((d) => (
-                <div key={d} className="text-center text-[11px] font-medium text-[#6B6358] tracking-wider py-1">
+                <div key={d} className="text-center text-[11px] font-medium text-zinc-400 tracking-wider py-1">
                   {d}
                 </div>
               ))}
@@ -293,9 +293,9 @@ export function CalendarPopup({
                     onClick={() => selectDay(d)}
                     className={`
                       min-w-[44px] min-h-[44px] flex items-center justify-center rounded-full text-[13px] font-medium transition-all duration-150 cursor-pointer
-                      ${future ? "text-text-muted/30 cursor-not-allowed" : "hover:bg-[#C5372E]/10 text-[#1A1611]"}
-                      ${selected ? "!bg-[#C5372E] !text-white" : ""}
-                      ${today && !selected ? "border border-[#C5372E]/30" : ""}
+                      ${future ? "text-text-muted/30 cursor-not-allowed" : "hover:bg-purple-500/10 text-white"}
+                      ${selected ? "!bg-purple-500 !text-white" : ""}
+                      ${today && !selected ? "border border-purple-500/30" : ""}
                     `}
                   >
                     {d}
@@ -305,39 +305,39 @@ export function CalendarPopup({
             </div>
 
             {/* Divider */}
-            <div className="h-px bg-[#E8DFD3] my-3" />
+            <div className="h-px bg-white/[0.06] my-3" />
 
             {/* Time section */}
             <div className="flex items-center justify-between">
-              <span className="text-sm font-semibold text-[#1A1611]">{t("time")}</span>
+              <span className="text-sm font-semibold text-white">{t("time")}</span>
               <div className="flex items-center gap-2">
                 {!unknownTime && (
                   <button
                     type="button"
                     onClick={() => setMode("time")}
-                    className="flex items-center gap-1.5 bg-[#FAFAF7] rounded-lg px-3 py-1.5 hover:bg-[#E8DFD3] transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 bg-white/[0.04] rounded-lg px-3 py-1.5 hover:bg-white/[0.08] transition-colors cursor-pointer"
                   >
                     <span className="text-base leading-none">{SAJU_PERIODS[selectedPeriod].emoji}</span>
-                    <span className="text-sm font-semibold text-[#C5372E]">
+                    <span className="text-sm font-semibold text-purple-400">
                       {formatTimeRange(SAJU_PERIODS[selectedPeriod].start, SAJU_PERIODS[selectedPeriod].end, locale)}
                     </span>
                   </button>
                 )}
-                <div className="flex bg-[#FAFAF7] rounded-lg overflow-hidden">
+                <div className="flex bg-white/[0.04] rounded-lg overflow-hidden">
                   <button
                     type="button"
                     onClick={() => {
                       onUnknownTimeChange(false);
                       if (!birthTime) setMode("time");
                     }}
-                    className={`px-2 py-1.5 text-[11px] font-semibold transition-colors cursor-pointer ${!unknownTime ? "bg-[#C5372E]/40 text-[#1A1611]" : "text-[#6B6358] hover:text-[#1A1611]"}`}
+                    className={`px-2 py-1.5 text-[11px] font-semibold transition-colors cursor-pointer ${!unknownTime ? "bg-purple-500/40 text-white" : "text-zinc-400 hover:text-white"}`}
                   >
                     {t("timeOn")}
                   </button>
                   <button
                     type="button"
                     onClick={() => onUnknownTimeChange(true)}
-                    className={`px-2 py-1.5 text-[11px] font-semibold transition-colors cursor-pointer ${unknownTime ? "bg-[#C5372E]/40 text-[#1A1611]" : "text-[#6B6358] hover:text-[#1A1611]"}`}
+                    className={`px-2 py-1.5 text-[11px] font-semibold transition-colors cursor-pointer ${unknownTime ? "bg-purple-500/40 text-white" : "text-zinc-400 hover:text-white"}`}
                     title={locale === "ko" ? "시간을 모르면 시주(時柱)가 제외됩니다" : "If you don't know the time, the hour pillar will be excluded"}
                   >
                     {t("timeOff")}
@@ -353,13 +353,13 @@ export function CalendarPopup({
               <button
                 type="button"
                 onClick={() => setMode("calendar")}
-                className="flex items-center gap-1 text-sm font-semibold text-[#C5372E] hover:opacity-80 transition-opacity cursor-pointer"
+                className="flex items-center gap-1 text-sm font-semibold text-purple-400 hover:opacity-80 transition-opacity cursor-pointer"
               >
                 <ChevronLeft className="w-3.5 h-3.5" />
                 {t("backToCalendar")}
               </button>
             </div>
-            <p className="text-xs text-[#6B6358] mb-3">{t("selectTimePeriod")}</p>
+            <p className="text-xs text-zinc-400 mb-3">{t("selectTimePeriod")}</p>
             <div className="grid grid-cols-3 gap-1.5">
               {SAJU_PERIODS.map((p, i) => (
                 <button
@@ -369,13 +369,13 @@ export function CalendarPopup({
                   className={`
                     flex flex-col items-center gap-0.5 py-2.5 px-1 rounded-lg text-xs font-medium transition-all cursor-pointer
                     ${selectedPeriod === i
-                      ? "bg-[#C5372E] text-white ring-1 ring-[#C5372E]/50"
-                      : "hover:bg-[#FAFAF7] text-[#C5372E] bg-white border border-[#E8DFD3]"
+                      ? "bg-purple-500 text-white ring-1 ring-purple-400/50"
+                      : "hover:bg-white/[0.08] text-purple-400 bg-white/[0.04]"
                     }
                   `}
                 >
                   <span className="text-lg leading-none">{p.emoji}</span>
-                  <span className={`text-[10px] leading-tight ${selectedPeriod === i ? "text-white/90" : "text-[#6B6358]"}`}>
+                  <span className={`text-[10px] leading-tight ${selectedPeriod === i ? "text-white/90" : "text-zinc-400"}`}>
                     {formatTimeRangeShort(p.start, p.end, locale)}
                   </span>
                 </button>
@@ -389,7 +389,7 @@ export function CalendarPopup({
               <button
                 type="button"
                 onClick={() => setMode("year")}
-                className="flex items-center gap-1 text-sm font-semibold text-[#C5372E] hover:opacity-80 transition-opacity cursor-pointer"
+                className="flex items-center gap-1 text-sm font-semibold text-purple-400 hover:opacity-80 transition-opacity cursor-pointer"
               >
                 <ChevronLeft className="w-3.5 h-3.5" />
                 {viewYear}
@@ -407,8 +407,8 @@ export function CalendarPopup({
                     onClick={() => selectMonth(m)}
                     className={`
                       py-2.5 rounded-lg text-xs font-medium transition-all cursor-pointer
-                      ${isFutureMonth ? "text-[#6B6358]/30 cursor-not-allowed" : "hover:bg-[#FAFAF7] text-[#1A1611]"}
-                      ${m === viewMonth ? "!bg-[#C5372E] !text-white" : ""}
+                      ${isFutureMonth ? "text-zinc-400/30 cursor-not-allowed" : "hover:bg-white/[0.08] text-white"}
+                      ${m === viewMonth ? "!bg-purple-500 !text-white" : ""}
                     `}
                   >
                     {getMonthName(i, locale, "short")}
@@ -428,14 +428,14 @@ export function CalendarPopup({
           <>
             {/* Year selector */}
             <div className="flex items-center justify-between mb-3">
-              <button type="button" onClick={() => setViewYear((y) => y - 12)} className="p-1.5 rounded-full hover:bg-[#FAFAF7] transition-colors cursor-pointer">
-                <ChevronLeft className="w-4 h-4 text-[#C5372E]" />
+              <button type="button" onClick={() => setViewYear((y) => y - 12)} className="p-1.5 rounded-full hover:bg-white/[0.06] transition-colors cursor-pointer">
+                <ChevronLeft className="w-4 h-4 text-purple-400" />
               </button>
-              <span className="text-sm font-semibold text-[#1A1611]">
+              <span className="text-sm font-semibold text-white">
                 {yearRange[0]} – {yearRange[yearRange.length - 1]}
               </span>
-              <button type="button" onClick={() => setViewYear((y) => y + 12)} className="p-1.5 rounded-full hover:bg-[#FAFAF7] transition-colors cursor-pointer">
-                <ChevronRight className="w-4 h-4 text-[#C5372E]" />
+              <button type="button" onClick={() => setViewYear((y) => y + 12)} className="p-1.5 rounded-full hover:bg-white/[0.06] transition-colors cursor-pointer">
+                <ChevronRight className="w-4 h-4 text-purple-400" />
               </button>
             </div>
             <div className="grid grid-cols-4 gap-1.5">
@@ -447,8 +447,8 @@ export function CalendarPopup({
                   onClick={() => selectYear(y)}
                   className={`
                     py-2 rounded-lg text-xs font-medium transition-all cursor-pointer
-                    ${y > currentYear ? "text-[#6B6358]/30 cursor-not-allowed" : "hover:bg-[#FAFAF7] text-[#1A1611]"}
-                    ${y === viewYear ? "!bg-[#C5372E] !text-white" : ""}
+                    ${y > currentYear ? "text-zinc-400/30 cursor-not-allowed" : "hover:bg-white/[0.08] text-purple-400"}
+                    ${y === viewYear ? "!bg-purple-500 !text-white" : ""}
                   `}
                 >
                   {y}
@@ -475,10 +475,10 @@ export function CalendarPopup({
         ref={triggerRef}
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="w-full flex items-center gap-2 rounded-lg bg-white border border-[#E8DFD3] px-4 py-2.5 text-sm text-left transition-all duration-200 cursor-pointer hover:border-[#C5372E]/30 focus:outline-none focus:border-[#C5372E]/40 focus:ring-1 focus:ring-[#C5372E]/30"
+        className="w-full flex items-center gap-2 rounded-lg bg-white/[0.04] border border-white/[0.08] px-4 py-2.5 text-sm text-left transition-all duration-200 cursor-pointer hover:border-purple-500/30 focus:outline-none focus:border-purple-500/40 focus:ring-1 focus:ring-purple-500/30"
       >
-        <Calendar className="w-4 h-4 text-[#6B6358] shrink-0" />
-        <span className={displayValue ? "text-[#1A1611]" : "text-[#6B6358]"}>
+        <Calendar className="w-4 h-4 text-zinc-400 shrink-0" />
+        <span className={displayValue ? "text-white" : "text-zinc-400"}>
           {displayValue || t("selectDate")}
         </span>
       </button>

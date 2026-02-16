@@ -78,7 +78,7 @@ export function NavBar() {
     >
       <div className="flex items-center gap-8">
         <Link href="/" className="flex items-center gap-2 group">
-          <Sparkles className="w-4 h-4 text-[#C5372E] group-hover:text-[#D4584F] transition-colors" />
+          <Sparkles className="w-4 h-4 text-purple-400 group-hover:text-purple-300 transition-colors" />
           <span className="text-lg font-bold text-text-primary tracking-widest font-[family-name:var(--font-heading)]">
             SAJU
           </span>
@@ -116,7 +116,7 @@ export function NavBar() {
               {user?.image ? (
                 <img src={user.image} alt="" className="w-5 h-5 rounded-full" />
               ) : (
-                <div className="w-5 h-5 rounded-full bg-[#C5372E]/20 flex items-center justify-center text-[10px] text-[#C5372E]">
+                <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center text-[10px] text-purple-300">
                   {user?.name?.[0] || "U"}
                 </div>
               )}
@@ -203,7 +203,7 @@ export function NavBar() {
                   {user?.image ? (
                     <img src={user.image} alt="" className="w-5 h-5 rounded-full" />
                   ) : (
-                    <div className="w-5 h-5 rounded-full bg-[#C5372E]/20 flex items-center justify-center text-[10px] text-[#C5372E]">
+                    <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center text-[10px] text-purple-300">
                       {user?.name?.[0] || "U"}
                     </div>
                   )}

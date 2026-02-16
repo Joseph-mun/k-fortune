@@ -22,14 +22,14 @@ export function Button({
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 cursor-pointer",
+        "inline-flex items-center justify-center gap-2 rounded-lg font-medium transition-all duration-200 cursor-pointer",
         "disabled:opacity-40 disabled:cursor-not-allowed",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-dark",
+        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/30 focus-visible:ring-offset-2 focus-visible:ring-offset-bg-dark",
         {
-          "bg-gradient-to-r from-[#C5372E] to-[#A47764] hover:from-[#D4584F] hover:to-[#B8886F] text-white rounded-full focus-visible:ring-[#C5372E]/30": variant === "primary",
-          "bg-[#F5F0E8] text-[#1A1611] border border-[#E8DFD3] hover:bg-[#EDE7DB] rounded-lg focus-visible:ring-[#C5372E]/30": variant === "secondary",
-          "bg-transparent text-[#6B6358] hover:text-[#1A1611] hover:bg-[#F5F0E8] rounded-lg focus-visible:ring-[#C5372E]/30": variant === "ghost",
-          "bg-gold-500 text-bg-dark hover:bg-gold-400 active:bg-gold-600 font-semibold rounded-lg focus-visible:ring-[#C5372E]/30": variant === "gold",
+          "bg-gradient-to-r from-purple-500 to-indigo-500 hover:from-purple-400 hover:to-indigo-400 text-white": variant === "primary",
+          "bg-white/[0.06] text-text-secondary border border-white/[0.08] hover:bg-white/[0.1] focus-visible:ring-purple-500/30": variant === "secondary",
+          "bg-transparent text-text-muted hover:text-text-secondary hover:bg-white/[0.04] focus-visible:ring-purple-500/30": variant === "ghost",
+          "bg-gold-500 text-bg-dark hover:bg-gold-400 active:bg-gold-600 font-semibold focus-visible:ring-purple-500/30": variant === "gold",
         },
         {
           "px-3 py-1.5 text-xs min-h-[44px]": size === "sm",

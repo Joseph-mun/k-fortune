@@ -19,10 +19,10 @@ export function StepProgress({ currentStep, totalSteps, labels }: StepProgressPr
               className={cn(
                 "w-5 h-5 rounded-full border-2 transition-all duration-300",
                 i < currentStep
-                  ? "bg-[#C5372E] border-[#C5372E]"
+                  ? "bg-purple-500 border-purple-500"
                   : i === currentStep
-                    ? "bg-[#C5372E] border-[#C5372E] animate-pulse"
-                    : "bg-transparent border-[#E8DFD3]",
+                    ? "bg-purple-500 border-purple-500 animate-pulse"
+                    : "bg-transparent border-white/[0.15]",
               )}
             />
             {labels?.[i] && (
@@ -42,7 +42,7 @@ export function StepProgress({ currentStep, totalSteps, labels }: StepProgressPr
             <div
               className={cn(
                 "w-12 h-0.5 mx-1 transition-all duration-300",
-                i < currentStep ? "bg-[#C5372E]" : "bg-[#E8DFD3]/30",
+                i < currentStep ? "bg-purple-500" : "bg-white/[0.08]",
               )}
             />
           )}

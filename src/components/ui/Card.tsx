@@ -11,10 +11,10 @@ export function Card({ children, glow = false, className, ...props }: CardProps)
   return (
     <div
       className={cn(
-        "rounded-lg bg-white border border-[#E8DFD3] p-6",
+        "rounded-lg bg-white/[0.03] border border-white/[0.06] p-6",
         "transition-colors duration-200",
-        "hover:border-[#E8DFD3]",
-        glow ? "shadow-[0_0_20px_rgba(197,55,46,0.06)]" : "shadow-[0_2px_8px_rgba(26,22,17,0.06)]",
+        "hover:border-white/[0.1]",
+        glow && "glow-purple border-purple-500/20",
         className,
       )}
       {...props}

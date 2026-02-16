@@ -111,7 +111,7 @@ export default function GalleryPage() {
             </h1>
             <p className="text-sm text-text-muted mt-1">{t("subtitle")}</p>
           </div>
-          <div className="flex gap-1 bg-white/[0.03] rounded-lg p-0.5 border border-white/[0.06]" role="tablist" aria-label="Sort order">
+          <div className="flex gap-1 bg-[#1A1611]/[0.03] rounded-lg p-0.5 border border-[#1A1611]/[0.06]" role="tablist" aria-label="Sort order">
             <button
               role="tab"
               aria-selected={sort === "latest"}
@@ -146,7 +146,7 @@ export default function GalleryPage() {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
             {Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="animate-skeleton">
-                <div className="w-full aspect-[2/3] rounded-lg bg-bg-card border border-white/[0.06]" />
+                <div className="w-full aspect-[2/3] rounded-lg bg-bg-card border border-[#1A1611]/[0.06]" />
               </div>
             ))}
           </div>

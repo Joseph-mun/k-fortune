@@ -214,7 +214,7 @@ export function PaywallOverlay({
       {/* Progressive reveal: graduated blur preview */}
       <div className="select-none pointer-events-none" aria-hidden="true">
         {/* Career — partially visible (lightest blur) */}
-        <div className="p-5 rounded-lg bg-bg-card border border-white/[0.06] mb-3">
+        <div className="p-5 rounded-lg bg-bg-card border border-[#1A1611]/[0.06] mb-3">
           <div className="flex items-center gap-2 mb-2">
             <TrendingUp
               className="w-4 h-4"
@@ -269,7 +269,7 @@ export function PaywallOverlay({
         </div>
 
         {/* Advice — heaviest blur */}
-        <div className="p-5 rounded-lg bg-bg-card border border-white/[0.06] blur-[9px]">
+        <div className="p-5 rounded-lg bg-bg-card border border-[#1A1611]/[0.06] blur-[9px]">
           <h3 className="text-sm font-semibold text-text-primary mb-2">
             {t("previewAdvice")}
           </h3>

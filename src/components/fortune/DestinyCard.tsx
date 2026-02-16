@@ -170,7 +170,7 @@ export function DestinyCard({
           {onDownload && (
             <button
               onClick={onDownload}
-              className="px-3 py-1.5 text-xs bg-white/[0.04] text-text-secondary rounded-lg border border-white/[0.08] hover:border-white/[0.15] transition-colors"
+              className="px-3 py-1.5 text-xs bg-[#1A1611]/[0.03] text-text-secondary rounded-lg border border-[#1A1611]/[0.08] hover:border-[#1A1611]/[0.08] transition-colors"
             >
               {tCard("download")}
             </button>
@@ -231,16 +231,16 @@ function getStyleClasses(style: string) {
       background: "bg-gradient-to-b from-[#F5F0E8] via-[#EDE8DF] to-[#F5F0E8]",
       title: "text-gray-900",
       text: "text-gray-600",
-      muted: "text-gray-400",
+      muted: "text-gray-500",
       iconBg: "bg-gray-900/[0.05] border border-gray-300/[0.3]",
       pillarBg: "bg-gray-900/[0.03]",
     },
     photo: {
       container: "border border-[#E8DFD3] shadow-xl",
-      background: "bg-gradient-to-b from-[#C5372E]/[0.15] via-[#A47764]/[0.1] to-[#C5372E]/[0.15]",
-      title: "text-white",
-      text: "text-white/[0.6]",
-      muted: "text-white/[0.4]",
+      background: "bg-gradient-to-b from-[#C5372E]/[0.25] via-[#A47764]/[0.15] to-[#C5372E]/[0.25]",
+      title: "text-[#1A1611]",
+      text: "text-[#6B6358]",
+      muted: "text-[#A89F91]",
       iconBg: "bg-white/[0.1] border border-white/[0.2]",
       pillarBg: "bg-white/[0.05]",
     },

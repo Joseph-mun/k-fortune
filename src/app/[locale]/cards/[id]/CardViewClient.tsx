@@ -10,6 +10,7 @@ import { NavBar } from "@/components/layout/NavBar";
 import { Footer } from "@/components/layout/Footer";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
+import { ShareMenu } from "@/components/ui/ShareMenu";
 import { DestinyCard } from "@/components/fortune/DestinyCard";
 import { reconstructReading } from "@/lib/saju";
 
@@ -33,6 +34,7 @@ export default function CardViewClient() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
+  const [shareMenuOpen, setShareMenuOpen] = useState(false);
 
   useEffect(() => {
     async function fetchCard() {
@@ -99,13 +101,8 @@ export default function CardViewClient() {
     }
   };
 
-  const handleShare = async () => {
-    const url = `${window.location.origin}/cards/${id}`;
-    if (navigator.share) {
-      await navigator.share({ title: "SAJU Card", url });
-    } else {
-      await navigator.clipboard.writeText(url);
-    }
+  const handleShare = () => {
+    setShareMenuOpen(true);
   };
 
   if (loading) {
@@ -191,6 +188,14 @@ export default function CardViewClient() {
       </div>
 
       <Footer />
+
+      <ShareMenu
+        isOpen={shareMenuOpen}
+        onClose={() => setShareMenuOpen(false)}
+        url={`${typeof window !== "undefined" ? window.location.origin : ""}/cards/${id}?utm_source=share&utm_medium=social`}
+        text={card ? `Check out my SAJU card! 🎴 #KDestiny #사주 #운세` : ""}
+        title="SAJU Card"
+      />
     </main>
   );
 }

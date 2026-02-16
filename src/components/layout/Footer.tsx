@@ -22,7 +22,7 @@ export function Footer() {
           <Link href="/legal/privacy" className="hover:text-text-secondary transition-colors">
             {tLegal("privacy")}
           </Link>
-          <span className="text-white/[0.1]">|</span>
+          <span className="text-[#A89F91]">|</span>
           <Link href="/legal/terms" className="hover:text-text-secondary transition-colors">
             {tLegal("terms")}
           </Link>

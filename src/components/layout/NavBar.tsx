@@ -159,9 +159,9 @@ export function NavBar() {
           />
 
           {/* Panel */}
-          <div className="absolute top-0 right-0 bottom-0 bg-bg-card border-l border-white/[0.06] flex flex-col animate-slide-in-right" style={{ width: "var(--size-menu-mobile)" }}>
+          <div className="absolute top-0 right-0 bottom-0 bg-bg-card border-l border-[#1A1611]/[0.06] flex flex-col animate-slide-in-right" style={{ width: "var(--size-menu-mobile)" }}>
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
+            <div className="flex items-center justify-between p-4 border-b border-[#1A1611]/[0.06]">
               <span className="text-sm font-semibold text-text-primary font-[family-name:var(--font-heading)]">
                 {tNav("menu")}
               </span>
@@ -194,7 +194,7 @@ export function NavBar() {
             </div>
 
             {/* Footer: Auth + Locale switcher */}
-            <div className="p-4 border-t border-white/[0.06] flex flex-col gap-3">
+            <div className="p-4 border-t border-[#1A1611]/[0.06] flex flex-col gap-3">
               {isAuthenticated ? (
                 <button
                   onClick={() => { logout(); setMobileMenuOpen(false); }}

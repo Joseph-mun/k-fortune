@@ -132,7 +132,7 @@ export function TeaserClient() {
                 placeholder="1990"
                 min={1924}
                 max={2025}
-                className="w-32 text-center text-lg font-bold rounded-lg border border-white/[0.1] bg-white/[0.03] text-text-primary py-3 px-4 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                className="w-32 text-center text-lg font-bold rounded-lg border border-[#1A1611]/[0.08] bg-[#1A1611]/[0.03] text-text-primary py-3 px-4 focus:outline-none focus:ring-2 focus:ring-purple-500/50"
               />
               <button
                 onClick={handleReveal}
@@ -192,7 +192,7 @@ export function TeaserClient() {
                   {ELEMENT_LABELS[yearData.pillar.stemElement]}
                 </span>
               </div>
-              <div className="px-4 py-2 rounded-full border border-white/[0.1] bg-white/[0.03]">
+              <div className="px-4 py-2 rounded-full border border-[#1A1611]/[0.08] bg-[#1A1611]/[0.03]">
                 <span className="text-sm text-text-secondary">
                   {yearData.pillar.yinYang === "yang" ? "陽 Yang" : "陰 Yin"}
                 </span>
@@ -220,7 +220,7 @@ export function TeaserClient() {
         {phase === "email" && yearData && (
           <div className="flex flex-col items-center gap-6 animate-fade-in">
             {/* Mini reveal recap */}
-            <div className="flex items-center gap-3 px-4 py-2 rounded-full border border-white/[0.06] bg-white/[0.02]">
+            <div className="flex items-center gap-3 px-4 py-2 rounded-full border border-[#1A1611]/[0.06] bg-[#1A1611]/[0.02]">
               <AnimalIcon animal={yearData.animal.id} size={24} />
               <span className="text-sm text-text-secondary">
                 {yearData.animal.displayName} · {ELEMENT_LABELS[yearData.pillar.stemElement]}
@@ -242,7 +242,7 @@ export function TeaserClient() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder={t("emailPlaceholder")}
-                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-white/[0.1] bg-white/[0.03] text-text-primary text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+                  className="w-full pl-10 pr-4 py-3 rounded-lg border border-[#1A1611]/[0.08] bg-[#1A1611]/[0.03] text-text-primary text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
                   required
                 />
               </div>

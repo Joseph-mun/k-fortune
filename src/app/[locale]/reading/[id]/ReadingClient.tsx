@@ -19,6 +19,7 @@ import { Card } from "@/components/ui/Card";
 import { GraphCard } from "@/components/ui/GraphCard";
 import { Button } from "@/components/ui/Button";
 import { Accordion } from "@/components/ui/Accordion";
+import { ShareMenu } from "@/components/ui/ShareMenu";
 import { ElementThemeProvider } from "@/contexts/ElementThemeContext";
 import { ElementPentagonChart } from "@/components/fortune/ElementPentagonChart";
 import { ElementIcon } from "@/components/icons/ElementIcon";
@@ -45,6 +46,7 @@ export default function ReadingClient() {
   const intentProcessedRef = useRef(false);
   const [serverReading, setServerReading] = useState<typeof storedReading | null>(null);
   const [isPaid, setIsPaid] = useState(false);
+  const [shareMenuOpen, setShareMenuOpen] = useState(false);
 
   // Post-login: detect checkout intent and auto-resume payment flow
   useEffect(() => {
@@ -148,18 +150,9 @@ export default function ReadingClient() {
     return key.startsWith(prefix) ? tInterp(key.slice(prefix.length)) : key;
   };
 
-  const handleShare = async () => {
+  const handleShare = () => {
     track("share_clicked", { source: "reading", readingId: id });
-    const text = t("shareText", { metaphor: reading.dayMaster.metaphorInfo.displayName });
-    try {
-      if (navigator.share) {
-        await navigator.share({ text, url: window.location.href });
-      } else {
-        await navigator.clipboard.writeText(`${text} ${window.location.href}`);
-      }
-    } catch {
-      // User cancelled share dialog or clipboard access denied
-    }
+    setShareMenuOpen(true);
   };
 
   return (
@@ -233,7 +226,7 @@ export default function ReadingClient() {
 
                 {/* Strengths & Weaknesses */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full text-left">
-                  <div className="p-4 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                  <div className="p-4 rounded-lg bg-[#1A1611]/[0.02] border border-[#1A1611]/[0.06]">
                     <p className="text-xs text-text-muted uppercase tracking-wider mb-3">{t("strengths")}</p>
                     <ul className="space-y-2">
                       {reading.dayMaster.strengths.map((strength, i) => (
@@ -244,7 +237,7 @@ export default function ReadingClient() {
                       ))}
                     </ul>
                   </div>
-                  <div className="p-4 rounded-lg bg-white/[0.02] border border-white/[0.06]">
+                  <div className="p-4 rounded-lg bg-[#1A1611]/[0.02] border border-[#1A1611]/[0.06]">
                     <p className="text-xs text-text-muted uppercase tracking-wider mb-3">{t("weaknesses")}</p>
                     <ul className="space-y-2">
                       {reading.dayMaster.weaknesses.map((weakness, i) => (
@@ -408,6 +401,14 @@ export default function ReadingClient() {
       <div className="w-full px-4 flex justify-center">
         <Footer />
       </div>
+
+      <ShareMenu
+        isOpen={shareMenuOpen}
+        onClose={() => setShareMenuOpen(false)}
+        url={`${typeof window !== "undefined" ? window.location.href : ""}`}
+        text={`${reading.dayMaster.metaphorInfo.displayName} in SAJU! ✨ #KDestiny #사주 #운세`}
+        title={t("shareText", { metaphor: reading.dayMaster.metaphorInfo.displayName })}
+      />
     </main>
   );
 }

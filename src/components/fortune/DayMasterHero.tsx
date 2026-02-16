@@ -57,7 +57,7 @@ export function DayMasterHero({ dayMaster }: DayMasterHeroProps) {
         {dayMaster.strengths.map((strength, i) => (
           <span
             key={strength}
-            className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.06] text-text-secondary text-xs animate-slide-up"
+            className="px-2.5 py-1 rounded-md bg-[#1A1611]/[0.03] border border-[#1A1611]/[0.06] text-text-secondary text-xs animate-slide-up"
             style={{ animationDelay: `${200 + i * 100}ms` }}
           >
             {resolveKey(strength)}

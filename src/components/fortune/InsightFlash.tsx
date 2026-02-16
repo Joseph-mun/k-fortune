@@ -112,7 +112,7 @@ export function InsightFlash({ yearPillar, animalInfo }: InsightFlashProps) {
               : "opacity-0 translate-y-4"
           }`}
         >
-          <div className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-white/[0.1] bg-white/[0.03]">
+          <div className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#1A1611]/[0.08] bg-[#1A1611]/[0.03]">
             <span className="text-sm text-text-secondary">
               {yearPillar.yinYang === "yang" ? "陽 Yang" : "陰 Yin"}
             </span>

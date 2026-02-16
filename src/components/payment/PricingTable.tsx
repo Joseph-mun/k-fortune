@@ -96,7 +96,7 @@ export function PricingTable() {
   return (
     <div className="flex flex-col items-center gap-8 w-full max-w-5xl">
       {/* Monthly / Annual Toggle */}
-      <div className="flex items-center gap-3 bg-bg-card border border-white/[0.06] rounded-full p-1">
+      <div className="flex items-center gap-3 bg-bg-card border border-[#1A1611]/[0.06] rounded-full p-1">
         <button
           type="button"
           onClick={() => {

@@ -34,6 +34,7 @@ export default function CardCreatePage() {
   const [isPublic, setIsPublic] = useState(false);
   const [creating, setCreating] = useState(false);
   const [cardId, setCardId] = useState<string | null>(null);
+  const [saveError, setSaveError] = useState(false);
 
   // Get latest reading from store
   const readings = useReadingStore((s) => s.readings);
@@ -61,6 +62,7 @@ export default function CardCreatePage() {
 
   const handleCreate = async () => {
     setCreating(true);
+    setSaveError(false);
     try {
       const response = await fetch("/api/cards", {
         method: "POST",
@@ -75,12 +77,16 @@ export default function CardCreatePage() {
       if (response.ok) {
         const data = await response.json();
         setCardId(data.card.id);
+        track("card_created", { style: selectedStyle, isPublic });
+        setStep(3);
+      } else {
+        // API returned error response
+        setSaveError(true);
+        setStep(3);
       }
-      track("card_created", { style: selectedStyle, isPublic });
-      // Proceed to success step regardless (card viewable locally)
-      setStep(3);
     } catch {
-      // Network error - still show card locally via DestinyCardGenerator
+      // Network error - still show card locally but indicate save failure
+      setSaveError(true);
       setStep(3);
     } finally {
       setCreating(false);
@@ -185,9 +191,16 @@ export default function CardCreatePage() {
         {/* Step 3: Success */}
         {step === 3 && (
           <div className="w-full space-y-4 text-center">
-            <h2 className="text-xl text-gold-400 font-bold">
-              {t("success")}
-            </h2>
+            {saveError ? (
+              <div className="bg-red-500/10 border border-red-500 rounded-lg p-4 text-red-500">
+                <p className="font-semibold">카드 저장에 실패했습니다. 다시 시도해 주세요.</p>
+                <p className="text-sm mt-1">Failed to save card. Please try again.</p>
+              </div>
+            ) : (
+              <h2 className="text-xl text-gold-400 font-bold">
+                {t("success")}
+              </h2>
+            )}
 
             <DestinyCardGenerator reading={reading} defaultStyle={selectedStyle} />
 

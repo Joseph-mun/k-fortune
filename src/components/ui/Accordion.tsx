@@ -30,7 +30,7 @@ export function Accordion({
       >
         <div className="flex items-center gap-2.5">
           {icon && (
-            <span className="flex items-center justify-center w-7 h-7 rounded-md bg-white/[0.04] border border-white/[0.06]">
+            <span className="flex items-center justify-center w-7 h-7 rounded-md bg-[#1A1611]/[0.03] border border-[#1A1611]/[0.06]">
               {icon}
             </span>
           )}

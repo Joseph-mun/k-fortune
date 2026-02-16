@@ -72,7 +72,7 @@ export function ReadingSummary({ dayMaster, elementAnalysis }: ReadingSummaryPro
         {elements.map(({ element, value }) => (
           <div
             key={element}
-            className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/[0.04] border border-white/[0.06]"
+            className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-[#1A1611]/[0.03] border border-[#1A1611]/[0.06]"
           >
             <ElementIcon element={element} size={14} />
             <span className="text-[10px] text-text-secondary font-medium">
@@ -87,7 +87,7 @@ export function ReadingSummary({ dayMaster, elementAnalysis }: ReadingSummaryPro
         {dayMaster.strengths.slice(0, 4).map((strength, i) => (
           <span
             key={strength}
-            className="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/[0.06] text-text-secondary text-xs animate-slide-up"
+            className="px-2.5 py-1 rounded-md bg-[#1A1611]/[0.03] border border-[#1A1611]/[0.06] text-text-secondary text-xs animate-slide-up"
             style={{ animationDelay: `${200 + i * 100}ms` }}
           >
             {resolveKey(strength)}

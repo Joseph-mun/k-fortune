@@ -24,7 +24,7 @@ export function FortunePillarCard({ pillar, label, isHighlighted = false }: Fort
         "flex flex-col items-center gap-1 rounded-lg p-3 bg-bg-surface border transition-all duration-200",
         isHighlighted
           ? "accent-glow"
-          : "border-white/[0.06] hover:border-white/[0.1]",
+          : "border-[#1A1611]/[0.06] hover:border-[#1A1611]/[0.08]",
       )}
       style={isHighlighted ? { background: "var(--accent-bg-tint)", borderColor: "var(--accent-glow)" } : undefined}
     >
@@ -50,7 +50,7 @@ export function FortunePillarCard({ pillar, label, isHighlighted = false }: Fort
       </div>
 
       {/* Divider */}
-      <div className="w-6 h-px bg-white/[0.08]" />
+      <div className="w-6 h-px bg-[#1A1611]/[0.08]" />
 
       {/* Branch Animal (bottom) */}
       <div className="flex flex-col items-center gap-0.5 py-1.5">

@@ -172,7 +172,7 @@ export default function StarMatchPage() {
                     type="checkbox"
                     checked={unknownTime}
                     onChange={(e) => setUnknownTime(e.target.checked)}
-                    className="rounded border-white/[0.08] bg-bg-surface accent-purple-500"
+                    className="rounded border-[#1A1611]/[0.08] bg-bg-surface accent-purple-500"
                   />
                   {tForm("birthTimeUnknown")}
                 </label>
@@ -187,7 +187,7 @@ export default function StarMatchPage() {
                         className={`flex-1 py-2 rounded-lg border text-xs font-medium transition-all cursor-pointer ${
                           gender === g
                             ? "bg-purple-500/15 border-purple-500/40 text-purple-300"
-                            : "bg-transparent border-white/[0.08] text-text-muted hover:border-white/[0.15]"
+                            : "bg-transparent border-[#1A1611]/[0.08] text-text-muted hover:border-[#1A1611]/[0.08]"
                         }`}
                       >
                         {tForm(g)}
@@ -231,7 +231,7 @@ export default function StarMatchPage() {
                     className={`flex flex-col items-center gap-1 p-3 rounded-lg border transition-all ${
                       selectedStar === star.id
                         ? "bg-purple-500/10 border-purple-500/30 text-text-primary"
-                        : "bg-transparent border-white/[0.06] text-text-muted hover:border-white/[0.1]"
+                        : "bg-transparent border-[#1A1611]/[0.06] text-text-muted hover:border-[#1A1611]/[0.08]"
                     }`}
                   >
                     <span className="text-2xl">{star.emoji}</span>

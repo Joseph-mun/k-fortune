@@ -37,7 +37,7 @@ export function ReadingCard({ reading, variant = "compact" }: ReadingCardProps) 
     <Card className="w-full">
       <div className="flex flex-col gap-4">
         {/* Header with icon */}
-        <div className="flex items-center gap-4 pb-4 border-b border-white/[0.06]">
+        <div className="flex items-center gap-4 pb-4 border-b border-[#1A1611]/[0.06]">
           <MetaphorIcon metaphor={reading.dayMaster.metaphorInfo.id} size={56} />
           <div className="flex-1">
             <h3 className="text-2xl font-bold text-text-primary mb-2">

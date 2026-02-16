@@ -36,7 +36,7 @@ export function ElementChart({ analysis }: ElementChartProps) {
           return (
             <div key={element}>
               <div
-                className="flex items-center gap-3 animate-slide-up cursor-pointer rounded-md px-1 py-1 -mx-1 transition-colors hover:bg-white/[0.03]"
+                className="flex items-center gap-3 animate-slide-up cursor-pointer rounded-md px-1 py-1 -mx-1 transition-colors hover:bg-[#1A1611]/[0.03]"
                 style={{ animationDelay: `${index * 80}ms` }}
                 onMouseEnter={() => setActiveElement(element)}
                 onMouseLeave={() => setActiveElement(null)}

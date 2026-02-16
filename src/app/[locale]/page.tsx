@@ -221,7 +221,7 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
 
       {/* Mobile fixed CTA */}
       <div className="fixed bottom-0 left-0 right-0 z-30 md:hidden pb-safe">
-        <div className="px-4 py-3 bg-[#F0EEE9]/95 backdrop-blur-lg border-t border-white/[0.06]">
+        <div className="px-4 py-3 bg-[#F0EEE9]/95 backdrop-blur-lg border-t border-[#1A1611]/[0.06]">
           <Link
             href="/start"
             className="flex items-center justify-center gap-2 w-full py-3 btn-cta text-white rounded-lg font-semibold text-sm"

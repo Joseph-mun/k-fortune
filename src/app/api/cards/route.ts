@@ -20,7 +20,15 @@ const ReadingDataSchema = z.object({
       displayName: z.string(),
     }).passthrough(),
   }).passthrough(),
-  elementAnalysis: z.record(z.string(), z.number()),
+  elementAnalysis: z.object({
+    wood: z.number(),
+    fire: z.number(),
+    earth: z.number(),
+    metal: z.number(),
+    water: z.number(),
+    dominant: z.string(),
+    lacking: z.string().nullable(),
+  }),
   luckyInfo: z.record(z.string(), z.unknown()),
 }).passthrough();
 

@@ -32,35 +32,40 @@ export default async function LandingPage({ params }: { params: Promise<{ locale
 
         {/* Hero Content */}
         <div className="relative z-10 flex flex-col items-center max-w-3xl px-4">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/80 text-xs mb-8 backdrop-blur-sm animate-slide-up">
-            <Sparkles className="w-3.5 h-3.5 text-[#FF8A80]" />
-            {tCommon("subtitle")}
+          {/* Dark scrim behind text for readability */}
+          <div className="absolute inset-0 -mx-8 rounded-3xl bg-black/50 backdrop-blur-sm" />
+
+          <div className="relative flex flex-col items-center">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white/80 text-xs mb-8 backdrop-blur-sm animate-slide-up">
+              <Sparkles className="w-3.5 h-3.5 text-[#FF8A80]" />
+              {tCommon("subtitle")}
+            </div>
+
+            {/* Headline */}
+            <h1 className="typo-display mb-6 animate-slide-up delay-100 drop-shadow-[0_2px_12px_rgba(0,0,0,0.8)]">
+              <span className="text-white">{t("heroTitle")}</span>
+              <br />
+              <span className="text-gradient-hero drop-shadow-none">{t("heroHighlight")}</span>
+            </h1>
+
+            {/* Subheading */}
+            <p className="typo-body-lg text-white/70 max-w-xl mb-12 animate-slide-up delay-200 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]">
+              {t("heroDescription")}
+            </p>
+
+            {/* CTA Button → /start */}
+            <Link
+              href="/start"
+              className="inline-flex items-center gap-3 px-8 py-4 btn-cta text-white rounded-xl font-semibold text-lg animate-cta-pulse group"
+            >
+              {t("cta")}
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Link>
+            <p className="text-sm text-white/50 mt-4 animate-fade-in delay-400">
+              {t("ctaSubtext")}
+            </p>
           </div>
-
-          {/* Headline */}
-          <h1 className="typo-display mb-6 animate-slide-up delay-100">
-            <span className="text-white/90">{t("heroTitle")}</span>
-            <br />
-            <span className="text-gradient-hero">{t("heroHighlight")}</span>
-          </h1>
-
-          {/* Subheading */}
-          <p className="typo-body-lg text-white/60 max-w-xl mb-12 animate-slide-up delay-200">
-            {t("heroDescription")}
-          </p>
-
-          {/* CTA Button → /start */}
-          <Link
-            href="/start"
-            className="inline-flex items-center gap-3 px-8 py-4 btn-cta text-white rounded-xl font-semibold text-lg animate-cta-pulse group"
-          >
-            {t("cta")}
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-          <p className="text-sm text-white/50 mt-4 animate-fade-in delay-400">
-            {t("ctaSubtext")}
-          </p>
         </div>
 
         {/* Scroll indicator */}

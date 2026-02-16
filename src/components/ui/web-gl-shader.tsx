@@ -9,7 +9,8 @@ function StaticGradientFallback() {
     <div
       className="absolute inset-0 w-full h-full"
       style={{
-        background: "radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.15) 0%, transparent 70%)",
+        background: "radial-gradient(ellipse at 50% 60%, rgba(197, 55, 46, 0.3) 0%, rgba(139, 92, 246, 0.15) 30%, #0a0a0a 70%)",
+        backgroundColor: "#0a0a0a",
       }}
     />
   )

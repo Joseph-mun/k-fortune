@@ -13,6 +13,7 @@ import { DestinyCard } from "@/components/fortune/DestinyCard";
 import { DestinyCardGenerator } from "@/components/fortune/DestinyCardGenerator";
 import { useReadingStore } from "@/stores/useReadingStore";
 import { reconstructReading } from "@/lib/saju";
+import { useAuth } from "@/features/auth/hooks/useAuth";
 
 const STYLES = ["classic", "tarot", "neon", "ink", "photo", "seasonal"] as const;
 const STYLE_ICONS: Record<string, string> = {
@@ -34,7 +35,9 @@ export default function CardCreatePage() {
   const [isPublic, setIsPublic] = useState(false);
   const [creating, setCreating] = useState(false);
   const [cardId, setCardId] = useState<string | null>(null);
-  const [saveError, setSaveError] = useState(false);
+  const [saveError, setSaveError] = useState<string | false>(false);
+
+  const { isAuthenticated, isLoading: authLoading, login } = useAuth();
 
   // Get latest reading from store
   const readings = useReadingStore((s) => s.readings);
@@ -61,6 +64,12 @@ export default function CardCreatePage() {
   const reading = reconstructReading(latestReading);
 
   const handleCreate = async () => {
+    if (!isAuthenticated) {
+      setSaveError("LOGIN_REQUIRED");
+      setStep(3);
+      return;
+    }
+
     setCreating(true);
     setSaveError(false);
     try {
@@ -79,14 +88,15 @@ export default function CardCreatePage() {
         setCardId(data.card.id);
         track("card_created", { style: selectedStyle, isPublic });
         setStep(3);
+      } else if (response.status === 401) {
+        setSaveError("LOGIN_REQUIRED");
+        setStep(3);
       } else {
-        // API returned error response
-        setSaveError(true);
+        setSaveError("SAVE_FAILED");
         setStep(3);
       }
     } catch {
-      // Network error - still show card locally but indicate save failure
-      setSaveError(true);
+      setSaveError("SAVE_FAILED");
       setStep(3);
     } finally {
       setCreating(false);
@@ -191,10 +201,28 @@ export default function CardCreatePage() {
         {/* Step 3: Success */}
         {step === 3 && (
           <div className="w-full space-y-4 text-center">
-            {saveError ? (
+            {saveError === "LOGIN_REQUIRED" ? (
+              <div className="bg-amber-500/10 border border-amber-500 rounded-lg p-4 text-amber-600">
+                <p className="font-semibold">로그인이 필요합니다</p>
+                <p className="text-sm mt-1">카드를 저장하려면 먼저 로그인해 주세요.</p>
+                <Button
+                  onClick={() => login("google")}
+                  className="mt-3"
+                >
+                  Google로 로그인
+                </Button>
+              </div>
+            ) : saveError ? (
               <div className="bg-red-500/10 border border-red-500 rounded-lg p-4 text-red-500">
-                <p className="font-semibold">카드 저장에 실패했습니다. 다시 시도해 주세요.</p>
-                <p className="text-sm mt-1">Failed to save card. Please try again.</p>
+                <p className="font-semibold">카드 저장에 실패했습니다.</p>
+                <p className="text-sm mt-1">잠시 후 다시 시도해 주세요.</p>
+                <Button
+                  variant="secondary"
+                  onClick={() => { setSaveError(false); setStep(2); }}
+                  className="mt-3"
+                >
+                  다시 시도
+                </Button>
               </div>
             ) : (
               <h2 className="text-xl text-gold-400 font-bold">

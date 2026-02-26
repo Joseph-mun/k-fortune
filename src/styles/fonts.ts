@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import { Gaegu } from "next/font/google";
+import { Gaegu, Noto_Serif_KR } from "next/font/google";
 
 // ── Body + Korean: Pretendard Variable (self-hosted) ──
 export const pretendard = localFont({
@@ -19,6 +19,15 @@ export const pretendard = localFont({
     "Malgun Gothic",
     "sans-serif",
   ],
+});
+
+// ── 묵(Ink) Layer: Serif heading for traditional aesthetic ──
+export const notoSerifKR = Noto_Serif_KR({
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+  variable: "--font-noto-serif-kr",
+  display: "swap",
+  fallback: ["Georgia", "Times New Roman", "serif"],
 });
 
 // ── 놀이(Play) Layer: Handwriting accent ──

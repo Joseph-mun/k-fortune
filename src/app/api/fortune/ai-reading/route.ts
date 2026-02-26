@@ -5,7 +5,7 @@ import { getToken } from "next-auth/jwt";
 import type { NextRequest } from "next/server";
 import { checkRateLimit, getClientIdentifier, RATE_LIMITS } from "@/lib/rateLimit";
 import { createServerClient } from "@/lib/supabase";
-import { SAJU_PREVIEW_PROMPT, SAJU_FULL_PROMPT, buildUserPrompt } from "@/lib/ai/prompts";
+import { SAJU_PAST_PREVIEW_PROMPT, SAJU_FULL_PPF_PROMPT, buildUserPrompt } from "@/lib/ai/prompts";
 
 const AiReadingSchema = z.object({
   mode: z.enum(["preview", "full"]),
@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
 
     const { mode, readingId, locale, ...readingData } = validation.data;
 
-    // Full mode requires authentication + payment
+    // Full mode requires authentication + per-reading payment
     if (mode === "full") {
       if (!token?.sub) {
         return new Response(
@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
 
       const supabase = createServerClient();
 
-      // Check 1: reading is directly marked as paid (set by webhook)
+      // Check: reading is directly marked as paid (set by webhook)
       const { data: readingRow } = await supabase
         .from("readings")
         .select("is_paid")
@@ -93,7 +93,7 @@ export async function POST(request: NextRequest) {
         .maybeSingle();
 
       if (!readingRow?.is_paid) {
-        // Check 2: user has a purchase or active subscription (resolve auth_id → UUID)
+        // Check: user has a purchase linked to THIS specific reading
         const { data: userRow } = await supabase
           .from("users")
           .select("id")
@@ -106,22 +106,14 @@ export async function POST(request: NextRequest) {
           .from("purchases")
           .select("id")
           .eq("user_id", userId)
-          .eq("product_type", "detailed_reading")
+          .eq("product_type", "single_reading")
           .eq("status", "completed")
           .limit(1)
           .maybeSingle();
 
-        const { data: subscription } = await supabase
-          .from("subscriptions")
-          .select("id")
-          .eq("user_id", userId)
-          .eq("status", "active")
-          .limit(1)
-          .maybeSingle();
-
-        if (!purchase && !subscription) {
+        if (!purchase) {
           return new Response(
-            JSON.stringify({ error: { code: "PAYMENT_REQUIRED", message: "Please purchase a detailed reading." } }),
+            JSON.stringify({ error: { code: "PAYMENT_REQUIRED", message: "Please purchase this reading." } }),
             { status: 402, headers: { "Content-Type": "application/json" } }
           );
         }
@@ -146,14 +138,14 @@ export async function POST(request: NextRequest) {
     }
 
     // Build prompt and stream
-    const systemPrompt = mode === "preview" ? SAJU_PREVIEW_PROMPT : SAJU_FULL_PROMPT;
+    const systemPrompt = mode === "preview" ? SAJU_PAST_PREVIEW_PROMPT : SAJU_FULL_PPF_PROMPT;
     const userPrompt = buildUserPrompt({ ...readingData, locale });
 
     const result = streamText({
       model: anthropic("claude-haiku-4-5-20251001"),
       system: systemPrompt,
       messages: [{ role: "user", content: userPrompt }],
-      maxOutputTokens: mode === "preview" ? 400 : 1500,
+      maxOutputTokens: mode === "preview" ? 400 : 2000,
       temperature: 0.7,
       onFinish: async ({ text }) => {
         // Cache the AI interpretation in Supabase

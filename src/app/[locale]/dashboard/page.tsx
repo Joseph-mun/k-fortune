@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
-import { BookOpen, Sparkles, Users, Crown, Clock, ArrowRight } from "lucide-react";
+import { Sparkles, Clock, ArrowRight } from "lucide-react";
 import { MetaphorIcon } from "@/components/icons/MetaphorIcon";
 
 import { NavBar } from "@/components/layout/NavBar";
@@ -45,7 +45,6 @@ interface ReadingsResponse {
 
 export default function DashboardPage() {
   const t = useTranslations("dashboard");
-  const tNav = useTranslations("nav");
   const router = useRouter();
 
   const [profile, setProfile] = useState<UserProfile | null>(null);
@@ -110,39 +109,9 @@ export default function DashboardPage() {
           </p>
         </div>
 
-        {/* Subscription Status Card */}
-        <Card glow={profile?.subscriptionTier === "premium"}>
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Crown className="w-6 h-6 text-gold-400" />
-              <div>
-                <h2 className="text-lg font-semibold text-text-primary">
-                  {t("subscription.title")}
-                </h2>
-                <p className="text-sm text-text-secondary">
-                  {profile?.subscriptionTier === "premium"
-                    ? t("subscription.premium")
-                    : profile?.subscriptionTier === "detailed"
-                      ? t("subscription.detailed")
-                      : t("subscription.free")}
-                </p>
-              </div>
-            </div>
-            {profile?.subscriptionTier === "free" && (
-              <Button
-                variant="gold"
-                size="sm"
-                onClick={() => router.push("/pricing")}
-              >
-                {t("subscription.upgrade")}
-              </Button>
-            )}
-          </div>
-        </Card>
-
-        {/* Quick Actions */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <Card className="cursor-pointer hover:border-purple-500/30 transition-colors" onClick={() => router.push("/")}>
+        {/* Quick Actions — simplified */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Card className="cursor-pointer hover:border-purple-500/30 transition-colors" onClick={() => router.push("/start")}>
             <div className="flex items-center gap-3">
               <Sparkles className="w-5 h-5 text-purple-400" />
               <div>
@@ -152,19 +121,9 @@ export default function DashboardPage() {
             </div>
           </Card>
 
-          <Card className="cursor-pointer hover:border-purple-500/30 transition-colors" onClick={() => router.push("/")}>
-            <div className="flex items-center gap-3">
-              <Users className="w-5 h-5 text-purple-400" />
-              <div>
-                <p className="font-semibold text-text-primary text-sm">{t("actions.compatibility")}</p>
-                <p className="text-xs text-text-muted">{t("actions.compatibilityDesc")}</p>
-              </div>
-            </div>
-          </Card>
-
           <Card className="cursor-pointer hover:border-purple-500/30 transition-colors" onClick={() => router.push("/pricing")}>
             <div className="flex items-center gap-3">
-              <BookOpen className="w-5 h-5 text-purple-400" />
+              <Sparkles className="w-5 h-5 text-gold-500" />
               <div>
                 <p className="font-semibold text-text-primary text-sm">{t("actions.fullReading")}</p>
                 <p className="text-xs text-text-muted">{t("actions.fullReadingDesc")}</p>
@@ -189,7 +148,7 @@ export default function DashboardPage() {
               <div className="text-center py-8">
                 <Sparkles className="w-12 h-12 text-purple-500/30 mx-auto mb-4" />
                 <p className="text-text-secondary mb-4">{t("history.empty")}</p>
-                <Button onClick={() => router.push("/")}>
+                <Button onClick={() => router.push("/start")}>
                   {t("history.getStarted")}
                 </Button>
               </div>
@@ -232,7 +191,6 @@ export default function DashboardPage() {
     </main>
   );
 }
-
 
 function formatDate(dateStr: string): string {
   try {

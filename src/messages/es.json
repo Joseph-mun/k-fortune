@@ -11,9 +11,7 @@
   "nav": {
     "home": "Inicio",
     "pricing": "Precios",
-    "compatibility": "Compatibilidad",
-    "gallery": "Galería",
-    "starMatch": "Compatibilidad",
+    "fortune": "Ver Lectura",
     "dashboard": "Mis Lecturas",
     "signIn": "Iniciar Sesión",
     "signOut": "Cerrar Sesión",
@@ -45,14 +43,12 @@
     "discoverTitle": "Lo Que Descubrirás",
     "discoverDescription": "Sabiduría coreana ancestral, reimaginada para el mundo moderno",
     "services": {
-      "sajuTitle": "Lectura Saju",
-      "sajuDesc": "Tus Cuatro Pilares del Destino revelados en 30 segundos",
-      "starTitle": "Match de Estrellas",
-      "starDesc": "Comprueba tu compatibilidad con estrellas K-Pop",
-      "compatTitle": "Compatibilidad",
-      "compatDesc": "Descubre la armonía de tu relación",
-      "galleryTitle": "Galería de Cartas",
-      "galleryDesc": "Colecciona hermosas Cartas del Destino"
+      "pastTitle": "Pasado · Energía Innata",
+      "pastDesc": "Descubre tu personalidad innata, fortalezas y el plano cósmico desde tu nacimiento",
+      "presentTitle": "Presente · Fortuna 2026",
+      "presentDesc": "Carrera, amor, salud y energía financiera para el año actual",
+      "futureTitle": "Futuro · 1-3 Años",
+      "futureDesc": "Transiciones de ciclos mayores, años clave y cómo prepararte"
     }
   },
   "start": {
@@ -144,7 +140,13 @@
     "aiRegenerate": "Regenerar",
     "aiDescription": "Obtén una interpretación personalizada basada en tus Cuatro Pilares.",
     "aiError": "Error al generar la interpretación. Inténtalo de nuevo.",
-    "aiRetry": "Reintentar"
+    "aiRetry": "Reintentar",
+    "sectionPast": "Pasado · Energía Innata",
+    "sectionPresent": "Presente · Este Año",
+    "sectionFuture": "Futuro · Lo Que Viene",
+    "sectionGuidance": "Orientación",
+    "sectionFullReading": "Lectura Completa — Pasado, Presente y Futuro",
+    "newReading": "Obtener Otra Lectura"
   },
   "elements": {
     "wood": "Madera",
@@ -270,55 +272,21 @@
     }
   },
   "pricing": {
-    "title": "Elige Tu Lectura",
-    "subtitle": "Desbloquea el poder completo de la sabiduría de los Cuatro Pilares coreanos",
-    "badge": "Mas Popular",
-    "popular": "MAS POPULAR",
-    "toggle": {
-      "monthly": "Mensual",
-      "annual": "Anual",
-      "save": "-30%"
-    },
-    "basic": {
-      "name": "Lectura Basica",
-      "price": "GRATIS",
+    "title": "Precio Simple",
+    "subtitle": "Paga solo lo que necesitas — sin suscripciones",
+    "badge": "Pago por Lectura",
+    "popular": "MEJOR VALOR",
+    "single": {
+      "name": "Lectura PPF Completa",
+      "perReading": "por lectura",
+      "description": "Análisis completo de Pasado, Presente y Futuro con IA y la sabiduría ancestral coreana de los Cuatro Pilares.",
       "features": [
-        "Analisis de Cuatro Pilares",
-        "Balance Elemental",
-        "Identidad del Maestro del Dia",
-        "Info de Suerte"
+        "Análisis de Pasado, Presente y Futuro con IA",
+        "Orientación personalizada y consejos de vida",
+        "Carta natal y balance de elementos",
+        "Acceso instantáneo — sin suscripción"
       ],
-      "cta": "Obtener Lectura Gratis"
-    },
-    "detailed": {
-      "name": "Lectura Completa",
-      "price": "{price}",
-      "features": [
-        "Todo en Basica",
-        "Carrera y Proposito",
-        "Amor y Relaciones",
-        "Salud y Bienestar",
-        "Fortuna 2026",
-        "Mapa de Ciclos de Vida"
-      ],
-      "cta": "Comprar Ahora"
-    },
-    "premium": {
-      "name": "Premium",
-      "price": "{price}",
-      "period": "/mes",
-      "periodYear": "/año",
-      "saveBadge": "Ahorra 30%",
-      "features": [
-        "Todas las Lecturas Ilimitadas",
-        "Actualizaciones Mensuales",
-        "Analisis de Compatibilidad",
-        "Todos los Estilos de Carta",
-        "Soporte Prioritario"
-      ],
-      "cta": "Suscribirse",
-      "trialCta": "Prueba Gratis {days} Días",
-      "trialNote": "Gratis por {days} días, luego se renueva. Cancela cuando quieras."
+      "cta": "Obtener Tu Lectura"
     }
   },
   "auth": {
@@ -355,20 +323,11 @@
     "welcome": "Bienvenido a tu panel de destino",
     "welcomeBack": "Bienvenido de vuelta, {name}",
     "loading": "Cargando tus lecturas...",
-    "subscription": {
-      "title": "Suscripcion",
-      "free": "Plan Gratuito - Solo lecturas basicas",
-      "detailed": "Lectura Completa - Compra unica",
-      "premium": "Premium - Lecturas ilimitadas y compatibilidad",
-      "upgrade": "Mejorar Plan"
-    },
     "actions": {
       "newReading": "Nueva Lectura",
       "newReadingDesc": "Obtener lectura gratuita de Cuatro Pilares",
-      "compatibility": "Compatibilidad",
-      "compatibilityDesc": "Compara dos destinos",
       "fullReading": "Lectura Completa",
-      "fullReadingDesc": "Desbloquea carrera, amor y mas"
+      "fullReadingDesc": "Desbloquea Pasado, Presente y Futuro por $0.99"
     },
     "history": {
       "title": "Historial de Lecturas",
@@ -466,38 +425,30 @@
     }
   },
   "paywall": {
-    "title": "Desbloquea Tu Lectura Completa",
-    "description": "Descubre tu destino completo con análisis de carrera, guía de relaciones y consejos de vida personalizados.",
-    "unlockButton": "Desbloquear Mi Lectura Completa",
-    "unlockButtonDiscount": "Desbloquear Ahora — $0.99",
+    "title": "Desbloquea Presente y Futuro",
+    "description": "Descubre tu lectura completa de Pasado, Presente y Futuro con orientación personalizada de IA.",
+    "unlockButton": "Desbloquear por $0.99",
     "price": "{price}",
-    "personalTeaser": "Tu personalidad {dayMaster} revela caminos profesionales y perspectivas de relaciones únicas...",
-    "personalTeaser_wood": "Tu energía de Madera esconde caminos profesionales en liderazgo y campos creativos. Desbloquea tu lectura completa para descubrir cómo canalizar tu potencial de crecimiento.",
-    "personalTeaser_fire": "Tu energía de Fuego revela oportunidades profesionales apasionantes y dinámicas de relación magnéticas. Descubre cómo tu resplandor moldea tu destino.",
-    "personalTeaser_earth": "Tu energía de Tierra señala estrategias de acumulación de riqueza estable y relaciones profundamente leales. Descubre el panorama completo de tu destino sólido.",
-    "personalTeaser_metal": "Tu energía de Metal indica éxito profesional impulsado por la precisión y patrones de relación refinados. Desbloquea tu análisis completo de los Cuatro Pilares.",
-    "personalTeaser_water": "Tu energía de Agua sugiere estrategias profesionales adaptativas y relaciones profundamente intuitivas. Explora las profundidades ocultas de tu mapa cósmico.",
+    "personalTeaser": "Tu personalidad de {dayMaster} contiene perspectivas únicas sobre tu presente y futuro...",
+    "personalTeaser_wood": "Tu energía de Madera oculta caminos profesionales en liderazgo y campos creativos. Desbloquea tu lectura completa para descubrir cómo canalizar tu potencial de crecimiento.",
+    "personalTeaser_fire": "Tu energía de Fuego revela oportunidades profesionales apasionadas y dinámicas de relaciones magnéticas. Descubre cómo tu resplandor moldea tu destino.",
+    "personalTeaser_earth": "Tu energía de Tierra apunta a estrategias de construcción de riqueza constante y relaciones profundamente leales. Descubre la imagen completa de tu destino arraigado.",
+    "personalTeaser_metal": "Tu energía de Metal indica éxito profesional impulsado por la precisión y patrones de relaciones refinados. Desbloquea tu análisis completo de los Cuatro Pilares.",
+    "personalTeaser_water": "Tu energía de Agua sugiere estrategias profesionales adaptativas y relaciones profundamente intuitivas. Explora las profundidades ocultas de tu plano cósmico.",
     "socialProof": "Únete a {count}+ lectores que descubrieron su destino",
-    "feature1": "Carrera profesional alineada con tu elemento",
-    "feature2": "Compatibilidad y guía de pareja de vida",
-    "feature3": "Línea de tiempo 2026 y mapa de ciclos de vida",
-    "feature4": "Consejos de salud y orientación de vida personalizada",
-    "previewCareer": "Carrera Profesional",
-    "previewCareerDesc": "Tus talentos naturales se alinean con roles de liderazgo donde puedes...",
-    "previewRelationship": "Relaciones",
-    "previewRelationshipDesc": "En las relaciones, tiendes a ser comprensivo y solidario...",
-    "previewHealth": "Salud y Bienestar",
-    "previewHealthDesc": "Tu equilibrio elemental sugiere enfocarte en áreas específicas de...",
-    "previewFortune": "Fortuna 2026",
-    "previewFortuneDesc": "Este año trae energía transformadora a tu carrera y...",
-    "previewAdvice": "Consejos de Vida",
-    "previewAdviceDesc": "Enfócate en construir bases sólidas en tus primeros años...",
+    "feature1": "Análisis de Pasado, Presente y Futuro con IA",
+    "feature2": "Orientación personalizada de carrera, amor y vida",
+    "feature3": "Línea de tiempo de Fortuna 2026 y perspectiva futura",
+    "feature4": "Consejos prácticos basados en tu carta natal",
+    "previewPresent": "Presente · Fortuna 2026",
+    "previewPresentDesc": "Tu energía del año actual revela cambios profesionales, dinámicas de relaciones y oportunidades financieras...",
+    "previewFuture": "Futuro · 1-3 Años",
+    "previewFutureDesc": "Transiciones de ciclos mayores y años clave que moldearán tu destino...",
+    "previewGuidance": "Orientación · Consejos de Vida",
+    "previewGuidanceDesc": "Recomendaciones personalizadas para alinear tus acciones con la energía cósmica...",
     "priceTag": "Solo {price}",
     "urgency": "Compra única · Acceso instantáneo",
-    "urgencyDiscount": "Oferta limitada · 50% descuento · Acceso instantáneo",
-    "discountBanner": "Oferta especial termina en {time}",
-    "trialUpsell": "O prueba Premium gratis por {days} días →",
-    "loginToUnlock": "Inicia sesión para desbloquear",
+    "loginToUnlock": "Iniciar Sesión para Desbloquear",
     "loginSubtext": "Inicia sesión con Google en 3 segundos — acceso permanente a tu lectura"
   },
   "interpretation": {

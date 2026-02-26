@@ -10,16 +10,16 @@ export const metadata: Metadata = {
     template: "%s | SAJU",
   },
   description:
-    "Born to be told. Discover your cosmic identity with Saju, Korea's ancient Four Pillars of Destiny. Free reading in 30 seconds, collectible Destiny Cards, and K-Pop star compatibility.",
+    "Born to be told. Discover your Past, Present & Future with Saju, Korea's ancient Four Pillars of Destiny. AI-powered reading starting at $0.99.",
   keywords: [
     "saju", "korean fortune", "four pillars of destiny", "korean astrology",
-    "saju reading", "destiny card", "k-pop compatibility", "what is saju",
+    "saju reading", "past present future", "what is saju",
     "korean zodiac", "birth chart", "cosmic blueprint", "born to be told",
   ],
   openGraph: {
     title: "SAJU — Born to be told.",
     description:
-      "In Korea, your birth date tells a 5,000-year-old story. Free Four Pillars reading, collectible Destiny Cards, and K-Pop star compatibility.",
+      "In Korea, your birth date tells a 5,000-year-old story. Discover your Past, Present & Future with AI-powered Four Pillars reading.",
     type: "website",
     siteName: "SAJU",
     url: BASE_URL,
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "SAJU — Born to be told.",
     description:
-      "In Korea, your birth date tells a 5,000-year-old story. Free reading, Destiny Cards, and K-Pop star compatibility.",
+      "In Korea, your birth date tells a 5,000-year-old story. Discover your Past, Present & Future with AI-powered Four Pillars reading.",
   },
   robots: {
     index: true,

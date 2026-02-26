@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
       .order("created_at", { ascending: false })
       .range(offset, offset + limit - 1);
 
-    if (type && ["basic", "detailed", "compatibility"].includes(type)) {
+    if (type && ["basic", "detailed", "compatibility", "ppf"].includes(type)) {
       query = query.eq("type", type);
     }
 

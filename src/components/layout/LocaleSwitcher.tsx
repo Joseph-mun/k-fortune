@@ -29,7 +29,7 @@ export function LocaleSwitcher() {
             onClick={() => handleLocaleChange(l.code)}
             className={`px-2 py-1 text-sm rounded transition-colors ${
               locale === l.code
-                ? "bg-purple-500/20 text-purple-300 font-semibold"
+                ? "bg-purple-500/35 text-purple-200 font-semibold"
                 : "text-text-muted hover:text-text-secondary"
             }`}
           >

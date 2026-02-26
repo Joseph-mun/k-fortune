@@ -22,11 +22,11 @@ export function ServiceHighlight({ services }: ServiceHighlightProps) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {services.map((service, i) => (
-        <Link key={service.href} href={service.href as "/start" | "/star-match" | "/compatibility" | "/gallery"}>
+        <Link key={service.href} href={service.href as "/start"}>
           <TiltCard
             className={cn(
               "glass-interactive rounded-xl p-6 flex flex-col gap-3 group cursor-pointer",
-              "animate-slide-up"
+              ""
             )}
             tiltMax={4}
             scale={1.01}
@@ -47,10 +47,11 @@ export function ServiceHighlight({ services }: ServiceHighlightProps) {
 
             {/* Icon */}
             <div
-              className="w-11 h-11 rounded-xl flex items-center justify-center transition-colors"
+              className="w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-105"
               style={{
-                background: `${service.color}15`,
-                border: `1px solid ${service.color}25`,
+                background: `linear-gradient(135deg, ${service.color}20, ${service.color}08)`,
+                border: `1px solid ${service.color}30`,
+                boxShadow: `0 0 20px ${service.color}10`,
               }}
             >
               {service.icon}

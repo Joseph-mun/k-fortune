@@ -92,7 +92,7 @@ export function OnboardingOverlay() {
                 {t("slide3Desc")}
               </p>
               <Link href="/start" onClick={dismiss}>
-                <Button variant="primary" size="lg" className="btn-cta animate-cta-pulse gap-2">
+                <Button variant="primary" size="lg" className="btn-cta animate-cta-pulse gap-2 !rounded-full px-8">
                   {t("getStarted")}
                   <ArrowRight className="w-4 h-4" />
                 </Button>

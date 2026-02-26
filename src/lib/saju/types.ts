@@ -119,6 +119,14 @@ export interface DetailedReading extends BasicReading {
   majorCycles: MajorCycle[];
 }
 
+/** PPF Reading (Past/Present/Future — MVP pay-per-view) */
+export interface PPFReading extends BasicReading {
+  past: string;
+  present: string;
+  future: string;
+  guidance: string;
+}
+
 /** Compatibility Reading */
 export interface CompatibilityReading {
   person1: BasicReading;

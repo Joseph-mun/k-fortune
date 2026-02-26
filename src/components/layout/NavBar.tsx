@@ -64,11 +64,9 @@ export function NavBar() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
+    { href: "/start" as const, label: tNav("fortune") },
     ...(isAuthenticated ? [{ href: "/dashboard" as const, label: tNav("dashboard") }] : []),
     { href: "/pricing" as const, label: tNav("pricing") },
-    { href: "/compatibility" as const, label: tNav("compatibility") },
-    { href: "/gallery" as const, label: tNav("gallery") },
-    { href: "/star-match" as const, label: tNav("starMatch"), special: true },
   ];
 
   return (
@@ -77,7 +75,7 @@ export function NavBar() {
       aria-label="Primary navigation"
     >
       <div className="flex items-center gap-8">
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-2 group" aria-label="SAJU Home">
           <Sparkles className="w-4 h-4 text-purple-400 group-hover:text-purple-300 transition-colors" />
           <span className="text-lg font-bold text-text-primary tracking-widest font-[family-name:var(--font-heading)]">
             SAJU
@@ -88,11 +86,7 @@ export function NavBar() {
             <Link
               key={link.href}
               href={link.href}
-              className={
-                link.special
-                  ? "px-3 py-1.5 text-sm text-pink-400/80 hover:text-pink-300 transition-colors rounded-md hover:bg-pink-500/5"
-                  : "px-3 py-1.5 text-sm text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/[0.05]"
-              }
+              className="px-5 py-1.5 text-sm font-semibold text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/[0.05] whitespace-nowrap text-center min-w-[5.5rem]"
             >
               {link.label}
             </Link>
@@ -110,11 +104,11 @@ export function NavBar() {
           {isAuthenticated ? (
             <button
               onClick={() => logout()}
-              className="flex items-center gap-2 px-3 py-1.5 text-sm text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/[0.05]"
+              className="flex items-center gap-2 px-3 py-1.5 text-sm font-semibold text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/[0.05]"
               title={user?.email || ""}
             >
               {user?.image ? (
-                <img src={user.image} alt="" className="w-5 h-5 rounded-full" />
+                <img src={user.image} alt="" className="w-5 h-5 rounded-full" width={20} height={20} />
               ) : (
                 <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center text-[10px] text-purple-300">
                   {user?.name?.[0] || "U"}
@@ -125,7 +119,7 @@ export function NavBar() {
           ) : (
             <button
               onClick={() => login("google")}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/[0.05]"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold text-text-muted hover:text-text-primary transition-colors rounded-md hover:bg-white/[0.05]"
             >
               <LogIn className="w-3.5 h-3.5" />
               {tNav("signIn")}
@@ -159,9 +153,9 @@ export function NavBar() {
           />
 
           {/* Panel */}
-          <div className="absolute top-0 right-0 bottom-0 bg-bg-card border-l border-[#1A1611]/[0.06] flex flex-col animate-slide-in-right" style={{ width: "var(--size-menu-mobile)" }}>
+          <div className="absolute top-0 right-0 bottom-0 bg-bg-card border-l border-white/[0.06] flex flex-col animate-slide-in-right" style={{ width: "var(--size-menu-mobile)" }}>
             {/* Header */}
-            <div className="flex items-center justify-between p-4 border-b border-[#1A1611]/[0.06]">
+            <div className="flex items-center justify-between p-4 border-b border-white/[0.06]">
               <span className="text-sm font-semibold text-text-primary font-[family-name:var(--font-heading)]">
                 {tNav("menu")}
               </span>
@@ -182,11 +176,7 @@ export function NavBar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className={
-                    link.special
-                      ? "px-3 py-2.5 text-sm text-pink-400/80 hover:text-pink-300 transition-colors rounded-lg hover:bg-pink-500/5"
-                      : "px-3 py-2.5 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-white/[0.05]"
-                  }
+                  className="px-3 py-2.5 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-white/[0.05]"
                 >
                   {link.label}
                 </Link>
@@ -194,14 +184,14 @@ export function NavBar() {
             </div>
 
             {/* Footer: Auth + Locale switcher */}
-            <div className="p-4 border-t border-[#1A1611]/[0.06] flex flex-col gap-3">
+            <div className="p-4 border-t border-white/[0.06] flex flex-col gap-3">
               {isAuthenticated ? (
                 <button
                   onClick={() => { logout(); setMobileMenuOpen(false); }}
                   className="flex items-center gap-2 px-3 py-2.5 text-sm text-text-secondary hover:text-text-primary transition-colors rounded-lg hover:bg-white/[0.05] w-full"
                 >
                   {user?.image ? (
-                    <img src={user.image} alt="" className="w-5 h-5 rounded-full" />
+                    <img src={user.image} alt="" className="w-5 h-5 rounded-full" width={20} height={20} />
                   ) : (
                     <div className="w-5 h-5 rounded-full bg-purple-500/20 flex items-center justify-center text-[10px] text-purple-300">
                       {user?.name?.[0] || "U"}

@@ -10,10 +10,8 @@
   },
   "nav": {
     "home": "Home",
+    "fortune": "Get Reading",
     "pricing": "Pricing",
-    "compatibility": "Compatibility",
-    "gallery": "Gallery",
-    "starMatch": "Destiny Match",
     "dashboard": "My Readings",
     "signIn": "Sign In",
     "signOut": "Sign Out",
@@ -23,7 +21,7 @@
   "landing": {
     "heroTitle": "Born to be",
     "heroHighlight": "told.",
-    "heroDescription": "In Korea, your birth date tells a 5,000-year-old story called Saju — the Four Pillars of Destiny. Discover yours in 30 seconds, starting at just $1.99.",
+    "heroDescription": "In Korea, your birth date tells a 5,000-year-old story called Saju — the Four Pillars of Destiny. Discover yours in 30 seconds, starting at just $0.99.",
     "cta": "What's My Saju?",
     "ctaSubtext": "No sign-up required · 30 seconds",
     "trustBadge": "Trusted by {count}+ seekers worldwide",
@@ -45,14 +43,12 @@
     "discoverTitle": "What You'll Discover",
     "discoverDescription": "Ancient Korean wisdom, reimagined for the modern world",
     "services": {
-      "sajuTitle": "Saju Reading",
-      "sajuDesc": "Your Four Pillars of Destiny revealed in 30 seconds",
-      "starTitle": "Star Match",
-      "starDesc": "Check your compatibility with K-Pop stars",
-      "compatTitle": "Compatibility",
-      "compatDesc": "Discover your relationship harmony",
-      "galleryTitle": "Card Gallery",
-      "galleryDesc": "Collect beautiful Destiny Cards"
+      "pastTitle": "Past · Innate Energy",
+      "pastDesc": "Discover your born personality, strengths, and the cosmic blueprint from birth",
+      "presentTitle": "Present · 2026 Fortune",
+      "presentDesc": "Career, love, health, and financial energy for the current year",
+      "futureTitle": "Future · 1-3 Years Ahead",
+      "futureDesc": "Major cycle transitions, key years to watch, and how to prepare"
     }
   },
   "start": {
@@ -144,7 +140,13 @@
     "aiRegenerate": "Regenerate",
     "aiDescription": "Get a personalized AI interpretation based on your unique Four Pillars chart.",
     "aiError": "Failed to generate interpretation. Please try again.",
-    "aiRetry": "Try Again"
+    "aiRetry": "Try Again",
+    "sectionPast": "Past · Innate Energy",
+    "sectionPresent": "Present · This Year",
+    "sectionFuture": "Future · What's Ahead",
+    "sectionGuidance": "Guidance",
+    "sectionFullReading": "Full Reading — Past, Present & Future",
+    "newReading": "Get Another Reading"
   },
   "elements": {
     "wood": "Wood",
@@ -270,55 +272,21 @@
     }
   },
   "pricing": {
-    "title": "Choose Your Reading",
-    "subtitle": "Unlock the full power of Korean Four Pillars wisdom",
-    "badge": "Most Popular",
-    "popular": "MOST POPULAR",
-    "toggle": {
-      "monthly": "Monthly",
-      "annual": "Annual",
-      "save": "-30%"
-    },
-    "basic": {
-      "name": "Basic Reading",
-      "price": "FREE",
+    "title": "Simple Pricing",
+    "subtitle": "Pay only for what you need — no subscriptions",
+    "badge": "Pay Per Reading",
+    "popular": "BEST VALUE",
+    "single": {
+      "name": "Full PPF Reading",
+      "perReading": "per reading",
+      "description": "Complete Past, Present & Future analysis powered by AI and ancient Korean Four Pillars wisdom.",
       "features": [
-        "Four Pillars Analysis",
-        "Element Balance",
-        "Day Master Identity",
-        "Lucky Info"
+        "AI-powered Past, Present & Future analysis",
+        "Personalized guidance & life advice",
+        "Birth chart & element balance",
+        "Instant access — no subscription needed"
       ],
-      "cta": "Get Free Reading"
-    },
-    "detailed": {
-      "name": "Full Reading",
-      "price": "{price}",
-      "features": [
-        "Everything in Basic",
-        "Career & Purpose",
-        "Love & Relationships",
-        "Health & Wellness",
-        "2026 Fortune",
-        "Life Cycles Map"
-      ],
-      "cta": "Buy Now"
-    },
-    "premium": {
-      "name": "Premium",
-      "price": "{price}",
-      "period": "/month",
-      "periodYear": "/year",
-      "saveBadge": "Save 30%",
-      "features": [
-        "All Readings Unlimited",
-        "Monthly Fortune Updates",
-        "Compatibility Analysis",
-        "All Destiny Card Styles",
-        "Priority Support"
-      ],
-      "cta": "Subscribe",
-      "trialCta": "Start {days}-Day Free Trial",
-      "trialNote": "Free for {days} days, then auto-renews. Cancel anytime."
+      "cta": "Get Your Reading"
     }
   },
   "auth": {
@@ -355,20 +323,11 @@
     "welcome": "Welcome to your destiny dashboard",
     "welcomeBack": "Welcome back, {name}",
     "loading": "Loading your readings...",
-    "subscription": {
-      "title": "Subscription",
-      "free": "Free Plan - Basic readings only",
-      "detailed": "Full Reading - One-time purchase",
-      "premium": "Premium - Unlimited readings & compatibility",
-      "upgrade": "Upgrade"
-    },
     "actions": {
       "newReading": "New Reading",
       "newReadingDesc": "Get a free Four Pillars reading",
-      "compatibility": "Compatibility Check",
-      "compatibilityDesc": "Compare two destinies",
       "fullReading": "Full Reading",
-      "fullReadingDesc": "Unlock career, love & more"
+      "fullReadingDesc": "Unlock Past, Present & Future for $0.99"
     },
     "history": {
       "title": "Reading History",
@@ -466,37 +425,29 @@
     }
   },
   "paywall": {
-    "title": "Unlock Your Full Reading",
-    "description": "Discover your complete destiny with career insights, relationship guidance, and personalized life advice.",
-    "unlockButton": "Unlock My Full Reading",
-    "unlockButtonDiscount": "Unlock Now — $0.99",
+    "title": "Unlock Present & Future",
+    "description": "See your complete Past, Present & Future reading with personalized AI guidance.",
+    "unlockButton": "Unlock for $0.99",
     "price": "{price}",
-    "personalTeaser": "Your {dayMaster} personality reveals unique career paths and relationship insights...",
+    "personalTeaser": "Your {dayMaster} personality holds unique insights about your present and future path...",
     "personalTeaser_wood": "Your Wood energy holds hidden career paths in leadership and creative fields. Unlock your full reading to discover how to channel your growth potential.",
     "personalTeaser_fire": "Your Fire energy reveals passionate career opportunities and magnetic relationship dynamics. See how your radiance shapes your destiny.",
     "personalTeaser_earth": "Your Earth energy points to steady wealth-building strategies and deeply loyal relationships. Discover the full picture of your grounded destiny.",
     "personalTeaser_metal": "Your Metal energy indicates precision-driven career success and refined relationship patterns. Unlock your complete Four Pillars analysis.",
     "personalTeaser_water": "Your Water energy suggests adaptive career strategies and deeply intuitive relationships. Explore the hidden depths of your cosmic blueprint.",
     "socialProof": "Join {count}+ readers who discovered their destiny",
-    "feature1": "Complete career path aligned with your element",
-    "feature2": "Relationship compatibility & life partner guidance",
-    "feature3": "2026 Fortune timeline & life cycle map",
-    "feature4": "Health insights & personalized life advice",
-    "previewCareer": "Career Path",
-    "previewCareerDesc": "Your natural talents align with leadership roles where you can...",
-    "previewRelationship": "Relationships",
-    "previewRelationshipDesc": "In relationships, you tend to be supportive and understanding...",
-    "previewHealth": "Health & Wellness",
-    "previewHealthDesc": "Your elemental balance suggests focusing on specific areas of...",
-    "previewFortune": "2026 Fortune",
-    "previewFortuneDesc": "This year brings transformative energy to your career and...",
-    "previewAdvice": "Life Advice",
-    "previewAdviceDesc": "Focus on building strong foundations in your early years...",
+    "feature1": "AI-powered Past, Present & Future analysis",
+    "feature2": "Personalized career, love & life guidance",
+    "feature3": "2026 Fortune timeline & future outlook",
+    "feature4": "Actionable advice based on your birth chart",
+    "previewPresent": "Present · 2026 Fortune",
+    "previewPresentDesc": "Your current year energy reveals career shifts, relationship dynamics, and financial opportunities...",
+    "previewFuture": "Future · 1-3 Years Ahead",
+    "previewFutureDesc": "Major cycle transitions and pivotal years that will shape your destiny...",
+    "previewGuidance": "Guidance · Life Advice",
+    "previewGuidanceDesc": "Personalized recommendations to align your actions with cosmic energy...",
     "priceTag": "Only {price}",
     "urgency": "One-time purchase · Instant access",
-    "urgencyDiscount": "Limited-time offer · 50% off · Instant access",
-    "discountBanner": "Special offer ends in {time}",
-    "trialUpsell": "Or try Premium free for {days} days →",
     "loginToUnlock": "Sign in to Unlock",
     "loginSubtext": "Sign in with Google in 3 seconds — permanent access to your reading"
   },

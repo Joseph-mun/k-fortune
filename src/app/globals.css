@@ -13,8 +13,8 @@
   --font-mono: ui-monospace, "SF Mono", monospace;
 
   /* 묵(Ink) Layer Fonts */
-  --font-ink-heading-ko: var(--font-pretendard), "Pretendard", system-ui, sans-serif;
-  --font-ink-heading-en: var(--font-pretendard), "Pretendard", system-ui, sans-serif;
+  --font-ink-heading-ko: var(--font-noto-serif-kr), "Noto Serif KR", Georgia, serif;
+  --font-ink-heading-en: var(--font-noto-serif-kr), "Noto Serif KR", Georgia, serif;
   --font-ink-body: var(--font-pretendard), "Pretendard", system-ui, sans-serif;
 
   /* 놀이(Play) Layer Fonts */
@@ -81,8 +81,8 @@
   --color-gold-500: #F59E0B;
   --color-gold-600: #D97706;
 
-  /* Background - True Dark */
-  --color-bg-dark: #09090B;
+  /* Background - True Dark with subtle warm tint */
+  --color-bg-dark: oklch(0.145 0.005 280);
   --color-bg-card: #18181B;
   --color-bg-surface: #27272A;
 
@@ -136,7 +136,7 @@
 }
 
 :root {
-  --bg-dark: #09090B;
+  --bg-dark: oklch(0.145 0.005 280);
   --text-primary: #FAFAFA;
   --radius: 0.625rem;
   /* Element Theme (defaults to purple) */
@@ -234,7 +234,7 @@ body {
 }
 
 .text-gradient-hero {
-  background: linear-gradient(135deg, #FAFAFA 0%, #A78BFA 40%, #C084FC 60%, #FAFAFA 100%);
+  background: linear-gradient(135deg, #FAFAFA 0%, #C5372E 30%, #2B4162 55%, #F59E0B 80%, #FAFAFA 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -715,26 +715,74 @@ body {
 }
 
 /* ══════════════════════════════════════════════
-   CTA Button — Gradient + Pulse
+   CTA Button — Rotating Border Glow
    ══════════════════════════════════════════════ */
 .btn-cta {
-  background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 50%, #8B5CF6 100%);
-  background-size: 200% 200%;
-  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3), 0 0 40px rgba(139, 92, 246, 0.1);
+  position: relative;
+  background: transparent;
+  overflow: hidden;
   transition: all 0.3s ease;
+  isolation: isolate;
+}
+.btn-cta::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* 정사각형으로 만들어 회전 시 균일하게 */
+  width: 0;
+  height: 0;
+  padding: 50vmax;
+  transform: translate(-50%, -50%);
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    transparent 5%,
+    rgba(255, 255, 255, 0.05) 8%,
+    rgba(255, 255, 255, 0.5) 13%,
+    #FAFAFA 18%,
+    rgba(255, 255, 255, 0.5) 23%,
+    rgba(255, 255, 255, 0.05) 28%,
+    transparent 32%,
+    transparent 100%
+  );
+  filter: blur(2px);
+  animation: cta-border-spin 3s linear infinite;
+  z-index: -2;
+}
+.btn-cta::after {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 50%, #8B5CF6 100%);
+  z-index: -1;
 }
 .btn-cta:hover {
-  background: linear-gradient(135deg, #A78BFA 0%, #818CF8 50%, #A78BFA 100%);
-  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.4), 0 0 60px rgba(139, 92, 246, 0.15);
   transform: translateY(-2px);
 }
+.btn-cta:hover::before {
+  animation-duration: 1.5s;
+}
+.btn-cta:hover::after {
+  background: linear-gradient(135deg, #A78BFA 0%, #818CF8 50%, #A78BFA 100%);
+}
 
-@keyframes cta-pulse {
-  0%, 100% { box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3), 0 0 0 0 rgba(139, 92, 246, 0.4); }
-  50% { box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3), 0 0 0 12px rgba(139, 92, 246, 0); }
+@keyframes cta-border-spin {
+  0%   { transform: translate(-50%, -50%) rotate(0deg); }
+  /* 상단 긴 변 — 일정 속도 */
+  20%  { transform: translate(-50%, -50%) rotate(68deg); }
+  /* 우측 짧은 변 — 감속 */
+  35%  { transform: translate(-50%, -50%) rotate(112deg); }
+  /* 하단 긴 변 — 일정 속도 */
+  50%  { transform: translate(-50%, -50%) rotate(180deg); }
+  70%  { transform: translate(-50%, -50%) rotate(248deg); }
+  /* 좌측 짧은 변 — 감속 */
+  85%  { transform: translate(-50%, -50%) rotate(292deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 .animate-cta-pulse {
-  animation: cta-pulse 2s ease-in-out infinite;
+  animation: none;
 }
 
 /* ── Glow Breathe — icon backgrounds ─── */
@@ -1221,6 +1269,29 @@ body {
 .touch-target {
   min-width: 44px;
   min-height: 44px;
+}
+
+/* ── CTA Glow Background ── */
+.cta-glow-bg {
+  width: var(--size-glow-lg);
+  height: 300px;
+  background: rgba(139, 92, 246, 0.08);
+  filter: blur(var(--size-blur-lg));
+}
+
+/* ── forced-colors (Windows High Contrast) fallback ── */
+@media (forced-colors: active) {
+  .text-gradient-purple,
+  .text-gradient-gold,
+  .text-gradient-hero,
+  .text-gradient-ink,
+  .text-gradient-play {
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+    -webkit-text-fill-color: unset !important;
+    color: CanvasText !important;
+  }
 }
 
 /* ── Gradient Text for Ink Layer ────────────── */

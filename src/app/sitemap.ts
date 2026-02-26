@@ -8,9 +8,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/start",
     "/pricing",
-    "/compatibility",
-    "/gallery",
-    "/star-match",
     "/legal/privacy",
     "/legal/terms",
   ];

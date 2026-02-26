@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Analytics } from "@vercel/analytics/react";
 import { routing } from "@/i18n/routing";
 import { AuthProvider } from "@/components/providers/AuthProvider";
-import { pretendard, gaegu } from "@/styles/fonts";
+import { pretendard, gaegu, notoSerifKR } from "@/styles/fonts";
 
 export default async function LocaleLayout({
   children,
@@ -24,7 +24,7 @@ export default async function LocaleLayout({
   const messages = (await import(`@/messages/${locale}.json`)).default;
 
   return (
-    <html lang={locale} suppressHydrationWarning className={`${pretendard.variable} ${gaegu.variable}`}>
+    <html lang={locale} suppressHydrationWarning className={`${pretendard.variable} ${gaegu.variable} ${notoSerifKR.variable}`}>
       <head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="icon" href="/icon.svg" type="image/svg+xml" />

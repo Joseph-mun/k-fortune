@@ -3,7 +3,7 @@
 import { useParams, useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useLocale } from "next-intl";
-import { Share2, Sparkles, ArrowRight, Compass, Palette, Hash, Star } from "lucide-react";
+import { Share2, Sparkles, ArrowRight, Compass, Palette, Hash, Clock } from "lucide-react";
 import { track } from "@vercel/analytics";
 import { Link } from "@/i18n/navigation";
 
@@ -59,7 +59,6 @@ export default function ReadingClient() {
     intentProcessedRef.current = true;
     clearCheckoutIntent();
 
-    // Onboard: save birth data + link reading
     const birthInput = getBirthInput(id);
     const onboard = async () => {
       try {
@@ -76,10 +75,9 @@ export default function ReadingClient() {
           }),
         });
       } catch {
-        // Non-blocking — continue to checkout even if onboard fails
+        // Non-blocking
       }
 
-      // Auto-redirect to checkout
       checkout({
         productId: intent.productId,
         readingId: id,
@@ -185,75 +183,46 @@ export default function ReadingClient() {
 
       <ElementThemeProvider element={reading.dayMaster.element}>
         <div className="relative w-full max-w-3xl px-4 sm:px-8 flex flex-col items-center gap-6 py-8">
-          {/* Quick Summary — merged hero (no more duplicate identity section) */}
+          {/* 1. Reading Summary — Day Master identity card */}
           <ReadingSummary
             dayMaster={reading.dayMaster}
             elementAnalysis={reading.elementAnalysis}
             luckyInfo={activeReading.luckyInfo}
           />
 
-          {/* Accordion: Four Pillars of Destiny */}
+          {/* 2. Past Section — Free AI preview */}
+          <Accordion
+            title={t("sectionPast")}
+            icon={<Clock className="w-3.5 h-3.5 text-purple-400" />}
+            defaultOpen
+          >
+            <Card className="w-full glass">
+              <div className="p-2">
+                <AiInterpretation
+                  readingId={id}
+                  readingData={{
+                    fourPillars: activeReading.fourPillars,
+                    elementAnalysis: activeReading.elementAnalysis,
+                    dayMaster: activeReading.dayMaster,
+                  }}
+                  mode="preview"
+                  locale={locale}
+                />
+              </div>
+            </Card>
+          </Accordion>
+
+          {/* 3. Four Pillars of Destiny — collapsed by default */}
           <Accordion
             title={t("sectionPillars")}
             icon={<Sparkles className="w-3.5 h-3.5 text-purple-400" />}
-            defaultOpen
           >
             <Card className="w-full glass">
               <FourPillarsDisplay fourPillars={reading.fourPillars} />
             </Card>
           </Accordion>
 
-          {/* Accordion: Day Pillar Interpretation (free detailed section) */}
-          <Accordion
-            title={t("sectionDayPillar")}
-            icon={<Star className="w-3.5 h-3.5 text-purple-400" />}
-            defaultOpen
-          >
-            <Card className="w-full glass">
-              <div className="flex flex-col items-center text-center p-2">
-                {/* Day pillar metaphor icon */}
-                <div className="w-16 h-16 rounded-full flex items-center justify-center mb-4 accent-glow" style={{ background: "var(--accent-bg-tint)", border: "1px solid var(--accent-glow)" }}>
-                  <MetaphorIcon metaphor={reading.dayMaster.metaphorInfo.id} size={40} />
-                </div>
-
-                <h3 className="text-lg font-bold text-text-primary mb-1 font-[family-name:var(--font-heading)]">
-                  {t("dayPillarTitle", { metaphor: reading.dayMaster.metaphorInfo.displayName })}
-                </h3>
-
-                <p className="text-sm text-text-secondary max-w-md mb-5 leading-relaxed">
-                  {resolveKey(reading.dayMaster.personality)}
-                </p>
-
-                {/* Strengths & Weaknesses */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full text-left">
-                  <div className="p-4 rounded-lg bg-[#1A1611]/[0.02] border border-[#1A1611]/[0.06]">
-                    <p className="text-xs text-text-muted uppercase tracking-wider mb-3">{t("strengths")}</p>
-                    <ul className="space-y-2">
-                      {reading.dayMaster.strengths.map((strength, i) => (
-                        <li key={i} className="text-sm text-text-secondary flex items-start gap-2">
-                          <span className="mt-0.5" style={{ color: "var(--accent-primary, #a855f7)" }}>+</span>
-                          {resolveKey(strength)}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="p-4 rounded-lg bg-[#1A1611]/[0.02] border border-[#1A1611]/[0.06]">
-                    <p className="text-xs text-text-muted uppercase tracking-wider mb-3">{t("weaknesses")}</p>
-                    <ul className="space-y-2">
-                      {reading.dayMaster.weaknesses.map((weakness, i) => (
-                        <li key={i} className="text-sm text-text-secondary flex items-start gap-2">
-                          <span className="text-text-muted mt-0.5">-</span>
-                          {resolveKey(weakness)}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </Accordion>
-
-          {/* Accordion: Element Balance */}
+          {/* 4. Element Balance — collapsed by default */}
           <Accordion
             title={t("sectionElements")}
             icon={<ElementIcon element={reading.dayMaster.element} size={14} />}
@@ -277,11 +246,10 @@ export default function ReadingClient() {
             </GraphCard>
           </Accordion>
 
-          {/* Accordion: Lucky Info */}
+          {/* 5. Lucky Info — collapsed by default */}
           <Accordion
             title={t("sectionLucky")}
             icon={<span className="text-xs">✦</span>}
-            defaultOpen
           >
             <div className="grid grid-cols-3 gap-3">
               <Card className="text-center py-5 glass-interactive cursor-default">
@@ -310,36 +278,14 @@ export default function ReadingClient() {
             </div>
           </Accordion>
 
-          {/* AI Career Preview — free for all users */}
-          <Accordion
-            title={t("aiSection")}
-            icon={<Sparkles className="w-3.5 h-3.5 text-purple-400" />}
-            defaultOpen
-          >
-            <Card className="w-full glass">
-              <div className="p-2">
-                <AiInterpretation
-                  readingId={id}
-                  readingData={{
-                    fourPillars: activeReading.fourPillars,
-                    elementAnalysis: activeReading.elementAnalysis,
-                    dayMaster: activeReading.dayMaster,
-                  }}
-                  mode="preview"
-                  locale={locale}
-                />
-              </div>
-            </Card>
-          </Accordion>
-
           {/* Gradient divider */}
           <div className="divider-gradient w-full" />
 
-          {/* Section: Unlock Full Reading / Premium Content */}
+          {/* 6. Paywall or Full PPF Content */}
           {isPaid ? (
             <div className="w-full">
               <Accordion
-                title={t("aiSection") + " — Full"}
+                title={t("sectionFullReading")}
                 icon={<Sparkles className="w-3.5 h-3.5 text-purple-400" />}
                 defaultOpen
               >
@@ -368,8 +314,8 @@ export default function ReadingClient() {
             >
               <PaywallOverlay
                 readingId={id}
-                productId={POLAR_PRODUCTS.DETAILED_READING}
-                price={PRICE_DISPLAY.DETAILED_READING}
+                productId={POLAR_PRODUCTS.SINGLE_READING}
+                price={PRICE_DISPLAY.SINGLE_READING}
                 dayMasterName={reading.dayMaster.metaphorInfo.displayName}
                 dayMasterElement={reading.dayMaster.element}
                 dayMasterMetaphor={reading.dayMaster.metaphor}
@@ -377,16 +323,16 @@ export default function ReadingClient() {
             </div>
           )}
 
-          {/* Actions */}
+          {/* 7. Actions */}
           <div className="flex flex-col items-center gap-4 w-full mt-4">
             <div className="flex flex-wrap justify-center gap-3">
               <Button variant="secondary" className="gap-2 hover:-translate-y-0.5 transition-all duration-300" onClick={handleShare}>
                 <Share2 className="w-4 h-4" />
                 {t("share")}
               </Button>
-              <Link href="/cards/create">
+              <Link href="/start">
                 <Button variant="ghost" className="gap-2 group">
-                  {t("createCard")}
+                  {t("newReading")}
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
